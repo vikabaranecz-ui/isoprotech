@@ -2,9 +2,11 @@
 // Dynamic service page — SSG with full SEO
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
-import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
+import { faqs } from "@/content/faqs";
+import { serviceSchema, faqSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
@@ -50,6 +52,9 @@ export default function ServicePage({
 
   const related = getRelatedServices(service.id);
   const serviceUrl = `${BRAND.url}/diensten/${service.slug}`;
+  const serviceFaqs = faqs
+    .filter((f) => service.faqIds.includes(f.id))
+    .map((f) => ({ question: f.question, answer: f.answer }));
 
   return (
     <>
@@ -60,14 +65,20 @@ export default function ServicePage({
           url: serviceUrl,
         })}
       />
+      {serviceFaqs.length > 0 && <JsonLd data={faqSchema(serviceFaqs)} />}
 
       {/* Hero */}
       <section className="relative min-h-[420px] flex items-center overflow-hidden">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${service.photo.src})` }}
-        />
+        <div className="absolute inset-0">
+          <Image
+            src={service.photo.src}
+            alt={service.photo.alt}
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
         <div className="absolute inset-0 bg-teal-900/70" />
         <div className="relative mx-auto max-w-4xl px-6 py-32 text-center">
           <span className="mb-4 inline-block rounded-full bg-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300 border border-orange-500/20">

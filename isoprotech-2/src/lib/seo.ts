@@ -148,6 +148,7 @@ export function blogPostSchema(post: {
   description: string;
   url: string;
   datePublished: string;
+  dateModified?: string;
   image?: string;
 }) {
   return {
@@ -157,9 +158,11 @@ export function blogPostSchema(post: {
     description: post.description,
     url: post.url,
     datePublished: post.datePublished,
+    dateModified: post.dateModified ?? post.datePublished,
     author: {
       "@type": "Organization",
       name: BRAND.name,
+      url: BRAND.url,
     },
     publisher: {
       "@type": "Organization",

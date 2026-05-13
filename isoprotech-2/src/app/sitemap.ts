@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE}/calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/calculator/dak`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/regio`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${BASE}/cookies`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     // Landing pages — high priority for Google Ads
