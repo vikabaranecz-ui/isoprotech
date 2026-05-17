@@ -254,7 +254,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
           />
           <span className="text-xs text-gray-500 leading-relaxed">
             Ik ga akkoord met het{" "}
-            <a href="/privacy" className="text-teal-600 underline">
+            <a href="/privacy" className="text-teal-700 underline">
               privacybeleid
             </a>
             . ISOPROTECH gebruikt uw gegevens uitsluitend om uw aanvraag te

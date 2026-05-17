@@ -115,7 +115,7 @@ export default function BlogArticlePage({
         })}
 
         {/* Inline CTA */}
-        <div className="mt-14 rounded-2xl bg-teal-600 p-8 md:p-10 text-center">
+        <div className="mt-14 rounded-2xl bg-teal-800 p-8 md:p-10 text-center">
           <h3 className="text-xl font-extrabold text-white mb-3">
             Klaar om te starten?
           </h3>

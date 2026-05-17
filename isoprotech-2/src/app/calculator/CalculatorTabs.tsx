@@ -20,7 +20,7 @@ export function CalculatorTabs({
           onClick={() => setTab("gevel")}
           className={`flex-1 py-3.5 rounded-xl text-sm font-bold transition-all border-2 ${
             tab === "gevel"
-              ? "bg-teal-600 border-teal-600 text-white"
+              ? "bg-teal-800 border-teal-800 text-white"
               : "bg-white border-gray-200 text-teal-800 hover:border-gray-300"
           }`}
           aria-pressed={tab === "gevel"}
@@ -43,7 +43,7 @@ export function CalculatorTabs({
           onClick={() => setTab("dak")}
           className={`flex-1 py-3.5 rounded-xl text-sm font-bold transition-all border-2 ${
             tab === "dak"
-              ? "bg-teal-600 border-teal-600 text-white"
+              ? "bg-teal-800 border-teal-800 text-white"
               : "bg-white border-gray-200 text-teal-800 hover:border-gray-300"
           }`}
           aria-pressed={tab === "dak"}

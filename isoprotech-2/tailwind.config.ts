@@ -12,24 +12,24 @@ const config: Config = {
       },
       colors: {
         teal: {
-          50: "#eef6f8",
+          50:  "#eef6f8",
           100: "#d5e8ed",
           200: "#a8d0db",
           300: "#7ab8c9",
           400: "#4d9fb7",
           500: "#2d7a8e",
-          600: "#1E4C59",  // brand primary
-          700: "#1a4250",
-          800: "#163844",
-          900: "#15353e",  // brand dark
+          600: "#256070",
+          700: "#1f5463",
+          800: "#1E4C59",  // ← brand primary #1E4C59
+          900: "#15353e",  // ← brand dark
           950: "#0d2229",
         },
         orange: {
-          50: "#fff7ed",
+          50:  "#fff7ed",
           100: "#ffeed4",
           200: "#fdd9a8",
           300: "#fbbf71",
-          400: "#F79448", // brand accent
+          400: "#F79448",  // ← brand accent #F79448
           500: "#f57a1f",
           600: "#e66315",
           700: "#be4c13",

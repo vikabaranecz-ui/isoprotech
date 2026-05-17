@@ -83,7 +83,7 @@ export default function FAQPage() {
         ))}
       </section>
 
-      <section className="bg-teal-600 py-14">
+      <section className="bg-teal-800 py-14">
         <div className="container-wide text-center">
           <h2 className="text-2xl font-extrabold text-white mb-3">
             Nog vragen?
