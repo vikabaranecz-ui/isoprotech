@@ -46,44 +46,13 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [overLight, setOverLight] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handler = () => {
-      const y = window.scrollY;
-      setScrolled(y > 60);
-
-      // Detect if navbar overlaps a light-background section
-      if (navRef.current) {
-        const sampleY = 72;
-        const sampleX = window.innerWidth / 2;
-        navRef.current.style.pointerEvents = "none";
-        navRef.current.style.visibility = "hidden";
-        const el = document.elementFromPoint(sampleX, sampleY);
-        navRef.current.style.pointerEvents = "";
-        navRef.current.style.visibility = "";
-
-        if (el) {
-          const bg = window.getComputedStyle(el).backgroundColor;
-          const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-          if (match) {
-            const lum = 0.299 * +match[1] + 0.587 * +match[2] + 0.114 * +match[3];
-            setOverLight(y > 60 && lum > 160);
-          } else {
-            setOverLight(false);
-          }
-        }
-      }
-    };
-
+    const handler = () => setScrolled(window.scrollY > 80);
     handler();
     window.addEventListener("scroll", handler, { passive: true });
-    window.addEventListener("resize", handler, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handler);
-      window.removeEventListener("resize", handler);
-    };
+    return () => window.removeEventListener("scroll", handler);
   }, []);
 
   useEffect(() => { setMobileOpen(false); setOpenDropdown(null); }, [pathname]);
@@ -102,31 +71,28 @@ export function Navbar() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
-  // Dynamic styling: dark text on light bg, white text on dark bg
-  const dark = overLight; // "dark text mode" = we're over a light background
-
-  const navBg = dark
-    ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100"
-    : scrolled
-      ? "bg-teal-900/97 backdrop-blur-lg shadow-lg"
-      : "bg-teal-800/80 backdrop-blur-md";
+  // At top of page: transparent + white text (hero is always dark)
+  // After scroll: white background + teal text (content sections are always light)
+  const navBg = scrolled
+    ? "bg-white/98 backdrop-blur-lg shadow-md border-b border-gray-100"
+    : "bg-transparent";
 
   const linkCls = (active: boolean) =>
     active
-      ? "text-orange-500"
-      : dark
+      ? scrolled ? "text-orange-500" : "text-orange-400"
+      : scrolled
         ? "text-teal-800 hover:text-orange-500"
-        : "text-white/85 hover:text-orange-300";
+        : "text-white/90 hover:text-orange-300";
 
-  const ddBg = dark
+  const ddBg = scrolled
     ? "bg-white border border-gray-200 shadow-xl"
-    : "bg-teal-900 border border-orange-500/10 shadow-2xl";
+    : "bg-teal-900/95 backdrop-blur-md border border-white/10 shadow-2xl";
 
-  const ddLink = dark
+  const ddLink = scrolled
     ? "text-gray-600 hover:text-orange-500 hover:bg-orange-50"
-    : "text-white/75 hover:text-orange-400 hover:bg-orange-500/5";
+    : "text-white/80 hover:text-orange-400 hover:bg-white/5";
 
-  const burger = dark ? "text-teal-800" : "text-orange-400";
+  const burger = scrolled ? "text-teal-800" : "text-white";
 
   return (
     <nav ref={navRef} className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${navBg}`} role="navigation" aria-label="Hoofdnavigatie">
@@ -134,11 +100,11 @@ export function Navbar() {
         <Link href="/" aria-label="ISOPROTECH — Naar homepagina">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={IMAGES.logo}
+            src={scrolled ? IMAGES.logoDark : IMAGES.logo}
             alt="ISOPROTECH"
             width={160}
             height={24}
-            className={`h-6 w-auto transition-all duration-300 ${dark ? "brightness-0" : ""}`}
+            className="h-6 w-auto transition-all duration-300"
           />
         </Link>
 
@@ -168,7 +134,7 @@ export function Navbar() {
               )}
             </div>
           ))}
-          <Link href="/contact" className="btn-primary ml-4 text-sm py-2 px-5">Gratis Offerte</Link>
+          <Link href="/contact" className={`ml-4 text-sm py-2 px-5 rounded-xl font-bold transition-all duration-200 ${scrolled ? "bg-orange-400 text-white hover:bg-orange-500 shadow-sm" : "bg-orange-400 text-white hover:bg-orange-500 shadow-lg shadow-orange-500/20"}`}>Gratis Offerte</Link>
         </div>
 
         {/* Mobile toggle */}
@@ -183,7 +149,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div id="mobile-menu" className="lg:hidden bg-teal-900 border-t border-white/5 px-6 pb-6 max-h-[80vh] overflow-y-auto" role="menu">
+        <div id="mobile-menu" className={`lg:hidden border-t px-6 pb-6 max-h-[80vh] overflow-y-auto ${scrolled ? "bg-white border-gray-100" : "bg-teal-900/98 backdrop-blur-md border-white/5"}`} role="menu">
           {links.map((link) => (
             <div key={link.href}>
               {link.children ? (
@@ -191,16 +157,16 @@ export function Navbar() {
                   <button className="w-full flex items-center justify-between py-3 text-white font-semibold border-b border-white/5"
                     onClick={() => setOpenDropdown(openDropdown === link.href ? null : link.href)}
                     aria-expanded={openDropdown === link.href}>
-                    {link.label}
+                    <span className={scrolled ? "text-teal-800" : "text-white"}>{link.label}</span>
                     <svg className={`h-4 w-4 text-orange-400 transition-transform ${openDropdown === link.href ? "rotate-180" : ""}`}
                       fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
                   </button>
                   {openDropdown === link.href && link.children.map((child) => (
-                    <Link key={child.href} href={child.href} className="block py-2.5 pl-4 text-white/60 text-sm hover:text-orange-400" role="menuitem">{child.label}</Link>
+                    <Link key={child.href} href={child.href} className={`block py-2.5 pl-4 text-sm hover:text-orange-400 ${scrolled ? "text-gray-500" : "text-white/60"}`} role="menuitem">{child.label}</Link>
                   ))}
                 </>
               ) : (
-                <Link href={link.href} className="block py-3 text-white font-semibold border-b border-white/5" role="menuitem">{link.label}</Link>
+                <Link href={link.href} className={`block py-3 font-semibold border-b ${scrolled ? "text-teal-800 border-gray-100" : "text-white border-white/5"}`} role="menuitem">{link.label}</Link>
               )}
             </div>
           ))}
