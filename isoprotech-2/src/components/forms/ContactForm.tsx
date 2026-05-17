@@ -43,27 +43,39 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
     setServerError("");
 
     try {
-      const res = await fetch("/api/contact", {
+      const serviceLabels: Record<string, string> = {
+        gevelwerken: "Gevelwerken (isolatie, crepi, spuitkurk)",
+        dakwerken: "Dakwerken (isolatie, renovatie, dakkapellen)",
+        asbestverwijdering: "Asbestverwijdering",
+        anders: "Anders / meerdere diensten",
+      };
+
+      const lines = [
+        "📋 *Nieuwe offerte-aanvraag via isoprotech.be*",
+        "",
+        `👤 Naam: ${data.name}`,
+        `📞 Telefoon: ${data.phone}`,
+        `📧 E-mail: ${data.email}`,
+        `🔧 Dienst: ${serviceLabels[data.service] ?? data.service}`,
+        data.message ? `💬 Bericht: ${data.message}` : null,
+      ].filter(Boolean).join("\n");
+
+      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
+
+      fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      });
+      }).catch(() => {});
 
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || "Verzenden mislukt.");
-      }
+      window.open(waUrl, "_blank", "noopener,noreferrer");
 
       setFormState("success");
       track.formSubmit(data.service);
       reset();
-    } catch (err) {
+    } catch {
       setFormState("error");
-      setServerError(
-        err instanceof Error
-          ? err.message
-          : "Er is een fout opgetreden. Probeer het later opnieuw."
-      );
+      setServerError("Er is een fout opgetreden. Probeer het later opnieuw.");
     }
   }
 
@@ -90,10 +102,10 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
           />
         </svg>
         <h3 className="font-bold text-xl text-teal-800 mb-2">
-          Bedankt voor uw aanvraag!
+          WhatsApp wordt geopend!
         </h3>
         <p className="text-gray-600">
-          Wij nemen binnen 24 uur contact met u op.
+          Uw bericht staat klaar in WhatsApp. Klik op &ldquo;Verstuur&rdquo; om uw aanvraag te bevestigen.
         </p>
       </div>
     );

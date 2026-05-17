@@ -139,9 +139,7 @@ export type DakType = "Plat dak" | "Hellend dak";
 export interface DakBedekkingOption { name: string; desc: string; surcharge: number; }
 
 export const PLAT_DAK_OPTIES: DakBedekkingOption[] = [
-  { name: "Bitumen-polymeer", desc: "Klassieke en betrouwbare rolbedekking", surcharge: 35 },
-  { name: "Synthetische membraan (EPDM / PVC / TPO)", desc: "Duurzaam en naadloos aangebracht", surcharge: 45 },
-  { name: "Mastiekdak", desc: "Gietvloeibaar — ideaal voor complexe vormen", surcharge: 55 },
+  { name: "Bitumen polymeer", desc: "Klassieke en betrouwbare rolbedekking", surcharge: 35 },
 ];
 
 export const HELLEND_DAK_OPTIES: DakBedekkingOption[] = [

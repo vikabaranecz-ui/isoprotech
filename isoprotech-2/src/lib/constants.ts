@@ -7,7 +7,7 @@ export const BRAND = {
   phoneDisplay: "+32 465 88 27 01",
   email: "info@isoprotech.be",
   address: { street: "P. van den Eedenstraat 84", city: "Antwerpen", zip: "2660", country: "BE" },
-  whatsapp: "https://wa.me/32465882701",
+  whatsapp: "https://wa.me/32470802020",
   maps: "https://maps.google.com/maps?cid=7238737443262617326",
   url: "https://www.isoprotech.be",
   geo: { lat: 51.1784, lng: 4.3484 },

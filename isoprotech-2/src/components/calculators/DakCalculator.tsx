@@ -63,10 +63,33 @@ export function DakCalculator() {
 
   function handleNext() {
     if (!canNext) return;
+    if (step === 1 && bedekkingOpts.length === 1) {
+      // Auto-select the single option and skip the bedekking step
+      setBedekking(bedekkingOpts[0].name);
+      setBedekkingSurcharge(bedekkingOpts[0].surcharge);
+      setStep(3);
+      return;
+    }
     if (step < 5) {
       setStep(step + 1);
     } else {
-      // Submit contact data FIRST, then show result
+      const lines = [
+        "🏠 *Dakcalculator aanvraag via isoprotech.be*",
+        "",
+        `👤 Naam: ${naam}`,
+        `📞 Telefoon: ${telefoon}`,
+        email ? `📧 E-mail: ${email}` : null,
+        "",
+        `🏗️ Daktype: ${daktype}`,
+        `📐 Oppervlakte: ${area} m²`,
+        `🔧 Dakbedekking: ${bedekking}`,
+        `🧱 Isolatie: ${isolatie}`,
+        `📅 Bouwjaar: ${bouwjaar}`,
+        result ? `💰 Richtprijs: ${formatEur(result.gross)} (incl. BTW)` : null,
+      ].filter(Boolean).join("\n");
+
+      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
+
       fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -79,6 +102,9 @@ export function DakCalculator() {
           privacy: true,
         }),
       }).catch(() => {});
+
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
       setShowResult(true);
       if (result) {
         track.calculatorComplete("dak", result.grossMin, result.grossMax);
@@ -89,6 +115,9 @@ export function DakCalculator() {
   function handleBack() {
     if (showResult) {
       setShowResult(false);
+    } else if (step === 3 && bedekkingOpts.length === 1) {
+      // Skip back over the auto-selected bedekking step
+      setStep(1);
     } else if (step > 0) {
       setStep(step - 1);
     }
@@ -173,20 +202,28 @@ export function DakCalculator() {
           </p>
           {!ctaSent ? (
             <>
-              <div className="grid gap-3 sm:grid-cols-2 mb-3">
-                <input className={inputCls} placeholder="Naam" defaultValue={naam} />
-                <input className={inputCls} placeholder="Telefoon" defaultValue={telefoon} />
-              </div>
-              <input className={inputCls} placeholder="Gemeente" />
-              <button onClick={() => setCtaSent(true)} className="btn-primary w-full mt-3 text-sm">
-                Plan gratis plaatsbezoek
+              <button
+                onClick={() => {
+                  const msg = [
+                    "🏠 *Gratis plaatsbezoek aanvraag*",
+                    "",
+                    `👤 Naam: ${naam}`,
+                    `📞 Telefoon: ${telefoon}`,
+                    result ? `💰 Richtprijs: ${formatEur(result.gross)}` : null,
+                  ].filter(Boolean).join("\n");
+                  window.open(`https://wa.me/32470802020?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+                  setCtaSent(true);
+                }}
+                className="btn-primary w-full text-sm"
+              >
+                Plan gratis plaatsbezoek via WhatsApp
               </button>
             </>
           ) : (
             <div className="text-green-700 font-bold text-sm">
-              Aanvraag ontvangen!
+              WhatsApp wordt geopend!
               <br />
-              <span className="font-normal">We nemen binnen 24u contact op. Dringend? Bel of WhatsApp: +32 465 88 27 01</span>
+              <span className="font-normal">Klik op &ldquo;Verstuur&rdquo; in WhatsApp om uw aanvraag te bevestigen.</span>
             </div>
           )}
           <p className="text-xs text-gray-400 mt-3 text-center">Gratis · Vrijblijvend · Binnen 48u contact</p>

@@ -59,7 +59,21 @@ export function GevelCalculator() {
     if (step < 5) {
       setStep(step + 1);
     } else {
-      // Submit contact data FIRST, then show result
+      const lines = [
+        "🏠 *Gevelcalculator aanvraag via isoprotech.be*",
+        "",
+        `👤 Naam: ${naam}`,
+        `📞 Telefoon: ${telefoon}`,
+        email ? `📧 E-mail: ${email}` : null,
+        "",
+        `🎨 Afwerking: ${input.finish}`,
+        `🧱 Isolatie: ${input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "geen"}`,
+        `📐 Netto-oppervlakte: ${result.netArea} m²`,
+        `💰 Richtprijs: ${formatEur(result.total)} (incl. BTW)`,
+      ].filter(Boolean).join("\n");
+
+      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
+
       fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,6 +86,9 @@ export function GevelCalculator() {
           privacy: true,
         }),
       }).catch(() => {});
+
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
       setShowResult(true);
       track.calculatorComplete("gevel", result.total, result.total);
     }
@@ -154,17 +171,27 @@ export function GevelCalculator() {
           <p className="text-sm text-gray-600 mb-4">Onze vakman komt langs in Antwerpen. Vrijblijvend, gratis, binnen 48u.</p>
           {!ctaSent ? (
             <>
-              <div className="grid gap-3 sm:grid-cols-2 mb-3">
-                <input className={ic} placeholder="Naam" defaultValue={naam} />
-                <input className={ic} placeholder="Telefoon" defaultValue={telefoon} />
-              </div>
-              <input className={ic} placeholder="Gemeente" />
-              <button onClick={() => setCtaSent(true)} className="btn-primary w-full mt-3 text-sm">Plan gratis plaatsbezoek</button>
+              <button
+                onClick={() => {
+                  const msg = [
+                    "🏠 *Gratis plaatsbezoek aanvraag*",
+                    "",
+                    `👤 Naam: ${naam}`,
+                    `📞 Telefoon: ${telefoon}`,
+                    `💰 Richtprijs: ${formatEur(result.total)}`,
+                  ].join("\n");
+                  window.open(`https://wa.me/32470802020?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+                  setCtaSent(true);
+                }}
+                className="btn-primary w-full mt-3 text-sm"
+              >
+                Plan gratis plaatsbezoek via WhatsApp
+              </button>
             </>
           ) : (
             <div className="text-green-700 font-bold text-sm">
-              Aanvraag ontvangen!<br />
-              <span className="font-normal">We nemen binnen 24u contact op. Dringend? Bel of WhatsApp: +32 465 88 27 01</span>
+              WhatsApp wordt geopend!<br />
+              <span className="font-normal">Klik op &ldquo;Verstuur&rdquo; in WhatsApp om uw aanvraag te bevestigen.</span>
             </div>
           )}
           <p className="text-xs text-gray-400 mt-3 text-center">Gratis · Vrijblijvend · Binnen 48u contact</p>
