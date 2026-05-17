@@ -131,20 +131,13 @@ export const projects: Project[] = [
     summary: "Detail van schoorsteen met correcte loodaansluiting op nieuwe dakpannen. Vakkundige afwerking voorkomt lekkages.",
   },
   {
-    id: "gevel-in-progress",
-    title: "Gevelisolatie in uitvoering",
-    photo: PHOTOS.gevelInProgress,
-    location: "Antwerpen",
-    workType: ["Gevelisolatie"],
-    summary: "EPS-isolatieplaten worden aangebracht op de buitengevel met stellingen. Na de isolatie volgt de afwerking met crepi of spuitkurk.",
-  },
-  {
     id: "gevel-crepi-project",
-    title: "Gevelisolatie met crepi",
+    title: "Gevelisolatie met crepi afwerking",
     photo: PHOTOS.gevelCrepiProject,
+    beforePhoto: PHOTOS.gevelInProgress,
     location: "Antwerpen",
     workType: ["Gevelisolatie", "Crepi"],
-    summary: "Woning met garage voorzien van buitengevelisolatie en een strakke crepi-afwerking. De stellingen worden binnenkort verwijderd.",
+    summary: "Woning met garage volledig geïsoleerd en afgewerkt met strakke witte crepi. Links de situatie tijdens de uitvoering, rechts het eindresultaat.",
   },
   {
     id: "crepi-schilde",
