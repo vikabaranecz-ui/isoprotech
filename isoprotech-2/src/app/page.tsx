@@ -37,9 +37,8 @@ export default function HomePage() {
             sizes="100vw"
           />
         </div>
-        {/* Strong overlay so text is always readable */}
-        <div className="absolute inset-0 bg-teal-950/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/95 via-teal-950/80 to-teal-900/50" />
+        <div className="absolute inset-0 bg-teal-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/75 via-teal-950/40 to-transparent" />
 
         <div className="relative container-wide py-24 md:py-32">
           <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-center">
