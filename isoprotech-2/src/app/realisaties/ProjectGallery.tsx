@@ -98,35 +98,36 @@ export function ProjectGallery() {
         </div>
       </div>
 
-      {/* All projects grid */}
-      <h2 className="text-xl font-extrabold text-teal-800 mb-6">Alle projecten</h2>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((pr, i) => (
-          <article
-            key={pr.id}
-            className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md"
-            onClick={() => setSelected(i)}
-          >
-            <div className="relative h-52">
-              <Image src={pr.photo.src} alt={pr.photo.alt} fill className="object-cover" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
-              {pr.beforePhoto && (
-                <span className="absolute top-3 left-3 bg-orange-500/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VOOR / NA</span>
-              )}
-              {pr.videoUrl && (
-                <span className="absolute top-3 right-3 bg-teal-800/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VIDEO</span>
-              )}
-            </div>
-            <div className="p-5">
-              <h3 className="font-bold text-teal-800 mb-1">{pr.title}</h3>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {pr.workType.map(w => <span key={w} className="text-xs font-semibold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-md">{w}</span>)}
-                <span className="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">{pr.location}</span>
-              </div>
-              <p className="text-sm text-gray-600 leading-relaxed">{pr.summary}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+      {/* Single-photo projects grid — only projects without a beforePhoto */}
+      {projects.filter(pr => !pr.beforePhoto).length > 0 && (
+        <>
+          <h2 className="text-xl font-extrabold text-teal-800 mb-6">Meer realisaties</h2>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {projects.filter(pr => !pr.beforePhoto).map((pr) => (
+              <article
+                key={pr.id}
+                className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md"
+                onClick={() => setSelected(projects.indexOf(pr))}
+              >
+                <div className="relative h-52">
+                  <Image src={pr.photo.src} alt={pr.photo.alt} fill className="object-cover" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
+                  {pr.videoUrl && (
+                    <span className="absolute top-3 right-3 bg-teal-800/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VIDEO</span>
+                  )}
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-teal-800 mb-1">{pr.title}</h3>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {pr.workType.map(w => <span key={w} className="text-xs font-semibold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-md">{w}</span>)}
+                    <span className="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">{pr.location}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed">{pr.summary}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Lightbox */}
       {selected !== null && p && (
