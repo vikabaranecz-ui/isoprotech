@@ -233,8 +233,18 @@ export default function HomePage() {
           </div>
 
           {/* Masonry-style grid */}
+          {(() => {
+            const homeIds = [
+              "gevel-antwerpen-before-after",  // modern apartment — best visual
+              "spuitkurk-voor-na-1",           // angular modern white house
+              "gevel-meise",                   // large crepi building
+              "gevel-before-after-1",          // spuitkurk before/after
+              "plat-dak-voor-na",              // flat roof + wood cladding
+            ];
+            const homePr = homeIds.map(id => projects.find(p => p.id === id)).filter(Boolean) as typeof projects;
+            return (
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-            {projects.slice(0, 5).map((p, i) => (
+            {homePr.map((p, i) => (
               <Link
                 key={p.id}
                 href="/realisaties"
@@ -260,6 +270,8 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+            );
+          })()}
           <div className="text-center mt-8 md:hidden">
             <Link href="/realisaties" className="btn-outline">Alle realisaties bekijken</Link>
           </div>
