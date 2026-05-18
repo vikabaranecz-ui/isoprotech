@@ -27,7 +27,7 @@ export const IMAGES = {
 
 export const VIDEOS = {
   mainShowreel: "https://www.youtube.com/embed/Zt19qXNgBCg",
-  projectHighlight: "https://www.youtube.com/embed/Pxm7v6-AUxE",
+  projectHighlight: "https://www.youtube.com/embed/8B5AW31IVTk",
 } as const;
 
 export const INSTAGRAM = {
