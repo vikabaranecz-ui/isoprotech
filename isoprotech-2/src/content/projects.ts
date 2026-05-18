@@ -95,7 +95,34 @@ export const projects: Project[] = [
     workType: ["Gevelisolatie", "Crepi"],
     summary: "Appartementsgebouw met verouderde leien bekleding volledig geïsoleerd en afgewerkt met crepi. Moderne uitstraling en betere energieprestaties voor alle bewoners.",
   },
+  // New spuitkurk before/after pairs
+  {
+    id: "spuitkurk-voor-na-1",
+    title: "Spuitkurk gevelrenovatie",
+    photo: PHOTOS.spuitkurkAfter1,
+    beforePhoto: PHOTOS.spuitkurkBefore1,
+    location: "Antwerpen",
+    workType: ["Gevelisolatie", "Spuitkurk"],
+    summary: "Verweerde cementbepleistering vervangen door een moderne spuitkurk afwerking. De woning kreeg een frisse, duurzame uitstraling met uitstekende isolatiewaarden.",
+  },
+  {
+    id: "spuitkurk-voor-na-2",
+    title: "Spuitkurk — zijgevel en achterkant",
+    photo: PHOTOS.spuitkurkAfter2,
+    beforePhoto: PHOTOS.spuitkurkBefore2,
+    location: "Antwerpen",
+    workType: ["Gevelisolatie", "Spuitkurk"],
+    summary: "Tweede zijde van dezelfde woning — strakke witte spuitkurk rondom het volledige gebouw. Naadloze aansluiting op de voorgevel en perfecte hoekafwerking.",
+  },
   // Regular projects
+  {
+    id: "crepi-antwerpen",
+    title: "Crepi voorgevel renovatie",
+    photo: PHOTOS.crepiAntwAfter,
+    location: "Antwerpen",
+    workType: ["Gevelisolatie", "Crepi"],
+    summary: "Volledige voorgevel vernieuwd met witte crepi. Strakke, moderne uitstraling met donkere plint en raamafwerking. Klaar voor de komende decennia.",
+  },
   {
     id: "gevel-meise",
     title: "Buitengevelisolatie met crepi",

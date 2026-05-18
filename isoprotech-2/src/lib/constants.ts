@@ -71,10 +71,18 @@ export const PHOTOS = {
   binnentuinAfter: { src: "/images/projects/binnentuin-after.jpg", alt: "Binnentuin na renovatie — witte crepi muren, tegels en sfeerverlichting", width: 1536, height: 2048 },
   binnentuinOnderkantBefore: { src: "/images/projects/binnentuinonderkant-before.jpg", alt: "Binnentuin onderkant vóór renovatie — verwaarloosde ruimte", width: 1536, height: 2048 },
   binnentuinOnderkantAfter: { src: "/images/projects/binnentuinonderkant-after.jpg", alt: "Binnentuin onderkant na renovatie — crepi afwerking en tegels", width: 1536, height: 2048 },
-  hellendDakEdegemBefore: { src: "/images/projects/hellendakedegem-before.jpg", alt: "Hellend dak Edegem vóór renovatie — verouderde dakpannen", width: 1536, height: 2048 },
-  hellendDakEdegemAfter: { src: "/images/projects/hellendakedegem-after.jpg", alt: "Hellend dak Edegem na renovatie — nieuwe dakpannen en isolatie", width: 1536, height: 2048 },
-  hellendDakEdegemBefore2: { src: "/images/projects/hellendakedegem-before2.jpg", alt: "Hellend dak Edegem vóór renovatie — tweede hoek", width: 1536, height: 2048 },
+  hellendDakEdegemBefore: { src: "/images/projects/hellendakedegem-before.jpg", alt: "Hellend dak Edegem vóór renovatie — verouderde dakpannen", width: 2048, height: 1152 },
+  hellendDakEdegemAfter: { src: "/images/projects/hellendakedegem-after.jpg", alt: "Hellend dak Edegem na renovatie — nieuwe dakpannen en isolatie", width: 1320, height: 1752 },
+  hellendDakEdegemBefore2: { src: "/images/projects/hellendakedegem-before2.jpg", alt: "Hellend dak Edegem vóór renovatie — tweede hoek", width: 2048, height: 1152 },
   hellendDakEdegemAfter1: { src: "/images/projects/hellendakedegem-after1.jpg", alt: "Hellend dak Edegem na renovatie — tweede hoek na renovatie", width: 1536, height: 2048 },
+  // New spuitkurk before/after
+  spuitkurkBefore1: { src: "/images/projects/spuitkurk-before-after-1-before.jpg", alt: "Woning vóór spuitkurk — verweerde cementbepleistering", width: 1195, height: 896 },
+  spuitkurkAfter1: { src: "/images/projects/spuitkurk-before-after-1-after.jpg", alt: "Woning na spuitkurk — moderne witte gevelafwerking", width: 896, height: 1195 },
+  spuitkurkBefore2: { src: "/images/projects/spuitkurk-before-after-2-before.jpg", alt: "Zijgevel vóór spuitkurk — oude bakstenen en cement", width: 896, height: 1195 },
+  spuitkurkAfter2: { src: "/images/projects/spuitkurk-before-after-2-after.jpg", alt: "Zijgevel na spuitkurk — strakke witte afwerking", width: 896, height: 1195 },
+  // New crepi project
+  crepiAntwAfter: { src: "/images/projects/crepi-antwerpen-after.jpg", alt: "Crepi gevelafwerking Antwerpen — volledig gerenoveerde voorgevel", width: 1160, height: 2048 },
+  crepiAntwDetail: { src: "/images/projects/crepi-antwerpen-detail.jpg", alt: "Crepi detail — strakke witte afwerking met ISOPROTECH", width: 1161, height: 2048 },
   // Service photos
   asbestverwijdering: { src: "/images/services/asbestverwijdering.jpg", alt: "Veilige asbestverwijdering — vakman in beschermend pak", width: 1460, height: 820 },
   dakkapellen: { src: "/images/services/dakkapellen.png", alt: "Dakkapel wordt geplaatst op een hellend dak", width: 1200, height: 800 },

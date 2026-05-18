@@ -3,6 +3,7 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
 import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
@@ -172,6 +173,29 @@ export default function ServicePage({
           </div>
         </div>
       </section>
+
+      {/* Photo gallery */}
+      {service.galleryPhotos && service.galleryPhotos.length > 0 && (
+        <section className="bg-stone-50 py-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Realisaties</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-8">Onze {service.name.toLowerCase()} projecten</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {service.galleryPhotos.map((photo, i) => (
+                <div key={i} className={`relative overflow-hidden rounded-2xl bg-gray-100 ${i === 0 ? "col-span-2 md:col-span-2 row-span-2 h-80 md:h-[420px]" : "h-48 md:h-52"}`}>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                    sizes="(max-width:768px)100vw,50vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Related services */}
       {related.length > 0 && (

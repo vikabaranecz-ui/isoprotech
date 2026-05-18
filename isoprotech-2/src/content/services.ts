@@ -10,13 +10,14 @@ export interface Service {
   heroDesc: string;
   photo: typeof PHOTOS[keyof typeof PHOTOS];
   benefits: string[];
+  galleryPhotos?: { src: string; alt: string }[];
   seo: {
     title: string;
     description: string;
     keywords: string[];
   };
   relatedServices: string[];
-  faqIds: string[]; // references to FAQ items relevant to this service
+  faqIds: string[];
 }
 
 export const services: Service[] = [
@@ -127,6 +128,14 @@ export const services: Service[] = [
       "Weinig onderhoud op lange termijn",
       "Hogere woningwaarde bij verkoop",
     ],
+    galleryPhotos: [
+      { src: PHOTOS.crepiAntwAfter.src, alt: PHOTOS.crepiAntwAfter.alt },
+      { src: PHOTOS.crepiAntwDetail.src, alt: PHOTOS.crepiAntwDetail.alt },
+      { src: PHOTOS.crepiAfter1.src, alt: PHOTOS.crepiAfter1.alt },
+      { src: PHOTOS.binnentuinAfter.src, alt: PHOTOS.binnentuinAfter.alt },
+      { src: PHOTOS.gevelCrepiMeise.src, alt: PHOTOS.gevelCrepiMeise.alt },
+      { src: PHOTOS.gevelAntwAfter.src, alt: PHOTOS.gevelAntwAfter.alt },
+    ],
     seo: {
       title: "Crepi Antwerpen — Gevelafwerking met Isolatie | ISOPROTECH",
       description: "Professionele crepi gevelafwerking in Antwerpen. Met of zonder isolatie. Diverse kleuren en structuren. Gratis inspectie, 10 jaar garantie.",
@@ -149,6 +158,14 @@ export const services: Service[] = [
       "Natuurlijk en ecologisch materiaal",
       "Thermisch en akoestisch isolerend effect",
       "Kleurvast en onderhoudsvriendelijk — jarenlang mooi",
+    ],
+    galleryPhotos: [
+      { src: PHOTOS.spuitkurkAfter1.src, alt: PHOTOS.spuitkurkAfter1.alt },
+      { src: PHOTOS.spuitkurkBefore1.src, alt: PHOTOS.spuitkurkBefore1.alt },
+      { src: PHOTOS.spuitkurkAfter2.src, alt: PHOTOS.spuitkurkAfter2.alt },
+      { src: PHOTOS.spuitkurkBefore2.src, alt: PHOTOS.spuitkurkBefore2.alt },
+      { src: PHOTOS.gevelAfter1.src, alt: PHOTOS.gevelAfter1.alt },
+      { src: PHOTOS.gevelCrepiMeise2.src, alt: PHOTOS.gevelCrepiMeise2.alt },
     ],
     seo: {
       title: "Spuitkurk Antwerpen — Naadloze Gevelafwerking | ISOPROTECH",
