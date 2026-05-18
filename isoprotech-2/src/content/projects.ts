@@ -98,21 +98,21 @@ export const projects: Project[] = [
   // New spuitkurk before/after pairs
   {
     id: "spuitkurk-voor-na-1",
-    title: "Spuitkurk gevelrenovatie",
+    title: "Gevelisolatie met crepi",
     photo: PHOTOS.spuitkurkAfter1,
     beforePhoto: PHOTOS.spuitkurkBefore1,
     location: "Antwerpen",
-    workType: ["Gevelisolatie", "Spuitkurk"],
-    summary: "Verweerde cementbepleistering vervangen door een moderne spuitkurk afwerking. De woning kreeg een frisse, duurzame uitstraling met uitstekende isolatiewaarden.",
+    workType: ["Gevelisolatie", "Crepi"],
+    summary: "Verweerde gevel volledig geïsoleerd en afgewerkt met strakke witte crepi. Van verouderd bakstenen en cement naar een moderne, energiezuinige woning.",
   },
   {
     id: "spuitkurk-voor-na-2",
-    title: "Spuitkurk — zijgevel en achterkant",
+    title: "Gevelisolatie met crepi — zijgevel",
     photo: PHOTOS.spuitkurkAfter2,
     beforePhoto: PHOTOS.spuitkurkBefore2,
     location: "Antwerpen",
-    workType: ["Gevelisolatie", "Spuitkurk"],
-    summary: "Tweede zijde van dezelfde woning — strakke witte spuitkurk rondom het volledige gebouw. Naadloze aansluiting op de voorgevel en perfecte hoekafwerking.",
+    workType: ["Gevelisolatie", "Crepi"],
+    summary: "Zijgevel en achterkant van dezelfde woning — strakke witte crepi rondom het volledige gebouw. Naadloze hoekafwerking en perfecte aansluiting op de voorgevel.",
   },
   // Regular projects
   {
