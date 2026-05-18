@@ -174,6 +174,31 @@ export default function ServicePage({
         </div>
       </section>
 
+      {/* Video section */}
+      {service.videoSrc && (
+        <section className="py-16 bg-teal-950">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div>
+                <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Bekijk het resultaat</span>
+                <h2 className="mt-2 text-3xl font-extrabold text-white mb-4">{service.name} in de praktijk</h2>
+                <p className="text-white/60 leading-relaxed">Bekijk hoe onze vakmensen een {service.name.toLowerCase()} project aanpakken — van voorbereiding tot het perfecte eindresultaat. Vakwerk dat voor zichzelf spreekt.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <video
+                  src={service.videoSrc}
+                  poster="/videos/spuitkurk-poster.jpg"
+                  controls
+                  playsInline
+                  className="w-full aspect-video object-cover bg-black"
+                  preload="metadata"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Photo gallery */}
       {service.galleryPhotos && service.galleryPhotos.length > 0 && (
         <section className="bg-stone-50 py-16">

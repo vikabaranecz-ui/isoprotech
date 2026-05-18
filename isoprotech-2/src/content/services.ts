@@ -11,6 +11,7 @@ export interface Service {
   photo: typeof PHOTOS[keyof typeof PHOTOS];
   benefits: string[];
   galleryPhotos?: { src: string; alt: string }[];
+  videoSrc?: string;
   seo: {
     title: string;
     description: string;
@@ -159,6 +160,7 @@ export const services: Service[] = [
       "Thermisch en akoestisch isolerend effect",
       "Kleurvast en onderhoudsvriendelijk — jarenlang mooi",
     ],
+    videoSrc: "/videos/spuitkurk-showreel.mp4",
     galleryPhotos: [
       { src: PHOTOS.spuitkurkAfter1.src, alt: PHOTOS.spuitkurkAfter1.alt },
       { src: PHOTOS.spuitkurkBefore1.src, alt: PHOTOS.spuitkurkBefore1.alt },
