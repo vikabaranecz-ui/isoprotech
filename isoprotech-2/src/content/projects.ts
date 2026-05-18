@@ -62,12 +62,11 @@ export const projects: Project[] = [
   },
   {
     id: "hellend-dak-edegem-2",
-    title: "Hellend dak — tweede zijde",
+    title: "Hellend dak renovatie met zonnepanelen",
     photo: PHOTOS.hellendDakEdegemAfter1,
-    beforePhoto: PHOTOS.hellendDakEdegemBefore2,
     location: "Edegem",
     workType: ["Dakrenovatie", "Dakisolatie"],
-    summary: "Tweede zijde van het gerenoveerde hellend dak in Edegem. Strakke aansluiting op de gevels en nette afwerking van alle dakdetails.",
+    summary: "Volledig vernieuwd hellend dak met nieuwe keramische pannen. Zonnepanelen vakkundig geïntegreerd in het nieuwe dakwerk — waterdicht en esthetisch afgewerkt.",
   },
   {
     id: "gevel-before-after-1",
