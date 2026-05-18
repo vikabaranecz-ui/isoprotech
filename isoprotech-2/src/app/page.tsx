@@ -235,11 +235,11 @@ export default function HomePage() {
           {/* Masonry-style grid */}
           {(() => {
             const homeIds = [
-              "gevel-antwerpen-before-after",  // modern apartment — best visual
-              "spuitkurk-voor-na-1",           // angular modern white house
-              "gevel-meise",                   // large crepi building
-              "gevel-before-after-1",          // spuitkurk before/after
+              "gevel-antwerpen-before-after",  // modern apartment facade — best visual
               "plat-dak-voor-na",              // flat roof + wood cladding
+              "spuitkurk-voor-na-1",           // angular white house facade
+              "hellend-dak-edegem-1",          // pitched roof renovation
+              "gevel-meise",                   // large crepi facade
             ];
             const homePr = homeIds.map(id => projects.find(p => p.id === id)).filter(Boolean) as typeof projects;
             return (
