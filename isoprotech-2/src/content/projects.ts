@@ -113,22 +113,7 @@ export const projects: Project[] = [
     workType: ["Crepi"],
     summary: "Dezelfde woning in Meise — strakke witte crepi rondom het hele gebouw, inclusief zijgevel en achterkant.",
   },
-  {
-    id: "dak-schouw",
-    title: "Dakrenovatie met schouwkap",
-    photo: PHOTOS.dakSchouw,
-    location: "Antwerpen",
-    workType: ["Dakrenovatie"],
-    summary: "Volledig nieuw dak met zwarte keramische pannen en een moderne schouwkap in antraciet. Waterdicht en esthetisch afgewerkt.",
-  },
-  {
-    id: "dak-schouw-2",
-    title: "Schouw met loodaansluiting",
-    photo: PHOTOS.dakSchouw2,
-    location: "Antwerpen",
-    workType: ["Dakrenovatie"],
-    summary: "Detail van schoorsteen met correcte loodaansluiting op nieuwe dakpannen. Vakkundige afwerking voorkomt lekkages.",
-  },
+
   {
     id: "gevel-crepi-project",
     title: "Gevelisolatie met crepi afwerking",
