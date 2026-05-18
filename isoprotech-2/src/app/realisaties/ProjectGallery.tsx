@@ -144,14 +144,14 @@ export function ProjectGallery() {
             <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
 
-          <div className="max-w-4xl w-full max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
-            {/* Image area */}
-            <div className="relative flex-1 min-h-[300px] rounded-t-2xl overflow-hidden bg-black">
+          <div className="max-w-4xl w-full flex flex-col" onClick={e => e.stopPropagation()}>
+            {/* Image area — explicit height so h-full works inside */}
+            <div className="relative h-[55vh] rounded-t-2xl overflow-hidden bg-black">
               {p.beforePhoto ? (
                 // Before/after comparison slider
                 <div
                   ref={sliderRef}
-                  className="relative w-full h-full cursor-col-resize select-none"
+                  className="absolute inset-0 cursor-col-resize select-none"
                   onMouseMove={e => { if (e.buttons === 1) handleSliderMove(e); }}
                   onTouchMove={handleSliderMove}
                   onMouseDown={handleSliderMove}
