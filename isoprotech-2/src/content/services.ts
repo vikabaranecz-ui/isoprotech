@@ -37,6 +37,13 @@ export const services: Service[] = [
       "Bescherming van uw dakstructuur tegen vocht en schimmel",
       "Premie-aanvraag inbegrepen — wij regelen het voor u",
     ],
+    galleryPhotos: [
+      { src: PHOTOS.dakisolatieTorch.src, alt: PHOTOS.dakisolatieTorch.alt },
+      { src: PHOTOS.dakisolatieTeam.src, alt: PHOTOS.dakisolatieTeam.alt },
+      { src: PHOTOS.platDakAfter.src, alt: PHOTOS.platDakAfter.alt },
+      { src: PHOTOS.platDak2After.src, alt: PHOTOS.platDak2After.alt },
+      { src: PHOTOS.platDak.src, alt: PHOTOS.platDak.alt },
+    ],
     seo: {
       title: "Dakisolatie Antwerpen — Plat & Hellend Dak | ISOPROTECH",
       description: "Professionele dakisolatie in Antwerpen en omgeving. Platte en hellende daken. Tot 30% besparing op energiekosten. Gratis inspectie, 10 jaar garantie. Vraag uw offerte aan.",
@@ -59,6 +66,13 @@ export const services: Service[] = [
       "Lagere onderhoudskosten op lange termijn",
       "Hogere woningwaarde en betere EPC-score",
       "Premie-aanvraag inbegrepen",
+    ],
+    galleryPhotos: [
+      { src: PHOTOS.dakrenovatieWorker.src, alt: PHOTOS.dakrenovatieWorker.alt },
+      { src: PHOTOS.hellendDakEdegemAfter.src, alt: PHOTOS.hellendDakEdegemAfter.alt },
+      { src: PHOTOS.hellendDakEdegemAfter1.src, alt: PHOTOS.hellendDakEdegemAfter1.alt },
+      { src: PHOTOS.dakSchouw.src, alt: PHOTOS.dakSchouw.alt },
+      { src: PHOTOS.platDakAfter.src, alt: PHOTOS.platDakAfter.alt },
     ],
     seo: {
       title: "Dakrenovatie Antwerpen — Vakkundige Dakvernieuwing | ISOPROTECH",
@@ -130,9 +144,12 @@ export const services: Service[] = [
       "Hogere woningwaarde bij verkoop",
     ],
     galleryPhotos: [
+      { src: PHOTOS.crepiWorker.src, alt: PHOTOS.crepiWorker.alt },
       { src: PHOTOS.crepiAntwAfter.src, alt: PHOTOS.crepiAntwAfter.alt },
+      { src: PHOTOS.crepiOranje1.src, alt: PHOTOS.crepiOranje1.alt },
       { src: PHOTOS.crepiAntwDetail.src, alt: PHOTOS.crepiAntwDetail.alt },
       { src: PHOTOS.crepiAfter1.src, alt: PHOTOS.crepiAfter1.alt },
+      { src: PHOTOS.crepiOranje2.src, alt: PHOTOS.crepiOranje2.alt },
       { src: PHOTOS.binnentuinAfter.src, alt: PHOTOS.binnentuinAfter.alt },
       { src: PHOTOS.gevelCrepiMeise.src, alt: PHOTOS.gevelCrepiMeise.alt },
       { src: PHOTOS.gevelAntwAfter.src, alt: PHOTOS.gevelAntwAfter.alt },
@@ -191,6 +208,11 @@ export const services: Service[] = [
       "Volledige documentatie voor uw renovatiepremie",
       "Asbestverwijderingsbonus van €8/m² mogelijk",
       "Gratis inspectie en asbestinventarisatie ter plaatse",
+    ],
+    galleryPhotos: [
+      { src: PHOTOS.asbestverwijdering1.src, alt: PHOTOS.asbestverwijdering1.alt },
+      { src: PHOTOS.asbestverwijdering2.src, alt: PHOTOS.asbestverwijdering2.alt },
+      { src: PHOTOS.asbestverwijdering.src, alt: PHOTOS.asbestverwijdering.alt },
     ],
     seo: {
       title: "Asbestverwijdering Antwerpen — Veilig & Gecertificeerd | ISOPROTECH",

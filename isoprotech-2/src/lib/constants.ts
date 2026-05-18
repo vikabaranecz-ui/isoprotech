@@ -83,11 +83,21 @@ export const PHOTOS = {
   // New crepi project
   crepiAntwAfter: { src: "/images/projects/crepi-antwerpen-after.jpg", alt: "Crepi gevelafwerking Antwerpen — volledig gerenoveerde voorgevel", width: 1160, height: 2048 },
   crepiAntwDetail: { src: "/images/projects/crepi-antwerpen-detail.jpg", alt: "Crepi detail — strakke witte afwerking met ISOPROTECH", width: 1161, height: 2048 },
+  // Orange facade project photos
+  crepiOranje1: { src: "/images/projects/crepi-oranje-1.jpg", alt: "Pomporanjevý fasáda s crepi afwerking — warm oranje eindresultaat", width: 1200, height: 1600 },
+  crepiOranje2: { src: "/images/projects/crepi-oranje-2.jpg", alt: "Oranje crepi gevelafwerking — detail", width: 1200, height: 1600 },
+  crepiOranje3: { src: "/images/projects/crepi-oranje-3.jpg", alt: "Oranje crepi woning — volledig gerenoveerde gevel", width: 1200, height: 1600 },
   // Service photos
   asbestverwijdering: { src: "/images/services/asbestverwijdering.jpg", alt: "Veilige asbestverwijdering — vakman in beschermend pak", width: 1460, height: 820 },
+  asbestverwijdering1: { src: "/images/services/asbestverwijdering-1.jpg", alt: "ISOPROTECH vakman verwijdert asbest in beschermend pak en masker", width: 1200, height: 900 },
+  asbestverwijdering2: { src: "/images/services/asbestverwijdering-2.jpg", alt: "Asbestverwijdering op locatie — ISOPROTECH team in actie", width: 1200, height: 900 },
   dakkapellen: { src: "/images/services/dakkapellen.png", alt: "Dakkapel wordt geplaatst op een hellend dak", width: 1200, height: 800 },
   dakrenovatie: { src: "/images/services/dakrenovatie.jpg", alt: "Dakrenovatie met nieuwe keramische dakpannen", width: 1080, height: 1920 },
+  dakrenovatieWorker: { src: "/images/services/dakrenovatie-worker.jpg", alt: "ISOPROTECH vakman aan het werk op hellend dak — blauwe sweater", width: 1080, height: 1920 },
   dakisolatieService: { src: "/images/services/dakisolatie.jpg", alt: "Dakisolatie op plat dak — PIR-platen en roofing", width: 1460, height: 820 },
+  dakisolatieTeam: { src: "/images/services/dakisolatie-team.jpg", alt: "ISOPROTECH team met Recticel PIR-isolatieplaten op plat dak", width: 1460, height: 820 },
+  dakisolatieTorch: { src: "/images/services/dakisolatie-torch.jpg", alt: "ISOPROTECH vakman torcht bitumen op plat dak — dakisolatie in uitvoering", width: 1080, height: 1920 },
   spuitkurk: { src: "/images/services/spuitkurk.jpg", alt: "Spuitkurk gevelafwerking close-up", width: 1200, height: 500 },
   crepiService: { src: "/images/services/crepi.jpg", alt: "Crepi gevelafwerking — strakke minerale pleister", width: 1080, height: 1620 },
+  crepiWorker: { src: "/images/services/crepi-worker.jpg", alt: "ISOPROTECH vakman brengt oranje crepi aan op gevel — grijs ISOPROTECH hoodie", width: 1080, height: 1920 },
 } as const;

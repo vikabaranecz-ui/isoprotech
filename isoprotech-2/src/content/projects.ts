@@ -167,6 +167,30 @@ export const projects: Project[] = [
     workType: ["Dakisolatie", "Dakrenovatie"],
     summary: "Volledige vernieuwing van een plat dak met PIR-isolatie en nieuwe waterdichte bedekking. Dronebeeld toont de omvang van het project.",
   },
+  {
+    id: "crepi-oranje-1",
+    title: "Gevelisolatie met oranje crepi",
+    photo: PHOTOS.crepiOranje1,
+    location: "Antwerpen",
+    workType: ["Gevelisolatie", "Crepi"],
+    summary: "Woning volledig geïsoleerd en afgewerkt met warm oranje crepi. Een frisse, opvallende kleurkeuze die de buurt op zijn kop zet.",
+  },
+  {
+    id: "crepi-oranje-2",
+    title: "Oranje crepi gevelafwerking — detail",
+    photo: PHOTOS.crepiOranje2,
+    location: "Antwerpen",
+    workType: ["Crepi"],
+    summary: "Detailopname van de oranje crepi afwerking — strakke textuur en egale kleur over het volledige gevelvlak.",
+  },
+  {
+    id: "crepi-oranje-3",
+    title: "Oranje crepi renovatie — eindresultaat",
+    photo: PHOTOS.crepiOranje3,
+    location: "Antwerpen",
+    workType: ["Gevelisolatie", "Crepi"],
+    summary: "Volledig gerenoveerde gevel met isolatie en oranje minerale crepi. Modern, duurzaam en energiezuinig.",
+  },
 ];
 
 export function getProjectsByCity(city: string): Project[] {
