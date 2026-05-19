@@ -7,16 +7,11 @@ const CONSENT_KEY = "cookie_consent";
 
 type ConsentValue = "accepted" | "rejected";
 
-declare global {
-  interface Window {
-    dataLayer?: Record<string, unknown>[];
-  }
-}
-
 function pushConsent(value: ConsentValue) {
   if (typeof window === "undefined") return;
-  window.dataLayer = window.dataLayer ?? [];
-  window.dataLayer.push({
+  const w = window as Window & { dataLayer: Record<string, unknown>[] };
+  w.dataLayer = w.dataLayer ?? [];
+  w.dataLayer.push({
     event: "cookie_consent_update",
     cookie_consent: value,
   });
