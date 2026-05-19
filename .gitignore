@@ -12,6 +12,9 @@ out/
 .env.test.local
 .env.production.local
 
+# TypeScript build cache
+*.tsbuildinfo
+
 # OS / editor
 .DS_Store
 *.swp
