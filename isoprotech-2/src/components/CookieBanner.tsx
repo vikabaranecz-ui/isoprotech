@@ -11,9 +11,11 @@ function pushConsent(value: ConsentValue) {
   if (typeof window === "undefined") return;
   const w = window as Window & { dataLayer: Record<string, unknown>[] };
   w.dataLayer = w.dataLayer ?? [];
+  const granted = value === "accepted";
   w.dataLayer.push({
     event: "cookie_consent_update",
-    cookie_consent: value,
+    ad_storage: granted ? "granted" : "denied",
+    analytics_storage: granted ? "granted" : "denied",
   });
 }
 
