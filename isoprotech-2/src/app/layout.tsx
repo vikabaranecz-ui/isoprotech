@@ -6,6 +6,7 @@ import { localBusinessSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { CookieBanner } from "@/components/CookieBanner";
 import "@/styles/globals.css";
 
 const outfit = Outfit({
@@ -90,6 +91,8 @@ export default function RootLayout({
 
         {/* Footer will be imported as a component */}
         <Footer />
+
+        <CookieBanner />
 
         {/* Floating WhatsApp CTA */}
         <a
