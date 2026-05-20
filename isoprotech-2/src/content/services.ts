@@ -18,6 +18,8 @@ export interface Service {
     keywords: string[];
   };
   relatedServices: string[];
+  relatedBlogSlugs: string[];
+  landingPage?: string;
   faqIds: string[];
 }
 
@@ -50,6 +52,8 @@ export const services: Service[] = [
       keywords: ["dakisolatie antwerpen", "dak isoleren", "plat dak isolatie", "hellend dak isolatie", "dakisolatie prijs"],
     },
     relatedServices: ["dakrenovatie", "gevelisolatie"],
+    relatedBlogSlugs: ["dakisolatie-plat-hellend", "epc-label-verbeteren", "premies-renovatie-2026"],
+    landingPage: "/dakisolatie-antwerpen",
     faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "garantie"],
   },
   {
@@ -80,6 +84,7 @@ export const services: Service[] = [
       keywords: ["dakrenovatie antwerpen", "dak vernieuwen", "dak renoveren", "nieuw dak prijs"],
     },
     relatedServices: ["dakisolatie", "dakkapellen"],
+    relatedBlogSlugs: ["dakisolatie-plat-hellend", "premies-renovatie-2026"],
     faqIds: ["dakrenovatie-duur", "garantie"],
   },
   {
@@ -103,6 +108,7 @@ export const services: Service[] = [
       keywords: ["dakkapellen antwerpen", "dakkapel plaatsen", "dakkapel prijs"],
     },
     relatedServices: ["dakisolatie", "dakrenovatie"],
+    relatedBlogSlugs: ["dakisolatie-plat-hellend", "epc-label-verbeteren"],
     faqIds: ["garantie"],
   },
   {
@@ -126,6 +132,8 @@ export const services: Service[] = [
       keywords: ["gevelisolatie antwerpen", "buitengevelisolatie", "gevel isoleren", "gevelisolatie prijs m2"],
     },
     relatedServices: ["crepi", "spuitkurk"],
+    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "epc-label-verbeteren", "premies-renovatie-2026"],
+    landingPage: "/gevelisolatie-antwerpen",
     faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "premies"],
   },
   {
@@ -160,6 +168,7 @@ export const services: Service[] = [
       keywords: ["crepi antwerpen", "crepi gevel", "crepi prijs", "gevelpleister", "crepi met isolatie"],
     },
     relatedServices: ["gevelisolatie", "spuitkurk"],
+    relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
     faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
   },
   {
@@ -192,6 +201,7 @@ export const services: Service[] = [
       keywords: ["spuitkurk antwerpen", "spuitkurk gevel", "spuitkurk prijs", "kurk gevelafwerking"],
     },
     relatedServices: ["gevelisolatie", "crepi"],
+    relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
     faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
   },
   {
@@ -220,6 +230,7 @@ export const services: Service[] = [
       keywords: ["asbestverwijdering antwerpen", "asbest verwijderen", "asbest sanering", "asbest prijs"],
     },
     relatedServices: ["dakrenovatie", "gevelisolatie"],
+    relatedBlogSlugs: ["asbest-herkennen", "premies-renovatie-2026"],
     faqIds: ["asbest-voor-renovatie", "garantie"],
   },
 ];

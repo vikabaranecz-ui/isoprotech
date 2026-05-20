@@ -4,7 +4,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
+import { getBlogPostBySlug } from "@/content/blog";
 import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -51,6 +53,9 @@ export default function ServicePage({
 
   const related = getRelatedServices(service.id);
   const serviceUrl = `${BRAND.url}/diensten/${service.slug}`;
+  const relatedBlogPosts = (service.relatedBlogSlugs ?? [])
+    .map(getBlogPostBySlug)
+    .filter(Boolean) as NonNullable<ReturnType<typeof getBlogPostBySlug>>[];
 
   return (
     <>
@@ -247,6 +252,54 @@ export default function ServicePage({
             </div>
           </div>
         </section>
+      )}
+
+      {/* Related blog posts */}
+      {relatedBlogPosts.length > 0 && (
+        <section className="py-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Verder lezen</span>
+            <h2 className="mt-2 text-2xl font-extrabold text-teal-800 mb-8">
+              Nuttige artikels over {service.name.toLowerCase()}
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedBlogPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.slug}`}
+                  className="group block rounded-2xl bg-white border border-gray-100 p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-orange-200 hover:shadow-md"
+                >
+                  <span className="text-xs font-bold text-orange-500 uppercase tracking-wide">
+                    {post.category}
+                  </span>
+                  <h3 className="mt-2 font-bold text-teal-800 leading-snug group-hover:text-orange-500 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
+                    Lees meer
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Landing page link for geo-targeted pages */}
+      {service.landingPage && (
+        <div className="mx-auto max-w-7xl px-6 pb-4">
+          <p className="text-sm text-gray-500">
+            Specifiek op zoek naar{" "}
+            <Link href={service.landingPage} className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              {service.name.toLowerCase()} in Antwerpen
+            </Link>
+            ? Bekijk onze speciale pagina met lokale referenties en prijsindicaties.
+          </p>
+        </div>
       )}
 
       {/* CTA + Form */}

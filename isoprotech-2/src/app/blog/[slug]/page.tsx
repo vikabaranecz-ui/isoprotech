@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPostBySlug, getRelatedPosts } from "@/content/blog";
+import { getServiceBySlug } from "@/content/services";
 import { BRAND } from "@/lib/constants";
 import { blogPostSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -43,6 +44,9 @@ export default function BlogArticlePage({
   if (!post) notFound();
 
   const related = getRelatedPosts(post.slug);
+  const relatedServices = (post.relatedServiceSlugs ?? [])
+    .map(getServiceBySlug)
+    .filter(Boolean) as NonNullable<ReturnType<typeof getServiceBySlug>>[];
 
   return (
     <>
@@ -126,6 +130,27 @@ export default function BlogArticlePage({
             Gratis offerte aanvragen
           </Link>
         </div>
+
+        {/* Related services */}
+        {relatedServices.length > 0 && (
+          <div className="mt-10 rounded-2xl border border-orange-100 bg-orange-50/60 p-6">
+            <h3 className="text-base font-extrabold text-teal-800 mb-4">
+              Onze diensten
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {relatedServices.map((svc) => (
+                <Link
+                  key={svc.id}
+                  href={`/diensten/${svc.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-orange-200 bg-white px-4 py-2 text-sm font-semibold text-teal-800 shadow-sm transition-all hover:border-orange-400 hover:text-orange-600"
+                >
+                  {svc.name}
+                  <svg className="h-3 w-3 text-orange-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Related articles */}
         {related.length > 0 && (

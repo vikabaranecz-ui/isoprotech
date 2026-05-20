@@ -6,6 +6,7 @@ import { services } from "@/content/services";
 import { projects } from "@/content/projects";
 import { reviews } from "@/content/reviews";
 import { cities } from "@/content/cities";
+import { blogPosts } from "@/content/blog";
 import { BRAND, PHOTOS, VIDEOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
 
@@ -375,6 +376,56 @@ export default function HomePage() {
                 {c.name}
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── BLOG ─── */}
+      <section className="section-padding bg-stone-50">
+        <div className="container-wide">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <span className="section-label">Tips & advies</span>
+              <h2 className="section-title mt-1">Laatste artikels</h2>
+            </div>
+            <Link href="/blog" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors shrink-0">
+              Alle artikels
+              <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+            </Link>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.slice(0, 3).map((post) => (
+              <Link
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="group block rounded-2xl bg-white border border-gray-100 overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={post.photo.src}
+                    alt={post.photo.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
+                  />
+                  <span className="absolute top-3 left-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-bold text-white">
+                    {post.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-teal-800 leading-snug group-hover:text-orange-500 transition-colors mb-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">{post.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-orange-500">
+                    {post.readTime} · {post.dateDisplay}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 md:hidden text-center">
+            <Link href="/blog" className="btn-outline">Alle artikels bekijken</Link>
           </div>
         </div>
       </section>

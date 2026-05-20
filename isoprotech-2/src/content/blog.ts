@@ -20,6 +20,7 @@ export interface BlogPost {
   photo: typeof PHOTOS[keyof typeof PHOTOS];
   body: BlogParagraph[];
   relatedSlugs: string[];
+  relatedServiceSlugs: string[];
   seo: {
     title: string;
     description: string;
@@ -55,6 +56,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Tot slot verhoogt gevelisolatie de marktwaarde van uw woning structureel. Potentiële kopers kijken steeds meer naar de energieprestaties van een woning. Een goede isolatie met een mooie afwerking is een doorslaggevend verkoopargument." },
     ],
     relatedSlugs: ["epc-label-verbeteren", "crepi-vs-spuitkurk"],
+    relatedServiceSlugs: ["gevelisolatie", "crepi", "spuitkurk"],
     seo: {
       title: "7 Voordelen van Gevelisolatie in 2026 — ISOPROTECH Blog",
       description: "Waarom gevelisolatie in 2026 de slimste investering is. Lagere energiekosten, betere EPC-score, hogere woningwaarde. Lees alle voordelen.",
@@ -84,6 +86,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Bij renovatie is dakisolatie van een hellend dak vaak eenvoudiger uit te voeren zonder de dakbedekking te verwijderen — de isolatie kan langs de binnenzijde worden aangebracht. Bij een plat dak is het meestal nodig om de volledige opbouw te vernieuwen, wat een grotere ingreep is maar ook de kans biedt om de waterdichting te vernieuwen." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "epc-label-verbeteren"],
+    relatedServiceSlugs: ["dakisolatie", "dakrenovatie"],
     seo: {
       title: "Dakisolatie: Plat vs. Hellend Dak — ISOPROTECH Blog",
       description: "Verschil tussen plat dak en hellend dak isoleren. Techniek, materialen en renovatie-overwegingen. Advies van ISOPROTECH Antwerpen.",
@@ -111,6 +114,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Kies crepi als u een strakke, uniforme uitstraling wilt tegen een competitieve prijs. Kies spuitkurk als uw gevel gevoelig is voor scheuren, als u een naadloze afwerking prefereert, of als ecologie een belangrijk criterium is." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
+    relatedServiceSlugs: ["crepi", "spuitkurk", "gevelisolatie"],
     seo: {
       title: "Crepi of Spuitkurk? Vergelijking Gevelafwerking — ISOPROTECH",
       description: "Vergelijking crepi vs. spuitkurk: prijs, onderhoud, uitstraling en duurzaamheid. Welke gevelafwerking past bij uw woning? ISOPROTECH adviseert.",
@@ -138,6 +142,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Via Mijn Verbouwpremie kunt u premies aanvragen die de investering in isolatie nog aantrekkelijker maken. De terugverdientijd van dakisolatie ligt doorgaans tussen 5 en 8 jaar, voor gevelisolatie tussen 8 en 12 jaar — afhankelijk van uw energieverbruik en de gekozen materialen." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "dakisolatie-plat-hellend"],
+    relatedServiceSlugs: ["gevelisolatie", "dakisolatie"],
     seo: {
       title: "EPC-label Verbeteren met Isolatie — ISOPROTECH Blog",
       description: "Welke isolatiewerken verbeteren uw EPC-label het meest? Dakisolatie, gevelisolatie, premies en terugverdientijd uitgelegd.",
@@ -165,6 +170,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Naast Mijn Verbouwpremie zijn er soms ook gemeentelijke premies beschikbaar. De stad Antwerpen, Mechelen en andere gemeenten bieden soms bijkomende ondersteuning. Informeer bij uw gemeente of via het Ecohuis naar actuele mogelijkheden." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "epc-label-verbeteren"],
+    relatedServiceSlugs: ["gevelisolatie", "dakisolatie", "asbestverwijdering"],
     seo: {
       title: "Renovatiepremies Vlaanderen 2026 — Overzicht | ISOPROTECH",
       description: "Overzicht renovatiepremies Vlaanderen 2026. Premies voor dakisolatie en gevelisolatie via Mijn Verbouwpremie. Hoe aanvragen? ISOPROTECH helpt.",
@@ -192,6 +198,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "ISOPROTECH voert asbestverwijdering uit volgens alle wettelijke normen. Wij zorgen voor een veilige verwijdering met beschermingsmaatregelen, gecertificeerd afvaltransport en volledige documentatie. Neem contact op voor een gratis inspectie." },
     ],
     relatedSlugs: ["premies-renovatie-2026", "dakisolatie-plat-hellend"],
+    relatedServiceSlugs: ["asbestverwijdering", "dakrenovatie"],
     seo: {
       title: "Asbest Herkennen in Uw Woning — ISOPROTECH Blog",
       description: "Hoe herkent u asbest? Meest voorkomende toepassingen, risico's en professionele verwijdering. ISOPROTECH Antwerpen.",
@@ -221,6 +228,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Wilt u een indicatieve prijs voor uw specifieke situatie? Gebruik onze gevelcalculator voor een schatting op maat, gebaseerd op de actuele marktprijzen in Antwerpen." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
+    relatedServiceSlugs: ["gevelisolatie", "crepi", "spuitkurk"],
     seo: {
       title: "Gevelisolatie Prijs per m² 2026 — Wat Kost Het? | ISOPROTECH",
       description: "Wat kost gevelisolatie per m² in 2026? Eerlijk overzicht: materiaal, arbeid, stelling, afwerking. Richtprijzen Antwerpen. ISOPROTECH.",
@@ -248,6 +256,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Een groot voordeel van buitenisolatie is dat u tegelijk de gevelafwerking vernieuwt. Crepi, spuitkurk of steenstrips geven uw woning een volledig nieuwe uitstraling — een dubbele investering die zowel energetisch als esthetisch rendeert." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "gevelisolatie-prijs-m2-2026"],
+    relatedServiceSlugs: ["gevelisolatie", "crepi", "spuitkurk"],
     seo: {
       title: "Buitenmuur Isoleren via de Buitenzijde — ISOPROTECH Blog",
       description: "Wanneer is buitengevelisolatie zinvol? Voordelen, beperkingen en alternatieven. Advies van ISOPROTECH Antwerpen.",
@@ -275,6 +284,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Bij een dakbedekkingsrenovatie is het technisch en financieel slim om tegelijk de dakisolatie te vernieuwen. De constructie ligt toch open, en de meerkosten voor isolatie zijn beperkt vergeleken met de energiebesparing die u er jarenlang mee realiseert." },
     ],
     relatedSlugs: ["dakisolatie-plat-hellend", "epc-label-verbeteren"],
+    relatedServiceSlugs: ["dakrenovatie", "dakisolatie"],
     seo: {
       title: "Plat Dak Renoveren 2026 — EPDM, Roofing of Groendak? | ISOPROTECH",
       description: "Plat dak renoveren? Vergelijking EPDM, bitumen roofing en groendak. Prijzen, levensduur en advies. ISOPROTECH Antwerpen.",
@@ -302,6 +312,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Wij controleren bij elk project of een vergunning nodig is. Als dat het geval is, begeleiden wij u bij de aanvraag. U hoeft zich hier geen zorgen over te maken — wij regelen het." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
+    relatedServiceSlugs: ["gevelisolatie", "dakisolatie"],
     seo: {
       title: "Isolatie Zonder Bouwvergunning — Wat Mag Wel? | ISOPROTECH",
       description: "Welke isolatiewerken zijn vrijgesteld van bouwvergunning in Vlaanderen? Dakisolatie, gevelisolatie, regels 2026. ISOPROTECH.",
@@ -333,6 +344,7 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Elke stap komt in aanmerking voor premies via Mijn Verbouwpremie. Door de werken in de juiste volgorde uit te voeren, maximaliseert u zowel de energiebesparing als de beschikbare premies. ISOPROTECH helpt u bij de eerste twee stappen: dak en gevel." },
     ],
     relatedSlugs: ["epc-label-verbeteren", "gevelisolatie-voordelen-2026"],
+    relatedServiceSlugs: ["dakisolatie", "gevelisolatie", "dakrenovatie"],
     seo: {
       title: "Energiezuinig Renoveren Stappenplan — ISOPROTECH Blog",
       description: "De juiste volgorde voor energiezuinig renoveren: dak, gevel, ramen, ventilatie, verwarming. Stappenplan en premies. ISOPROTECH.",
