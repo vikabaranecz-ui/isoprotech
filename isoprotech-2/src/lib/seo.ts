@@ -37,13 +37,21 @@ export function buildMeta(meta: PageMeta) {
 export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
     "@id": `${BRAND.url}/#organization`,
     name: BRAND.name,
     description: BRAND.tagline,
     url: BRAND.url,
     telephone: BRAND.phone,
     email: BRAND.email,
+    logo: `${BRAND.url}/images/logo-dark.png`,
+    image: `${BRAND.url}/images/og-isoprotech.png`,
+    hasMap: BRAND.maps,
+    sameAs: [
+      BRAND.maps,
+      "https://www.facebook.com/people/Isoprotech/61587744656837/",
+      "https://www.instagram.com/isoprotech.be/",
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: BRAND.address.street,

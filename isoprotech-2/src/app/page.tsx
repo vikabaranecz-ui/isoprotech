@@ -1,4 +1,5 @@
 // src/app/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { services } from "@/content/services";
@@ -7,6 +8,22 @@ import { reviews } from "@/content/reviews";
 import { cities } from "@/content/cities";
 import { BRAND, PHOTOS, VIDEOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
+
+export const metadata: Metadata = {
+  title: "Dakisolatie & Gevelisolatie Antwerpen | ISOPROTECH",
+  description:
+    "Dak- en gevelisolatie in Antwerpen en omgeving. Gecertificeerde vakmensen, ATG/BENOR-materialen, gratis inspectie aan huis, 10 jaar schriftelijke garantie. Vraag vandaag uw offerte aan.",
+  alternates: {
+    canonical: "https://www.isoprotech.be",
+  },
+  openGraph: {
+    title: "ISOPROTECH — Dakisolatie & Gevelisolatie Antwerpen",
+    description:
+      "Dak- en gevelisolatie in Antwerpen. Gratis inspectie, vaste prijs, 10 jaar garantie.",
+    url: "https://www.isoprotech.be",
+    images: [{ url: "/images/og-isoprotech.png", width: 1080, height: 1080 }],
+  },
+};
 
 const stats = [
   { value: "150+", label: "Projecten afgerond" },

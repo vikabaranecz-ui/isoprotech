@@ -38,9 +38,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: BRAND.url,
-  },
 };
 
 export default function RootLayout({
