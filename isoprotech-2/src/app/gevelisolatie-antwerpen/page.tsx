@@ -207,8 +207,8 @@ export default function GevelisolatieLanding() {
               <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Crepi — Schilde</div>
             </div>
             <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.gevelInProgress.src} alt="Gevelisolatie in uitvoering met EPS-platen en stellingen" fill className="object-cover object-top transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-orange-400/90 text-white text-[10px] font-bold px-2 py-1 rounded-full">In uitvoering</div>
+              <Image src={PHOTOS.gevelCrepiProject.src} alt="Gevelisolatie met crepi afwerking — modern eindresultaat" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
+              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Crepi afwerking</div>
             </div>
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">Geen stockfoto&apos;s — eigen projecten in Antwerpen en omgeving</p>
@@ -312,7 +312,6 @@ export default function GevelisolatieLanding() {
               { before: PHOTOS.crepiBefore1, after: PHOTOS.crepiAfter1, label: "Crepi achtergevel", city: "Antwerpen" },
               { before: PHOTOS.gevelAntwBefore, after: PHOTOS.gevelAntwAfter, label: "Crepi appartement", city: "Antwerpen" },
               { before: PHOTOS.spuitkurkBefore1, after: PHOTOS.spuitkurkAfter1, label: "Spuitkurk renovatie", city: "Omgeving" },
-              { before: PHOTOS.spuitkurkBefore2, after: PHOTOS.spuitkurkAfter2, label: "Zijgevel spuitkurk", city: "Omgeving" },
             ].map((pair) => (
               <div key={pair.label + pair.city} className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm">
                 <div className="grid grid-cols-2 h-52">
