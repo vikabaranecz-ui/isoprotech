@@ -2,6 +2,7 @@
 // High-conversion landing page — rebuilt with photo galleries, pain+numbers, social proof
 
 import type { Metadata } from "next";
+import type React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BRAND, PHOTOS } from "@/lib/constants";
@@ -41,7 +42,7 @@ export default function GevelisolatieLanding() {
             fill className="object-cover object-center" priority sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/92 via-teal-900/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/95 via-teal-950/85 to-teal-900/50" />
         <div className="relative container-wide py-28">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 mb-5">
@@ -222,46 +223,72 @@ export default function GevelisolatieLanding() {
             Wat gevelisolatie concreet voor u doet
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">
-            {[
+            {([
               {
-                icon: "💶",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
                 title: "25–35% minder verwarmingskosten",
                 desc: "Bij een gemiddelde verwarmingsrekening van €2.100 bespaart u jaarlijks €525 tot €735. Terugverdientijd: 8 tot 12 jaar. Daarna puur rendement.",
                 source: "Bron: VEA — Vlaams Energie- en Klimaatagentschap",
               },
               {
-                icon: "🌡️",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                  </svg>
+                ),
                 title: "Warme muren, aangenaam klimaat",
                 desc: "Warmere binnenmuurtemperaturen in de winter: minder koude tocht, geen condensatieproblemen meer, en een stabiel binnenklimaat in alle seizoenen.",
                 source: "Effect van buitengevelisolatie op binnenoppervlaktetemperatuur",
               },
               {
-                icon: "📋",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
                 title: "1 tot 2 EPC-labels beter",
                 desc: "Gevelisolatie verbetert uw EPC-score aanzienlijk. Bij een gemiddelde Belgische woning: 1 à 2 labelstappen voorwaarts. Relevant bij verhuur (verplichte normen) en verkoop.",
                 source: "Energieprestatieregelgeving Vlaanderen — Fluvius/VEA",
               },
               {
-                icon: "🏠",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                  </svg>
+                ),
                 title: "+5% tot +10% woningwaarde",
                 desc: "Een betere EPC-score verhoogt de marktwaarde van uw woning meetbaar. Vastgoedstudies tonen een gemiddelde meerwaarde van 5% tot 10% bij verkoop.",
                 source: "Bron: diverse vastgoedmarkt-analyses EPC vs. verkoopprijs",
               },
               {
-                icon: "🔇",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                  </svg>
+                ),
                 title: "Geluidsdemping",
                 desc: "Buitengevelisolatie met minerale wol of EPS dempt ook omgevingsgeluid. Minder verkeerslawaai, rustiger huis — een bijkomend voordeel dat veel klanten verrast.",
                 source: "",
               },
               {
-                icon: "💧",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                ),
                 title: "Geen vocht of schimmel meer",
                 desc: "Warmere binnenmuurtemperaturen voorkomen condensatie. Bestaande vochtproblemen in hoeken en kieren verdwijnen na buitenisolatie structureel.",
                 source: "",
               },
-            ].map((item) => (
+            ] as Array<{ icon: React.ReactNode; title: string; desc: string; source: string }>).map((item) => (
               <div key={item.title} className="flex gap-4 items-start p-5 rounded-xl bg-stone-50 border border-gray-100">
-                <div className="text-2xl shrink-0 mt-0.5">{item.icon}</div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 shrink-0">
+                  {item.icon}
+                </div>
                 <div>
                   <h3 className="font-bold text-teal-800 mb-1">{item.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
@@ -286,7 +313,6 @@ export default function GevelisolatieLanding() {
               { before: PHOTOS.gevelAntwBefore, after: PHOTOS.gevelAntwAfter, label: "Crepi appartement", city: "Antwerpen" },
               { before: PHOTOS.spuitkurkBefore1, after: PHOTOS.spuitkurkAfter1, label: "Spuitkurk renovatie", city: "Omgeving" },
               { before: PHOTOS.spuitkurkBefore2, after: PHOTOS.spuitkurkAfter2, label: "Zijgevel spuitkurk", city: "Omgeving" },
-              { before: PHOTOS.gevelAntwBefore, after: PHOTOS.crepiAntwAfter, label: "Voorgevel crepi", city: "Antwerpen" },
             ].map((pair) => (
               <div key={pair.label + pair.city} className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm">
                 <div className="grid grid-cols-2 h-52">
@@ -322,16 +348,42 @@ export default function GevelisolatieLanding() {
         <div className="container-wide max-w-4xl mx-auto">
           <h2 className="text-3xl font-extrabold text-teal-800 text-center mb-10">Wat wij voor u doen</h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { title: "Buitengevelisolatie", desc: "EPS, PUR of minerale wol — optimaal afgestemd op uw constructie, klimaat en budget.", icon: "🧱" },
-              { title: "Crepi afwerking", desc: "Minerale pleister in tientallen kleuren en structuren. Duurzaam, onderhoudsvriendelijk.", icon: "🖌️" },
-              { title: "Spuitkurk", desc: "Elastische, naadloze afwerking op basis van natuurlijke kurk. Ademend en vochtbestendig.", icon: "🌿" },
-              { title: "Steenstrips", desc: "Klinkerlook zonder volle baksteen. Dun, duurzaam, authentiek karakter.", icon: "🏗️" },
-              { title: "Gevelrenovatie", desc: "Volledige vernieuwing van uw buitengevel, inclusief vensterbanken, details en afwerking.", icon: "🔨" },
-              { title: "Premie-begeleiding", desc: "Wij bekijken samen welke subsidies mogelijk zijn en helpen met de aanvraag.", icon: "📋" },
-            ].map((s) => (
+            {([
+              {
+                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" /></svg>,
+                title: "Buitengevelisolatie",
+                desc: "EPS, PUR of minerale wol — optimaal afgestemd op uw constructie, klimaat en budget.",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg>,
+                title: "Crepi afwerking",
+                desc: "Minerale pleister in tientallen kleuren en structuren. Duurzaam, onderhoudsvriendelijk.",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>,
+                title: "Spuitkurk",
+                desc: "Elastische, naadloze afwerking op basis van natuurlijke kurk. Ademend en vochtbestendig.",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>,
+                title: "Steenstrips",
+                desc: "Klinkerlook zonder volle baksteen. Dun, duurzaam, authentiek karakter.",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>,
+                title: "Gevelrenovatie",
+                desc: "Volledige vernieuwing van uw buitengevel, inclusief vensterbanken, details en afwerking.",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>,
+                title: "Premie-begeleiding",
+                desc: "Wij bekijken samen welke subsidies mogelijk zijn en helpen met de aanvraag.",
+              },
+            ] as Array<{ icon: React.ReactNode; title: string; desc: string }>).map((s) => (
               <div key={s.title} className="rounded-xl border border-gray-100 p-5 bg-white hover:border-orange-200 hover:shadow-sm transition-all">
-                <div className="text-2xl mb-3">{s.icon}</div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 mb-3">
+                  {s.icon}
+                </div>
                 <h3 className="font-bold text-teal-800 mb-1.5">{s.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
               </div>
@@ -349,7 +401,7 @@ export default function GevelisolatieLanding() {
               { n: "1", title: "Gratis aanvraag", desc: "Vul het formulier in of bel ons. Wij nemen binnen 48 uur contact op voor een afspraak." },
               { n: "2", title: "Inspectie ter plaatse", desc: "Onze vakman bekijkt uw gevel, meet op en bespreekt uw wensen en de beste oplossingen. Geen verplichtingen." },
               { n: "3", title: "Vaste offerte + premie-overzicht", desc: "U ontvangt een heldere prijs met volledige breakdown. Plus een overzicht van premies waarvoor u in aanmerking komt." },
-              { n: "4", title: "Uitvoering in 1–2 weken", desc: "Ons team voert de werken netjes en vakkundig uit. Gemiddeld 1 tot 2 weken voor een volledige gevel. Oplevering met 10 jaar garantie." },
+              { n: "4", title: "Uitvoering binnen afgesproken termijn", desc: "Wij werken netjes en vakkundig, binnen de termijn die wij samen afspreken. Oplevering met 10 jaar schriftelijke garantie." },
             ].map((s) => (
               <div key={s.n} className="flex gap-5 items-start">
                 <div className="w-12 h-12 rounded-xl bg-teal-800 text-white font-extrabold text-lg flex items-center justify-center shrink-0">{s.n}</div>

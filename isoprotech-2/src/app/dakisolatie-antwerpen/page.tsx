@@ -2,6 +2,7 @@
 // High-conversion landing page — rebuilt with photo galleries, pain+numbers, social proof
 
 import type { Metadata } from "next";
+import type React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BRAND, PHOTOS } from "@/lib/constants";
@@ -41,7 +42,7 @@ export default function DakisolatieLanding() {
             fill className="object-cover object-center" priority sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/92 via-teal-900/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/95 via-teal-950/85 to-teal-900/50" />
         <div className="relative container-wide py-28">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 mb-5">
@@ -252,46 +253,72 @@ export default function DakisolatieLanding() {
             Wat dakisolatie concreet voor u doet
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">
-            {[
+            {([
               {
-                icon: "💶",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
                 title: "Tot 30% minder verwarmingskosten",
                 desc: "Dakisolatie is de meest rendabele energiemaatregel voor een woning. Bij een rekening van €2.100/jaar bespaart u tot €630 per verwarmingsseizoen. Terugverdientijd: 5 tot 8 jaar.",
                 source: "Bron: VEA — Vlaams Energie- en Klimaatagentschap",
               },
               {
-                icon: "🌡️",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                  </svg>
+                ),
                 title: "Comfortabel op elke verdieping",
                 desc: "Geen onaangename hitte meer op de bovenverdieping in de zomer, geen koude tocht in de winter. Een goed geïsoleerd dak regelt de temperatuur in beide richtingen.",
                 source: "",
               },
               {
-                icon: "🛡️",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                ),
                 title: "Bescherming van uw woning",
                 desc: "Nieuwe waterdichte dakbedekking (EPDM, bitumen of PVC) gecombineerd met PIR-isolatie. Levensduur van 25 tot 30+ jaar bij correcte uitvoering. Geen water, geen houtrot, geen structuurschade.",
                 source: "",
               },
               {
-                icon: "📋",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
                 title: "1 tot 2 EPC-labels beter",
                 desc: "Dakisolatie heeft de grootste impact op uw EPC-score. In de meeste gevallen verbetert u 1 à 2 labelstappen — relevant bij zowel verhuur als verkoop.",
                 source: "Energieprestatieregelgeving Vlaanderen",
               },
               {
-                icon: "💰",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                  </svg>
+                ),
                 title: "Premies tot duizenden euro's",
                 desc: "Via Mijn VerbouwPremie kunt u een aanzienlijk deel recupereren. Bonus bij asbestverwijdering: €8/m². Verlaagd btw-tarief van 6% voor woningen ouder dan 10 jaar.",
                 source: "Mijn VerbouwPremie — Vlaamse overheid",
               },
               {
-                icon: "🏠",
+                icon: (
+                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                  </svg>
+                ),
                 title: "Hogere woningwaarde",
                 desc: "Een beter EPC-label verhoogt de marktwaarde van uw woning. Vastgoedstudies tonen aan dat kopers 5–10% meer betalen voor energiezuinige woningen.",
                 source: "",
               },
-            ].map((item) => (
+            ] as Array<{ icon: React.ReactNode; title: string; desc: string; source: string }>).map((item) => (
               <div key={item.title} className="flex gap-4 items-start p-5 rounded-xl bg-white border border-gray-100">
-                <div className="text-2xl shrink-0 mt-0.5">{item.icon}</div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 shrink-0">
+                  {item.icon}
+                </div>
                 <div>
                   <h3 className="font-bold text-teal-800 mb-1">{item.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
@@ -351,7 +378,7 @@ export default function DakisolatieLanding() {
               { n: "1", title: "Gratis aanvraag", desc: "Vul het formulier in of bel ons. Wij nemen binnen 48 uur contact op voor een afspraak." },
               { n: "2", title: "Inspectie ter plaatse", desc: "Onze vakman bekijkt uw dak, bespreekt uw wensen en geeft advies over de beste aanpak. Eventuele asbestproblemen worden meegenomen." },
               { n: "3", title: "Vaste offerte + premie-overzicht", desc: "U ontvangt een heldere vaste prijs met volledige breakdown, plus een overzicht van premies waarvoor u in aanmerking komt." },
-              { n: "4", title: "Professionele uitvoering", desc: "Gemiddeld 3 tot 5 werkdagen voor een volledig dak. Netjes afgewerkt, op tijd, met 10 jaar schriftelijke garantie." },
+              { n: "4", title: "Uitvoering binnen afgesproken termijn", desc: "Wij werken netjes en vakkundig, binnen de termijn die wij samen afspreken. Oplevering met 10 jaar schriftelijke garantie." },
             ].map((s) => (
               <div key={s.n} className="flex gap-5 items-start">
                 <div className="w-12 h-12 rounded-xl bg-teal-800 text-white font-extrabold text-lg flex items-center justify-center shrink-0">{s.n}</div>
