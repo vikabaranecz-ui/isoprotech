@@ -27,9 +27,9 @@ export default function FAQPage() {
     <>
       <JsonLd data={faqSchema(schemaFaqs)} />
 
-      <section className="bg-gradient-to-br from-teal-800 to-teal-950 py-28">
+      <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-28">
         <div className="container-wide text-center max-w-3xl mx-auto">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/15 border border-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/15 border border-orange-400/20 px-5 py-2 text-sm font-semibold text-orange-300">
             FAQ
           </span>
           <h1 className="text-4xl font-extrabold text-white md:text-5xl mb-6">
@@ -60,7 +60,7 @@ export default function FAQPage() {
                     <summary className="flex cursor-pointer items-center justify-between font-semibold text-teal-800 select-none">
                       <span className="pr-8">{faq.question}</span>
                       <svg
-                        className="h-5 w-5 shrink-0 text-orange-500 transition-transform group-open:rotate-45"
+                        className="h-5 w-5 shrink-0 text-orange-400 transition-transform group-open:rotate-45"
                         viewBox="0 0 20 20"
                         fill="none"
                         aria-hidden="true"

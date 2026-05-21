@@ -79,17 +79,17 @@ export function Navbar() {
 
   const linkCls = (active: boolean) =>
     active
-      ? scrolled ? "text-orange-500" : "text-orange-400"
+      ? scrolled ? "text-orange-400" : "text-orange-400"
       : scrolled
-        ? "text-teal-800 hover:text-orange-500"
+        ? "text-teal-800 hover:text-orange-400"
         : "text-white/90 hover:text-orange-300";
 
   const ddBg = scrolled
     ? "bg-white border border-gray-200 shadow-xl"
-    : "bg-teal-900/95 backdrop-blur-md border border-white/10 shadow-2xl";
+    : "bg-teal-800/95 backdrop-blur-md border border-white/10 shadow-2xl";
 
   const ddLink = scrolled
-    ? "text-gray-600 hover:text-orange-500 hover:bg-orange-50"
+    ? "text-gray-600 hover:text-orange-400 hover:bg-orange-50"
     : "text-white/80 hover:text-orange-400 hover:bg-white/5";
 
   const burger = scrolled ? "text-teal-800" : "text-white";
@@ -134,7 +134,7 @@ export function Navbar() {
               )}
             </div>
           ))}
-          <Link href="/contact" className={`ml-4 text-sm py-2 px-5 rounded-xl font-bold transition-all duration-200 ${scrolled ? "bg-orange-400 text-white hover:bg-orange-500 shadow-sm" : "bg-orange-400 text-white hover:bg-orange-500 shadow-lg shadow-orange-500/20"}`}>Gratis Offerte</Link>
+          <Link href="/contact" className={`ml-4 text-sm py-2 px-5 rounded-xl font-bold transition-all duration-200 ${scrolled ? "bg-orange-400 text-white hover:bg-orange-400 shadow-sm" : "bg-orange-400 text-white hover:bg-orange-400 shadow-lg shadow-orange-400/20"}`}>Gratis Offerte</Link>
         </div>
 
         {/* Mobile toggle */}
@@ -149,7 +149,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div id="mobile-menu" className={`lg:hidden border-t px-6 pb-6 max-h-[80vh] overflow-y-auto ${scrolled ? "bg-white border-gray-100" : "bg-teal-900/98 backdrop-blur-md border-white/5"}`} role="menu">
+        <div id="mobile-menu" className={`lg:hidden border-t px-6 pb-6 max-h-[80vh] overflow-y-auto ${scrolled ? "bg-white border-gray-100" : "bg-teal-800/98 backdrop-blur-md border-white/5"}`} role="menu">
           {links.map((link) => (
             <div key={link.href}>
               {link.children ? (

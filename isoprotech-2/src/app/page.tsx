@@ -37,14 +37,14 @@ export default function HomePage() {
             sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 bg-teal-950/45" />
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/75 via-teal-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-teal-800/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-800/75 via-teal-800/40 to-transparent" />
 
         <div className="relative container-wide py-24 md:py-32">
           <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-center">
             {/* Left: headline */}
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 mb-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 mb-6">
                 <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
                 <span className="text-xs font-semibold tracking-wide text-orange-300 uppercase">Antwerpen · Google 5/5 · Gratis inspectie</span>
               </div>
@@ -112,7 +112,7 @@ export default function HomePage() {
               <span className="section-label">Onze diensten</span>
               <h2 className="section-heading">Alles voor uw dak en gevel</h2>
             </div>
-            <Link href="/diensten" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors shrink-0">
+            <Link href="/diensten" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:text-orange-600 transition-colors shrink-0">
               Alle diensten
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>
             </Link>
@@ -126,9 +126,9 @@ export default function HomePage() {
               className="col-span-2 row-span-2 group relative rounded-2xl overflow-hidden min-h-[300px] md:min-h-[360px]"
             >
               <Image src={services[0].photo.src} alt={services[0].photo.alt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:1024px)100vw,50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-teal-950/95 via-teal-900/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-teal-800/90 via-teal-800/40 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <span className="inline-block rounded-full bg-orange-500/20 border border-orange-400/30 px-3 py-1 text-xs font-bold text-orange-300 mb-3">Meest gevraagd</span>
+                <span className="inline-block rounded-full bg-orange-400/20 border border-orange-400/30 px-3 py-1 text-xs font-bold text-orange-300 mb-3">Meest gevraagd</span>
                 <h3 className="text-xl font-extrabold text-white mb-1.5">{services[0].name}</h3>
                 <p className="text-sm text-white/65 leading-relaxed line-clamp-2 mb-3">{services[0].shortDesc}</p>
                 <span className="inline-flex items-center gap-1.5 text-sm font-bold text-orange-400 group-hover:gap-2.5 transition-all">
@@ -145,7 +145,7 @@ export default function HomePage() {
                 className="group relative rounded-2xl overflow-hidden min-h-[150px] md:min-h-[170px]"
               >
                 <Image src={sv.photo.src} alt={sv.photo.alt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:640px)50vw,(max-width:1024px)50vw,25vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-950/90 via-teal-900/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-800/85 via-teal-800/25 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <h3 className="font-bold text-white text-sm leading-snug">{sv.name}</h3>
                   <span className="text-xs text-orange-300 font-medium mt-0.5 block opacity-0 group-hover:opacity-100 transition-opacity">Meer info →</span>
@@ -171,7 +171,7 @@ export default function HomePage() {
               <div key={s.n} className="relative flex flex-col items-center text-center p-6 md:p-7">
                 {/* Step circle */}
                 <div className={`relative z-10 h-20 w-20 rounded-2xl flex items-center justify-center mb-5 shadow-lg ${
-                  i === 0 ? "bg-orange-500 shadow-orange-500/30" : "bg-white border-2 border-gray-100 shadow-gray-100/50"
+                  i === 0 ? "bg-orange-400 shadow-orange-400/30" : "bg-white border-2 border-gray-100 shadow-gray-100/50"
                 }`}>
                   <span className={`text-2xl font-black ${i === 0 ? "text-white" : "text-teal-800"}`}>{s.n}</span>
                 </div>
@@ -189,10 +189,10 @@ export default function HomePage() {
       </section>
 
       {/* ─── CALCULATOR CTA ─── */}
-      <section className="relative overflow-hidden bg-teal-900">
+      <section className="relative overflow-hidden bg-teal-800">
         <div className="absolute inset-0 opacity-[0.06]" style={{backgroundImage:"radial-gradient(circle at 1px 1px, white 1.5px, transparent 0)", backgroundSize:"28px 28px"}} />
         {/* Decorative blobs */}
-        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-orange-400/10 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-teal-700/30 blur-3xl pointer-events-none" />
         <div className="relative container-wide py-16 md:py-20">
           <div className="max-w-3xl mx-auto text-center">
@@ -226,7 +226,7 @@ export default function HomePage() {
               <span className="section-label">Realisaties</span>
               <h2 className="section-heading">Onze projecten in Antwerpen</h2>
             </div>
-            <Link href="/realisaties" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors shrink-0">
+            <Link href="/realisaties" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:text-orange-600 transition-colors shrink-0">
               Alle realisaties
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>
             </Link>
@@ -259,13 +259,13 @@ export default function HomePage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-950/90 via-teal-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-800/85 via-teal-800/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <p className="font-bold text-white text-sm leading-snug">{p.title}</p>
                   <span className="text-xs text-orange-300 font-medium">{p.location}</span>
                 </div>
                 {p.beforePhoto && (
-                  <span className="absolute top-3 left-3 bg-orange-500/90 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VOOR / NA</span>
+                  <span className="absolute top-3 left-3 bg-orange-400/90 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VOOR / NA</span>
                 )}
               </Link>
             ))}
@@ -317,7 +317,7 @@ export default function HomePage() {
           </div>
           <p className="text-center mt-8">
             <a href={BRAND.maps} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-700 shadow-sm hover:border-orange-200 hover:text-orange-500 transition-all">
+              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-700 shadow-sm hover:border-orange-200 hover:text-orange-400 transition-all">
               <svg viewBox="0 0 24 24" className="h-4 w-4 text-orange-400" fill="currentColor"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"/></svg>
               Alle Google reviews bekijken
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>
@@ -334,10 +334,10 @@ export default function HomePage() {
             <h2 className="section-heading">Echte projecten in Antwerpen</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 max-w-4xl mx-auto">
-            <div className="rounded-2xl overflow-hidden bg-teal-900 aspect-video shadow-xl ring-1 ring-teal-700/30">
+            <div className="rounded-2xl overflow-hidden bg-teal-800 aspect-video shadow-xl ring-1 ring-teal-800/30">
               <iframe src={`${VIDEOS.mainShowreel}?rel=0&modestbranding=1`} title="ISOPROTECH — Gevelisolatie showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" loading="lazy" />
             </div>
-            <div className="rounded-2xl overflow-hidden bg-teal-900 aspect-video shadow-xl ring-1 ring-teal-700/30">
+            <div className="rounded-2xl overflow-hidden bg-teal-800 aspect-video shadow-xl ring-1 ring-teal-800/30">
               <iframe src={`${VIDEOS.projectHighlight}?rel=0&modestbranding=1`} title="ISOPROTECH — Project highlight" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" loading="lazy" />
             </div>
           </div>
@@ -354,7 +354,7 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-2">
             {cities.map((c) => (
               <Link key={c.id} href={`/regio/${c.slug}`}
-                className="rounded-xl bg-white border border-gray-200 px-4 py-2.5 text-sm font-semibold text-teal-700 shadow-sm transition-all hover:border-orange-300 hover:text-orange-500 hover:bg-orange-50 hover:-translate-y-0.5 hover:shadow">
+                className="rounded-xl bg-white border border-gray-200 px-4 py-2.5 text-sm font-semibold text-teal-700 shadow-sm transition-all hover:border-orange-300 hover:text-orange-400 hover:bg-orange-50 hover:-translate-y-0.5 hover:shadow">
                 {c.name}
               </Link>
             ))}
@@ -363,9 +363,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── CTA + FORM ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-900 to-teal-950 section-padding">
+      <section className="relative overflow-hidden bg-gradient-to-br from-teal-800 to-teal-700 section-padding">
         <div className="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-teal-800/40 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-orange-500/5 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-orange-400/5 blur-3xl pointer-events-none" />
         <div className="relative container-wide grid gap-10 lg:gap-16 lg:grid-cols-2 items-start">
           <div className="lg:pt-2">
             <span className="section-label text-orange-400">Gratis offerte</span>
@@ -384,7 +384,7 @@ export default function HomePage() {
                 "Premie-advies inbegrepen",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-white/70">
-                  <div className="h-5 w-5 rounded-full bg-orange-500/20 border border-orange-400/30 flex items-center justify-center shrink-0">
+                  <div className="h-5 w-5 rounded-full bg-orange-400/20 border border-orange-400/30 flex items-center justify-center shrink-0">
                     <svg className="h-3 w-3 text-orange-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
                   </div>
                   {item}

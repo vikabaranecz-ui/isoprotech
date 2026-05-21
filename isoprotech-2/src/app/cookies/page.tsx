@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function CookiesPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-teal-800 to-teal-950 py-24">
+      <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-24">
         <div className="container-wide text-center">
           <h1 className="text-3xl font-extrabold text-white md:text-4xl">Cookiebeleid</h1>
         </div>
@@ -24,7 +24,7 @@ export default function CookiesPage() {
         <Breadcrumb items={[{ label: "Cookies", href: "/cookies" }]} />
       </div>
 
-      <article className="container-narrow py-12 prose prose-gray prose-headings:text-teal-800 prose-a:text-orange-500 max-w-none">
+      <article className="container-narrow py-12 prose prose-gray prose-headings:text-teal-800 prose-a:text-orange-400 max-w-none">
         <h2>1. Wat zijn cookies?</h2>
         <p>
           Cookies zijn kleine tekstbestanden die op uw apparaat worden opgeslagen

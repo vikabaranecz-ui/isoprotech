@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 export default function CalculatorPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-teal-800 to-teal-950 py-28">
+      <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-28">
         <div className="container-wide text-center max-w-3xl mx-auto">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/15 border border-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/15 border border-orange-400/20 px-5 py-2 text-sm font-semibold text-orange-300">
             Calculator
           </span>
           <h1 className="text-4xl font-extrabold text-white md:text-5xl mb-6">

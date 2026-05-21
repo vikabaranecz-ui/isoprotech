@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 export default function DienstenPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-teal-800 to-teal-950 py-28">
+      <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-28">
         <div className="container-wide text-center max-w-3xl mx-auto">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/15 border border-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/15 border border-orange-400/20 px-5 py-2 text-sm font-semibold text-orange-300">
             Onze diensten
           </span>
           <h1 className="text-4xl font-extrabold text-white md:text-5xl mb-6">
@@ -52,13 +52,13 @@ export default function DienstenPage() {
                 />
               </div>
               <div className="p-6">
-                <h2 className="text-lg font-bold text-teal-800 group-hover:text-orange-500 transition-colors mb-2">
+                <h2 className="text-lg font-bold text-teal-800 group-hover:text-orange-400 transition-colors mb-2">
                   {sv.name}
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed mb-3">
                   {sv.heroDesc.slice(0, 160)}...
                 </p>
-                <span className="text-sm font-semibold text-orange-500">
+                <span className="text-sm font-semibold text-orange-400">
                   Meer info →
                 </span>
               </div>

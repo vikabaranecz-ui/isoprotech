@@ -88,7 +88,7 @@ export function ProjectGallery() {
               <div className="p-4">
                 <h3 className="font-bold text-teal-800 text-sm mb-1">{pr.title}</h3>
                 <div className="flex gap-2 mb-2">
-                  {pr.workType.map(w => <span key={w} className="text-[10px] font-bold text-orange-500 bg-orange-50 px-2 py-0.5 rounded">{w}</span>)}
+                  {pr.workType.map(w => <span key={w} className="text-[10px] font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded">{w}</span>)}
                   <span className="text-[10px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded">{pr.location}</span>
                 </div>
                 <p className="text-xs text-gray-500 leading-relaxed">{pr.summary}</p>
@@ -118,7 +118,7 @@ export function ProjectGallery() {
                 <div className="p-5">
                   <h3 className="font-bold text-teal-800 mb-1">{pr.title}</h3>
                   <div className="flex flex-wrap gap-2 mb-2">
-                    {pr.workType.map(w => <span key={w} className="text-xs font-semibold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-md">{w}</span>)}
+                    {pr.workType.map(w => <span key={w} className="text-xs font-semibold text-orange-400 bg-orange-50 px-2.5 py-1 rounded-md">{w}</span>)}
                     <span className="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">{pr.location}</span>
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed">{pr.summary}</p>
@@ -180,11 +180,11 @@ export function ProjectGallery() {
             <div className="bg-white rounded-b-2xl p-5">
               <h3 className="font-bold text-teal-800 text-lg">{p.title}</h3>
               <div className="flex flex-wrap gap-2 mt-2 mb-2">
-                {p.workType.map(w => <span key={w} className="text-xs font-semibold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-md">{w}</span>)}
+                {p.workType.map(w => <span key={w} className="text-xs font-semibold text-orange-400 bg-orange-50 px-2.5 py-1 rounded-md">{w}</span>)}
                 <span className="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">{p.location}</span>
               </div>
               <p className="text-sm text-gray-600">{p.summary}</p>
-              {p.beforePhoto && <p className="text-xs text-orange-500 font-bold mt-2">Sleep de schuifbalk om voor en na te vergelijken</p>}
+              {p.beforePhoto && <p className="text-xs text-orange-400 font-bold mt-2">Sleep de schuifbalk om voor en na te vergelijken</p>}
               <p className="text-xs text-gray-400 mt-2">{selected + 1} / {projects.length}</p>
             </div>
           </div>

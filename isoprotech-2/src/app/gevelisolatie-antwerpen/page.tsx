@@ -42,7 +42,7 @@ export default function GevelisolatieLanding() {
             fill className="object-cover object-center" priority sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-950/95 via-teal-950/85 to-teal-900/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-800/95 via-teal-800/70 to-transparent" />
         <div className="relative container-wide py-28">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 mb-5">
@@ -85,7 +85,7 @@ export default function GevelisolatieLanding() {
       </section>
 
       {/* ═══ 2. STATS BAR ═══ */}
-      <div className="bg-teal-900 py-5 border-b border-teal-800">
+      <div className="bg-teal-800 py-5 border-b border-teal-700">
         <div className="container-wide">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
             {[
@@ -108,7 +108,7 @@ export default function GevelisolatieLanding() {
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Het probleem</span>
+              <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Het probleem</span>
               <h2 className="mt-2 text-3xl font-extrabold text-teal-800 leading-tight mb-5">
                 Een ongeïsoleerde gevel kost u meer dan u denkt
               </h2>
@@ -144,7 +144,7 @@ export default function GevelisolatieLanding() {
               </div>
             </div>
             {/* Cost calculator visual */}
-            <div className="rounded-2xl bg-teal-900 p-8 text-white">
+            <div className="rounded-2xl bg-teal-800 p-8 text-white">
               <h3 className="text-xl font-extrabold mb-6">Wat kost uitstel u per jaar?</h3>
               <div className="space-y-4">
                 {[
@@ -159,7 +159,7 @@ export default function GevelisolatieLanding() {
                   </div>
                 ))}
               </div>
-              <div className="mt-6 rounded-xl bg-orange-500/15 border border-orange-400/30 p-4 text-center">
+              <div className="mt-6 rounded-xl bg-orange-400/15 border border-orange-400/30 p-4 text-center">
                 <p className="text-sm text-orange-200 leading-relaxed">
                   Gevelisolatie kost gemiddeld <strong className="text-orange-300">€140–230/m²</strong> alles inbegrepen.
                   De investering verdient zichzelf terug in <strong className="text-orange-300">8 tot 12 jaar</strong> — daarna puur winst.
@@ -176,10 +176,10 @@ export default function GevelisolatieLanding() {
       {/* ═══ 4. PHOTO GALLERY — echte projecten ═══ */}
       <section className="section-padding bg-stone-100">
         <div className="container-wide">
-          <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Onze realisaties</span>
+          <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Onze realisaties</span>
           <div className="flex items-end justify-between mt-1 mb-8">
             <h2 className="text-3xl font-extrabold text-teal-800">Echte projecten in Antwerpen</h2>
-            <Link href="/realisaties" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors">
+            <Link href="/realisaties" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:text-orange-600 transition-colors">
               Alle projecten
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
             </Link>
@@ -208,7 +208,7 @@ export default function GevelisolatieLanding() {
             </div>
             <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
               <Image src={PHOTOS.gevelInProgress.src} alt="Gevelisolatie in uitvoering met EPS-platen en stellingen" fill className="object-cover object-top transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-orange-500/90 text-white text-[10px] font-bold px-2 py-1 rounded-full">In uitvoering</div>
+              <div className="absolute bottom-2 left-2 bg-orange-400/90 text-white text-[10px] font-bold px-2 py-1 rounded-full">In uitvoering</div>
             </div>
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">Geen stockfoto&apos;s — eigen projecten in Antwerpen en omgeving</p>
@@ -218,7 +218,7 @@ export default function GevelisolatieLanding() {
       {/* ═══ 5. SOLUTION — met cijfers ═══ */}
       <section className="section-padding bg-white">
         <div className="container-wide max-w-4xl mx-auto">
-          <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">De oplossing</span>
+          <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">De oplossing</span>
           <h2 className="mt-2 text-3xl font-extrabold text-teal-800 text-center mb-10">
             Wat gevelisolatie concreet voor u doet
           </h2>
@@ -226,7 +226,7 @@ export default function GevelisolatieLanding() {
             {([
               {
                 icon: (
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 ),
@@ -236,7 +236,7 @@ export default function GevelisolatieLanding() {
               },
               {
                 icon: (
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                   </svg>
                 ),
@@ -246,7 +246,7 @@ export default function GevelisolatieLanding() {
               },
               {
                 icon: (
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 ),
@@ -256,7 +256,7 @@ export default function GevelisolatieLanding() {
               },
               {
                 icon: (
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                   </svg>
                 ),
@@ -266,7 +266,7 @@ export default function GevelisolatieLanding() {
               },
               {
                 icon: (
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
                   </svg>
                 ),
@@ -276,7 +276,7 @@ export default function GevelisolatieLanding() {
               },
               {
                 icon: (
-                  <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                   </svg>
                 ),
@@ -286,7 +286,7 @@ export default function GevelisolatieLanding() {
               },
             ] as Array<{ icon: React.ReactNode; title: string; desc: string; source: string }>).map((item) => (
               <div key={item.title} className="flex gap-4 items-start p-5 rounded-xl bg-stone-50 border border-gray-100">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 shrink-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-400/10 shrink-0">
                   {item.icon}
                 </div>
                 <div>
@@ -303,7 +303,7 @@ export default function GevelisolatieLanding() {
       {/* ═══ 6. BEFORE / AFTER — expanded ═══ */}
       <section className="section-padding bg-stone-50">
         <div className="container-wide">
-          <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Voor & na</span>
+          <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Voor & na</span>
           <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-3">Het verschil ziet u onmiddellijk</h2>
           <p className="text-gray-500 mb-10 max-w-xl">Elk project is anders — dezelfde aanpak: vakkundig, netjes, binnen de afgesproken termijn.</p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -350,38 +350,38 @@ export default function GevelisolatieLanding() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {([
               {
-                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" /></svg>,
+                icon: <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" /></svg>,
                 title: "Buitengevelisolatie",
                 desc: "EPS, PUR of minerale wol — optimaal afgestemd op uw constructie, klimaat en budget.",
               },
               {
-                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg>,
+                icon: <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg>,
                 title: "Crepi afwerking",
                 desc: "Minerale pleister in tientallen kleuren en structuren. Duurzaam, onderhoudsvriendelijk.",
               },
               {
-                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>,
+                icon: <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>,
                 title: "Spuitkurk",
                 desc: "Elastische, naadloze afwerking op basis van natuurlijke kurk. Ademend en vochtbestendig.",
               },
               {
-                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>,
+                icon: <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>,
                 title: "Steenstrips",
                 desc: "Klinkerlook zonder volle baksteen. Dun, duurzaam, authentiek karakter.",
               },
               {
-                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>,
+                icon: <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>,
                 title: "Gevelrenovatie",
                 desc: "Volledige vernieuwing van uw buitengevel, inclusief vensterbanken, details en afwerking.",
               },
               {
-                icon: <svg className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>,
+                icon: <svg className="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>,
                 title: "Premie-begeleiding",
                 desc: "Wij bekijken samen welke subsidies mogelijk zijn en helpen met de aanvraag.",
               },
             ] as Array<{ icon: React.ReactNode; title: string; desc: string }>).map((s) => (
               <div key={s.title} className="rounded-xl border border-gray-100 p-5 bg-white hover:border-orange-200 hover:shadow-sm transition-all">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 mb-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-400/10 mb-3">
                   {s.icon}
                 </div>
                 <h3 className="font-bold text-teal-800 mb-1.5">{s.title}</h3>
@@ -459,7 +459,7 @@ export default function GevelisolatieLanding() {
                 <p className="text-sm text-gray-600 leading-relaxed mt-3 mb-4">&ldquo;{r.text}&rdquo;</p>
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-teal-800">{r.author} · {r.location}</span>
-                  <span className="text-[10px] text-orange-500 font-semibold bg-orange-50 border border-orange-100 px-2 py-0.5 rounded-full">{r.project}</span>
+                  <span className="text-[10px] text-orange-400 font-semibold bg-orange-50 border border-orange-100 px-2 py-0.5 rounded-full">{r.project}</span>
                 </div>
               </div>
             ))}
@@ -583,7 +583,7 @@ export default function GevelisolatieLanding() {
       <section id="offerte" className="section-padding bg-white">
         <div className="container-wide max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Gratis · Vrijblijvend · Binnen 48u</span>
+            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Gratis · Vrijblijvend · Binnen 48u</span>
             <h2 className="text-3xl font-extrabold text-teal-800 mt-2 mb-3">
               Ontdek wat gevelisolatie voor uw woning kan betekenen
             </h2>
