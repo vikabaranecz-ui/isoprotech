@@ -136,7 +136,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       {/* Name */}
       <div className="mb-4">
         <label htmlFor="name" className="block text-sm text-gray-600 mb-1.5">
-          Naam <span className="text-orange-500">*</span>
+          Naam <span className="text-orange-400">*</span>
         </label>
         <input
           id="name"
@@ -159,7 +159,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       {/* Phone */}
       <div className="mb-4">
         <label htmlFor="phone" className="block text-sm text-gray-600 mb-1.5">
-          Telefoonnummer <span className="text-orange-500">*</span>
+          Telefoonnummer <span className="text-orange-400">*</span>
         </label>
         <input
           id="phone"
@@ -182,7 +182,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       {/* Email */}
       <div className="mb-4">
         <label htmlFor="email" className="block text-sm text-gray-600 mb-1.5">
-          E-mailadres <span className="text-orange-500">*</span>
+          E-mailadres <span className="text-orange-400">*</span>
         </label>
         <input
           id="email"
@@ -205,7 +205,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       {/* Service */}
       <div className="mb-4">
         <label htmlFor="service" className="block text-sm text-gray-600 mb-1.5">
-          Type werken <span className="text-orange-500">*</span>
+          Type werken <span className="text-orange-400">*</span>
         </label>
         <select
           id="service"
@@ -249,7 +249,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-orange-500 focus:ring-orange-300"
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-orange-400 focus:ring-orange-300"
             {...register("privacy")}
           />
           <span className="text-xs text-gray-500 leading-relaxed">
@@ -282,7 +282,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       <button
         type="submit"
         disabled={formState === "submitting"}
-        className="w-full py-3.5 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2"
+        className="w-full py-3.5 bg-orange-400 hover:bg-orange-400 text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2"
       >
         {formState === "submitting" ? (
           <span className="flex items-center justify-center gap-2">

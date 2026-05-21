@@ -133,7 +133,7 @@ export function GevelCalculator() {
             </div>
             <div className="flex-1 min-w-[180px]">
               <div className="text-xs font-bold text-gray-500 mb-1">Incl. {Math.round(result.vatRate * 100)}% btw</div>
-              <div className="text-3xl font-black text-orange-500">{formatEur(result.total)}</div>
+              <div className="text-3xl font-black text-orange-400">{formatEur(result.total)}</div>
             </div>
           </div>
           <div className="p-4 border-t border-gray-100 space-y-1.5">
@@ -152,8 +152,8 @@ export function GevelCalculator() {
               <span className="text-gray-500">{formatEur(result.vat)}</span>
             </div>
             <div className="flex justify-between pt-2 border-t-2 border-orange-400">
-              <span className="font-extrabold text-orange-500">Totaal incl. btw</span>
-              <span className="font-extrabold text-orange-500">{formatEur(result.total)}</span>
+              <span className="font-extrabold text-orange-400">Totaal incl. btw</span>
+              <span className="font-extrabold text-orange-400">{formatEur(result.total)}</span>
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ export function GevelCalculator() {
         {result.perM2 > 0 && (
           <div className="text-center text-sm text-gray-500 mb-5">
             {formatEur(result.perM2)}/m² excl. btw · {result.netArea} m² netto
-            {result.hFactor > 1 && <span className="ml-2 text-orange-500 font-bold">hoogtefactor ×{result.hFactor.toFixed(2)}</span>}
+            {result.hFactor > 1 && <span className="ml-2 text-orange-400 font-bold">hoogtefactor ×{result.hFactor.toFixed(2)}</span>}
           </div>
         )}
 

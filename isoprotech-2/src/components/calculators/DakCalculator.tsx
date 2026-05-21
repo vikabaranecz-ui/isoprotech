@@ -166,7 +166,7 @@ export function DakCalculator() {
           <div className="p-4 border-t border-gray-100 space-y-2">
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Werken (materiaal + arbeid)</span><span className="text-gray-500">{formatEur(result.base)}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Dakbedekking</span><span className="text-gray-500">{formatEur(result.dakbedekkingKost)}</span></div>
-            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Extra elementen</span><span className="text-orange-500">{result.extrasKost > 0 ? formatEur(result.extrasKost) : "—"}</span></div>
+            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Extra elementen</span><span className="text-orange-400">{result.extrasKost > 0 ? formatEur(result.extrasKost) : "—"}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Geschatte premies</span><span className="text-green-600">- {formatEur(result.premieTotal)}</span></div>
           </div>
         </div>

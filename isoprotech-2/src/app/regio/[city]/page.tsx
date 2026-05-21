@@ -66,9 +66,9 @@ export default function CityPage({
       {allFaqs.length > 0 && <JsonLd data={faqSchema(allFaqs)} />}
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-teal-800 to-teal-950 py-28">
+      <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-28">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300 border border-orange-500/20">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/20 px-5 py-2 text-sm font-semibold text-orange-300 border border-orange-400/20">
             {city.name} ({city.zip})
           </span>
           <h1 className="text-4xl font-extrabold text-white md:text-5xl leading-tight mb-6">
@@ -112,13 +112,13 @@ export default function CityPage({
                 href={`/diensten/${sv.slug}`}
                 className="group block rounded-2xl bg-white p-6 border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
               >
-                <h3 className="font-bold text-teal-800 group-hover:text-orange-500 transition-colors">
+                <h3 className="font-bold text-teal-800 group-hover:text-orange-400 transition-colors">
                   {sv.name} in {city.name}
                 </h3>
                 <p className="mt-2 text-sm text-gray-600 leading-relaxed">
                   {sv.shortDesc}
                 </p>
-                <span className="mt-3 inline-block text-sm font-semibold text-orange-500">
+                <span className="mt-3 inline-block text-sm font-semibold text-orange-400">
                   Meer info →
                 </span>
               </a>
@@ -139,7 +139,7 @@ export default function CityPage({
                 <summary className="flex cursor-pointer items-center justify-between font-semibold text-teal-800">
                   <span>{faq.question}</span>
                   <svg
-                    className="h-5 w-5 shrink-0 text-orange-500 transition-transform group-open:rotate-45"
+                    className="h-5 w-5 shrink-0 text-orange-400 transition-transform group-open:rotate-45"
                     viewBox="0 0 20 20"
                     fill="none"
                     aria-hidden="true"
@@ -172,7 +172,7 @@ export default function CityPage({
               <a
                 key={c.id}
                 href={`/regio/${c.slug}`}
-                className="rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-teal-700 border border-gray-100 transition hover:border-orange-300 hover:text-orange-500"
+                className="rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-teal-700 border border-gray-100 transition hover:border-orange-300 hover:text-orange-400"
               >
                 {c.name}
               </a>
@@ -182,7 +182,7 @@ export default function CityPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-teal-900 py-16">
+      <section className="bg-teal-800 py-16">
         <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:grid-cols-2 items-start">
           <div>
             <h2 className="text-3xl font-extrabold text-white mb-4">

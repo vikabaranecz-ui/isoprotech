@@ -6,7 +6,7 @@ import { cities } from "@/content/cities";
 
 export function Footer() {
   return (
-    <footer className="bg-teal-900 pt-16 pb-8">
+    <footer className="bg-teal-800 pt-16 pb-8">
       <div className="container-wide">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 mb-12">
           {/* Brand */}

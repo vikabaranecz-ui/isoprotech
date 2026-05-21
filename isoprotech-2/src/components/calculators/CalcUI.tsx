@@ -29,7 +29,7 @@ export function RadioCard({
           : "border-gray-150 bg-white hover:border-gray-300"
       }`}
     >
-      <span className={`block font-bold text-sm ${selected ? "text-orange-500" : "text-teal-800"}`}>
+      <span className={`block font-bold text-sm ${selected ? "text-orange-400" : "text-teal-800"}`}>
         {title}
       </span>
       {desc && <span className="block text-xs text-gray-500 mt-0.5">{desc}</span>}
@@ -62,7 +62,7 @@ export function NumberInput({
       <label className="block text-sm text-gray-600 mb-1.5">{label}</label>
       <div className="flex items-center gap-2">
         <button type="button" onClick={() => onChange(Math.max(min, value - (max > 100 ? 5 : 1)))}
-          className="w-11 h-11 rounded-xl border border-gray-200 bg-white text-lg font-bold hover:border-orange-400 hover:text-orange-500 transition shrink-0">
+          className="w-11 h-11 rounded-xl border border-gray-200 bg-white text-lg font-bold hover:border-orange-400 hover:text-orange-400 transition shrink-0">
           −
         </button>
         <input
@@ -74,7 +74,7 @@ export function NumberInput({
           className="flex-1 rounded-xl border border-gray-200 px-4 py-3 text-sm text-center text-teal-800 font-medium focus:outline-none focus:ring-2 focus:ring-orange-300 transition"
         />
         <button type="button" onClick={() => onChange(Math.min(max, value + (max > 100 ? 5 : 1)))}
-          className="w-11 h-11 rounded-xl border border-gray-200 bg-white text-lg font-bold hover:border-orange-400 hover:text-orange-500 transition shrink-0">
+          className="w-11 h-11 rounded-xl border border-gray-200 bg-white text-lg font-bold hover:border-orange-400 hover:text-orange-400 transition shrink-0">
           +
         </button>
         {suffix && <span className="text-sm text-gray-500 font-medium shrink-0">{suffix}</span>}

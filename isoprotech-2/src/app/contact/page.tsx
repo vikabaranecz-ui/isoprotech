@@ -59,9 +59,9 @@ const contactChannels = [
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-teal-800 to-teal-950 py-28">
+      <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-28">
         <div className="container-wide text-center max-w-3xl mx-auto">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/15 border border-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/15 border border-orange-400/20 px-5 py-2 text-sm font-semibold text-orange-300">
             Contact
           </span>
           <h1 className="text-4xl font-extrabold text-white md:text-5xl mb-6">
@@ -91,14 +91,14 @@ export default function ContactPage() {
                   rel={ch.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="flex items-center gap-5 py-5 group"
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500 group-hover:bg-orange-500/15 transition-colors">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-400 group-hover:bg-orange-400/15 transition-colors">
                     {ch.icon}
                   </span>
                   <div>
                     <span className="block text-xs text-gray-500">
                       {ch.label}
                     </span>
-                    <span className="font-bold text-teal-800 group-hover:text-orange-500 transition-colors">
+                    <span className="font-bold text-teal-800 group-hover:text-orange-400 transition-colors">
                       {ch.value}
                     </span>
                   </div>

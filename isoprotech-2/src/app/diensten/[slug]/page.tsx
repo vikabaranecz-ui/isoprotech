@@ -76,7 +76,7 @@ export default function ServicePage({
         />
         <div className="absolute inset-0 bg-teal-900/70" />
         <div className="relative mx-auto max-w-4xl px-6 py-32 text-center">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/20 px-5 py-2 text-sm font-semibold text-orange-300 border border-orange-500/20">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/20 px-5 py-2 text-sm font-semibold text-orange-300 border border-orange-400/20">
             {service.name}
           </span>
           <h1 className="text-4xl font-extrabold text-white md:text-5xl leading-tight mb-6">
@@ -103,7 +103,7 @@ export default function ServicePage({
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Benefits */}
           <div>
-            <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">
+            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
               Voordelen
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-teal-800">
@@ -113,7 +113,7 @@ export default function ServicePage({
               {service.benefits.map((b, i) => (
                 <li key={i} className="flex items-start gap-4">
                   <svg
-                    className="mt-0.5 h-5 w-5 shrink-0 text-orange-500"
+                    className="mt-0.5 h-5 w-5 shrink-0 text-orange-400"
                     viewBox="0 0 20 20"
                     fill="none"
                     aria-hidden="true"
@@ -135,7 +135,7 @@ export default function ServicePage({
 
           {/* Process */}
           <div>
-            <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">
+            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
               Onze aanpak
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-teal-800">
@@ -165,7 +165,7 @@ export default function ServicePage({
                 },
               ].map((s) => (
                 <li key={s.step} className="relative pl-16">
-                  <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 text-sm font-extrabold text-orange-500">
+                  <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-xl bg-orange-400/10 text-sm font-extrabold text-orange-400">
                     {s.step}
                   </span>
                   <h3 className="font-bold text-teal-800">{s.title}</h3>
@@ -181,7 +181,7 @@ export default function ServicePage({
 
       {/* Video section */}
       {service.videoSrc && (
-        <section className="py-16 bg-teal-950">
+        <section className="py-16 bg-teal-800">
           <div className="mx-auto max-w-7xl px-6">
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
@@ -208,7 +208,7 @@ export default function ServicePage({
       {service.galleryPhotos && service.galleryPhotos.length > 0 && (
         <section className="bg-stone-50 py-16">
           <div className="mx-auto max-w-7xl px-6">
-            <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">Realisaties</span>
+            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Realisaties</span>
             <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-8">Onze {service.name.toLowerCase()} projecten</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {service.galleryPhotos.map((photo, i) => (
@@ -241,7 +241,7 @@ export default function ServicePage({
                   href={`/diensten/${rs.slug}`}
                   className="group block rounded-2xl bg-white p-6 border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
                 >
-                  <h3 className="font-bold text-teal-800 group-hover:text-orange-500 transition-colors">
+                  <h3 className="font-bold text-teal-800 group-hover:text-orange-400 transition-colors">
                     {rs.name}
                   </h3>
                   <p className="mt-2 text-sm text-gray-600 leading-relaxed">
@@ -303,7 +303,7 @@ export default function ServicePage({
       )}
 
       {/* CTA + Form */}
-      <section className="bg-teal-900 py-16">
+      <section className="bg-teal-800 py-16">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-12 lg:grid-cols-2 items-start">
             <div>
@@ -317,7 +317,7 @@ export default function ServicePage({
               <div className="flex flex-wrap gap-4">
                 <a
                   href={`tel:${BRAND.phone}`}
-                  className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3 font-bold text-white transition hover:bg-orange-400"
+                  className="inline-flex items-center gap-2 rounded-xl bg-orange-400 px-6 py-3 font-bold text-white transition hover:bg-orange-400"
                 >
                   Bel ons
                 </a>
@@ -325,7 +325,7 @@ export default function ServicePage({
                   href={BRAND.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border-2 border-orange-500 px-6 py-3 font-bold text-orange-400 transition hover:bg-orange-500/10"
+                  className="inline-flex items-center gap-2 rounded-xl border-2 border-orange-400 px-6 py-3 font-bold text-orange-400 transition hover:bg-orange-400/10"
                 >
                   WhatsApp
                 </a>

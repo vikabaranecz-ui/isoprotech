@@ -74,7 +74,7 @@ export default function BlogArticlePage({
         </div>
         <div className="absolute inset-0 bg-teal-900/75" />
         <div className="relative container-wide py-28 text-center max-w-3xl mx-auto">
-          <span className="mb-4 inline-block rounded-full bg-orange-500/15 border border-orange-500/20 px-4 py-1.5 text-sm font-semibold text-orange-300">
+          <span className="mb-4 inline-block rounded-full bg-orange-400/15 border border-orange-400/20 px-4 py-1.5 text-sm font-semibold text-orange-300">
             {post.category}
           </span>
           <h1 className="text-3xl font-extrabold text-white md:text-4xl leading-tight mb-4">
@@ -165,10 +165,10 @@ export default function BlogArticlePage({
                   href={`/blog/${rp.slug}`}
                   className="group block rounded-xl bg-stone-50 border border-gray-100 p-5 transition-all hover:border-orange-200 hover:shadow-sm"
                 >
-                  <span className="text-xs font-bold text-orange-500">
+                  <span className="text-xs font-bold text-orange-400">
                     {rp.category}
                   </span>
-                  <h4 className="mt-1 font-bold text-teal-800 group-hover:text-orange-500 transition-colors leading-snug">
+                  <h4 className="mt-1 font-bold text-teal-800 group-hover:text-orange-400 transition-colors leading-snug">
                     {rp.title}
                   </h4>
                   <p className="mt-2 text-sm text-gray-500">{rp.readTime}</p>
