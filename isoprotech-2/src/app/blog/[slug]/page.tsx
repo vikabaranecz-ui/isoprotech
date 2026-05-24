@@ -31,6 +31,7 @@ export function generateMetadata({
       url: `${BRAND.url}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.date,
+      images: [{ url: `${BRAND.url}${post.photo.src}`, width: post.photo.width, height: post.photo.height, alt: post.seo.title }],
     },
   };
 }

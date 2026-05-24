@@ -38,7 +38,7 @@ export const cities: CityData[] = [
     ],
     seo: {
       title: "Dak- en Gevelisolatie Antwerpen — ISOPROTECH",
-      description: "ISOPROTECH is uw lokale partner voor dakisolatie, gevelisolatie, crepi en asbestverwijdering in Antwerpen. Gratis inspectie, 10 jaar garantie. Bel +32 465 88 27 01.",
+      description: "Dakisolatie, gevelisolatie, crepi en asbestverwijdering in Antwerpen. Lokale vakman, gratis inspectie, 10 jaar garantie. Bel +32 465 88 27 01.",
     },
   },
   {

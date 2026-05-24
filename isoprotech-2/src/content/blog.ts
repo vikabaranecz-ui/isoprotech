@@ -116,7 +116,7 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
     relatedServiceSlugs: ["crepi", "spuitkurk", "gevelisolatie"],
     seo: {
-      title: "Crepi of Spuitkurk? Vergelijking Gevelafwerking — ISOPROTECH",
+      title: "Crepi of Spuitkurk? Welke Afwerking Past? | ISOPROTECH",
       description: "Vergelijking crepi vs. spuitkurk: prijs, onderhoud, uitstraling en duurzaamheid. Welke gevelafwerking past bij uw woning? ISOPROTECH adviseert.",
     },
   },
@@ -230,7 +230,7 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
     relatedServiceSlugs: ["gevelisolatie", "crepi", "spuitkurk"],
     seo: {
-      title: "Gevelisolatie Prijs per m² 2026 — Wat Kost Het? | ISOPROTECH",
+      title: "Gevelisolatie Prijs per m² 2026 | ISOPROTECH",
       description: "Wat kost gevelisolatie per m² in 2026? Eerlijk overzicht: materiaal, arbeid, stelling, afwerking. Richtprijzen Antwerpen. ISOPROTECH.",
     },
   },
@@ -286,7 +286,7 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["dakisolatie-plat-hellend", "epc-label-verbeteren"],
     relatedServiceSlugs: ["dakrenovatie", "dakisolatie"],
     seo: {
-      title: "Plat Dak Renoveren 2026 — EPDM, Roofing of Groendak? | ISOPROTECH",
+      title: "Plat Dak Renoveren 2026 — EPDM of Groendak? | ISOPROTECH",
       description: "Plat dak renoveren? Vergelijking EPDM, bitumen roofing en groendak. Prijzen, levensduur en advies. ISOPROTECH Antwerpen.",
     },
   },
@@ -382,7 +382,7 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["gevelisolatie-prijs-m2-2026", "buitenmuur-isoleren-buitenzijde", "epc-label-verbeteren"],
     relatedServiceSlugs: ["gevelisolatie", "crepi", "spuitkurk"],
     seo: {
-      title: "Spouwmuurisolatie of Buitengevelisolatie — Wat Past bij U? | ISOPROTECH",
+      title: "Spouwmuur of Buitengevelisolatie? | ISOPROTECH",
       description: "Verschil tussen spouwmuurisolatie en buitengevelisolatie uitgelegd. Wanneer kiest u voor welke techniek? Prijzen, voor- en nadelen. ISOPROTECH Antwerpen.",
     },
   },
@@ -416,7 +416,7 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["dakisolatie-plat-hellend", "premies-renovatie-2026", "energiezuinig-renoveren-stappenplan"],
     relatedServiceSlugs: ["dakisolatie", "dakrenovatie"],
     seo: {
-      title: "Dakisolatie Prijs per m² 2026 — Eerlijke Richtprijzen Antwerpen | ISOPROTECH",
+      title: "Dakisolatie Prijs per m² 2026 — Richtprijzen | ISOPROTECH",
       description: "Wat kost dakisolatie per m² in 2026? Richtprijzen plat dak, hellend dak, materialen, premies en terugverdientijd. ISOPROTECH Antwerpen.",
     },
   },

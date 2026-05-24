@@ -9,7 +9,7 @@ import { BRAND, PHOTOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Dakisolatie Antwerpen — Minder Warmteverlies, Meer Comfort | ISOPROTECH",
+  title: "Dakisolatie Antwerpen — Meer Comfort | ISOPROTECH",
   description: "Dakisolatie en dakrenovatie in Antwerpen. Plat en hellend dak. Premie-advies inbegrepen. Gratis inspectie, vaste prijs, 10 jaar garantie. Bel +32 465 88 27 01.",
   keywords: ["dakisolatie antwerpen", "dakisolatie prijs", "dakrenovatie antwerpen", "plat dak isoleren", "dak renoveren antwerpen", "dakisolatie premie"],
   alternates: { canonical: `${BRAND.url}/dakisolatie-antwerpen` },

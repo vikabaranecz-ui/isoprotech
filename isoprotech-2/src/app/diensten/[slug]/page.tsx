@@ -39,6 +39,7 @@ export function generateMetadata({
       description: service.seo.description,
       url: `${BRAND.url}/diensten/${service.slug}`,
       type: "website",
+      images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
     },
   };
 }

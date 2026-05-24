@@ -48,7 +48,7 @@ export const services: Service[] = [
     ],
     seo: {
       title: "Dakisolatie Antwerpen — Plat & Hellend Dak | ISOPROTECH",
-      description: "Professionele dakisolatie in Antwerpen en omgeving. Platte en hellende daken. Tot 30% besparing op energiekosten. Gratis inspectie, 10 jaar garantie. Vraag uw offerte aan.",
+      description: "Professionele dakisolatie in Antwerpen. Platte en hellende daken. Tot 30% besparing op energiekosten. Gratis inspectie, 10 jaar garantie.",
       keywords: ["dakisolatie antwerpen", "dak isoleren", "plat dak isolatie", "hellend dak isolatie", "dakisolatie prijs"],
     },
     relatedServices: ["dakrenovatie", "gevelisolatie"],
@@ -79,7 +79,7 @@ export const services: Service[] = [
       { src: PHOTOS.platDakAfter.src, alt: PHOTOS.platDakAfter.alt },
     ],
     seo: {
-      title: "Dakrenovatie Antwerpen — Vakkundige Dakvernieuwing | ISOPROTECH",
+      title: "Dakrenovatie Antwerpen — Nieuw Dak | ISOPROTECH",
       description: "Dakrenovatie in Antwerpen. Volledige vernieuwing van platte en hellende daken. Nieuwe bedekking, isolatie en afwatering. Gratis inspectie, 10 jaar garantie.",
       keywords: ["dakrenovatie antwerpen", "dak vernieuwen", "dak renoveren", "nieuw dak prijs"],
     },
@@ -127,7 +127,7 @@ export const services: Service[] = [
       "Premies mogelijk — wij checken uw situatie",
     ],
     seo: {
-      title: "Gevelisolatie Antwerpen — Buitenisolatie met Crepi | ISOPROTECH",
+      title: "Gevelisolatie Antwerpen — Crepi & Isolatie | ISOPROTECH",
       description: "Gevelisolatie in Antwerpen en omgeving. Buitengevelisolatie met crepi, spuitkurk of steenstrips. Gratis inspectie, vrijblijvende offerte, 10 jaar garantie.",
       keywords: ["gevelisolatie antwerpen", "buitengevelisolatie", "gevel isoleren", "gevelisolatie prijs m2"],
     },
@@ -225,7 +225,7 @@ export const services: Service[] = [
       { src: PHOTOS.asbestverwijdering.src, alt: PHOTOS.asbestverwijdering.alt },
     ],
     seo: {
-      title: "Asbestverwijdering Antwerpen — Veilig & Gecertificeerd | ISOPROTECH",
+      title: "Asbestverwijdering Antwerpen — Gecertificeerd | ISOPROTECH",
       description: "Veilige asbestverwijdering in Antwerpen en omgeving. Gecertificeerd volgens Belgische normen. Gratis inspectie, volledige sanering, afvaltransport inbegrepen.",
       keywords: ["asbestverwijdering antwerpen", "asbest verwijderen", "asbest sanering", "asbest prijs"],
     },

@@ -32,6 +32,8 @@ export function generateMetadata({
       title: city.seo.title,
       description: city.seo.description,
       url: `${BRAND.url}/regio/${city.slug}`,
+      type: "website",
+      images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
     },
   };
 }
