@@ -14,7 +14,8 @@ import {
 import { track } from "@/lib/tracking";
 import { RadioCard, NumberInput, ProgressBar, StepNav } from "./CalcUI";
 
-const STEPS = ["Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details", "Contact"];
+// 5 config steps — contact info is OPTIONAL on the result screen
+const STEPS = ["Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details"];
 
 export function GevelCalculator() {
   const [step, setStep] = useState(0);
@@ -31,10 +32,12 @@ export function GevelCalculator() {
     sillsAlu: 25,
     sillsStone: 0,
   });
-  const [naam, setNaam] = useState("");
-  const [telefoon, setTelefoon] = useState("");
-  const [email, setEmail] = useState("");
+
+  // Result screen state
   const [showResult, setShowResult] = useState(false);
+  // Optional contact fields on result screen
+  const [qNaam, setQNaam] = useState("");
+  const [qTelefoon, setQTelefoon] = useState("");
   const [ctaSent, setCtaSent] = useState(false);
 
   const set = <K extends keyof GevelInput>(key: K, val: GevelInput[K]) =>
@@ -49,46 +52,16 @@ export function GevelCalculator() {
       case 2: return true;
       case 3: return input.grossArea >= 10;
       case 4: return true;
-      case 5: return naam.trim().length > 1 && telefoon.trim().length > 6;
       default: return false;
     }
-  }, [step, input.grossArea, naam, telefoon]);
+  }, [step, input.grossArea]);
 
   function handleNext() {
     if (!canNext) return;
-    if (step < 5) {
+    if (step < 4) {
       setStep(step + 1);
     } else {
-      const lines = [
-        "🏠 *Gevelcalculator aanvraag via isoprotech.be*",
-        "",
-        `👤 Naam: ${naam}`,
-        `📞 Telefoon: ${telefoon}`,
-        email ? `📧 E-mail: ${email}` : null,
-        "",
-        `🎨 Afwerking: ${input.finish}`,
-        `🧱 Isolatie: ${input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "geen"}`,
-        `📐 Netto-oppervlakte: ${result.netArea} m²`,
-        `💰 Richtprijs: ${formatEur(result.total)} (incl. BTW)`,
-      ].filter(Boolean).join("\n");
-
-      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
-
-      fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: naam,
-          phone: telefoon,
-          email: email,
-          service: "gevelwerken",
-          message: `Gevelcalculator: ${input.finish}, ${input.insulation}, ${result.netArea}m², ${formatEur(result.total)}`,
-          privacy: true,
-        }),
-      }).catch(() => {});
-
-      window.open(waUrl, "_blank", "noopener,noreferrer");
-
+      // Step 4 → show result immediately, no gate
       setShowResult(true);
       track.calculatorComplete("gevel", result.total, result.total);
     }
@@ -99,14 +72,51 @@ export function GevelCalculator() {
     else if (step > 0) setStep(step - 1);
   }
 
-  const ic = "w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition";
+  function handleWhatsApp() {
+    const lines = [
+      "🏠 *Gevelcalculator aanvraag via isoprotech.be*",
+      "",
+      qNaam ? `👤 Naam: ${qNaam}` : null,
+      qTelefoon ? `📞 Telefoon: ${qTelefoon}` : null,
+      "",
+      `🎨 Afwerking: ${input.finish}`,
+      `🧱 Isolatie: ${input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "geen"}`,
+      `📐 Netto-oppervlakte: ${result.netArea} m²`,
+      `💰 Richtprijs: ${formatEur(result.total)} (incl. BTW)`,
+    ].filter(Boolean).join("\n");
 
-  // ─── RESULT ──────────────────────────────────────────────
+    window.open(
+      `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    setCtaSent(true);
+
+    // Send to API only if contact info provided
+    if (qNaam.trim() && qTelefoon.trim()) {
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: qNaam,
+          phone: qTelefoon,
+          service: "gevelwerken",
+          message: `Gevelcalculator: ${input.finish}, ${input.insulation}, ${result.netArea}m², ${formatEur(result.total)}`,
+          privacy: true,
+        }),
+      }).catch(() => {});
+    }
+  }
+
+  const ic = "w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition bg-white placeholder:text-gray-400";
+
+  // ─── RESULT SCREEN ───────────────────────────────────────
   if (showResult) {
     return (
       <div className="max-w-2xl mx-auto animate-fadeInUp">
         <div className="inline-block bg-green-100 text-green-800 border border-green-200 px-3 py-1.5 rounded-full text-xs font-bold mb-4">
-          Uw richtprijs is klaar
+          ✓ Uw richtprijs is klaar
         </div>
 
         <h2 className="text-2xl font-extrabold text-teal-800 mb-1">Gevelprijs — vrijblijvende schatting</h2>
@@ -165,43 +175,74 @@ export function GevelCalculator() {
           </div>
         )}
 
-        {/* CTA card */}
+        {/* ── CTA BLOCK — no required fields, contact is optional ── */}
         <div className="rounded-2xl bg-orange-50 border border-orange-300 p-5 mb-4">
-          <h4 className="font-bold text-teal-800 mb-1">Bevestig uw exacte prijs — gratis</h4>
-          <p className="text-sm text-gray-600 mb-4">Onze vakman komt langs in Antwerpen. Vrijblijvend, gratis, binnen 48u.</p>
+          <h4 className="font-bold text-teal-800 mb-1">Plan gratis plaatsbezoek — vrijblijvend</h4>
+          <p className="text-sm text-gray-600 mb-4">
+            Onze vakman meet exact op in Antwerpen en geeft u een vaste prijs. Gratis, binnen 48u.
+          </p>
+
           {!ctaSent ? (
-            <>
+            <div className="space-y-3">
+              {/* Optional contact fields */}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <input
+                  className={ic}
+                  placeholder="Uw naam (optioneel)"
+                  value={qNaam}
+                  onChange={(e) => setQNaam(e.target.value)}
+                  autoComplete="name"
+                />
+                <input
+                  className={ic}
+                  type="tel"
+                  placeholder="Telefoon (optioneel)"
+                  value={qTelefoon}
+                  onChange={(e) => setQTelefoon(e.target.value)}
+                  autoComplete="tel"
+                />
+              </div>
               <button
-                onClick={() => {
-                  const msg = [
-                    "🏠 *Gratis plaatsbezoek aanvraag*",
-                    "",
-                    `👤 Naam: ${naam}`,
-                    `📞 Telefoon: ${telefoon}`,
-                    `💰 Richtprijs: ${formatEur(result.total)}`,
-                  ].join("\n");
-                  window.open(`https://wa.me/32470802020?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
-                  setCtaSent(true);
-                }}
-                className="btn-primary w-full mt-3 text-sm"
+                onClick={handleWhatsApp}
+                className="btn-primary w-full text-sm"
               >
+                {/* WhatsApp icon */}
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.1-1.13l-.29-.174-3.01.79.8-2.93-.19-.3A7.96 7.96 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+                </svg>
                 Plan gratis plaatsbezoek via WhatsApp
               </button>
-            </>
+              <p className="text-[11px] text-gray-400 text-center">
+                Geen verplichte velden — klik direct of vul eerst uw naam/telefoon in.
+              </p>
+            </div>
           ) : (
             <div className="text-green-700 font-bold text-sm">
               WhatsApp wordt geopend!<br />
               <span className="font-normal">Klik op &ldquo;Verstuur&rdquo; in WhatsApp om uw aanvraag te bevestigen.</span>
             </div>
           )}
+
           <p className="text-xs text-gray-400 mt-3 text-center">Gratis · Vrijblijvend · Binnen 48u contact</p>
+        </div>
+
+        {/* Alternative: call */}
+        <div className="rounded-xl border border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white mb-4">
+          <div>
+            <p className="text-sm font-bold text-teal-800">Liever direct bellen?</p>
+            <p className="text-xs text-gray-500">Ma – Vr 08:00–18:00, Za 09:00–14:00</p>
+          </div>
+          <a href="tel:+32465882701" className="btn-outline text-sm px-5 py-2.5 whitespace-nowrap">
+            +32 465 88 27 01
+          </a>
         </div>
 
         <p className="text-center text-xs text-gray-400 mb-1">Google 5/5 · ATG & BENOR · 10 jaar garantie · Antwerpen</p>
         <p className="text-center text-[11px] text-gray-300">* Richtprijs op basis van uw gegevens. Exacte prijs na gratis plaatsbezoek.</p>
 
         <div className="mt-6">
-          <button onClick={handleBack} className="btn-outline text-sm">Terug naar calculator</button>
+          <button onClick={handleBack} className="btn-outline text-sm">← Terug naar calculator</button>
         </div>
       </div>
     );
@@ -234,7 +275,7 @@ export function GevelCalculator() {
                 { k: "steenstrips" as const, t: "Steenstrips", d: "Klinkerlook, dun en duurzaam" },
                 { k: "kaleien" as const, t: "Kaleien", d: "Limestone wash, zacht patina" },
               ]).map((o) => (
-                <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => set("finish", o.k)} title={o.t} desc={o.d} />
+                <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => set("finish", o.k as GevelFinish)} title={o.t} desc={o.d} />
               ))}
             </div>
           </div>
@@ -251,7 +292,7 @@ export function GevelCalculator() {
                 { k: "eps" as const, t: "EPS / PUR", d: "Hoge isolatiewaarde" },
                 { k: "mineral" as const, t: "Minerale wol", d: "Brandveilig & dampopen" },
               ]).map((o) => (
-                <RadioCard key={o.k} selected={input.insulation === o.k} onClick={() => set("insulation", o.k)} title={o.t} desc={o.d} />
+                <RadioCard key={o.k} selected={input.insulation === o.k} onClick={() => set("insulation", o.k as GevelInsulation)} title={o.t} desc={o.d} />
               ))}
             </div>
             {input.insulation !== "none" && (
@@ -318,30 +359,17 @@ export function GevelCalculator() {
                 Gevelhoogte boven 5m: hoogtefactor ×{input.height <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
               </div>
             )}
-          </div>
-        );
 
-      case 5:
-        return (
-          <div>
-            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
-            <p className="text-sm text-gray-500 mb-5">U ontvangt uw prijs direct. Daarna plannen we gratis een plaatsbezoek.</p>
-            <div className="grid gap-3 sm:grid-cols-2 mb-3">
+            {/* Live price preview to entice completion */}
+            <div className="mt-5 rounded-xl bg-teal-50 border border-teal-200 p-4 flex items-center justify-between">
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Naam *</label>
-                <input className={ic} value={naam} onChange={(e) => setNaam(e.target.value)} placeholder="Naam" />
+                <p className="text-xs text-teal-600 font-bold uppercase tracking-wide mb-0.5">Uw richtprijs tot nu toe</p>
+                <p className="text-2xl font-black text-teal-800">{formatEur(result.total)}</p>
+                <p className="text-xs text-gray-500">incl. {Math.round(result.vatRate * 100)}% btw</p>
               </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Telefoon *</label>
-                <input className={ic} value={telefoon} onChange={(e) => setTelefoon(e.target.value)} placeholder="Telefoon" type="tel" />
+              <div className="text-right">
+                <p className="text-xs text-gray-500">Klik &ldquo;Toon mijn prijs&rdquo;<br />voor volledige breakdown →</p>
               </div>
-            </div>
-            <div>
-              <label className="block text-xs text-gray-500 mb-1">E-mailadres (optioneel)</label>
-              <input className={ic} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mailadres" type="email" />
-            </div>
-            <div className="mt-4 rounded-xl bg-orange-50 border border-orange-200 p-3 text-xs text-orange-700">
-              Enkel voor uw offerte. Geen spam. Nooit doorverkocht.
             </div>
           </div>
         );
@@ -357,7 +385,14 @@ export function GevelCalculator() {
       <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
-      <StepNav step={step} maxStep={5} canNext={canNext} onBack={handleBack} onNext={handleNext} />
+      <StepNav
+        step={step}
+        maxStep={4}
+        canNext={canNext}
+        onBack={handleBack}
+        onNext={handleNext}
+        nextLabel={step === 4 ? "Toon mijn prijs →" : undefined}
+      />
     </div>
   );
 }

@@ -10,12 +10,12 @@ import {
   type DakType,
   type DakIsolatieType,
   type Bouwjaar,
-  type DakInput,
 } from "@/lib/calculator";
 import { track } from "@/lib/tracking";
-import { ProgressBar, RadioCard, NumberInput } from "./CalcUI";
+import { ProgressBar, RadioCard, NumberInput, StepNav } from "./CalcUI";
 
-const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Isolatie", "Bouwjaar", "Contact"];
+// 5 config steps — contact info is OPTIONAL on the result screen
+const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Isolatie", "Bouwjaar"];
 
 export function DakCalculator() {
   const [step, setStep] = useState(0);
@@ -27,10 +27,12 @@ export function DakCalculator() {
   const [bedekkingSurcharge, setBedekkingSurcharge] = useState(0);
   const [isolatie, setIsolatie] = useState<DakIsolatieType | null>(null);
   const [bouwjaar, setBouwjaar] = useState<Bouwjaar | null>(null);
-  const [naam, setNaam] = useState("");
-  const [telefoon, setTelefoon] = useState("");
-  const [email, setEmail] = useState("");
+
+  // Result screen state
   const [showResult, setShowResult] = useState(false);
+  // Optional contact fields on result screen
+  const [qNaam, setQNaam] = useState("");
+  const [qTelefoon, setQTelefoon] = useState("");
   const [ctaSent, setCtaSent] = useState(false);
 
   const bedekkingOpts = daktype === "Plat dak" ? PLAT_DAK_OPTIES : HELLEND_DAK_OPTIES;
@@ -42,10 +44,9 @@ export function DakCalculator() {
       case 2: return !!bedekking;
       case 3: return !!isolatie;
       case 4: return !!bouwjaar;
-      case 5: return naam.trim().length > 1 && telefoon.trim().length > 6;
       default: return false;
     }
-  }, [step, daktype, area, bedekking, isolatie, bouwjaar, naam, telefoon]);
+  }, [step, daktype, area, bedekking, isolatie, bouwjaar]);
 
   const result = useMemo(() => {
     if (!daktype || !bedekking || !isolatie || !bouwjaar) return null;
@@ -64,47 +65,15 @@ export function DakCalculator() {
   function handleNext() {
     if (!canNext) return;
     if (step === 1 && bedekkingOpts.length === 1) {
-      // Auto-select the single option and skip the bedekking step
       setBedekking(bedekkingOpts[0].name);
       setBedekkingSurcharge(bedekkingOpts[0].surcharge);
       setStep(3);
       return;
     }
-    if (step < 5) {
+    if (step < 4) {
       setStep(step + 1);
     } else {
-      const lines = [
-        "🏠 *Dakcalculator aanvraag via isoprotech.be*",
-        "",
-        `👤 Naam: ${naam}`,
-        `📞 Telefoon: ${telefoon}`,
-        email ? `📧 E-mail: ${email}` : null,
-        "",
-        `🏗️ Daktype: ${daktype}`,
-        `📐 Oppervlakte: ${area} m²`,
-        `🔧 Dakbedekking: ${bedekking}`,
-        `🧱 Isolatie: ${isolatie}`,
-        `📅 Bouwjaar: ${bouwjaar}`,
-        result ? `💰 Richtprijs: ${formatEur(result.gross)} (incl. BTW)` : null,
-      ].filter(Boolean).join("\n");
-
-      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
-
-      fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: naam,
-          phone: telefoon,
-          email: email,
-          service: "dakwerken",
-          message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${isolatie}, ${bouwjaar}${result ? `, ${formatEur(result.gross)}` : ""}`,
-          privacy: true,
-        }),
-      }).catch(() => {});
-
-      window.open(waUrl, "_blank", "noopener,noreferrer");
-
+      // Step 4 → show result immediately, no gate
       setShowResult(true);
       if (result) {
         track.calculatorComplete("dak", result.grossMin, result.grossMax);
@@ -116,21 +85,59 @@ export function DakCalculator() {
     if (showResult) {
       setShowResult(false);
     } else if (step === 3 && bedekkingOpts.length === 1) {
-      // Skip back over the auto-selected bedekking step
       setStep(1);
     } else if (step > 0) {
       setStep(step - 1);
     }
   }
 
-  const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition";
+  function handleWhatsApp() {
+    const lines = [
+      "🏠 *Dakcalculator aanvraag via isoprotech.be*",
+      "",
+      qNaam ? `👤 Naam: ${qNaam}` : null,
+      qTelefoon ? `📞 Telefoon: ${qTelefoon}` : null,
+      "",
+      `🏗️ Daktype: ${daktype}`,
+      `📐 Oppervlakte: ${area} m²`,
+      `🔧 Dakbedekking: ${bedekking}`,
+      `🧱 Isolatie: ${isolatie}`,
+      `📅 Bouwjaar: ${bouwjaar}`,
+      result ? `💰 Richtprijs: ${formatEur(result.gross)} (incl. BTW)` : null,
+    ].filter(Boolean).join("\n");
+
+    window.open(
+      `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    setCtaSent(true);
+
+    // Send to API only if contact info provided
+    if (qNaam.trim() && qTelefoon.trim()) {
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: qNaam,
+          phone: qTelefoon,
+          service: "dakwerken",
+          message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${isolatie}, ${bouwjaar}${result ? `, ${formatEur(result.gross)}` : ""}`,
+          privacy: true,
+        }),
+      }).catch(() => {});
+    }
+  }
+
+  const ic = "w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition bg-white placeholder:text-gray-400";
 
   // ─── RESULT VIEW ─────────────────────────────────────────
   if (showResult && result) {
     return (
       <div className="max-w-2xl mx-auto animate-fadeInUp">
         <div className="inline-block bg-green-100 text-green-800 border border-green-200 px-3 py-1.5 rounded-full text-xs font-bold mb-4">
-          Uw richtprijs is klaar
+          ✓ Uw richtprijs is klaar
         </div>
 
         <h2 className="text-2xl font-extrabold text-teal-800 mb-1">
@@ -194,31 +201,47 @@ export function DakCalculator() {
           </div>
         )}
 
-        {/* CTA card */}
+        {/* ── CTA BLOCK — no required fields, contact is optional ── */}
         <div className="rounded-2xl bg-orange-50 border border-orange-300 p-5 mb-4">
-          <h4 className="font-bold text-teal-800 mb-1 text-base">Bevestig uw exacte prijs — gratis</h4>
+          <h4 className="font-bold text-teal-800 mb-1 text-base">Plan gratis plaatsbezoek — vrijblijvend</h4>
           <p className="text-sm text-gray-600 mb-4">
-            Onze vakman komt langs in Antwerpen. Vrijblijvend, gratis, binnen 48u.
+            Onze vakman meet exact op in Antwerpen en geeft u een vaste prijs. Gratis, binnen 48u.
           </p>
+
           {!ctaSent ? (
-            <>
+            <div className="space-y-3">
+              {/* Optional contact fields */}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <input
+                  className={ic}
+                  placeholder="Uw naam (optioneel)"
+                  value={qNaam}
+                  onChange={(e) => setQNaam(e.target.value)}
+                  autoComplete="name"
+                />
+                <input
+                  className={ic}
+                  type="tel"
+                  placeholder="Telefoon (optioneel)"
+                  value={qTelefoon}
+                  onChange={(e) => setQTelefoon(e.target.value)}
+                  autoComplete="tel"
+                />
+              </div>
               <button
-                onClick={() => {
-                  const msg = [
-                    "🏠 *Gratis plaatsbezoek aanvraag*",
-                    "",
-                    `👤 Naam: ${naam}`,
-                    `📞 Telefoon: ${telefoon}`,
-                    result ? `💰 Richtprijs: ${formatEur(result.gross)}` : null,
-                  ].filter(Boolean).join("\n");
-                  window.open(`https://wa.me/32470802020?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
-                  setCtaSent(true);
-                }}
+                onClick={handleWhatsApp}
                 className="btn-primary w-full text-sm"
               >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.1-1.13l-.29-.174-3.01.79.8-2.93-.19-.3A7.96 7.96 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+                </svg>
                 Plan gratis plaatsbezoek via WhatsApp
               </button>
-            </>
+              <p className="text-[11px] text-gray-400 text-center">
+                Geen verplichte velden — klik direct of vul eerst uw naam/telefoon in.
+              </p>
+            </div>
           ) : (
             <div className="text-green-700 font-bold text-sm">
               WhatsApp wordt geopend!
@@ -226,7 +249,19 @@ export function DakCalculator() {
               <span className="font-normal">Klik op &ldquo;Verstuur&rdquo; in WhatsApp om uw aanvraag te bevestigen.</span>
             </div>
           )}
+
           <p className="text-xs text-gray-400 mt-3 text-center">Gratis · Vrijblijvend · Binnen 48u contact</p>
+        </div>
+
+        {/* Alternative: call */}
+        <div className="rounded-xl border border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white mb-4">
+          <div>
+            <p className="text-sm font-bold text-teal-800">Liever direct bellen?</p>
+            <p className="text-xs text-gray-500">Ma – Vr 08:00–18:00, Za 09:00–14:00</p>
+          </div>
+          <a href="tel:+32465882701" className="btn-outline text-sm px-5 py-2.5 whitespace-nowrap">
+            +32 465 88 27 01
+          </a>
         </div>
 
         {/* Trust + disclaimer */}
@@ -235,7 +270,7 @@ export function DakCalculator() {
 
         {/* Back button */}
         <div className="mt-6">
-          <button onClick={handleBack} className="btn-outline text-sm">Terug naar calculator</button>
+          <button onClick={handleBack} className="btn-outline text-sm">← Terug naar calculator</button>
         </div>
       </div>
     );
@@ -309,7 +344,7 @@ export function DakCalculator() {
                 { k: "Minerale wol" as const, t: "Minerale wol", d: "Goede geluid- & brandisolatie" },
                 { k: "Houtvezel" as const, t: "Houtvezel", d: "Ecologisch, zomers comfort", badge: "Ecologisch", badgeColor: "green" },
                 { k: "Advies gewenst" as const, t: "Laat Isoprotech adviseren", d: "Wij kiezen de beste optie voor uw situatie" },
-              ]).map((opt) => (
+              ] as Array<{ k: DakIsolatieType; t: string; d: string; badge?: string; badgeColor?: string }>).map((opt) => (
                 <button
                   key={opt.k}
                   type="button"
@@ -347,7 +382,7 @@ export function DakCalculator() {
                 { k: "1970 – 1990" as const, t: "1970 – 1990", badge: "Asbestcheck vereist", badgeColor: "orange" },
                 { k: "1990 – 2005" as const, t: "1990 – 2005", badge: "Meer premies", badgeColor: "green" },
                 { k: "Na 2005" as const, t: "Na 2005" },
-              ]).map((opt) => (
+              ] as Array<{ k: Bouwjaar; t: string; badge?: string; badgeColor?: string }>).map((opt) => (
                 <button
                   key={opt.k}
                   type="button"
@@ -375,31 +410,19 @@ export function DakCalculator() {
                 Woningen vóór 1990 vereisen wettelijk een asbestinventarisatie vóór dakwerken. Isoprotech regelt dit volledig voor u.
               </div>
             )}
-          </div>
-        );
-
-      case 5:
-        return (
-          <div>
-            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
-            <p className="text-sm text-gray-500 mb-5">U ontvangt uw prijs + premie-overzicht direct. Daarna plannen we gratis een plaatsbezoek.</p>
-            <div className="grid gap-3 sm:grid-cols-2 mb-3">
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Naam *</label>
-                <input className={inputCls} value={naam} onChange={(e) => setNaam(e.target.value)} placeholder="Naam" />
+            {/* Live price preview */}
+            {result && (
+              <div className="mt-5 rounded-xl bg-teal-50 border border-teal-200 p-4 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-teal-600 font-bold uppercase tracking-wide mb-0.5">Uw richtprijs tot nu toe</p>
+                  <p className="text-2xl font-black text-teal-800">{formatEur(result.gross)}</p>
+                  <p className="text-xs text-gray-500">incl. btw</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-gray-500">Klik &ldquo;Toon mijn prijs&rdquo;<br />voor volledige breakdown →</p>
+                </div>
               </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Telefoon *</label>
-                <input className={inputCls} value={telefoon} onChange={(e) => setTelefoon(e.target.value)} placeholder="Telefoon" type="tel" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs text-gray-500 mb-1">E-mailadres (optioneel)</label>
-              <input className={inputCls} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mailadres" type="email" />
-            </div>
-            <div className="mt-4 rounded-xl bg-orange-50 border border-orange-200 p-3 text-xs text-orange-700">
-              Enkel voor uw offerte. Geen spam. Nooit doorverkocht.
-            </div>
+            )}
           </div>
         );
 
@@ -414,18 +437,14 @@ export function DakCalculator() {
       <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
-      <div className="flex gap-3 mt-5">
-        {step > 0 && (
-          <button onClick={handleBack} className="btn-outline flex-1 text-sm">Terug</button>
-        )}
-        <button
-          onClick={handleNext}
-          disabled={!canNext}
-          className="btn-primary flex-1 text-sm"
-        >
-          {step === 5 ? "Bereken mijn prijs" : "Verder"}
-        </button>
-      </div>
+      <StepNav
+        step={step}
+        maxStep={4}
+        canNext={canNext}
+        onBack={handleBack}
+        onNext={handleNext}
+        nextLabel={step === 4 ? "Toon mijn prijs →" : undefined}
+      />
     </div>
   );
 }
