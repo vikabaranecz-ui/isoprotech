@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BRAND, PHOTOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { HeroQuickForm } from "@/components/forms/HeroQuickForm";
 
 export const metadata: Metadata = {
   title: "Gevelisolatie Antwerpen — Warmer Huis | ISOPROTECH",
@@ -34,7 +35,7 @@ export default function GevelisolatieLanding() {
   return (
     <>
       {/* ═══ 1. HERO ═══ */}
-      <section className="relative min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={PHOTOS.gevelCrepiMeise.src}
@@ -42,44 +43,46 @@ export default function GevelisolatieLanding() {
             fill className="object-cover object-center" priority sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-800/95 via-teal-800/70 to-transparent" />
-        <div className="relative container-wide py-28">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 mb-5">
-              <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
-              <span className="text-xs font-bold text-orange-300 uppercase tracking-wide">Antwerpen & omgeving · Gratis inspectie</span>
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-800/95 via-teal-800/80 to-teal-800/60" />
+        <div className="relative container-wide py-10 md:py-20">
+          <div className="grid lg:grid-cols-5 gap-6 lg:gap-10 items-center">
+
+            {/* Left column — text */}
+            <div className="lg:col-span-3 order-1">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 mb-4">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
+                <span className="text-xs font-bold text-orange-300 uppercase tracking-wide">Antwerpen & omgeving · Gratis inspectie</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-[2.8rem] font-extrabold text-white leading-[1.12] mb-4">
+                Via uw ongeïsoleerde gevel verdwijnt elke winter tot{" "}
+                <span className="text-orange-400">25% van uw verwarmingsgeld.</span>
+              </h1>
+              <p className="hidden md:block text-lg text-white/75 leading-relaxed mb-6">
+                ISOPROTECH stopt dat verlies structureel met buitengevelisolatie. Crepi, spuitkurk of steenstrips —
+                uw woning wordt warmer, stiller en ziet er uit als nieuw.
+              </p>
+              <div className="hidden md:flex flex-col gap-2.5">
+                {[
+                  "Gratis inspectie ter plaatse — zonder verplichting",
+                  "Duidelijke vaste prijs na de inspectie",
+                  "Premie-advies op maat inbegrepen",
+                  "10 jaar schriftelijke garantie op alle werken",
+                ].map((t) => (
+                  <div key={t} className="flex items-center gap-2.5">
+                    <svg className="h-5 w-5 text-orange-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    <span className="text-white/90 text-sm font-medium">{t}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-[2.8rem] font-extrabold text-white leading-[1.12] mb-5">
-              Via uw ongeïsoleerde gevel verdwijnt elke winter tot{" "}
-              <span className="text-orange-400">25% van uw verwarmingsgeld.</span>
-            </h1>
-            <p className="text-lg text-white/75 leading-relaxed mb-7">
-              ISOPROTECH stopt dat verlies structureel met buitengevelisolatie. Crepi, spuitkurk of steenstrips —
-              uw woning wordt warmer, stiller en ziet er uit als nieuw. Eén aanspreekpunt. Vaste prijs. 10 jaar garantie.
-            </p>
-            <div className="flex flex-col gap-2.5 mb-8">
-              {[
-                "Gratis inspectie ter plaatse — zonder verplichting",
-                "Duidelijke vaste prijs na de inspectie",
-                "Premie-advies op maat inbegrepen",
-                "10 jaar schriftelijke garantie op alle werken",
-              ].map((t) => (
-                <div key={t} className="flex items-center gap-2.5">
-                  <svg className="h-5 w-5 text-orange-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                  <span className="text-white/90 text-sm font-medium">{t}</span>
-                </div>
-              ))}
+
+            {/* Right column — form (always visible, no scrolling required) */}
+            <div className="lg:col-span-2 order-2 w-full max-w-sm mx-auto lg:mx-0 lg:max-w-none">
+              <HeroQuickForm />
             </div>
-            <div className="flex flex-wrap gap-3">
-              <a href="#offerte" className="btn-primary text-base px-7 py-3.5">
-                Plan gratis gevelinspectie
-              </a>
-              <a href={`tel:${BRAND.phone}`} className="btn-outline-light text-base px-7 py-3.5">
-                {BRAND.phoneDisplay}
-              </a>
-            </div>
+
           </div>
         </div>
       </section>
