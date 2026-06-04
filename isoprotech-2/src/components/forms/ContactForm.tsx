@@ -12,11 +12,13 @@ interface ContactFormProps {
   defaultService?: ContactFormData["service"];
   /** Compact layout for sidebar placement */
   compact?: boolean;
+  /** Hide service dropdown (when defaultService is already known from page context) */
+  hideService?: boolean;
 }
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
-export function ContactForm({ defaultService, compact }: ContactFormProps) {
+export function ContactForm({ defaultService, compact, hideService }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serverError, setServerError] = useState<string>("");
 
@@ -33,8 +35,8 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       email: "",
       service: defaultService || undefined,
       message: "",
-      privacy: false as unknown as true, // initial unchecked
-      website: "", // honeypot
+      privacy: false as unknown as true,
+      website: "",
     },
   });
 
@@ -115,13 +117,20 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="rounded-2xl bg-white p-8 border border-gray-100 shadow-sm"
+      className={`rounded-2xl bg-white border border-gray-100 shadow-sm ${compact ? "p-6" : "p-8"}`}
     >
-      <h3 className="font-bold text-xl text-teal-800 mb-6">
-        Vraag een gratis offerte aan
-      </h3>
+      {!compact && (
+        <h3 className="font-bold text-xl text-teal-800 mb-6">
+          Vraag een gratis offerte aan
+        </h3>
+      )}
+      {compact && (
+        <h3 className="font-bold text-lg text-teal-800 mb-4">
+          Gratis gevelinspectie aanvragen
+        </h3>
+      )}
 
-      {/* Honeypot — invisible to users, catches bots */}
+      {/* Honeypot */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input
@@ -142,6 +151,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
           id="name"
           type="text"
           autoComplete="name"
+          placeholder="Uw naam"
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? "name-error" : undefined}
           className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition ${
@@ -165,13 +175,17 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
           id="phone"
           type="tel"
           autoComplete="tel"
+          placeholder="+32 4xx xx xx xx"
           aria-invalid={!!errors.phone}
-          aria-describedby={errors.phone ? "phone-error" : undefined}
+          aria-describedby="phone-hint phone-error"
           className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition ${
             errors.phone ? "border-red-400" : "border-gray-200"
           }`}
           {...register("phone")}
         />
+        <p id="phone-hint" className="text-[11px] text-gray-400 mt-1">
+          Wij bellen u terug voor een gratis afspraak — geen spam.
+        </p>
         {errors.phone && (
           <p id="phone-error" className="text-red-500 text-xs mt-1" role="alert">
             {errors.phone.message}
@@ -188,6 +202,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
           id="email"
           type="email"
           autoComplete="email"
+          placeholder="uw@email.be"
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "email-error" : undefined}
           className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition ${
@@ -202,34 +217,38 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
         )}
       </div>
 
-      {/* Service */}
-      <div className="mb-4">
-        <label htmlFor="service" className="block text-sm text-gray-600 mb-1.5">
-          Type werken <span className="text-orange-400">*</span>
-        </label>
-        <select
-          id="service"
-          aria-invalid={!!errors.service}
-          aria-describedby={errors.service ? "service-error" : undefined}
-          className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition ${
-            errors.service ? "border-red-400" : "border-gray-200"
-          }`}
-          {...register("service")}
-        >
-          <option value="">Selecteer...</option>
-          <option value="gevelwerken">Gevelwerken (isolatie, crepi, spuitkurk)</option>
-          <option value="dakwerken">Dakwerken (isolatie, renovatie, dakkapellen)</option>
-          <option value="asbestverwijdering">Asbestverwijdering</option>
-          <option value="anders">Anders / meerdere diensten</option>
-        </select>
-        {errors.service && (
-          <p id="service-error" className="text-red-500 text-xs mt-1" role="alert">
-            {errors.service.message}
-          </p>
-        )}
-      </div>
+      {/* Service — hidden when hideService=true and defaultService is known */}
+      {hideService && defaultService ? (
+        <input type="hidden" value={defaultService} {...register("service")} />
+      ) : (
+        <div className="mb-4">
+          <label htmlFor="service" className="block text-sm text-gray-600 mb-1.5">
+            Type werken <span className="text-orange-400">*</span>
+          </label>
+          <select
+            id="service"
+            aria-invalid={!!errors.service}
+            aria-describedby={errors.service ? "service-error" : undefined}
+            className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition ${
+              errors.service ? "border-red-400" : "border-gray-200"
+            }`}
+            {...register("service")}
+          >
+            <option value="">Selecteer...</option>
+            <option value="gevelwerken">Gevelwerken (isolatie, crepi, spuitkurk)</option>
+            <option value="dakwerken">Dakwerken (isolatie, renovatie, dakkapellen)</option>
+            <option value="asbestverwijdering">Asbestverwijdering</option>
+            <option value="anders">Anders / meerdere diensten</option>
+          </select>
+          {errors.service && (
+            <p id="service-error" className="text-red-500 text-xs mt-1" role="alert">
+              {errors.service.message}
+            </p>
+          )}
+        </div>
+      )}
 
-      {/* Message */}
+      {/* Message — only in non-compact mode */}
       {!compact && (
         <div className="mb-4">
           <label htmlFor="message" className="block text-sm text-gray-600 mb-1.5">
@@ -245,7 +264,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       )}
 
       {/* Privacy consent */}
-      <div className="mb-6">
+      <div className="mb-5">
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
@@ -257,8 +276,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
             <a href="/privacy" className="text-teal-700 underline">
               privacybeleid
             </a>
-            . ISOPROTECH gebruikt uw gegevens uitsluitend om uw aanvraag te
-            behandelen.
+            . ISOPROTECH gebruikt uw gegevens uitsluitend om uw aanvraag te behandelen.
           </span>
         </label>
         {errors.privacy && (
@@ -270,10 +288,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
 
       {/* Server error */}
       {formState === "error" && serverError && (
-        <div
-          className="mb-4 p-3 rounded-xl bg-red-50 text-red-700 text-sm"
-          role="alert"
-        >
+        <div className="mb-4 p-3 rounded-xl bg-red-50 text-red-700 text-sm" role="alert">
           {serverError}
         </div>
       )}
@@ -282,7 +297,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       <button
         type="submit"
         disabled={formState === "submitting"}
-        className="w-full py-3.5 bg-orange-400 hover:bg-orange-400 text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2"
+        className="w-full py-3.5 bg-orange-400 hover:bg-orange-500 text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2"
       >
         {formState === "submitting" ? (
           <span className="flex items-center justify-center gap-2">
@@ -293,9 +308,10 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
             Bezig met verzenden...
           </span>
         ) : (
-          "Verstuur aanvraag"
+          "Gratis inspectie aanvragen"
         )}
       </button>
+      <p className="text-[11px] text-gray-400 text-center mt-2">Gratis · Vrijblijvend · Binnen 48u reactie</p>
     </form>
   );
 }
