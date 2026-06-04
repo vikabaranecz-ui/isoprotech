@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BRAND, PHOTOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { BeforeAfterLightbox } from "@/components/BeforeAfterLightbox";
 
 export const metadata: Metadata = {
   title: "Gevelisolatie Antwerpen — Warmer Huis | ISOPROTECH",
@@ -174,32 +175,13 @@ export default function GevelisolatieLanding() {
         <div className="container-wide">
           <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Voor & na</span>
           <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-3">Het verschil ziet u onmiddellijk</h2>
-          <p className="text-gray-500 mb-10 max-w-xl">Elk project is anders — dezelfde aanpak: vakkundig, netjes, binnen de afgesproken termijn.</p>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { before: PHOTOS.gevelBefore1, after: PHOTOS.gevelAfter1, label: "Spuitkurk", city: "Antwerpen" },
-              { before: PHOTOS.crepiBefore1, after: PHOTOS.crepiAfter1, label: "Crepi achtergevel", city: "Antwerpen" },
-              { before: PHOTOS.gevelAntwBefore, after: PHOTOS.gevelAntwAfter, label: "Crepi appartement", city: "Antwerpen" },
-              { before: PHOTOS.spuitkurkBefore1, after: PHOTOS.spuitkurkAfter1, label: "Spuitkurk renovatie", city: "Omgeving" },
-            ].map((pair) => (
-              <div key={pair.label + pair.city} className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm">
-                <div className="grid grid-cols-2 h-52">
-                  <div className="relative">
-                    <Image src={pair.before.src} alt={pair.before.alt} fill className="object-cover" sizes="15vw" />
-                    <span className="absolute bottom-2 left-2 bg-red-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">VOOR</span>
-                  </div>
-                  <div className="relative">
-                    <Image src={pair.after.src} alt={pair.after.alt} fill className="object-cover" sizes="15vw" />
-                    <span className="absolute bottom-2 right-2 bg-green-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">NA</span>
-                  </div>
-                </div>
-                <div className="p-3">
-                  <span className="text-sm font-bold text-teal-800">{pair.label}</span>
-                  <span className="text-xs text-gray-400 ml-2">{pair.city}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-500 mb-10 max-w-xl">Klik op een project om voor en na te vergelijken met de schuifbalk.</p>
+          <BeforeAfterLightbox pairs={[
+            { before: PHOTOS.gevelBefore1, after: PHOTOS.gevelAfter1, label: "Spuitkurk", city: "Antwerpen" },
+            { before: PHOTOS.crepiBefore1, after: PHOTOS.crepiAfter1, label: "Crepi achtergevel", city: "Antwerpen" },
+            { before: PHOTOS.gevelAntwBefore, after: PHOTOS.gevelAntwAfter, label: "Crepi appartement", city: "Antwerpen" },
+            { before: PHOTOS.spuitkurkBefore1, after: PHOTOS.spuitkurkAfter1, label: "Spuitkurk renovatie", city: "Omgeving" },
+          ]} />
         </div>
       </section>
 
