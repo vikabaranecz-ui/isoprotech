@@ -24,6 +24,11 @@ export const contactFormSchema = z.object({
     ["gevelwerken", "dakwerken", "asbestverwijdering", "anders"],
     { errorMap: () => ({ message: "Selecteer een type werken." }) }
   ),
+  region: z
+    .string()
+    .max(100, "Gemeente is te lang.")
+    .optional()
+    .default(""),
   message: z
     .string()
     .max(2000, "Bericht is te lang.")

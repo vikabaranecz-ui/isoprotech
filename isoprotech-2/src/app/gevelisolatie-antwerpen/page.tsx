@@ -140,31 +140,31 @@ export default function GevelisolatieLanding() {
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div className="col-span-2 row-span-2 relative rounded-2xl overflow-hidden h-64 md:h-auto">
-              <Image src={PHOTOS.crepiAntwAfter.src} alt="Volledig gerenoveerde voorgevel met crepi in Antwerpen" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="50vw" />
-              <div className="absolute bottom-3 left-3 bg-teal-900/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">Crepi voorgevel — Antwerpen</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.gevelCrepiMeise2.src} alt="Gevelisolatie met crepi in Meise — zijgevel" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Crepi — Meise</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.crepiOranje1.src} alt="Oranje crepi gevelafwerking" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Crepi kleur</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.spuitkurkAfter1.src} alt="Woning na spuitkurk gevelafwerking" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Spuitkurk</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.crepiSchilde.src} alt="Crepi gevelafwerking woning Schilde" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Crepi — Schilde</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.gevelCrepiProject.src} alt="Gevelisolatie met crepi afwerking" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Crepi afwerking</div>
-            </div>
+          <div className="columns-2 md:columns-3 gap-3 [column-gap:12px]">
+            {([
+              { photo: PHOTOS.crepiAntwAfter, label: "Crepi voorgevel — Antwerpen" },
+              { photo: PHOTOS.crepiOranje1, label: "Crepi kleurafwerking" },
+              { photo: PHOTOS.crepiAntwDetail, label: "Crepi detail — Antwerpen" },
+              { photo: PHOTOS.crepiOranje2, label: "Crepi oranje gevel" },
+              { photo: PHOTOS.gevelCrepiMeise2, label: "Crepi — Meise" },
+              { photo: PHOTOS.crepiOranje3, label: "Gerenoveerde voorgevel" },
+              { photo: PHOTOS.crepiSchilde, label: "Crepi — Schilde" },
+              { photo: PHOTOS.gevelCrepiProject, label: "Crepi afwerking" },
+            ]).map(({ photo, label }) => (
+              <div key={photo.src} className="break-inside-avoid mb-3 rounded-2xl overflow-hidden relative group">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={photo.width}
+                  height={photo.height}
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-teal-900/80 to-transparent px-3 py-3">
+                  <span className="text-white text-xs font-bold">{label}</span>
+                </div>
+              </div>
+            ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">Geen stockfoto&apos;s — eigen projecten in Antwerpen en omgeving</p>
         </div>
@@ -207,28 +207,47 @@ export default function GevelisolatieLanding() {
           <div className="grid gap-4 sm:grid-cols-2">
             {([
               {
-                icon: "💶",
+                icon: (
+                  <svg className="h-6 w-6 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M15 8.5A4 4 0 009 12a4 4 0 006 3.5M7.5 11h5M7.5 13h5"/>
+                  </svg>
+                ),
                 title: "25–35% minder verwarmingskosten",
                 desc: "Bij een gemiddelde rekening van €2.100 bespaart u jaarlijks €525–€735. Terugverdientijd: 8 tot 12 jaar.",
               },
               {
-                icon: "🌡️",
+                icon: (
+                  <svg className="h-6 w-6 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/>
+                  </svg>
+                ),
                 title: "Warme muren, aangenaam klimaat",
                 desc: "Geen koude tocht, geen condensatie meer, stabiel binnenklimaat in alle seizoenen.",
               },
               {
-                icon: "🏡",
+                icon: (
+                  <svg className="h-6 w-6 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9,22 9,12 15,12 15,22"/>
+                  </svg>
+                ),
                 title: "+5 tot +10% woningwaarde",
                 desc: "Een betere EPC-score verhoogt uw verkoopprijs meetbaar. Relevant bij verhuur én verkoop.",
               },
               {
-                icon: "🔇",
+                icon: (
+                  <svg className="h-6 w-6 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
+                    <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+                  </svg>
+                ),
                 title: "Geen vocht, minder geluid",
                 desc: "Condensatie en schimmel verdwijnen structureel. Buitengevelisolatie dempt ook omgevingsgeluid.",
               },
-            ] as Array<{ icon: string; title: string; desc: string }>).map((item) => (
+            ] as Array<{ icon: React.ReactNode; title: string; desc: string }>).map((item) => (
               <div key={item.title} className="flex gap-4 items-start p-5 rounded-xl bg-white border border-gray-100">
-                <div className="text-2xl shrink-0">{item.icon}</div>
+                <div className="mt-0.5 shrink-0">{item.icon}</div>
                 <div>
                   <h3 className="font-bold text-teal-800 mb-1">{item.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
@@ -239,7 +258,10 @@ export default function GevelisolatieLanding() {
 
           {/* Guarantee highlight */}
           <div className="mt-8 rounded-2xl bg-teal-800 text-white p-6 flex flex-col sm:flex-row items-center gap-5">
-            <div className="text-5xl shrink-0">🛡️</div>
+            <svg className="h-14 w-14 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
             <div>
               <div className="font-extrabold text-xl text-orange-400 mb-1">10 jaar schriftelijke garantie</div>
               <p className="text-white/80 text-sm leading-relaxed">
@@ -317,13 +339,25 @@ export default function GevelisolatieLanding() {
 
           {/* Risk reversal / vertrouwen sluiten */}
           <div className="mt-10 grid sm:grid-cols-3 gap-4">
-            {[
-              { icon: "🔍", title: "Gratis inspectie", desc: "Ter plaatse, zonder verplichting" },
-              { icon: "📋", title: "Vaste prijs", desc: "Schriftelijk vastgelegd vóór start" },
-              { icon: "🛡️", title: "10 jaar garantie", desc: "Op isolatie én afwerking" },
-            ].map((item) => (
+            {([
+              {
+                icon: <svg className="h-5 w-5 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>,
+                title: "Gratis inspectie",
+                desc: "Ter plaatse, zonder verplichting",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>,
+                title: "Vaste prijs",
+                desc: "Schriftelijk vastgelegd vóór start",
+              },
+              {
+                icon: <svg className="h-5 w-5 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+                title: "10 jaar garantie",
+                desc: "Op isolatie én afwerking",
+              },
+            ] as Array<{ icon: React.ReactNode; title: string; desc: string }>).map((item) => (
               <div key={item.title} className="flex items-start gap-3 p-4 rounded-xl bg-stone-50 border border-gray-100">
-                <div className="text-2xl shrink-0">{item.icon}</div>
+                <div className="mt-0.5 shrink-0">{item.icon}</div>
                 <div>
                   <div className="font-bold text-sm text-teal-800">{item.title}</div>
                   <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
@@ -472,7 +506,7 @@ export default function GevelisolatieLanding() {
 
       {/* ═══ STICKY MOBILE CTA ═══ */}
       <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-gray-200 p-3 flex gap-3 sm:hidden">
-        <a href={`tel:${BRAND.phone}`} className="btn-primary flex-1 text-center text-sm py-3">Bel nu</a>
+        <a href={`tel:${BRAND.phone}`} className="btn-primary flex-1 text-center text-sm py-3">{BRAND.phoneDisplay}</a>
         <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer"
           className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-green-500 text-white font-bold text-sm py-3">
           <WhatsAppIcon /> WhatsApp
