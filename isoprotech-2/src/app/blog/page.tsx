@@ -42,12 +42,13 @@ export default function BlogPage() {
               href={`/blog/${post.slug}`}
               className="card-hover group block overflow-hidden"
             >
-              <div className="relative h-52">
+              <div className="overflow-hidden">
                 <Image
                   src={post.photo.src}
                   alt={post.photo.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={post.photo.width}
+                  height={post.photo.height}
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
                 />
               </div>

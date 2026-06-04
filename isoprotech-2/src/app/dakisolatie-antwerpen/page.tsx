@@ -184,28 +184,29 @@ export default function DakisolatieLanding() {
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {/* Big feature image */}
-            <div className="col-span-2 row-span-2 relative rounded-2xl overflow-hidden h-64 md:h-auto">
-              <Image src={PHOTOS.hellendDakEdegemAfter.src} alt="Hellend dak Edegem na renovatie met nieuwe dakpannen en isolatie" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="50vw" />
-              <div className="absolute bottom-3 left-3 bg-teal-900/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">Hellend dak renovatie — Edegem</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.platDakAfter.src} alt="Plat dak na renovatie — nieuwe waterdichte bedekking" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Plat dak — na renovatie</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.platDak2After.src} alt="Plat dak na vernieuwing — waterdicht en geïsoleerd" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Plat dak — vernieuwd</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.hellendDakEdegemAfter1.src} alt="Hellend dak Edegem na renovatie — tweede hoek" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Hellend dak — Edegem</div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-44">
-              <Image src={PHOTOS.dakSchouw.src} alt="Schouwkap bij dakrenovatie — loodaansluiting en dakpannen" fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="25vw" />
-              <div className="absolute bottom-2 left-2 bg-teal-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-full">Details & schouw</div>
-            </div>
+          <div className="columns-2 md:columns-3 gap-3 [column-gap:12px]">
+            {([
+              { photo: PHOTOS.hellendDakEdegemAfter, label: "Hellend dak renovatie — Edegem" },
+              { photo: PHOTOS.platDakAfter, label: "Plat dak — na renovatie" },
+              { photo: PHOTOS.dakrenovatieWorker, label: "Vakman aan het werk" },
+              { photo: PHOTOS.platDak2After, label: "Plat dak — vernieuwd" },
+              { photo: PHOTOS.hellendDakEdegemAfter1, label: "Hellend dak — Edegem" },
+              { photo: PHOTOS.dakSchouw, label: "Details & schouw" },
+            ]).map(({ photo, label }) => (
+              <div key={photo.src} className="break-inside-avoid mb-3 rounded-2xl overflow-hidden relative group">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={photo.width}
+                  height={photo.height}
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-teal-900/80 to-transparent px-3 py-3">
+                  <span className="text-white text-xs font-bold">{label}</span>
+                </div>
+              </div>
+            ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">Geen stockfoto&apos;s — eigen projecten in Antwerpen en omgeving</p>
         </div>
@@ -225,13 +226,13 @@ export default function DakisolatieLanding() {
               { before: PHOTOS.hellendDakEdegemBefore2, after: PHOTOS.hellendDakEdegemAfter1, label: "Hellend dak — tweede zijde", desc: "Volledige dakvernieuwing inclusief isolatie en afwerking" },
             ].map((pair) => (
               <div key={pair.label} className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm">
-                <div className="grid grid-cols-2 h-56">
-                  <div className="relative">
-                    <Image src={pair.before.src} alt={pair.before.alt} fill className="object-cover" sizes="25vw" />
+                <div className="grid grid-cols-2">
+                  <div className="relative aspect-[3/4] bg-gray-900">
+                    <Image src={pair.before.src} alt={pair.before.alt} fill className="object-contain" sizes="25vw" />
                     <span className="absolute bottom-2 left-2 bg-red-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">VOOR</span>
                   </div>
-                  <div className="relative">
-                    <Image src={pair.after.src} alt={pair.after.alt} fill className="object-cover" sizes="25vw" />
+                  <div className="relative aspect-[3/4] bg-gray-900">
+                    <Image src={pair.after.src} alt={pair.after.alt} fill className="object-contain" sizes="25vw" />
                     <span className="absolute bottom-2 right-2 bg-green-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">NA</span>
                   </div>
                 </div>

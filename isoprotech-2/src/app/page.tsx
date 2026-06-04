@@ -276,40 +276,40 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Masonry-style grid */}
+          {/* Masonry grid — natural aspect ratios, no cropping */}
           {(() => {
             const homeIds = [
-              "gevel-antwerpen-before-after",  // modern apartment facade — best visual
-              "plat-dak-voor-na",              // flat roof + wood cladding
-              "spuitkurk-voor-na-1",           // angular white house facade
-              "hellend-dak-edegem-1",          // pitched roof renovation
-              "gevel-meise",                   // large crepi facade
+              "gevel-antwerpen-before-after",
+              "plat-dak-voor-na",
+              "spuitkurk-voor-na-1",
+              "hellend-dak-edegem-1",
+              "gevel-meise",
+              "binnentuin-na",
             ];
             const homePr = homeIds.map(id => projects.find(p => p.id === id)).filter(Boolean) as typeof projects;
             return (
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-            {homePr.map((p, i) => (
+          <div className="columns-2 md:columns-3 gap-3 [column-gap:12px]">
+            {homePr.map((p) => (
               <Link
                 key={p.id}
                 href="/realisaties"
-                className={`group relative block rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${
-                  i === 0 ? "col-span-2 h-64 md:h-80" : "h-48 md:h-56"
-                }`}
+                className="group break-inside-avoid mb-3 block rounded-2xl overflow-hidden relative shadow-sm hover:shadow-xl transition-all duration-300"
               >
                 <Image
                   src={p.photo.src}
                   alt={p.photo.alt}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  width={p.photo.width}
+                  height={p.photo.height}
+                  className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-800/85 via-teal-800/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-800/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                   <p className="font-bold text-white text-sm leading-snug">{p.title}</p>
                   <span className="text-xs text-orange-300 font-medium">{p.location}</span>
                 </div>
                 {p.beforePhoto && (
-                  <span className="absolute top-3 left-3 bg-orange-400/90 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VOOR / NA</span>
+                  <span className="absolute top-2 left-2 bg-orange-400/90 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VOOR / NA</span>
                 )}
               </Link>
             ))}

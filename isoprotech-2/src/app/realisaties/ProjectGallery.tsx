@@ -75,13 +75,13 @@ export function ProjectGallery() {
               className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md"
               onClick={() => setSelected(projects.indexOf(pr))}
             >
-              <div className="grid grid-cols-2 h-48">
-                <div className="relative">
-                  <Image src={pr.beforePhoto!.src} alt={pr.beforePhoto!.alt} fill className="object-cover" sizes="25vw" />
+              <div className="grid grid-cols-2">
+                <div className="relative aspect-[3/4] bg-gray-900">
+                  <Image src={pr.beforePhoto!.src} alt={pr.beforePhoto!.alt} fill className="object-contain" sizes="25vw" />
                   <span className="absolute bottom-2 left-2 bg-red-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">VOOR</span>
                 </div>
-                <div className="relative">
-                  <Image src={pr.photo.src} alt={pr.photo.alt} fill className="object-cover" sizes="25vw" />
+                <div className="relative aspect-[3/4] bg-gray-900">
+                  <Image src={pr.photo.src} alt={pr.photo.alt} fill className="object-contain" sizes="25vw" />
                   <span className="absolute bottom-2 right-2 bg-green-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">NA</span>
                 </div>
               </div>
@@ -109,8 +109,8 @@ export function ProjectGallery() {
                 className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md"
                 onClick={() => setSelected(projects.indexOf(pr))}
               >
-                <div className="relative h-52">
-                  <Image src={pr.photo.src} alt={pr.photo.alt} fill className="object-cover" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
+                <div className="relative">
+                  <Image src={pr.photo.src} alt={pr.photo.alt} width={pr.photo.width} height={pr.photo.height} className="w-full h-auto object-cover" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
                   {pr.videoUrl && (
                     <span className="absolute top-3 right-3 bg-teal-800/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">VIDEO</span>
                   )}

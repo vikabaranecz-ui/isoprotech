@@ -10,7 +10,7 @@ export interface Service {
   heroDesc: string;
   photo: typeof PHOTOS[keyof typeof PHOTOS];
   benefits: string[];
-  galleryPhotos?: { src: string; alt: string }[];
+  galleryPhotos?: Array<typeof PHOTOS[keyof typeof PHOTOS]>;
   videoSrc?: string;
   seo: {
     title: string;
@@ -40,11 +40,11 @@ export const services: Service[] = [
       "Premie-aanvraag inbegrepen — wij regelen het voor u",
     ],
     galleryPhotos: [
-      { src: PHOTOS.dakisolatieTorch.src, alt: PHOTOS.dakisolatieTorch.alt },
-      { src: PHOTOS.dakisolatieTeam.src, alt: PHOTOS.dakisolatieTeam.alt },
-      { src: PHOTOS.platDakAfter.src, alt: PHOTOS.platDakAfter.alt },
-      { src: PHOTOS.platDak2After.src, alt: PHOTOS.platDak2After.alt },
-      { src: PHOTOS.platDak.src, alt: PHOTOS.platDak.alt },
+      PHOTOS.dakisolatieTorch,
+      PHOTOS.dakisolatieTeam,
+      PHOTOS.platDakAfter,
+      PHOTOS.platDak2After,
+      PHOTOS.platDak,
     ],
     seo: {
       title: "Dakisolatie Antwerpen — Plat & Hellend Dak",
@@ -72,11 +72,11 @@ export const services: Service[] = [
       "Premie-aanvraag inbegrepen",
     ],
     galleryPhotos: [
-      { src: PHOTOS.dakrenovatieWorker.src, alt: PHOTOS.dakrenovatieWorker.alt },
-      { src: PHOTOS.hellendDakEdegemAfter.src, alt: PHOTOS.hellendDakEdegemAfter.alt },
-      { src: PHOTOS.hellendDakEdegemAfter1.src, alt: PHOTOS.hellendDakEdegemAfter1.alt },
-      { src: PHOTOS.dakSchouw.src, alt: PHOTOS.dakSchouw.alt },
-      { src: PHOTOS.platDakAfter.src, alt: PHOTOS.platDakAfter.alt },
+      PHOTOS.dakrenovatieWorker,
+      PHOTOS.hellendDakEdegemAfter,
+      PHOTOS.hellendDakEdegemAfter1,
+      PHOTOS.dakSchouw,
+      PHOTOS.platDakAfter,
     ],
     seo: {
       title: "Dakrenovatie Antwerpen — Nieuw Dak",
@@ -152,15 +152,15 @@ export const services: Service[] = [
       "Hogere woningwaarde bij verkoop",
     ],
     galleryPhotos: [
-      { src: PHOTOS.crepiWorker.src, alt: PHOTOS.crepiWorker.alt },
-      { src: PHOTOS.crepiAntwAfter.src, alt: PHOTOS.crepiAntwAfter.alt },
-      { src: PHOTOS.crepiOranje1.src, alt: PHOTOS.crepiOranje1.alt },
-      { src: PHOTOS.crepiAntwDetail.src, alt: PHOTOS.crepiAntwDetail.alt },
-      { src: PHOTOS.crepiAfter1.src, alt: PHOTOS.crepiAfter1.alt },
-      { src: PHOTOS.crepiOranje2.src, alt: PHOTOS.crepiOranje2.alt },
-      { src: PHOTOS.binnentuinAfter.src, alt: PHOTOS.binnentuinAfter.alt },
-      { src: PHOTOS.gevelCrepiMeise.src, alt: PHOTOS.gevelCrepiMeise.alt },
-      { src: PHOTOS.gevelAntwAfter.src, alt: PHOTOS.gevelAntwAfter.alt },
+      PHOTOS.crepiWorker,
+      PHOTOS.crepiAntwAfter,
+      PHOTOS.crepiOranje1,
+      PHOTOS.crepiAntwDetail,
+      PHOTOS.crepiAfter1,
+      PHOTOS.crepiOranje2,
+      PHOTOS.binnentuinAfter,
+      PHOTOS.gevelCrepiMeise,
+      PHOTOS.gevelAntwAfter,
     ],
     seo: {
       title: "Crepi Antwerpen — Gevelafwerking met Isolatie",
@@ -188,12 +188,12 @@ export const services: Service[] = [
     ],
     videoSrc: "/videos/spuitkurk-showreel.mp4",
     galleryPhotos: [
-      { src: PHOTOS.spuitkurkAfter1.src, alt: PHOTOS.spuitkurkAfter1.alt },
-      { src: PHOTOS.spuitkurkBefore1.src, alt: PHOTOS.spuitkurkBefore1.alt },
-      { src: PHOTOS.spuitkurkAfter2.src, alt: PHOTOS.spuitkurkAfter2.alt },
-      { src: PHOTOS.spuitkurkBefore2.src, alt: PHOTOS.spuitkurkBefore2.alt },
-      { src: PHOTOS.gevelAfter1.src, alt: PHOTOS.gevelAfter1.alt },
-      { src: PHOTOS.gevelCrepiMeise2.src, alt: PHOTOS.gevelCrepiMeise2.alt },
+      PHOTOS.spuitkurkAfter1,
+      PHOTOS.spuitkurkBefore1,
+      PHOTOS.spuitkurkAfter2,
+      PHOTOS.spuitkurkBefore2,
+      PHOTOS.gevelAfter1,
+      PHOTOS.gevelCrepiMeise2,
     ],
     seo: {
       title: "Spuitkurk Antwerpen — Naadloze Gevelafwerking",
@@ -220,9 +220,9 @@ export const services: Service[] = [
       "Gratis inspectie en asbestinventarisatie ter plaatse",
     ],
     galleryPhotos: [
-      { src: PHOTOS.asbestverwijdering1.src, alt: PHOTOS.asbestverwijdering1.alt },
-      { src: PHOTOS.asbestverwijdering2.src, alt: PHOTOS.asbestverwijdering2.alt },
-      { src: PHOTOS.asbestverwijdering.src, alt: PHOTOS.asbestverwijdering.alt },
+      PHOTOS.asbestverwijdering1,
+      PHOTOS.asbestverwijdering2,
+      PHOTOS.asbestverwijdering,
     ],
     seo: {
       title: "Asbestverwijdering Antwerpen — Gecertificeerd",

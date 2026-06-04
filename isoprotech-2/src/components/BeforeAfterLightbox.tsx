@@ -55,13 +55,13 @@ export function BeforeAfterLightbox({ pairs }: Props) {
             className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md group"
             onClick={() => setSelected(i)}
           >
-            <div className="relative grid grid-cols-2 h-52">
-              <div className="relative">
-                <Image src={pair.before.src} alt={pair.before.alt} fill className="object-cover" sizes="15vw" />
+            <div className="grid grid-cols-2">
+              <div className="relative aspect-[3/4] bg-gray-900">
+                <Image src={pair.before.src} alt={pair.before.alt} fill className="object-contain" sizes="15vw" />
                 <span className="absolute bottom-2 left-2 bg-red-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">VOOR</span>
               </div>
-              <div className="relative">
-                <Image src={pair.after.src} alt={pair.after.alt} fill className="object-cover" sizes="15vw" />
+              <div className="relative aspect-[3/4] bg-gray-900">
+                <Image src={pair.after.src} alt={pair.after.alt} fill className="object-contain" sizes="15vw" />
                 <span className="absolute bottom-2 right-2 bg-green-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">NA</span>
               </div>
               {/* Hover overlay */}

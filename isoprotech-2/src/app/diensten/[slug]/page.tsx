@@ -211,15 +211,16 @@ export default function ServicePage({
           <div className="mx-auto max-w-7xl px-6">
             <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Realisaties</span>
             <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-8">Onze {service.name.toLowerCase()} projecten</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="columns-2 md:columns-3 gap-3 [column-gap:12px]">
               {service.galleryPhotos.map((photo, i) => (
-                <div key={i} className={`relative overflow-hidden rounded-2xl bg-gray-100 ${i === 0 ? "col-span-2 md:col-span-2 row-span-2 h-80 md:h-[420px]" : "h-48 md:h-52"}`}>
+                <div key={i} className="break-inside-avoid mb-3 rounded-2xl overflow-hidden relative group">
                   <Image
                     src={photo.src}
                     alt={photo.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                    sizes="(max-width:768px)100vw,50vw"
+                    width={photo.width}
+                    height={photo.height}
+                    className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width:768px)50vw,33vw"
                   />
                 </div>
               ))}

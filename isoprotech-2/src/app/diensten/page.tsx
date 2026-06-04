@@ -42,12 +42,13 @@ export default function DienstenPage() {
               href={`/diensten/${sv.slug}`}
               className="card-hover group block overflow-hidden"
             >
-              <div className="relative h-52">
+              <div className="overflow-hidden">
                 <Image
                   src={sv.photo.src}
                   alt={sv.photo.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={sv.photo.width}
+                  height={sv.photo.height}
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
                 />
               </div>
