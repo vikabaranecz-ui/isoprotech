@@ -28,6 +28,13 @@ export const metadata: Metadata = {
     icon: "/images/favicon.png",
     apple: "/images/apple-touch-icon.png",
   },
+  alternates: {
+    canonical: BRAND.url,
+    languages: {
+      "nl-BE": BRAND.url,
+      "x-default": BRAND.url,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "nl_BE",

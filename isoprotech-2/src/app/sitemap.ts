@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/calculator/dak`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
 
     // /privacy and /cookies are noindex — excluded from sitemap
+    { url: `${BASE}/regio`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     // Landing pages — high priority for Google Ads
     { url: `${BASE}/gevelisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dakisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },

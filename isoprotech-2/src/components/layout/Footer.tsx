@@ -42,6 +42,14 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            <div className="mt-4 pt-4 border-t border-white/10 space-y-2">
+              <Link href="/gevelisolatie-antwerpen" className="block text-xs text-orange-400/70 hover:text-orange-300 transition-colors">
+                Gevelisolatie Antwerpen →
+              </Link>
+              <Link href="/dakisolatie-antwerpen" className="block text-xs text-orange-400/70 hover:text-orange-300 transition-colors">
+                Dakisolatie Antwerpen →
+              </Link>
+            </div>
           </div>
 
           {/* Werkgebied */}
@@ -49,8 +57,8 @@ export function Footer() {
             <h4 className="text-xs font-bold tracking-widest text-orange-400 uppercase mb-4">
               Werkgebied
             </h4>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-              {cities.slice(0, 12).map((c) => (
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-5">
+              {cities.slice(0, 10).map((c) => (
                 <Link
                   key={c.id}
                   href={`/regio/${c.slug}`}
@@ -60,6 +68,9 @@ export function Footer() {
                 </Link>
               ))}
             </div>
+            <Link href="/regio" className="text-xs text-white/30 hover:text-orange-300 transition-colors">
+              Alle regio&apos;s →
+            </Link>
           </div>
 
           {/* Contact */}
