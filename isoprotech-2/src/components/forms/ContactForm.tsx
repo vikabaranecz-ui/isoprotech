@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useSubmit } from "@formspree/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +28,7 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
   const [formState, setFormState] = useState<FormState>("idle");
   const [serverError, setServerError] = useState<string>("");
   const fsSubmit = useSubmit("mqeoygea");
+  const router = useRouter();
 
   const {
     register,
@@ -65,9 +67,9 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
         throw new Error("Submission rejected");
       }
 
-      setFormState("success");
       track.formSubmit(data.service);
       reset();
+      router.push("/bedankt");
     } catch {
       setFormState("error");
       setServerError("Er is een fout opgetreden. Probeer het opnieuw of bel ons op +32 470 80 20 20.");
