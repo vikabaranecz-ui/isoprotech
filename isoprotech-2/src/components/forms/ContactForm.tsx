@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSubmit } from "@formspree/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormData } from "@/lib/form";
 import { track } from "@/lib/tracking";
@@ -18,6 +19,7 @@ type FormState = "idle" | "submitting" | "success" | "error";
 export function ContactForm({ defaultService, compact, hideService }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serverError, setServerError] = useState<string>("");
+  const fsSubmit = useSubmit("mqeoygea");
 
   const {
     register,
@@ -61,11 +63,16 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
 
       const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
 
-      fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      }).catch(() => {});
+      // Send email via Formspree (fire and forget — WhatsApp remains primary)
+      fsSubmit({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        region: data.region || "",
+        service: serviceLabels[data.service] ?? data.service,
+        message: data.message || "",
+        _subject: `Nieuwe aanvraag: ${serviceLabels[data.service] ?? data.service} – ${data.name}`,
+      } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
       window.open(waUrl, "_blank", "noopener,noreferrer");
       setFormState("success");
