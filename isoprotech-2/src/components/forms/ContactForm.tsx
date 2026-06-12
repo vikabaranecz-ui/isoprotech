@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSubmit } from "@formspree/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormData } from "@/lib/form";
 import { track } from "@/lib/tracking";
@@ -15,9 +16,17 @@ interface ContactFormProps {
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+const SERVICE_LABELS: Record<string, string> = {
+  gevelwerken: "Gevelwerken (isolatie, crepi, spuitkurk)",
+  dakwerken: "Dakwerken (isolatie, renovatie, dakkapellen)",
+  asbestverwijdering: "Asbestverwijdering",
+  anders: "Anders / meerdere diensten",
+};
+
 export function ContactForm({ defaultService, compact, hideService }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serverError, setServerError] = useState<string>("");
+  const fsSubmit = useSubmit("mqeoygea");
 
   const {
     register,
@@ -42,15 +51,18 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
     setFormState("submitting");
     setServerError("");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const result = await fsSubmit({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        region: data.region || "",
+        service: SERVICE_LABELS[data.service] ?? data.service,
+        message: data.message || "",
+        _subject: `Aanvraag: ${SERVICE_LABELS[data.service] ?? data.service} – ${data.name}`,
+      } as Parameters<typeof fsSubmit>[0]);
 
-      if (!res.ok) {
-        const json = await res.json().catch(() => ({}));
-        throw new Error((json as { error?: string }).error ?? "Submission failed");
+      if (result && typeof result === "object" && "errors" in result) {
+        throw new Error("Submission rejected");
       }
 
       setFormState("success");
