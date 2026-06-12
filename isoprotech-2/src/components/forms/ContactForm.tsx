@@ -16,6 +16,13 @@ interface ContactFormProps {
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+const SERVICE_LABELS: Record<string, string> = {
+  gevelwerken: "Gevelwerken (isolatie, crepi, spuitkurk)",
+  dakwerken: "Dakwerken (isolatie, renovatie, dakkapellen)",
+  asbestverwijdering: "Asbestverwijdering",
+  anders: "Anders / meerdere diensten",
+};
+
 export function ContactForm({ defaultService, compact, hideService }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [serverError, setServerError] = useState<string>("");
@@ -44,56 +51,44 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
     setFormState("submitting");
     setServerError("");
     try {
-      const serviceLabels: Record<string, string> = {
-        gevelwerken: "Gevelwerken (isolatie, crepi, spuitkurk)",
-        dakwerken: "Dakwerken (isolatie, renovatie, dakkapellen)",
-        asbestverwijdering: "Asbestverwijdering",
-        anders: "Anders / meerdere diensten",
-      };
-      const lines = [
-        "*Nieuwe offerte-aanvraag via isoprotech.be*",
-        "",
-        `Naam: ${data.name}`,
-        `Tel: ${data.phone}`,
-        `E-mail: ${data.email}`,
-        data.region ? `Gemeente: ${data.region}` : null,
-        `Dienst: ${serviceLabels[data.service] ?? data.service}`,
-        data.message ? `Bericht: ${data.message}` : null,
-      ].filter(Boolean).join("\n");
-
-      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
-
-      // Send email via Formspree (fire and forget — WhatsApp remains primary)
-      fsSubmit({
+      const result = await fsSubmit({
         name: data.name,
         email: data.email,
         phone: data.phone,
         region: data.region || "",
-        service: serviceLabels[data.service] ?? data.service,
+        service: SERVICE_LABELS[data.service] ?? data.service,
         message: data.message || "",
-        _subject: `Nieuwe aanvraag: ${serviceLabels[data.service] ?? data.service} – ${data.name}`,
-      } as Parameters<typeof fsSubmit>[0]).catch(() => {});
+        _subject: `Aanvraag: ${SERVICE_LABELS[data.service] ?? data.service} – ${data.name}`,
+      } as Parameters<typeof fsSubmit>[0]);
 
-      window.open(waUrl, "_blank", "noopener,noreferrer");
+      // Formspree returns an error result (with .errors) on failure
+      if (result && typeof result === "object" && "errors" in result) {
+        throw new Error("Submission rejected");
+      }
+
       setFormState("success");
       track.formSubmit(data.service);
       reset();
     } catch {
       setFormState("error");
-      setServerError("Er is een fout opgetreden. Probeer het later opnieuw.");
+      setServerError("Er is een fout opgetreden. Probeer het opnieuw of bel ons op +32 470 80 20 20.");
     }
   }
 
   if (formState === "success") {
     return (
       <div className="rounded-2xl bg-white p-10 text-center border border-teal-100" role="alert" aria-live="polite">
-        <div className="mx-auto mb-4 h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-          <svg className="h-7 w-7 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+        <div className="mx-auto mb-5 h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
+          <svg className="h-9 w-9 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <h3 className="font-bold text-xl text-teal-800 mb-2">WhatsApp wordt geopend!</h3>
-        <p className="text-gray-600">Uw bericht staat klaar in WhatsApp. Klik op &ldquo;Verstuur&rdquo; om uw aanvraag te bevestigen.</p>
+        <h3 className="font-bold text-2xl text-teal-800 mb-3">Bedankt voor uw aanvraag!</h3>
+        <p className="text-gray-600 leading-relaxed mb-2">
+          We hebben uw bericht goed ontvangen en nemen zo snel mogelijk contact met u op —
+          normaal <span className="font-semibold text-teal-700">binnen 24 uur</span>.
+        </p>
+        <p className="text-sm text-gray-400">U ontvangt ook een bevestiging per e-mail.</p>
       </div>
     );
   }
@@ -105,7 +100,7 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
       className={`rounded-2xl bg-white border border-gray-100 shadow-sm ${compact ? "p-6" : "p-8"}`}
     >
       <h3 className={`font-bold text-teal-800 mb-4 ${compact ? "text-lg" : "text-xl mb-6"}`}>
-        Gratis gevelinspectie aanvragen
+        Gratis inspectie aanvragen
       </h3>
 
       {/* Honeypot */}
@@ -242,7 +237,7 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
           </span>
         ) : "Gratis inspectie aanvragen"}
       </button>
-      <p className="text-[11px] text-gray-400 text-center mt-2">Gratis · Vrijblijvend · Binnen 48u reactie</p>
+      <p className="text-[11px] text-gray-400 text-center mt-2">Gratis · Vrijblijvend · Binnen 24u reactie</p>
     </form>
   );
 }
