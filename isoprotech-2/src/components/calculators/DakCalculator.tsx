@@ -2,6 +2,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { useSubmit } from "@formspree/react";
 import {
   calculateDak,
   formatEur,
@@ -18,6 +20,8 @@ import { ProgressBar, RadioCard, NumberInput } from "./CalcUI";
 const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Isolatie", "Bouwjaar", "Contact"];
 
 export function DakCalculator() {
+  const router = useRouter();
+  const fsSubmit = useSubmit("mqeoygea");
   const [step, setStep] = useState(0);
   const [daktype, setDaktype] = useState<DakType | null>(null);
   const [area, setArea] = useState(80);
@@ -88,27 +92,20 @@ export function DakCalculator() {
         result ? `💰 Richtprijs: ${formatEur(result.gross)} (incl. BTW)` : null,
       ].filter(Boolean).join("\n");
 
-      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
+      fsSubmit({
+        name: naam,
+        email: email || "",
+        phone: telefoon,
+        service: "Dakwerken",
+        message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${isolatie}, ${bouwjaar}${result ? `, richtprijs ${formatEur(result.gross)}` : ""}`,
+        _subject: `Dakcalculator aanvraag – ${naam}`,
+      } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
-      fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: naam,
-          phone: telefoon,
-          email: email,
-          service: "dakwerken",
-          message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${isolatie}, ${bouwjaar}${result ? `, ${formatEur(result.gross)}` : ""}`,
-          privacy: true,
-        }),
-      }).catch(() => {});
-
-      window.open(waUrl, "_blank", "noopener,noreferrer");
-
-      setShowResult(true);
       if (result) {
         track.calculatorComplete("dak", result.grossMin, result.grossMax);
       }
+      setShowResult(true);
+      router.push("/bedankt");
     }
   }
 

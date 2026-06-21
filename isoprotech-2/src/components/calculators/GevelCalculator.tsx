@@ -2,6 +2,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { useSubmit } from "@formspree/react";
 import {
   calculateGevel,
   formatEur,
@@ -17,6 +19,8 @@ import { RadioCard, NumberInput, ProgressBar, StepNav } from "./CalcUI";
 const STEPS = ["Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details", "Contact"];
 
 export function GevelCalculator() {
+  const router = useRouter();
+  const fsSubmit = useSubmit("mqeoygea");
   const [step, setStep] = useState(0);
   const [input, setInput] = useState<GevelInput>({
     projectType: "reno",
@@ -72,25 +76,18 @@ export function GevelCalculator() {
         `💰 Richtprijs: ${formatEur(result.total)} (incl. BTW)`,
       ].filter(Boolean).join("\n");
 
-      const waUrl = `https://wa.me/32470802020?text=${encodeURIComponent(lines)}`;
+      fsSubmit({
+        name: naam,
+        email: email || "",
+        phone: telefoon,
+        service: "Gevelwerken",
+        message: `Gevelcalculator: ${input.finish}, isolatie ${input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "geen"}, ${result.netArea}m², richtprijs ${formatEur(result.total)}`,
+        _subject: `Gevelcalculator aanvraag – ${naam}`,
+      } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
-      fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: naam,
-          phone: telefoon,
-          email: email,
-          service: "gevelwerken",
-          message: `Gevelcalculator: ${input.finish}, ${input.insulation}, ${result.netArea}m², ${formatEur(result.total)}`,
-          privacy: true,
-        }),
-      }).catch(() => {});
-
-      window.open(waUrl, "_blank", "noopener,noreferrer");
-
-      setShowResult(true);
       track.calculatorComplete("gevel", result.total, result.total);
+      setShowResult(true);
+      router.push("/bedankt");
     }
   }
 
