@@ -206,32 +206,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── LANDING PAGES CTA ─── */}
-      <section className="section-padding bg-white">
-        <div className="container-wide max-w-4xl mx-auto">
-          <div className="grid sm:grid-cols-2 gap-5">
-            <Link href="/gevelisolatie-antwerpen" className="group rounded-2xl border border-teal-100 bg-teal-50 p-6 hover:border-teal-300 hover:bg-teal-100 transition-all">
-              <div className="text-xs font-bold tracking-widest text-orange-400 uppercase mb-2">Gevelisolatie Antwerpen</div>
-              <h3 className="font-extrabold text-teal-800 text-lg mb-2 group-hover:text-teal-900">Gratis gevelinspectie aanvragen</h3>
-              <p className="text-sm text-gray-500 mb-4 leading-relaxed">Crepi, spuitkurk of steenstrips. Vaste prijs, 10 jaar garantie. Wij inspecteren gratis ter plaatse.</p>
-              <span className="inline-flex items-center gap-1 text-sm font-bold text-orange-400 group-hover:gap-2 transition-all">
-                Plan inspectie
-                <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>
-              </span>
-            </Link>
-            <Link href="/dakisolatie-antwerpen" className="group rounded-2xl border border-teal-100 bg-teal-50 p-6 hover:border-teal-300 hover:bg-teal-100 transition-all">
-              <div className="text-xs font-bold tracking-widest text-orange-400 uppercase mb-2">Dakisolatie Antwerpen</div>
-              <h3 className="font-extrabold text-teal-800 text-lg mb-2 group-hover:text-teal-900">Gratis dakinspectie aanvragen</h3>
-              <p className="text-sm text-gray-500 mb-4 leading-relaxed">Plat dak of hellend dak — tot 30% energiebesparing. Gratis inspectie ter plaatse, vaste offerte.</p>
-              <span className="inline-flex items-center gap-1 text-sm font-bold text-orange-400 group-hover:gap-2 transition-all">
-                Plan inspectie
-                <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>
-              </span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ─── CALCULATOR CTA ─── */}
       <section className="relative overflow-hidden bg-teal-800">
         <div className="absolute inset-0 opacity-[0.06]" style={{backgroundImage:"radial-gradient(circle at 1px 1px, white 1.5px, transparent 0)", backgroundSize:"28px 28px"}} />
