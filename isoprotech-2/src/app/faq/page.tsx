@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   description:
     "Antwoorden op de meest gestelde vragen over dakisolatie, gevelisolatie, crepi, spuitkurk, premies en onze werkwijze. ISOPROTECH Antwerpen.",
   alternates: { canonical: `${BRAND.url}/faq` },
+  openGraph: {
+    title: "Veelgestelde Vragen — Dak- & Gevelisolatie",
+    description: "Antwoorden op de meest gestelde vragen over dakisolatie, gevelisolatie, crepi, premies en onze werkwijze. ISOPROTECH Antwerpen.",
+  },
 };
 
 export default function FAQPage() {

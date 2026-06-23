@@ -5,7 +5,11 @@ import { cities } from "@/content/cities";
 
 export const metadata: Metadata = {
   title: "Werkgebied — Dak- & Gevelisolatie Regio Antwerpen",
-  description: "ISOPROTECH voert dak- en gevelisolatie uit in heel de regio Antwerpen: Wilrijk, Mechelen, Mortsel, Schoten, Brasschaat, Ekeren, Schilde en meer. Gratis inspectie ter plaatse.",
+  description: "ISOPROTECH voert dak- en gevelisolatie uit in de regio Antwerpen: Wilrijk, Mortsel, Mechelen, Schoten, Brasschaat, Ekeren en meer. Gratis inspectie.",
+  openGraph: {
+    title: "Werkgebied — Dak- \& Gevelisolatie Regio Antwerpen",
+    description: "ISOPROTECH voert dak- en gevelisolatie uit in de regio Antwerpen: Wilrijk, Mortsel, Mechelen, Schoten, Brasschaat, Ekeren en meer. Gratis inspectie.",
+  },
   alternates: { canonical: `${BRAND.url}/regio` },
 };
 

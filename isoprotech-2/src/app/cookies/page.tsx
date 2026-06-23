@@ -6,9 +6,13 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 
 export const metadata: Metadata = {
   title: "Cookiebeleid",
-  description: "Cookiebeleid van ISOPROTECH. Welke cookies wij gebruiken en waarvoor.",
+  description: "Cookiebeleid van ISOPROTECH — welke cookies wij gebruiken, waarvoor en hoe u uw voorkeuren beheert.",
   alternates: { canonical: `${BRAND.url}/cookies` },
   robots: { index: false, follow: true },
+  openGraph: {
+    title: "Cookiebeleid",
+    description: "Cookiebeleid van ISOPROTECH — welke cookies wij gebruiken, waarvoor en hoe u uw voorkeuren beheert.",
+  },
 };
 
 export default function CookiesPage() {

@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Realisaties — Projecten Dak- & Gevelisolatie",
   description: "Bekijk onze gerealiseerde dak- en gevelprojecten in Antwerpen en omgeving. Gevelisolatie, crepi, spuitkurk, dakrenovatie en meer.",
   alternates: { canonical: `${BRAND.url}/realisaties` },
+  openGraph: {
+    title: "Realisaties — Projecten Dak- & Gevelisolatie",
+    description: "Bekijk onze gerealiseerde dak- en gevelprojecten in Antwerpen en omgeving. Gevelisolatie, crepi, spuitkurk, dakrenovatie en meer.",
+  },
 };
 
 export default function RealisatiesPage() {

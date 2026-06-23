@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     default: "ISOPROTECH — Dak- en Gevelisolatie Antwerpen",
     template: "%s | ISOPROTECH",
   },
-  description: BRAND.tagline + " Dakisolatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen en omgeving. Gratis inspectie, 10 jaar garantie.",
+  description: "Dakisolatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen. Gratis inspectie. 10 jaar garantie. " + BRAND.tagline,
   keywords: ["gevelisolatie antwerpen", "dakisolatie antwerpen", "crepi antwerpen", "dakrenovatie", "asbestverwijdering", "isoprotech"],
   authors: [{ name: BRAND.name }],
   icons: {

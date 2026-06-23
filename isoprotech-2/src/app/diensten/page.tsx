@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "Onze Diensten — Dak, Gevel & Asbest",
   description: "ISOPROTECH biedt dakisolatie, dakrenovatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen en omgeving. Bekijk ons volledig aanbod.",
   alternates: { canonical: `${BRAND.url}/diensten` },
+  openGraph: {
+    title: "Onze Diensten — Dak, Gevel & Asbest",
+    description: "ISOPROTECH biedt dakisolatie, dakrenovatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen en omgeving.",
+  },
 };
 
 export default function DienstenPage() {

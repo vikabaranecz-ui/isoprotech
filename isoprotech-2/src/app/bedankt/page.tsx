@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   description: "We hebben uw aanvraag goed ontvangen en nemen zo snel mogelijk contact met u op.",
   alternates: { canonical: `${BRAND.url}/bedankt` },
   robots: { index: false, follow: false },
+  openGraph: {
+    title: "Bedankt voor uw aanvraag",
+    description: "We hebben uw aanvraag goed ontvangen en nemen zo snel mogelijk contact met u op.",
+  },
 };
 
 export default function BedanktPage() {

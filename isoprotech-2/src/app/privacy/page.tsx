@@ -5,9 +5,13 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 
 export const metadata: Metadata = {
   title: "Privacybeleid",
-  description: "Privacybeleid van ISOPROTECH. Hoe wij omgaan met uw persoonsgegevens.",
+  description: "Privacybeleid van ISOPROTECH — hoe wij omgaan met uw persoonsgegevens, welke gegevens wij verzamelen en uw rechten.",
   alternates: { canonical: `${BRAND.url}/privacy` },
   robots: { index: false, follow: true },
+  openGraph: {
+    title: "Privacybeleid",
+    description: "Privacybeleid van ISOPROTECH — hoe wij omgaan met uw persoonsgegevens, welke gegevens wij verzamelen en uw rechten.",
+  },
 };
 
 export default function PrivacyPage() {

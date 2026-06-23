@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "Blog — Tips & Advies over Isolatie",
   description: "Tips, advies en nieuws over dakisolatie, gevelisolatie, crepi, premies en energiebesparing. ISOPROTECH Blog.",
   alternates: { canonical: `${BRAND.url}/blog` },
+  openGraph: {
+    title: "Blog — Tips & Advies over Isolatie",
+    description: "Tips, advies en nieuws over dakisolatie, gevelisolatie, crepi, premies en energiebesparing. ISOPROTECH Blog.",
+  },
 };
 
 export default function BlogPage() {

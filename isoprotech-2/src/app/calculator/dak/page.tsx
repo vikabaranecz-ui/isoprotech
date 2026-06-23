@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   description:
     "Bereken een indicatieve prijs voor dakrenovatie of dakisolatie in de regio Antwerpen. Plat en hellend dak. Actuele prijzen 2026.",
   alternates: { canonical: `${BRAND.url}/calculator/dak` },
+  openGraph: {
+    title: "Dakcalculator — Bereken uw Dakprijs",
+    description: "Bereken een indicatieve prijs voor dakrenovatie of dakisolatie in de regio Antwerpen. Plat en hellend dak. Actuele prijzen 2026.",
+  },
 };
 
 export default function DakCalculatorPage() {
