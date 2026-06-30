@@ -47,15 +47,16 @@ export const cities: CityData[] = [
     name: "Mechelen",
     zip: "2800",
     province: "Antwerpen",
-    intro: "In Mechelen voert ISOPROTECH regelmatig dak- en gevelprojecten uit. De stad kent een mix van historische panden in het centrum en modernere woningen in de buitenwijken zoals Battel, Heffen en Leest. Ons team combineert geregeld dakvernieuwing met gevelisolatie voor een optimaal energetisch resultaat.",
-    localContext: "Mechelen zet sterk in op klimaatneutraliteit en stimuleert bewoners actief om te isoleren. De vele jaren-60 en jaren-70 woningen in de Mechelse rand zijn ideale kandidaten voor buitengevelisolatie. Wij hebben meerdere projecten gerealiseerd waar dak- en gevelwerken in één fase werden uitgevoerd, wat technisch efficiënt en kostenbesparend is.",
+    intro: "Op zoek naar dakwerken in Mechelen? ISOPROTECH voert er regelmatig dak- en gevelprojecten uit. De stad kent een mix van historische panden in het centrum en modernere woningen in de buitenwijken zoals Battel, Heffen en Leest. Ons team combineert geregeld dakwerken met gevelisolatie voor een optimaal energetisch resultaat.",
+    localContext: "Mechelen zet sterk in op klimaatneutraliteit en stimuleert bewoners actief om te isoleren. Voor dakwerken in Mechelen kiezen steeds meer eigenaars voor ISOPROTECH: van dakisolatie en dakrenovatie tot volledige dakvernieuwing. De vele jaren-60 en jaren-70 woningen in de Mechelse rand zijn bovendien ideale kandidaten voor buitengevelisolatie. Wij hebben meerdere projecten gerealiseerd waar dakwerken en gevelwerken in één fase werden uitgevoerd, wat technisch efficiënt en kostenbesparend is.",
     projectRefs: ["dak-gevel-mechelen"],
     localFaqs: [
       { q: "Werken jullie ook in de deelgemeenten van Mechelen?", a: "Ja, wij zijn actief in heel Mechelen inclusief Battel, Heffen, Leest, Walem, Hombeek en Muizen. De afstand tot ons kantoor in Antwerpen is beperkt." },
+      { q: "Voeren jullie ook dakwerken uit in Mechelen, niet enkel isolatie?", a: "Zeker. Naast dakisolatie verzorgen wij ook volledige dakwerken in Mechelen: dakrenovatie, dakvernieuwing en herstellingen, steeds met 10 jaar garantie." },
     ],
     seo: {
-      title: "Isolatie & Dakrenovatie Mechelen — ISOPROTECH",
-      description: "Dakisolatie, gevelisolatie en dakrenovatie in Mechelen. Lokale referenties, gratis inspectie, 10 jaar garantie. Vraag uw offerte aan bij ISOPROTECH.",
+      title: "Dakwerken & Isolatie Mechelen — ISOPROTECH",
+      description: "Dakwerken, dakisolatie, gevelisolatie en dakrenovatie in Mechelen. Lokale referenties, gratis inspectie, 10 jaar garantie. Vraag uw offerte aan.",
     },
   },
   {
