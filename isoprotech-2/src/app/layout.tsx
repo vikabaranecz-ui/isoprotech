@@ -1,5 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Outfit } from "next/font/google";
 import { BRAND } from "@/lib/constants";
 import { localBusinessSchema } from "@/lib/seo";
@@ -55,21 +56,20 @@ export default function RootLayout({
   return (
     <html lang="nl" className={outfit.variable}>
       <head>
-        {/* GTM — replace GTM-XXXX with your real container ID */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-P37SR8T8');
-            `,
-          }}
-        />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <JsonLd data={localBusinessSchema()} />
       </head>
       <body className="font-sans bg-stone-50 text-gray-700 antialiased">
+        {/* GTM — loaded after the page becomes interactive so it doesn't block first paint */}
+        <Script id="gtm" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-P37SR8T8');
+          `}
+        </Script>
         {/* GTM noscript */}
         <noscript>
           <iframe
