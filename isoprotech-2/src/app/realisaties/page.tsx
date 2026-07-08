@@ -5,8 +5,8 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { ProjectGallery } from "./ProjectGallery";
 
 export const metadata: Metadata = {
-  title: "Realisaties — Projecten Dak- & Gevelisolatie",
-  description: "Bekijk onze gerealiseerde dak- en gevelprojecten in Antwerpen en omgeving. Gevelisolatie, crepi, spuitkurk, dakrenovatie en meer.",
+  title: "Realisaties Antwerpen — Dak- & Gevelprojecten | ISOPROTECH",
+  description: "Bekijk onze gerealiseerde dak- en gevelprojecten in Antwerpen en omgeving. Gevelisolatie met crepi, spuitkurk, dakrenovatie en dakisolatie — resultaten die voor zich spreken.",
   alternates: { canonical: `${BRAND.url}/realisaties` },
 };
 

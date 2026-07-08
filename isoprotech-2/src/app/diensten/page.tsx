@@ -7,8 +7,8 @@ import { BRAND } from "@/lib/constants";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Onze Diensten — Dak, Gevel & Asbest",
-  description: "ISOPROTECH biedt dakisolatie, dakrenovatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen en omgeving. Bekijk ons volledig aanbod.",
+  title: "Diensten Antwerpen — Dakisolatie & Gevelisolatie | ISOPROTECH",
+  description: "Dakisolatie, dakrenovatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen en omgeving. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
   alternates: { canonical: `${BRAND.url}/diensten` },
 };
 

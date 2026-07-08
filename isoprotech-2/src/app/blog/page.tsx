@@ -7,8 +7,8 @@ import { BRAND } from "@/lib/constants";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Blog — Tips & Advies over Isolatie",
-  description: "Tips, advies en nieuws over dakisolatie, gevelisolatie, crepi, premies en energiebesparing. ISOPROTECH Blog.",
+  title: "Blog Isolatie & Renovatie — Advies voor uw Woning | ISOPROTECH",
+  description: "Praktisch advies over dakisolatie, gevelisolatie, crepi, spuitkurk, premies en energiebesparing voor woningeigenaren in Antwerpen en omgeving.",
   alternates: { canonical: `${BRAND.url}/blog` },
 };
 

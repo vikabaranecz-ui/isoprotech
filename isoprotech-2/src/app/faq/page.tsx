@@ -9,9 +9,8 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Veelgestelde Vragen — Dak- & Gevelisolatie",
-  description:
-    "Antwoorden op de meest gestelde vragen over dakisolatie, gevelisolatie, crepi, spuitkurk, premies en onze werkwijze. ISOPROTECH Antwerpen.",
+  title: "Veelgestelde Vragen over Isolatie | ISOPROTECH Antwerpen",
+  description: "Antwoorden op de meest gestelde vragen over dakisolatie, gevelisolatie, crepi, spuitkurk, premies en onze werkwijze. ISOPROTECH — actief in Antwerpen en omgeving.",
   alternates: { canonical: `${BRAND.url}/faq` },
 };
 
