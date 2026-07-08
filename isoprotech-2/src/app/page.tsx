@@ -67,8 +67,8 @@ export default function HomePage() {
                 <span className="text-xs font-semibold tracking-wide text-orange-300 uppercase">Antwerpen · Google 5/5 · Gratis inspectie</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold text-white leading-[1.07] tracking-tight mb-5">
-                Dak of gevel isoleren?
-                <span className="block text-orange-400 mt-1">Compleet geregeld.</span>
+                Uw woning te koud in de winter of te warm in de zomer?{" "}
+                <span className="text-orange-400">ISOPROTECH isoleert uw dak en gevel — met duidelijke planning, vaste afspraken en garantie.</span>
               </h1>
               <p className="text-lg text-white/70 max-w-lg leading-relaxed mb-8">
                 Professionele isolatie en renovatie in Antwerpen. Gratis inspectie,
@@ -202,6 +202,66 @@ export default function HomePage() {
             <a href={`tel:${BRAND.phone}`} className="btn-primary">
               Start nu — bel gratis
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── VOOR WIE ─── */}
+      <section className="section-padding bg-white">
+        <div className="container-wide">
+          <div className="text-center mb-12">
+            <span className="section-label">Voor wie</span>
+            <h2 className="section-heading mt-2">Wie kiest voor ISOPROTECH?</h2>
+            <p className="section-subheading mx-auto mt-4">
+              Wij helpen eigenaars van woningen in Antwerpen en omgeving die hun woning energiezuiniger,
+              comfortabeler en beter beschermd willen maken — zonder stress, onduidelijke offertes of half afgewerkte werken.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { icon: "🏠", title: "Oudere woning met hoge energiefactuur", desc: "Woningen gebouwd vóór 1990 verliezen tot 30% van hun warmte via dak en gevel. Isolatie is de meest rendabele ingreep." },
+              { icon: "❄️", title: "Koud in de winter, warm in de zomer", desc: "Een correct geïsoleerde woning houdt de warmte binnen in de winter en de hitte buiten in de zomer — zonder airco." },
+              { icon: "📉", title: "Slechte EPC-score", desc: "De renovatieplicht maakt een goede EPC-score steeds belangrijker bij verkoop of verhuur. Wij helpen u die score verbeteren." },
+              { icon: "💧", title: "Vocht, condensatie of schimmel", desc: "Koude muren en een slecht geïsoleerd dak zijn de belangrijkste oorzaken van vochtproblemen. Isolatie pakt de oorzaak aan." },
+              { icon: "🏗️", title: "Verouderde gevel of oud dak", desc: "Tegelijk isoleren én de gevel of het dak vernieuwen? Wij combineren beide ingrepen voor maximale efficiëntie." },
+              { icon: "🎯", title: "Één aanspreekpunt voor alles", desc: "Dak én gevel in één werf — minder coördinatie, efficiëntere planning en één factuur. ISOPROTECH regelt het voor u." },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="text-2xl mb-3">{item.icon}</div>
+                <h3 className="font-bold text-teal-800 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PROBLEMEN ─── */}
+      <section className="section-padding bg-teal-800">
+        <div className="container-wide">
+          <div className="text-center mb-12">
+            <span className="section-label text-orange-400">Uw situatie</span>
+            <h2 className="section-heading mt-2 text-white">Welke problemen lossen wij op?</h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {[
+              { problem: "Koude muren", solution: "Buitengevelisolatie", link: "/diensten/gevelisolatie" },
+              { problem: "Woning te warm in de zomer", solution: "Dak- en gevelisolatie", link: "/diensten/dakisolatie" },
+              { problem: "Hoge energiefactuur", solution: "Dakisolatie of gevelisolatie", link: "/diensten/dakisolatie" },
+              { problem: "Vocht en condensatie", solution: "Gevelisolatie of dakrenovatie", link: "/diensten/gevelisolatie" },
+              { problem: "Slechte EPC-score", solution: "Gecombineerde isolatie", link: "/diensten/gevelisolatie" },
+              { problem: "Verouderde gevel", solution: "Crepi of spuitkurk", link: "/diensten/crepi" },
+              { problem: "Oud of lekkend dak", solution: "Dakrenovatie met isolatie", link: "/diensten/dakrenovatie" },
+              { problem: "Asbest in het dak", solution: "Asbestverwijdering", link: "/diensten/asbestverwijdering" },
+            ].map((item) => (
+              <Link key={item.problem} href={item.link}
+                className="group block rounded-xl border border-white/10 bg-white/5 hover:bg-white/15 transition-all p-5">
+                <p className="text-sm font-semibold text-orange-300 mb-1">Probleem</p>
+                <p className="font-bold text-white mb-3">{item.problem}</p>
+                <p className="text-xs text-white/60 mb-2">Oplossing:</p>
+                <p className="text-sm text-orange-400 font-semibold group-hover:text-orange-300 transition-colors">{item.solution} →</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -368,6 +428,9 @@ export default function HomePage() {
           <div className="text-center mb-8">
             <span className="section-label">Werkgebied</span>
             <h2 className="text-2xl font-extrabold text-teal-900">Actief in Antwerpen en omgeving</h2>
+            <p className="section-subheading mx-auto mt-3">
+              ISOPROTECH is actief in Antwerpen en de ruime omgeving. Kies uw gemeente voor lokale informatie over onze diensten en referenties in uw buurt.
+            </p>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
             {cities.map((c) => (

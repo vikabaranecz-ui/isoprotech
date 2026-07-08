@@ -133,7 +133,11 @@ export const cities: CityData[] = [
     intro: "Schilde staat bekend om zijn villawijken en ruime woningen. ISOPROTECH voert hier regelmatig gecombineerde dak- en gevelprojecten uit, waarbij de schaal van de woningen een doordachte aanpak vereist.",
     localContext: "De vrijstaande woningen in Schilde hebben doorgaans zowel grote dakoppervlakken als ruime gevels. Een geïntegreerde aanpak — dakisolatie gecombineerd met gevelisolatie — levert hier het grootste energetische voordeel op. Wij hebben in Schilde succesvolle totaalprojecten gerealiseerd.",
     projectRefs: ["dak-gevel-schilde"],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Is er een vergunning nodig voor gevelisolatie in Schilde?", a: "Voor standaard buitengevelisolatie is in Schilde doorgaans geen vergunning nodig. Voor woningen in beschermde zones of met een architecturaal karakter raden wij aan dit te laten controleren. Wij adviseren u hierover tijdens de gratis inspectie." },
+      { q: "Welke gevelafwerking past het best bij een villa in Schilde?", a: "Voor de grotere, kwalitatieve woningen in Schilde kiezen veel eigenaars voor minerale crepi in een neutrale tint of voor een combinatie van crepi en steenstrips. Spuitkurk is een duurzame optie voor gevels met een unieke structuur. Wij leggen u de opties uit en passen ze aan uw voorkeur." },
+      { q: "Bieden jullie ook dakrenovatie aan in Schilde?", a: "Ja. In Schilde voeren wij regelmatig gecombineerde dak- en gevelprojecten uit. Grotere, vrijstaande woningen combineren wij graag in één werf — efficiënter voor u en voor ons team." },
+    ],
     seo: {
       title: "Dak- & Gevelisolatie Schilde — ISOPROTECH",
       description: "Totale dak- en gevelisolatie in Schilde. Ervaring met villawoningen, grote oppervlakken. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
@@ -148,7 +152,11 @@ export const cities: CityData[] = [
     intro: "Brasschaat is een residentiële gemeente ten noorden van Antwerpen met veel kwalitatieve gezinswoningen. ISOPROTECH is hier actief met zowel dakwerken als gevelisolatie, afgestemd op het hogere afwerkingsniveau dat in deze gemeente verwacht wordt.",
     localContext: "In Brasschaat zien we vaak woningen waar esthetiek even belangrijk is als technische prestatie. Wij werken hier met premium afwerkingen en besteden extra aandacht aan details rond ramen, deuren en dakgoten. Het resultaat is een woning die er niet alleen beter uitziet, maar ook meetbaar minder energie verbruikt.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Welke afwerking past bij een kwalitatieve woning in Brasschaat?", a: "In Brasschaat is de verwachting voor kwaliteit en afwerking hoog. Wij werken hier met premium mineralecrepi-systemen en besteden extra aandacht aan details rond ramen, dakgoten en hoeken. Spuitkurk is ook populair voor zijn naadloze uitstraling en kleurvastheid." },
+      { q: "Zijn er premies voor gevelisolatie in Brasschaat?", a: "Ja — via Mijn VerbouwPremie kunt u premies aanvragen voor buitengevelisolatie, ongeacht uw gemeente. Wij controleren uw recht op premies en dienen de aanvraag in voor u." },
+      { q: "Hoelang duurt gevelisolatie voor een grote vrijstaande woning in Brasschaat?", a: "Voor een grotere vrijstaande woning in Brasschaat rekent u op 3 tot 5 weken, afhankelijk van de geveloppervlakte en de complexiteit van de details. Wij plannen alles vooraf en communiceren duidelijk over de doorlooptijd." },
+    ],
     seo: {
       title: "Isolatie & Gevelwerken Brasschaat — ISOPROTECH",
       description: "Dakisolatie en gevelisolatie in Brasschaat. Premium afwerking, lokale ervaring. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
@@ -163,7 +171,11 @@ export const cities: CityData[] = [
     intro: "In Kapellen voeren wij dak- en gevelisolatiewerken uit voor zowel particuliere woningen als kleinere appartementsgebouwen. De gemeente biedt een mix van bouwstijlen waar onze brede ervaring goed bij aansluit.",
     localContext: "Kapellen kent zowel oudere dorpskernen als nieuwere verkavelingen. Bij oudere woningen combineren wij vaak asbestverwijdering met dakrenovatie en isolatie — een efficiënte totaalaanpak die de woning in één keer toekomstbestendig maakt.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Werken jullie ook bij oudere woningen in Kapellen waar asbest aanwezig kan zijn?", a: "Ja. In Kapellen zijn er woningen gebouwd vóór 1990 waar asbestmateriaal aanwezig kan zijn — met name in daken en gevels. Wij voeren de asbestinventarisatie en verwijdering uit vóór de start van de isolatiewerken. Een gecombineerde aanpak is zowel praktisch als kosteneffectief." },
+      { q: "Kan ik dak- en gevelisolatie combineren in Kapellen?", a: "Zeker. Het is zelfs aan te raden. Door dak en gevel samen aan te pakken, betaalt u maar één keer voor stellingwerk en vermijdt u twee periodes van werken aan uw woning. Wij plannen beide ingrepen in één werf." },
+      { q: "Hoe snel kan ISOPROTECH in Kapellen starten?", a: "Kapellen ligt op goede rijafstand van ons kantoor in Antwerpen. Na uw aanvraag plannen wij een gratis inspectie binnen de week en bezorgen u een offerte. De startdatum voor de werken stemmen wij af op uw planning." },
+    ],
     seo: {
       title: "Dakisolatie & Gevelwerken Kapellen — ISOPROTECH",
       description: "Dak- en gevelisolatie in Kapellen. Van asbestverwijdering tot crepi-afwerking. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
@@ -178,7 +190,11 @@ export const cities: CityData[] = [
     intro: "Edegem grenst direct aan ons werkgebied en is een gemeente waar wij snel ter plaatse zijn voor inspectie en uitvoering. De typische Edegemse halfopen en gesloten bebouwing leent zich uitstekend voor buitengevelisolatie.",
     localContext: "Veel woningen in Edegem dateren uit de jaren 50–70 en zijn gebouwd met massieve muren zonder isolatie. Buitengevelisolatie met crepi is hier de meest logische oplossing: de woning wint aan comfort, uitstraling en waarde, zonder verlies van binnenruimte.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Hoeveel kost gevelisolatie voor een typische woning in Edegem?", a: "De meeste woningen in Edegem zijn halfopen bebouwing uit de jaren 50–70 met een geveloppervlak van 80 tot 120 m². Een indicatieve prijs voor buitengevelisolatie met crepi ligt voor dit type woning tussen €8.500 en €18.000, afhankelijk van de staat van de gevel, de isolatiedikte en de gekozen afwerking. Gebruik onze calculator of vraag een gratis inspectie aan voor een exacte prijs." },
+      { q: "Zijn er referenties van ISOPROTECH in Edegem?", a: "Ja. Wij hebben in Edegem meerdere dak- en gevelprojecten gerealiseerd, waaronder hellende dakrenovaties en gevelisolatie met crepi op halfopen bebouwing. Bekijk onze realisaties voor meer voorbeelden." },
+      { q: "Combineert ISOPROTECH dak- en gevelisolatie in Edegem?", a: "Ja. Voor de typische woning in Edegem is een gecombineerde aanpak — hellend dak renoveren én gevel isoleren — het meest kosteneffectief. Wij plannen beide ingrepen in één werf en zorgen voor een naadloze aansluiting." },
+    ],
     seo: {
       title: "Gevelisolatie Edegem — Crepi & Isolatie | ISOPROTECH",
       description: "Buitengevelisolatie met crepi in Edegem. Ideaal voor jaren-60 woningen. Gratis inspectie, 10 jaar garantie. ISOPROTECH Antwerpen.",
@@ -193,7 +209,11 @@ export const cities: CityData[] = [
     intro: "Kontich is een dynamische gemeente tussen Antwerpen en Mechelen waar wij actief zijn met dak- en gevelprojecten. De goede bereikbaarheid maakt het een efficiënt werkgebied voor ons team.",
     localContext: "In Kontich treffen wij een mix van oudere woningen in het centrum en recentere bouw in de woonwijken. Voor de oudere woningen is een gecombineerde aanpak (dak + gevel) vaak het meest kosteneffectief. Voor recentere woningen kan een gerichte gevelafwerking al voldoende zijn.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Werken jullie ook in Kontich voor particuliere woningen?", a: "Ja. Kontich valt volledig in ons werkgebied. Wij zijn regelmatig actief in Kontich voor zowel dak- als gevelprojecten. De afstand tot ons kantoor in Antwerpen is beperkt, wat de planning en communicatie vereenvoudigt." },
+      { q: "Is gevelisolatie interessant voor een woning in het centrum van Kontich?", a: "Zeker. Oudere woningen in het centrum van Kontich hebben vaak massieve muren zonder isolatie — de ideale kandidaten voor buitengevelisolatie. De woning wint aan comfort en uitstraling, en u profiteert van de Vlaamse premies." },
+      { q: "Welke diensten biedt ISOPROTECH aan in Kontich?", a: "In Kontich bieden wij dezelfde diensten als in heel ons werkgebied: dakisolatie, dakrenovatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering. Vraag een gratis inspectie aan en wij bespreken wat het meest zinvol is voor uw specifieke woning." },
+    ],
     seo: {
       title: "Isolatie Kontich — Dak & Gevel | ISOPROTECH",
       description: "Dak- en gevelisolatie in Kontich. Tussen Antwerpen en Mechelen. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",

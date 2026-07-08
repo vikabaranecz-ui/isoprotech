@@ -18,6 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE}/calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/calculator/dak`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/over-ons`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+
+    // Static service pages — higher priority than the dynamic catch-all
+    { url: `${BASE}/diensten/gevelisolatie`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
+    { url: `${BASE}/diensten/dakisolatie`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
 
     // /privacy and /cookies are noindex — excluded from sitemap
     // Landing pages — high priority for Google Ads
