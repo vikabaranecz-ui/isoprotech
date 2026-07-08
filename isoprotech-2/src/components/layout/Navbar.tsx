@@ -113,12 +113,14 @@ export function Navbar() {
           {links.map((link) => (
             <div key={link.href} className="relative"
               onMouseEnter={() => link.children && setOpenDropdown(link.href)}
-              onMouseLeave={() => link.children && setOpenDropdown(null)}>
+              onMouseLeave={() => link.children && setOpenDropdown(null)}
+              onFocus={() => link.children && setOpenDropdown(link.href)}
+              onBlur={(e) => { if (link.children && !e.currentTarget.contains(e.relatedTarget as Node)) setOpenDropdown(null); }}>
               <Link href={link.href}
                 className={`px-4 py-2 text-sm font-semibold tracking-wide transition-colors duration-200 ${linkCls(isActive(link.href))}`}
                 aria-current={isActive(link.href) ? "page" : undefined}
                 aria-expanded={link.children ? openDropdown === link.href : undefined}
-                aria-haspopup={link.children ? "true" : undefined}>
+                aria-haspopup={link.children ? "menu" : undefined}>
                 {link.label}
               </Link>
               {link.children && openDropdown === link.href && (

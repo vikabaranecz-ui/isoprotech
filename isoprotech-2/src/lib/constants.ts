@@ -3,7 +3,7 @@
 export const BRAND = {
   name: "ISOPROTECH",
   tagline: "Meer wooncomfort, minder energiekosten.",
-  phone: "+32 465 88 27 01",
+  phone: "+32465882701",
   phoneDisplay: "+32 465 88 27 01",
   email: "info@isoprotech.be",
   address: { street: "P. van den Eedenstraat 84", city: "Antwerpen", zip: "2660", country: "BE" },
@@ -84,7 +84,7 @@ export const PHOTOS = {
   crepiAntwAfter: { src: "/images/projects/crepi-antwerpen-after.jpg", alt: "Crepi gevelafwerking Antwerpen — volledig gerenoveerde voorgevel", width: 1160, height: 2048 },
   crepiAntwDetail: { src: "/images/projects/crepi-antwerpen-detail.jpg", alt: "Crepi detail — strakke witte afwerking met ISOPROTECH", width: 1161, height: 2048 },
   // Orange facade project photos
-  crepiOranje1: { src: "/images/projects/crepi-oranje-1.jpg", alt: "Pomporanjevý fasáda s crepi afwerking — warm oranje eindresultaat", width: 1200, height: 1600 },
+  crepiOranje1: { src: "/images/projects/crepi-oranje-1.jpg", alt: "Oranje crepi gevelafwerking — warm oranje eindresultaat", width: 1200, height: 1600 },
   crepiOranje2: { src: "/images/projects/crepi-oranje-2.jpg", alt: "Oranje crepi gevelafwerking — detail", width: 1200, height: 1600 },
   crepiOranje3: { src: "/images/projects/crepi-oranje-3.jpg", alt: "Oranje crepi woning — volledig gerenoveerde gevel", width: 1200, height: 1600 },
   // Service photos

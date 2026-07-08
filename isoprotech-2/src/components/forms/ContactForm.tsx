@@ -246,9 +246,11 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
 
       {/* Privacy consent */}
       <div className="mb-6">
-        <label className="flex items-start gap-3 cursor-pointer">
+        <label htmlFor="privacy" className="flex items-start gap-3 cursor-pointer">
           <input
+            id="privacy"
             type="checkbox"
+            aria-describedby={errors.privacy ? "privacy-error" : undefined}
             className="mt-1 h-4 w-4 rounded border-gray-300 text-orange-400 focus:ring-orange-300"
             {...register("privacy")}
           />
@@ -262,7 +264,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
           </span>
         </label>
         {errors.privacy && (
-          <p className="text-red-500 text-xs mt-1" role="alert">
+          <p id="privacy-error" className="text-red-500 text-xs mt-1" role="alert">
             {errors.privacy.message}
           </p>
         )}
@@ -282,7 +284,7 @@ export function ContactForm({ defaultService, compact }: ContactFormProps) {
       <button
         type="submit"
         disabled={formState === "submitting"}
-        className="w-full py-3.5 bg-orange-400 hover:bg-orange-400 text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2"
+        className="w-full py-3.5 bg-orange-400 hover:bg-orange-300 text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2"
       >
         {formState === "submitting" ? (
           <span className="flex items-center justify-center gap-2">

@@ -386,7 +386,7 @@ export default function HomePage() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <span className="section-label">Tips & advies</span>
-              <h2 className="section-title mt-1">Laatste artikels</h2>
+              <h2 className="section-heading mt-1">Laatste artikels</h2>
             </div>
             <Link href="/blog" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors shrink-0">
               Alle artikels
@@ -473,15 +473,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── STICKY MOBILE CTA ─── */}
-      <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-3 flex gap-2.5 sm:hidden">
-        <a href={`tel:${BRAND.phone}`} className="btn-primary flex-1 text-center text-sm py-3.5">
-          Bel nu gratis
-        </a>
-        <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="btn-outline flex-1 text-center text-sm py-3.5">
-          WhatsApp
-        </a>
-      </div>
     </>
   );
 }

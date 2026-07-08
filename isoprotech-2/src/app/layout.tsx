@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import Script from "next/script";
 import { BRAND } from "@/lib/constants";
 import { localBusinessSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -48,18 +49,9 @@ export default function RootLayout({
   return (
     <html lang="nl" className={outfit.variable}>
       <head>
-        {/* GTM — replace GTM-XXXX with your real container ID */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-P37SR8T8');
-            `,
-          }}
-        />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
         <JsonLd data={localBusinessSchema()} />
       </head>
       <body className="font-sans bg-stone-50 text-gray-700 antialiased">
@@ -67,16 +59,30 @@ export default function RootLayout({
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-P37SR8T8"
+            title="Google Tag Manager (noscript)"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
 
+        {/* GTM script — afterInteractive avoids render-blocking */}
+        <Script
+          id="gtm"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P37SR8T8');`,
+          }}
+        />
+
         {/* Skip to content — accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-orange-400 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-teal-800 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
         >
           Ga naar inhoud
         </a>
@@ -106,7 +112,7 @@ export default function RootLayout({
         </a>
 
         {/* Global mobile sticky CTA bar — visible on all pages, mobile only */}
-        <div className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-white/97 backdrop-blur-sm border-t border-gray-200 px-3 py-2.5 flex gap-2.5 safe-area-inset-bottom">
+        <div className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-white/97 backdrop-blur-sm border-t border-gray-200 px-3 pt-2.5 flex gap-2.5" style={{ paddingBottom: "max(0.625rem, env(safe-area-inset-bottom))" }}>
           <a
             href={`tel:${BRAND.phone}`}
             className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-teal-800 text-white text-sm font-bold py-3 hover:bg-teal-700 transition-colors"
