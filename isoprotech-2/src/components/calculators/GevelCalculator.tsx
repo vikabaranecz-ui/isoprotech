@@ -73,7 +73,6 @@ export function GevelCalculator() {
     openings: 30,
     plinthType: "blauwesteen",
   });
-  const [constructionYear, setConstructionYear] = useState(CURRENT_YEAR - 25);
   const [sides, setSides] = useState<GevelSide[]>(DEFAULT_SIDES);
   const [sillMaterial, setSillMaterial] = useState<SillMaterial>("aluminium");
   const [naam, setNaam] = useState("");
@@ -270,25 +269,11 @@ export function GevelCalculator() {
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Projecttype</h2>
-            <p className="text-sm text-gray-500 mb-5">Nieuwbouw = 21% btw. Renovatie van een woning ouder dan 10 jaar (gebouwd vóór {RENO_CUTOFF_YEAR}) = 6% btw.</p>
+            <p className="text-sm text-gray-500 mb-5">Het btw-tarief hangt af van het bouwjaar van de woning.</p>
             <div className="grid gap-3 sm:grid-cols-2 mb-5">
-              <RadioCard selected={input.projectType === "reno"} onClick={() => set("projectType", "reno" as ProjectType)} title="Renovatie" desc="Woning ouder dan 10 jaar" badge="6% btw" badgeColor="green" />
-              <RadioCard selected={input.projectType === "new"} onClick={() => set("projectType", "new" as ProjectType)} title="Nieuwbouw" desc="Standaard btw-tarief" badge="21% btw" badgeColor="orange" />
+              <RadioCard selected={input.projectType === "reno"} onClick={() => set("projectType", "reno" as ProjectType)} title="Renovatie" desc={`Woning gebouwd vóór ${RENO_CUTOFF_YEAR}`} badge="6% btw" badgeColor="green" />
+              <RadioCard selected={input.projectType === "new"} onClick={() => set("projectType", "new" as ProjectType)} title="Nieuwbouw" desc={`Woning gebouwd vanaf ${RENO_CUTOFF_YEAR}`} badge="21% btw" badgeColor="orange" />
             </div>
-
-            <NumberInput label="Bouwjaar van de woning" value={constructionYear} onChange={setConstructionYear} min={1900} max={CURRENT_YEAR} step={1} />
-
-            {input.projectType === "reno" && (
-              constructionYear <= RENO_CUTOFF_YEAR ? (
-                <div className="rounded-xl bg-green-50 border border-green-200 p-3 text-xs text-green-700">
-                  ✓ Deze woning komt in aanmerking voor het 6% btw-tarief (ouder dan 10 jaar).
-                </div>
-              ) : (
-                <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-700">
-                  ⚠ Voor 6% btw moet de woning minstens 10 jaar oud zijn (gebouwd vóór {RENO_CUTOFF_YEAR}). Kies &ldquo;Nieuwbouw&rdquo; als uw woning recenter is.
-                </div>
-              )
-            )}
           </div>
         );
 
