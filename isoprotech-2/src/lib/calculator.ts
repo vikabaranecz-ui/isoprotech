@@ -10,12 +10,12 @@ export function formatEur(v: number): string {
 // ═══════════════════════════════════════════════════════════════════
 //
 // Formula:
-//   base = (finishRate + extraIsolatie(thickness)) × netArea
+//   base = (finishRate + extraIsolatie(thickness)) × netArea + (15 × netArea steiger)
+//          — isolatie en stelling worden niet apart vermeld, ze zitten in "base"
 //   plinth = 115 × plinthLm
 //   sillsAlu = 38 × lm
 //   sillsStone = 220 × lm
-//   scaffold (steiger) = 15 × netArea
-//   subtotal = (base + plinth + sillsAlu + sillsStone + scaffold) × heightFactor
+//   subtotal = (base + plinth + sillsAlu + sillsStone) × heightFactor
 //   total = subtotal × (1 + vatRate)
 //   premie = min(25% van total, €5000)
 //   netTotal = total − premie
@@ -94,13 +94,14 @@ export function calculateGevel(input: GevelInput): GevelResult {
   const extraInsulPerM2 = Math.max(0, input.thickness - BASE_INSULATION_CM) * EXTRA_INSULATION_RATE_PER_CM;
   const hF = heightFactor(input.height);
 
-  const base = (finRate + extraInsulPerM2) * netArea;
+  const scaffold = SCAFFOLD_RATE * netArea;
+  // Isolatie en stelling worden niet apart vermeld — samen met de afwerking op één regel
+  const base = (finRate + extraInsulPerM2) * netArea + scaffold;
   const plinth = PLINTH_RATE[input.plinthType] * input.plinthLm;
   const sillsA = SILLS_ALU_RATE * input.sillsAlu;
   const sillsS = SILLS_STONE_RATE * input.sillsStone;
-  const scaffold = SCAFFOLD_RATE * netArea;
 
-  const rawSubtotal = base + plinth + sillsA + sillsS + scaffold;
+  const rawSubtotal = base + plinth + sillsA + sillsS;
   const subtotal = rawSubtotal * hF;
   const vat = subtotal * vatRate;
   const total = subtotal + vat;
@@ -108,7 +109,7 @@ export function calculateGevel(input: GevelInput): GevelResult {
   const netTotal = Math.max(0, total - premie);
 
   const lines: GevelLine[] = [
-    { label: `Gevelafwerking (${input.finish}) incl. isolatie (${input.thickness}cm)`, amount: base },
+    { label: `Gevelafwerking (${input.finish}) incl. isolatie (${input.thickness}cm) en stelling`, amount: base },
   ];
   const plinthLabels: Record<GevelPlinthType, string> = {
     blauwesteen: "Gevelplint in blauwe steen",
@@ -117,7 +118,6 @@ export function calculateGevel(input: GevelInput): GevelResult {
   lines.push({ label: plinthLabels[input.plinthType], amount: plinth });
   if (sillsA > 0) lines.push({ label: "Vensterbanken aluminium", amount: sillsA });
   if (sillsS > 0) lines.push({ label: "Vensterbanken natuursteen", amount: sillsS });
-  if (scaffold > 0) lines.push({ label: "Richtprijs stelling", amount: scaffold });
   if (hF > 1) lines.push({ label: `Hoogtefactor ×${hF.toFixed(2)}`, amount: subtotal * (1 - 1 / hF) });
 
   return {
