@@ -54,6 +54,7 @@ export function GevelCalculator() {
   const [input, setInput] = useState<BaseInput>({
     projectType: "reno",
     finish: "spuitkurk",
+    thickness: 12,
     grossArea: 150,
     openings: 30,
     plinthType: "blauwesteen",
@@ -102,7 +103,7 @@ export function GevelCalculator() {
         email: email || "",
         phone: telefoon,
         service: "Gevelwerken",
-        message: `Gevelcalculator: ${input.finish} incl. isolatie, ${result.netArea}m², richtprijs ${formatEur(result.total)}`,
+        message: `Gevelcalculator: ${input.finish} incl. isolatie ${input.thickness}cm, ${result.netArea}m², richtprijs ${formatEur(result.total)}`,
         _subject: `Gevelcalculator aanvraag – ${naam}`,
       } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
@@ -133,7 +134,7 @@ export function GevelCalculator() {
         <div className="flex flex-wrap gap-2 mb-6">
           {[
             input.projectType === "reno" ? "Renovatie (6%)" : "Nieuwbouw (21%)",
-            `${input.finish} incl. isolatie`,
+            `${input.finish} incl. isolatie (${input.thickness}cm)`,
             `${result.netArea} m² netto`,
           ].map((p) => (
             <span key={p} className="bg-stone-100 border border-gray-200 text-gray-600 px-3 py-1.5 rounded-full text-xs font-bold">{p}</span>
@@ -144,12 +145,13 @@ export function GevelCalculator() {
         <div className="rounded-2xl border border-gray-200 shadow-lg overflow-hidden bg-white mb-5">
           <div className="flex flex-wrap gap-6 p-5 bg-gradient-to-b from-orange-50 to-white">
             <div className="flex-1 min-w-[180px]">
-              <div className="text-xs font-bold text-gray-500 mb-1">Excl. btw</div>
-              <div className="text-3xl font-black text-teal-800">{formatEur(result.subtotal)}</div>
+              <div className="text-xs font-bold text-gray-500 mb-1">Bruto richtprijs incl. {Math.round(result.vatRate * 100)}% btw</div>
+              <div className="text-3xl font-black text-teal-800">{formatEur(result.total)}</div>
             </div>
             <div className="flex-1 min-w-[180px]">
-              <div className="text-xs font-bold text-gray-500 mb-1">Incl. {Math.round(result.vatRate * 100)}% btw</div>
-              <div className="text-3xl font-black text-orange-400">{formatEur(result.total)}</div>
+              <div className="text-xs font-bold text-gray-500 mb-1">Na premies</div>
+              <div className="text-3xl font-black text-green-600">{formatEur(result.netTotal)}</div>
+              <div className="text-xs text-green-600 mt-1">- {formatEur(result.premie)} premies</div>
             </div>
           </div>
           <div className="p-4 border-t border-gray-100 space-y-1.5">
@@ -173,6 +175,17 @@ export function GevelCalculator() {
             </div>
           </div>
         </div>
+
+        {/* Premie card */}
+        {result.premie > 0 && (
+          <div className="rounded-2xl bg-green-50 border border-green-200 p-4 mb-4">
+            <h4 className="font-bold text-green-700 mb-1 text-sm">Mogelijke premies</h4>
+            <div className="flex justify-between py-1 text-sm font-bold text-green-800">
+              <span>Mijn VerbouwPremie (indicatief)</span>
+              <span>tot {formatEur(result.premie)}</span>
+            </div>
+          </div>
+        )}
 
         {result.perM2 > 0 && (
           <div className="text-center text-sm text-gray-500 mb-5">
@@ -252,6 +265,22 @@ export function GevelCalculator() {
               ]).map((o) => (
                 <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => set("finish", o.k)} title={o.t} desc={o.d} image={FINISH_IMAGES[o.k]} />
               ))}
+            </div>
+
+            <div className="mt-5">
+              <label className="block text-sm font-bold text-teal-800 mb-2">Isolatiedikte: {input.thickness} cm</label>
+              <input
+                type="range"
+                min={12}
+                max={24}
+                step={2}
+                value={input.thickness}
+                onChange={(e) => set("thickness", Number(e.target.value))}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-400"
+              />
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
+                <span>12 cm</span><span>18 cm</span><span>24 cm</span>
+              </div>
             </div>
           </div>
         );
