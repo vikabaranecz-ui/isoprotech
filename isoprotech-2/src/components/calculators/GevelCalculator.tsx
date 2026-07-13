@@ -18,11 +18,53 @@ import { RadioCard, NumberInput, ProgressBar, StepNav } from "./CalcUI";
 
 const STEPS = ["Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details", "Contact"];
 
+// Drop the corresponding photos into these paths (public/images/calculator/gevel/…)
+const FINISH_IMAGES: Record<GevelFinish, string> = {
+  spuitkurk: "/images/calculator/gevel/afwerking/spuitkurk.jpg",
+  crepi: "/images/calculator/gevel/afwerking/crepi.jpg",
+  steenstrips: "/images/calculator/gevel/afwerking/steenstrips.jpg",
+  kaleien: "/images/calculator/gevel/afwerking/kaleien.jpg",
+};
+
+const PLINTH_IMAGES: Record<GevelPlinthType, string> = {
+  blauwesteen: "/images/calculator/gevel/plint/blauwesteen.jpg",
+  mozaiek: "/images/calculator/gevel/plint/mozaiek.jpg",
+};
+
+type SillMaterial = "aluminium" | "natuursteen";
+
+const SILL_IMAGES: Record<SillMaterial, string> = {
+  aluminium: "/images/calculator/gevel/vensterbank/aluminium.jpg",
+  natuursteen: "/images/calculator/gevel/vensterbank/natuursteen.jpg",
+};
+
+// Gemiddelde vensterhoogte, gebruikt om de vensterbanklengte te schatten uit het raam-/deuroppervlak
+const AVG_WINDOW_HEIGHT_M = 1.2;
+
+interface GevelSide {
+  label: string;
+  height: number;
+  plinthLm: number;
+}
+
+const DEFAULT_SIDES: GevelSide[] = [
+  { label: "Voorgevel", height: 6, plinthLm: 12 },
+  { label: "Achtergevel", height: 6, plinthLm: 12 },
+  { label: "Zijgevel links", height: 6, plinthLm: 8 },
+  { label: "Zijgevel rechts", height: 6, plinthLm: 8 },
+];
+
+// Base project input — height, plinthLm and the vensterbank lm's are derived, not entered directly
+type BaseInput = Omit<GevelInput, "height" | "plinthLm" | "sillsAlu" | "sillsStone">;
+
+const CURRENT_YEAR = new Date().getFullYear();
+const RENO_CUTOFF_YEAR = CURRENT_YEAR - 10;
+
 export function GevelCalculator() {
   const router = useRouter();
   const fsSubmit = useSubmit("mqeoygea");
   const [step, setStep] = useState(0);
-  const [input, setInput] = useState<GevelInput>({
+  const [input, setInput] = useState<BaseInput>({
     projectType: "reno",
     finish: "spuitkurk",
     insulation: "eps",
@@ -30,21 +72,37 @@ export function GevelCalculator() {
     grossArea: 150,
     openings: 30,
     plinthType: "blauwesteen",
-    height: 6,
-    plinthLm: 40,
-    sillsAlu: 25,
-    sillsStone: 0,
   });
+  const [sides, setSides] = useState<GevelSide[]>(DEFAULT_SIDES);
+  const [sillMaterial, setSillMaterial] = useState<SillMaterial>("aluminium");
   const [naam, setNaam] = useState("");
   const [telefoon, setTelefoon] = useState("");
   const [email, setEmail] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [ctaSent, setCtaSent] = useState(false);
 
-  const set = <K extends keyof GevelInput>(key: K, val: GevelInput[K]) =>
+  const set = <K extends keyof BaseInput>(key: K, val: BaseInput[K]) =>
     setInput((p) => ({ ...p, [key]: val }));
 
-  const result = useMemo(() => calculateGevel(input), [input]);
+  const updateSide = (i: number, key: "height" | "plinthLm", val: number) =>
+    setSides((p) => p.map((s, idx) => (idx === i ? { ...s, [key]: val } : s)));
+
+  // Gemiddelde gevelhoogte en gemiddelde plintlengte worden altijd automatisch berekend uit de gevels hierboven
+  const avgHeight = useMemo(() => sides.reduce((s, x) => s + x.height, 0) / sides.length, [sides]);
+  const avgPlinthLm = useMemo(() => sides.reduce((s, x) => s + x.plinthLm, 0) / sides.length, [sides]);
+
+  // Vensterbanklengte wordt altijd berekend uit het oppervlak ramen en deuren, geen handmatige invoer
+  const sillLm = useMemo(() => Math.max(0, Math.round(input.openings / AVG_WINDOW_HEIGHT_M)), [input.openings]);
+
+  const calcInput: GevelInput = useMemo(() => ({
+    ...input,
+    height: avgHeight,
+    plinthLm: avgPlinthLm,
+    sillsAlu: sillMaterial === "aluminium" ? sillLm : 0,
+    sillsStone: sillMaterial === "natuursteen" ? sillLm : 0,
+  }), [input, avgHeight, avgPlinthLm, sillMaterial, sillLm]);
+
+  const result = useMemo(() => calculateGevel(calcInput), [calcInput]);
 
   const canNext = useMemo(() => {
     switch (step) {
@@ -211,10 +269,10 @@ export function GevelCalculator() {
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Projecttype</h2>
-            <p className="text-sm text-gray-500 mb-5">Nieuwbouw = 21% btw, renovatie ouder dan 10 jaar = 6% btw.</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <RadioCard selected={input.projectType === "reno"} onClick={() => set("projectType", "reno" as ProjectType)} title="Renovatie" desc="Woning ouder dan 10 jaar" badge="6% btw" badgeColor="green" />
-              <RadioCard selected={input.projectType === "new"} onClick={() => set("projectType", "new" as ProjectType)} title="Nieuwbouw" desc="Standaard btw-tarief" badge="21% btw" badgeColor="orange" />
+            <p className="text-sm text-gray-500 mb-5">Het btw-tarief hangt af van het bouwjaar van de woning.</p>
+            <div className="grid gap-3 sm:grid-cols-2 mb-5">
+              <RadioCard selected={input.projectType === "reno"} onClick={() => set("projectType", "reno" as ProjectType)} title="Renovatie" desc={`Woning gebouwd vóór ${RENO_CUTOFF_YEAR}`} badge="6% btw" badgeColor="green" />
+              <RadioCard selected={input.projectType === "new"} onClick={() => set("projectType", "new" as ProjectType)} title="Nieuwbouw" desc={`Woning gebouwd vanaf ${RENO_CUTOFF_YEAR}`} badge="21% btw" badgeColor="orange" />
             </div>
           </div>
         );
@@ -231,7 +289,7 @@ export function GevelCalculator() {
                 { k: "steenstrips" as const, t: "Steenstrips", d: "Klinkerlook, dun en duurzaam" },
                 { k: "kaleien" as const, t: "Kaleien", d: "Limestone wash, zacht patina" },
               ]).map((o) => (
-                <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => set("finish", o.k)} title={o.t} desc={o.d} />
+                <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => set("finish", o.k)} title={o.t} desc={o.d} image={FINISH_IMAGES[o.k]} />
               ))}
             </div>
           </div>
@@ -242,11 +300,10 @@ export function GevelCalculator() {
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Isolatie</h2>
             <p className="text-sm text-gray-500 mb-5">Kies het isolatiemateriaal en de dikte.</p>
-            <div className="grid gap-3 sm:grid-cols-3 mb-5">
+            <div className="grid gap-3 sm:grid-cols-2 mb-5">
               {([
                 { k: "none" as const, t: "Geen", d: "Afwerking zonder isolatie" },
                 { k: "eps" as const, t: "EPS / PUR", d: "Hoge isolatiewaarde" },
-                { k: "mineral" as const, t: "Minerale wol", d: "Brandveilig & dampopen" },
               ]).map((o) => (
                 <RadioCard key={o.k} selected={input.insulation === o.k} onClick={() => set("insulation", o.k)} title={o.t} desc={o.d} />
               ))}
@@ -291,28 +348,63 @@ export function GevelCalculator() {
             <p className="text-sm text-gray-500 mb-5">Gevelplint, hoogte en vensterbanken.</p>
 
             <p className="text-sm font-bold text-teal-800 mb-3">Welk type gevelplint?</p>
-            <div className="grid gap-3 sm:grid-cols-3 mb-5">
-              <RadioCard selected={input.plinthType === "blauwesteen"} onClick={() => set("plinthType", "blauwesteen" as GevelPlinthType)} title="Blauwe steen" desc="Slagvast, premium uitstraling" />
-              <RadioCard selected={input.plinthType === "mozaiek"} onClick={() => set("plinthType", "mozaiek" as GevelPlinthType)} title="Mozaïek sokkel" desc="Decoratief, duurzaam" />
-              <RadioCard selected={input.plinthType === "spuitkurk"} onClick={() => set("plinthType", "spuitkurk" as GevelPlinthType)} title="Spuitkurk plint" desc="Naadloos, kleuraangepast" />
+            <div className="grid gap-3 sm:grid-cols-2 mb-5">
+              <RadioCard selected={input.plinthType === "blauwesteen"} onClick={() => set("plinthType", "blauwesteen" as GevelPlinthType)} title="Blauwe steen" desc="Slagvast, premium uitstraling" image={PLINTH_IMAGES.blauwesteen} />
+              <RadioCard selected={input.plinthType === "mozaiek"} onClick={() => set("plinthType", "mozaiek" as GevelPlinthType)} title="Mozaïek sokkel" desc="Decoratief, duurzaam" image={PLINTH_IMAGES.mozaiek} />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <NumberInput label="Gemiddelde gevelhoogte" value={input.height} onChange={(v) => set("height", v)} suffix="m" min={2} max={15} />
-              <NumberInput label="Plintlengte" value={input.plinthLm} onChange={(v) => set("plinthLm", v)} suffix="lm" max={200} />
-            </div>
-
-            <div className="border-t border-gray-100 pt-4 mt-2">
-              <p className="text-sm font-bold text-teal-800 mb-3">Vensterbanken</p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <NumberInput label="Aluminium vensterbanken" value={input.sillsAlu} onChange={(v) => set("sillsAlu", v)} suffix="lm" max={200} />
-                <NumberInput label="Natuursteen vensterbanken" value={input.sillsStone} onChange={(v) => set("sillsStone", v)} suffix="lm" max={200} />
+            <div className="border-t border-gray-100 pt-4">
+              <p className="text-sm font-bold text-teal-800 mb-1">Gevelhoogte & plintlengte per gevel</p>
+              <p className="text-xs text-gray-500 mb-3">De gemiddelde gevelhoogte en plintlengte worden automatisch berekend.</p>
+              <div className="grid grid-cols-3 gap-2 text-[11px] font-bold text-gray-400 mb-1 px-1">
+                <span>Gevel</span><span className="text-center">Hoogte (m)</span><span className="text-center">Plintlengte (lm)</span>
+              </div>
+              <div className="space-y-2 mb-3">
+                {sides.map((side, i) => (
+                  <div key={side.label} className="grid grid-cols-3 gap-2 items-center">
+                    <span className="text-xs text-gray-600">{side.label}</span>
+                    <input
+                      type="number"
+                      className={`${ic} text-center py-2`}
+                      value={side.height}
+                      min={0}
+                      max={15}
+                      step={0.1}
+                      onChange={(e) => updateSide(i, "height", Math.max(0, Number(e.target.value) || 0))}
+                    />
+                    <input
+                      type="number"
+                      className={`${ic} text-center py-2`}
+                      value={side.plinthLm}
+                      min={0}
+                      max={100}
+                      step={0.5}
+                      onChange={(e) => updateSide(i, "plinthLm", Math.max(0, Number(e.target.value) || 0))}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-xl bg-orange-50 border border-orange-200 p-3 text-sm font-bold text-orange-600 flex flex-wrap justify-between gap-2">
+                <span>Gemiddelde gevelhoogte: {avgHeight.toFixed(1)} m</span>
+                <span>Gemiddelde plintlengte: {avgPlinthLm.toFixed(1)} lm</span>
               </div>
             </div>
 
-            {input.height > 5 && (
+            <div className="border-t border-gray-100 pt-4 mt-4">
+              <p className="text-sm font-bold text-teal-800 mb-1">Vensterbanken</p>
+              <p className="text-xs text-gray-500 mb-3">De lengte wordt automatisch berekend op basis van het oppervlak ramen en deuren ({input.openings} m²).</p>
+              <div className="grid gap-3 sm:grid-cols-2 mb-3">
+                <RadioCard selected={sillMaterial === "aluminium"} onClick={() => setSillMaterial("aluminium")} title="Aluminium vensterbank" desc="Strak, onderhoudsvriendelijk" image={SILL_IMAGES.aluminium} />
+                <RadioCard selected={sillMaterial === "natuursteen"} onClick={() => setSillMaterial("natuursteen")} title="Natuursteen vensterbank" desc="Premium, tijdloos" image={SILL_IMAGES.natuursteen} />
+              </div>
+              <div className="rounded-xl bg-orange-50 border border-orange-200 p-3 text-sm font-bold text-orange-600">
+                Geschatte vensterbanklengte: {sillLm} lm
+              </div>
+            </div>
+
+            {avgHeight > 5 && (
               <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-700">
-                Gevelhoogte boven 5m: hoogtefactor ×{input.height <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
+                Gevelhoogte boven 5m: hoogtefactor ×{avgHeight <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
               </div>
             )}
           </div>
