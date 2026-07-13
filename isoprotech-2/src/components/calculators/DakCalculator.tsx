@@ -29,11 +29,8 @@ const DAKTYPE_IMAGES: Record<DakType, string> = {
 
 const BEDEKKING_IMAGES: Record<string, string> = {
   "Bitumen polymeer": "/images/calculator/dak/bedekking/bitumen.jpg",
-  "Natuurleien (ardoise)": "/images/calculator/dak/bedekking/natuurleien.jpg",
+  "Kunstleien": "/images/calculator/dak/bedekking/kunstleien.jpg",
   "Keramische dakpannen": "/images/calculator/dak/bedekking/keramische-dakpannen.jpg",
-  "Betonnen dakpannen": "/images/calculator/dak/bedekking/betonnen-dakpannen.jpg",
-  "Bitumen dakshingles": "/images/calculator/dak/bedekking/bitumen.jpg",
-  "Vezelcement shingles": "/images/calculator/dak/bedekking/vezelcement-shingles.jpg",
   "Metalen / gevouwen dakbedekking": "/images/calculator/dak/bedekking/metalen-dakbedekking.jpg",
 };
 
@@ -85,7 +82,7 @@ export function DakCalculator() {
       // affect a flat roof's premies/asbestcheck here, so skip that step too
       setBedekking(bedekkingOpts[0].name);
       setBedekkingSurcharge(bedekkingOpts[0].surcharge);
-      setBouwjaar("Na 2005");
+      setBouwjaar("Na 2000");
       setStep(4);
       return;
     }
@@ -161,6 +158,9 @@ export function DakCalculator() {
           </div>
           <div className="p-4 border-t border-gray-100 space-y-2">
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Werken (materiaal + arbeid + dakbedekking)</span><span className="text-gray-500">{formatEur(result.base)}</span></div>
+            {result.asbestKost > 0 && (
+              <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Asbestverwijdering (bouwjaar vóór 2000)</span><span className="text-gray-500">{formatEur(result.asbestKost)}</span></div>
+            )}
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Extra elementen</span><span className="text-orange-400">{result.extrasKost > 0 ? formatEur(result.extrasKost) : "—"}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Geschatte premies</span><span className="text-green-600">- {formatEur(result.premieTotal)}</span></div>
           </div>
@@ -184,8 +184,9 @@ export function DakCalculator() {
           <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 mb-4 text-sm text-amber-800">
             <strong>Asbestinventarisatie vereist</strong>
             <br />
-            Uw woning dateert van vóór 1990. Een wettelijke asbestinventarisatie is
-            verplicht vóór dakwerken in België. Isoprotech begeleidt u van A tot Z.
+            Uw woning dateert van vóór 2000. Een wettelijke asbestinventarisatie en
+            -verwijdering is verplicht vóór dakwerken in België (reeds inbegrepen in de
+            richtprijs, €25/m²). Isoprotech begeleidt u van A tot Z.
           </div>
         )}
 
@@ -290,13 +291,11 @@ export function DakCalculator() {
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Wanneer is de woning gebouwd?</h2>
-            <p className="text-sm text-gray-500 mb-5">Bepaalt uw premie-aansprankelijkheid en of een asbestcheck vereist is.</p>
+            <p className="text-sm text-gray-500 mb-5">Bepaalt of een asbestcheck en -verwijdering vereist is.</p>
             <div className="grid gap-3 sm:grid-cols-2">
               {([
-                { k: "Vóór 1970" as const, t: "Vóór 1970", badge: "Asbestcheck vereist", badgeColor: "orange" },
-                { k: "1970 – 1990" as const, t: "1970 – 1990", badge: "Asbestcheck vereist", badgeColor: "orange" },
-                { k: "1990 – 2005" as const, t: "1990 – 2005", badge: "Meer premies", badgeColor: "green" },
-                { k: "Na 2005" as const, t: "Na 2005" },
+                { k: "Vóór 2000" as const, t: "Vóór 2000", badge: "Asbestcheck vereist", badgeColor: "orange" },
+                { k: "Na 2000" as const, t: "Na 2000" },
               ]).map((opt) => (
                 <button
                   key={opt.k}
@@ -320,9 +319,9 @@ export function DakCalculator() {
                 </button>
               ))}
             </div>
-            {(bouwjaar === "Vóór 1970" || bouwjaar === "1970 – 1990") && (
+            {bouwjaar === "Vóór 2000" && (
               <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
-                Woningen vóór 1990 vereisen wettelijk een asbestinventarisatie vóór dakwerken. Isoprotech regelt dit volledig voor u.
+                Woningen vóór 2000 vereisen wettelijk een asbestinventarisatie en -verwijdering vóór dakwerken (€25/m² incl. in de richtprijs). Isoprotech regelt dit volledig voor u.
               </div>
             )}
           </div>
