@@ -178,7 +178,6 @@ export type Bouwjaar = "Vóór 1970" | "1970 – 1990" | "1990 – 2005" | "Na 2
 export interface DakInput {
   daktype: DakType;
   area: number;
-  dakramen: number;
   schouwen: number;
   dakbedekking: string;
   dakbedekkingSurcharge: number;
@@ -190,7 +189,6 @@ export interface DakPremie { name: string; amount: number; }
 
 export interface DakResult {
   base: number;
-  dakbedekkingKost: number;
   extrasKost: number;
   gross: number;
   grossMin: number;
@@ -207,10 +205,11 @@ export interface DakResult {
 
 export function calculateDak(input: DakInput): DakResult {
   const area = input.area;
-  const base = 195 * area;  // €195/m² base (materiaal + arbeid + isolatie + onderdak)
-  const dakbedekkingKost = input.dakbedekkingSurcharge * area;
-  const extrasKost = input.dakramen * 450 + input.schouwen * 350;
-  const gross = base + dakbedekkingKost + extrasKost;
+  // Werken (materiaal + arbeid + isolatie + onderdak) en dakbedekking worden
+  // niet apart vermeld — samen op één regel "Werken"
+  const base = 195 * area + input.dakbedekkingSurcharge * area;
+  const extrasKost = input.schouwen * 350;
+  const gross = base + extrasKost;
 
   // Premies — Mijn VerbouwPremie only (since 2022, Fluvius no longer gives separate premie for professional dakisolatie)
   // Amounts depend on income category — we show an indicative range
@@ -236,7 +235,7 @@ export function calculateDak(input: DakInput): DakResult {
   const premieTotal = premies.reduce((s, p) => s + p.amount, 0);
 
   return {
-    base, dakbedekkingKost, extrasKost, gross,
+    base, extrasKost, gross,
     grossMin: gross * 0.85, grossMax: gross * 1.18,
     premies, premieTotal,
     net: Math.max(0, gross - premieTotal),
