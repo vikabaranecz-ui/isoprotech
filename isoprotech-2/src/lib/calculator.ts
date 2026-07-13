@@ -20,8 +20,8 @@ export function formatEur(v: number): string {
 //   total = subtotal × (1 + vatRate)
 
 export type GevelFinish = "spuitkurk" | "crepi" | "steenstrips" | "kaleien";
-export type GevelInsulation = "none" | "eps" | "mineral";
-export type GevelPlinthType = "blauwesteen" | "mozaiek" | "spuitkurk";
+export type GevelInsulation = "none" | "eps";
+export type GevelPlinthType = "blauwesteen" | "mozaiek";
 export type ProjectType = "new" | "reno";
 
 const FINISH_RATES: Record<GevelFinish, { material: number; labor: number }> = {
@@ -34,13 +34,11 @@ const FINISH_RATES: Record<GevelFinish, { material: number; labor: number }> = {
 const INSUL_PER_CM: Record<GevelInsulation, number> = {
   none: 0,
   eps: 2,      // €2 per cm per m²
-  mineral: 3,  // €3 per cm per m²
 };
 
 const PLINTH_RATE: Record<GevelPlinthType, number> = {
   blauwesteen: 115,  // €/lm
   mozaiek: 105,      // €/lm
-  spuitkurk: 115,    // €/lm
 };
 const SILLS_ALU_RATE = 38;    // €/lm
 const SILLS_STONE_RATE = 55;  // €/lm
@@ -109,7 +107,6 @@ export function calculateGevel(input: GevelInput): GevelResult {
   const plinthLabels: Record<GevelPlinthType, string> = {
     blauwesteen: "Gevelplint in blauwe steen",
     mozaiek: "Gevelplint in mozaïek sokkel",
-    spuitkurk: "Gevelplint in spuitkurk",
   };
   lines.push({ label: plinthLabels[input.plinthType], amount: plinth });
   if (sillsA > 0) lines.push({ label: "Vensterbanken aluminium", amount: sillsA });

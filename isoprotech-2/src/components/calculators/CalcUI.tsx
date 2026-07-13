@@ -10,6 +10,7 @@ export function RadioCard({
   desc,
   badge,
   badgeColor,
+  image,
 }: {
   selected: boolean;
   onClick: () => void;
@@ -17,27 +18,39 @@ export function RadioCard({
   desc?: string;
   badge?: string;
   badgeColor?: "orange" | "green";
+  image?: string;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`w-full text-left rounded-2xl border-2 p-4 transition-all ${
+      className={`w-full text-left rounded-2xl border-2 overflow-hidden transition-all ${
         selected
           ? "border-orange-400 bg-orange-50 shadow-md"
           : "border-gray-150 bg-white hover:border-gray-300"
       }`}
     >
-      <span className={`block font-bold text-sm ${selected ? "text-orange-400" : "text-teal-800"}`}>
-        {title}
-      </span>
-      {desc && <span className="block text-xs text-gray-500 mt-0.5">{desc}</span>}
-      {badge && (
-        <span className={`inline-block mt-2 px-2 py-1 rounded-lg text-[11px] font-bold ${
-          badgeColor === "green" ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-600"
-        }`}>{badge}</span>
+      {image && (
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          className="w-full h-28 object-cover bg-gray-100"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
       )}
+      <span className="block p-4">
+        <span className={`block font-bold text-sm ${selected ? "text-orange-400" : "text-teal-800"}`}>
+          {title}
+        </span>
+        {desc && <span className="block text-xs text-gray-500 mt-0.5">{desc}</span>}
+        {badge && (
+          <span className={`inline-block mt-2 px-2 py-1 rounded-lg text-[11px] font-bold ${
+            badgeColor === "green" ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-600"
+          }`}>{badge}</span>
+        )}
+      </span>
     </button>
   );
 }
@@ -49,6 +62,7 @@ export function NumberInput({
   suffix,
   min = 0,
   max = 9999,
+  step,
 }: {
   label: string;
   value: number;
@@ -56,12 +70,14 @@ export function NumberInput({
   suffix?: string;
   min?: number;
   max?: number;
+  step?: number;
 }) {
+  const s = step ?? (max > 100 ? 5 : 1);
   return (
     <div className="mb-4">
       <label className="block text-sm text-gray-600 mb-1.5">{label}</label>
       <div className="flex items-center gap-2">
-        <button type="button" onClick={() => onChange(Math.max(min, value - (max > 100 ? 5 : 1)))}
+        <button type="button" onClick={() => onChange(Math.max(min, value - s))}
           className="w-11 h-11 rounded-xl border border-gray-200 bg-white text-lg font-bold hover:border-orange-400 hover:text-orange-400 transition shrink-0">
           −
         </button>
@@ -73,7 +89,7 @@ export function NumberInput({
           onChange={(e) => onChange(Math.max(min, Number(e.target.value) || 0))}
           className="flex-1 rounded-xl border border-gray-200 px-4 py-3 text-sm text-center text-teal-800 font-medium focus:outline-none focus:ring-2 focus:ring-orange-300 transition"
         />
-        <button type="button" onClick={() => onChange(Math.min(max, value + (max > 100 ? 5 : 1)))}
+        <button type="button" onClick={() => onChange(Math.min(max, value + s))}
           className="w-11 h-11 rounded-xl border border-gray-200 bg-white text-lg font-bold hover:border-orange-400 hover:text-orange-400 transition shrink-0">
           +
         </button>
