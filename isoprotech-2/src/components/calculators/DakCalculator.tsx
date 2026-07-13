@@ -42,7 +42,6 @@ export function DakCalculator() {
   const [step, setStep] = useState(0);
   const [daktype, setDaktype] = useState<DakType | null>(null);
   const [area, setArea] = useState(80);
-  const [dakramen, setDakramen] = useState(0);
   const [schouwen, setSchouwen] = useState(0);
   const [bedekking, setBedekking] = useState<string | null>(null);
   const [bedekkingSurcharge, setBedekkingSurcharge] = useState(0);
@@ -71,22 +70,23 @@ export function DakCalculator() {
     return calculateDak({
       daktype,
       area,
-      dakramen,
       schouwen,
       dakbedekking: bedekking,
       dakbedekkingSurcharge: bedekkingSurcharge,
       isolatie: ISOLATIE,
       bouwjaar,
     });
-  }, [daktype, area, dakramen, schouwen, bedekking, bedekkingSurcharge, bouwjaar]);
+  }, [daktype, area, schouwen, bedekking, bedekkingSurcharge, bouwjaar]);
 
   function handleNext() {
     if (!canNext) return;
     if (step === 1 && bedekkingOpts.length === 1) {
-      // Auto-select the single option and skip the bedekking step
+      // Plat dak: auto-select the single bedekking option; bouwjaar doesn't
+      // affect a flat roof's premies/asbestcheck here, so skip that step too
       setBedekking(bedekkingOpts[0].name);
       setBedekkingSurcharge(bedekkingOpts[0].surcharge);
-      setStep(3);
+      setBouwjaar("Na 2005");
+      setStep(4);
       return;
     }
     if (step < 4) {
@@ -97,7 +97,7 @@ export function DakCalculator() {
         email: email || "",
         phone: telefoon,
         service: "Dakwerken",
-        message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${ISOLATIE}, ${bouwjaar}${result ? `, richtprijs ${formatEur(result.gross)}` : ""}`,
+        message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${ISOLATIE}${daktype === "Hellend dak" ? `, bouwjaar ${bouwjaar}` : ""}${result ? `, richtprijs ${formatEur(result.gross)}` : ""}`,
         _subject: `Dakcalculator aanvraag – ${naam}`,
       } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
@@ -111,8 +111,8 @@ export function DakCalculator() {
   function handleBack() {
     if (showResult) {
       setShowResult(false);
-    } else if (step === 3 && bedekkingOpts.length === 1) {
-      // Skip back over the auto-selected bedekking step
+    } else if (step === 4 && bedekkingOpts.length === 1) {
+      // Skip back over the auto-selected bedekking + bouwjaar steps (plat dak)
       setStep(1);
     } else if (step > 0) {
       setStep(step - 1);
@@ -160,8 +160,7 @@ export function DakCalculator() {
             </div>
           </div>
           <div className="p-4 border-t border-gray-100 space-y-2">
-            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Werken (materiaal + arbeid)</span><span className="text-gray-500">{formatEur(result.base)}</span></div>
-            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Dakbedekking</span><span className="text-gray-500">{formatEur(result.dakbedekkingKost)}</span></div>
+            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Werken (materiaal + arbeid + dakbedekking)</span><span className="text-gray-500">{formatEur(result.base)}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Extra elementen</span><span className="text-orange-400">{result.extrasKost > 0 ? formatEur(result.extrasKost) : "—"}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Geschatte premies</span><span className="text-green-600">- {formatEur(result.premieTotal)}</span></div>
           </div>
@@ -260,8 +259,7 @@ export function DakCalculator() {
             <NumberInput label="Dakoppervlakte" value={area} onChange={setArea} suffix="m²" min={10} max={2000} />
             <div className="mt-4 rounded-xl border border-gray-200 p-4 bg-white">
               <h4 className="font-bold text-sm text-teal-800 mb-3">Extra elementen op het dak (optioneel)</h4>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <NumberInput label="Dakramen" value={dakramen} onChange={setDakramen} suffix="stuks" max={20} />
+              <div className="grid gap-4 sm:grid-cols-2 max-w-xs">
                 <NumberInput label="Schouwen" value={schouwen} onChange={setSchouwen} suffix="stuks" max={10} />
               </div>
             </div>
