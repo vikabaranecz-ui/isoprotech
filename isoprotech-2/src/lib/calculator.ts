@@ -22,7 +22,7 @@ export type GevelFinish = "spuitkurk" | "crepi" | "steenstrips" | "kaleien";
 export type GevelPlinthType = "blauwesteen" | "mozaiek";
 export type ProjectType = "new" | "reno";
 
-// All-in €/m² netto gevel — materiaal + arbeid + 12cm isolatie inbegrepen
+// All-in €/m² netto gevel — materiaal + arbeid + isolatie (vanaf 12cm) inbegrepen
 const FINISH_RATES: Record<GevelFinish, number> = {
   spuitkurk: 175,
   crepi: 167,
@@ -92,7 +92,7 @@ export function calculateGevel(input: GevelInput): GevelResult {
   const total = subtotal + vat;
 
   const lines: GevelLine[] = [
-    { label: `Afwerking (${input.finish}) incl. isolatie, materiaal + arbeid`, amount: base },
+    { label: `Gevelafwerking (${input.finish}) incl. isolatie`, amount: base },
   ];
   const plinthLabels: Record<GevelPlinthType, string> = {
     blauwesteen: "Gevelplint in blauwe steen",

@@ -39,8 +39,11 @@ const SILL_IMAGES: Record<SillMaterial, string> = {
 // Gemiddelde vensterhoogte, gebruikt om de vensterbanklengte te schatten uit het raam-/deuroppervlak
 const AVG_WINDOW_HEIGHT_M = 1.2;
 
-// Base project input — the vensterbank lm's are derived, not entered directly
-type BaseInput = Omit<GevelInput, "sillsAlu" | "sillsStone">;
+// Vaste gevelhoogte, gebruikt voor de hoogtefactor — geen aparte vraag aan de klant
+const DEFAULT_HEIGHT_M = 6;
+
+// Base project input — the vensterbank lm's and gevelhoogte are derived, not entered directly
+type BaseInput = Omit<GevelInput, "sillsAlu" | "sillsStone" | "height">;
 
 const CURRENT_YEAR = new Date().getFullYear();
 const RENO_CUTOFF_YEAR = CURRENT_YEAR - 10;
@@ -54,7 +57,6 @@ export function GevelCalculator() {
     grossArea: 150,
     openings: 30,
     plinthType: "blauwesteen",
-    height: 6,
     plinthLm: 40,
   });
   const [sillMaterial, setSillMaterial] = useState<SillMaterial>("aluminium");
@@ -72,6 +74,7 @@ export function GevelCalculator() {
 
   const calcInput: GevelInput = useMemo(() => ({
     ...input,
+    height: DEFAULT_HEIGHT_M,
     sillsAlu: sillMaterial === "aluminium" ? sillLm : 0,
     sillsStone: sillMaterial === "natuursteen" ? sillLm : 0,
   }), [input, sillMaterial, sillLm]);
@@ -278,10 +281,7 @@ export function GevelCalculator() {
               <RadioCard selected={input.plinthType === "mozaiek"} onClick={() => set("plinthType", "mozaiek" as GevelPlinthType)} title="Mozaïek sokkel" desc="Decoratief, duurzaam" image={PLINTH_IMAGES.mozaiek} />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <NumberInput label="Gemiddelde gevelhoogte" value={input.height} onChange={(v) => set("height", v)} suffix="m" min={2} max={15} />
-              <NumberInput label="Plintlengte" value={input.plinthLm} onChange={(v) => set("plinthLm", v)} suffix="lm" max={200} />
-            </div>
+            <NumberInput label="Plintlengte" value={input.plinthLm} onChange={(v) => set("plinthLm", v)} suffix="lm" max={200} />
 
             <div className="border-t border-gray-100 pt-4 mt-2">
               <p className="text-sm font-bold text-teal-800 mb-1">Vensterbanken</p>
@@ -294,12 +294,6 @@ export function GevelCalculator() {
                 Geschatte vensterbanklengte: {sillLm} lm
               </div>
             </div>
-
-            {input.height > 5 && (
-              <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-700">
-                Gevelhoogte boven 5m: hoogtefactor ×{input.height <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
-              </div>
-            )}
           </div>
         );
 
