@@ -8,14 +8,13 @@ import {
   formatEur,
   type GevelInput,
   type GevelFinish,
-  type GevelInsulation,
   type GevelPlinthType,
   type ProjectType,
 } from "@/lib/calculator";
 import { track } from "@/lib/tracking";
 import { RadioCard, NumberInput, ProgressBar, StepNav } from "./CalcUI";
 
-const STEPS = ["Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details", "Contact"];
+const STEPS = ["Projecttype", "Afwerking", "Oppervlakte", "Details", "Contact"];
 
 // Drop the corresponding photos into these paths (public/images/calculator/gevel/…)
 const FINISH_IMAGES: Record<GevelFinish, string> = {
@@ -52,8 +51,6 @@ export function GevelCalculator() {
   const [input, setInput] = useState<BaseInput>({
     projectType: "reno",
     finish: "spuitkurk",
-    insulation: "eps",
-    thickness: 10,
     grossArea: 150,
     openings: 30,
     plinthType: "blauwesteen",
@@ -85,17 +82,16 @@ export function GevelCalculator() {
     switch (step) {
       case 0: return true;
       case 1: return true;
-      case 2: return true;
-      case 3: return input.grossArea >= 10;
-      case 4: return true;
-      case 5: return naam.trim().length > 1 && telefoon.trim().length > 6;
+      case 2: return input.grossArea >= 10;
+      case 3: return true;
+      case 4: return naam.trim().length > 1 && telefoon.trim().length > 6;
       default: return false;
     }
   }, [step, input.grossArea, naam, telefoon]);
 
   function handleNext() {
     if (!canNext) return;
-    if (step < 5) {
+    if (step < 4) {
       setStep(step + 1);
     } else {
       fsSubmit({
@@ -103,7 +99,7 @@ export function GevelCalculator() {
         email: email || "",
         phone: telefoon,
         service: "Gevelwerken",
-        message: `Gevelcalculator: ${input.finish}, isolatie ${input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "geen"}, ${result.netArea}m², richtprijs ${formatEur(result.total)}`,
+        message: `Gevelcalculator: ${input.finish} incl. isolatie, ${result.netArea}m², richtprijs ${formatEur(result.total)}`,
         _subject: `Gevelcalculator aanvraag – ${naam}`,
       } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
@@ -134,8 +130,7 @@ export function GevelCalculator() {
         <div className="flex flex-wrap gap-2 mb-6">
           {[
             input.projectType === "reno" ? "Renovatie (6%)" : "Nieuwbouw (21%)",
-            input.finish,
-            input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "Geen isolatie",
+            `${input.finish} incl. isolatie`,
             `${result.netArea} m² netto`,
           ].map((p) => (
             <span key={p} className="bg-stone-100 border border-gray-200 text-gray-600 px-3 py-1.5 rounded-full text-xs font-bold">{p}</span>
@@ -261,39 +256,6 @@ export function GevelCalculator() {
       case 2:
         return (
           <div>
-            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Isolatie</h2>
-            <p className="text-sm text-gray-500 mb-5">Kies het isolatiemateriaal en de dikte.</p>
-            <div className="grid gap-3 sm:grid-cols-2 mb-5">
-              {([
-                { k: "none" as const, t: "Geen", d: "Afwerking zonder isolatie" },
-                { k: "eps" as const, t: "EPS / PUR", d: "Hoge isolatiewaarde" },
-              ]).map((o) => (
-                <RadioCard key={o.k} selected={input.insulation === o.k} onClick={() => set("insulation", o.k)} title={o.t} desc={o.d} />
-              ))}
-            </div>
-            {input.insulation !== "none" && (
-              <div>
-                <label className="block text-sm font-bold text-teal-800 mb-2">Isolatiedikte: {input.thickness} cm</label>
-                <input
-                  type="range"
-                  min={0}
-                  max={20}
-                  step={1}
-                  value={input.thickness}
-                  onChange={(e) => set("thickness", Number(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-400"
-                />
-                <div className="flex justify-between text-xs text-gray-400 mt-1">
-                  <span>0 cm</span><span>10 cm</span><span>20 cm</span>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-
-      case 3:
-        return (
-          <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Oppervlaktes</h2>
             <p className="text-sm text-gray-500 mb-5">Schatting is prima — wij meten exact op bij het gratis plaatsbezoek.</p>
             <NumberInput label="Totale muuroppervlakte" value={input.grossArea} onChange={(v) => set("grossArea", v)} suffix="m²" min={10} max={2000} />
@@ -304,7 +266,7 @@ export function GevelCalculator() {
           </div>
         );
 
-      case 4:
+      case 3:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Details & opties</h2>
@@ -341,7 +303,7 @@ export function GevelCalculator() {
           </div>
         );
 
-      case 5:
+      case 4:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
@@ -377,7 +339,7 @@ export function GevelCalculator() {
       <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
-      <StepNav step={step} maxStep={5} canNext={canNext} onBack={handleBack} onNext={handleNext} />
+      <StepNav step={step} maxStep={4} canNext={canNext} onBack={handleBack} onNext={handleNext} />
     </div>
   );
 }
