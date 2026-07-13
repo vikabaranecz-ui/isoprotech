@@ -15,7 +15,7 @@ import {
 import { track } from "@/lib/tracking";
 import { RadioCard, NumberInput, ProgressBar, StepNav } from "./CalcUI";
 
-const STEPS = ["Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details", "Contact"];
+const STEPS = ["Contact", "Projecttype", "Afwerking", "Isolatie", "Oppervlakte", "Details"];
 
 // Drop the corresponding photos into these paths (public/images/calculator/gevel/…)
 const FINISH_IMAGES: Record<GevelFinish, string> = {
@@ -83,12 +83,12 @@ export function GevelCalculator() {
 
   const canNext = useMemo(() => {
     switch (step) {
-      case 0: return true;
+      case 0: return naam.trim().length > 1 && telefoon.trim().length > 6;
       case 1: return true;
       case 2: return true;
-      case 3: return input.grossArea >= 10;
-      case 4: return true;
-      case 5: return naam.trim().length > 1 && telefoon.trim().length > 6;
+      case 3: return true;
+      case 4: return input.grossArea >= 10;
+      case 5: return true;
       default: return false;
     }
   }, [step, input.grossArea, naam, telefoon]);
@@ -231,6 +231,31 @@ export function GevelCalculator() {
       case 0:
         return (
           <div>
+            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
+            <p className="text-sm text-gray-500 mb-5">Vul uw gegevens in, dan doorlopen we samen de vragen en toont Isoprotech direct uw richtprijs.</p>
+            <div className="grid gap-3 sm:grid-cols-2 mb-3">
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Naam *</label>
+                <input className={ic} value={naam} onChange={(e) => setNaam(e.target.value)} placeholder="Naam" />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Telefoon *</label>
+                <input className={ic} value={telefoon} onChange={(e) => setTelefoon(e.target.value)} placeholder="Telefoon" type="tel" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">E-mailadres (optioneel)</label>
+              <input className={ic} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mailadres" type="email" />
+            </div>
+            <div className="mt-4 rounded-xl bg-orange-50 border border-orange-200 p-3 text-xs text-orange-700">
+              Enkel voor uw offerte. Geen spam. Nooit doorverkocht.
+            </div>
+          </div>
+        );
+
+      case 1:
+        return (
+          <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Projecttype</h2>
             <p className="text-sm text-gray-500 mb-5">Het btw-tarief hangt af van het bouwjaar van de woning.</p>
             <div className="grid gap-3 sm:grid-cols-2 mb-5">
@@ -240,7 +265,7 @@ export function GevelCalculator() {
           </div>
         );
 
-      case 1:
+      case 2:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Afwerking</h2>
@@ -258,7 +283,7 @@ export function GevelCalculator() {
           </div>
         );
 
-      case 2:
+      case 3:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Isolatie</h2>
@@ -291,7 +316,7 @@ export function GevelCalculator() {
           </div>
         );
 
-      case 3:
+      case 4:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Oppervlaktes</h2>
@@ -304,7 +329,7 @@ export function GevelCalculator() {
           </div>
         );
 
-      case 4:
+      case 5:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Details & opties</h2>
@@ -338,31 +363,6 @@ export function GevelCalculator() {
                 Gevelhoogte boven 5m: hoogtefactor ×{input.height <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
               </div>
             )}
-          </div>
-        );
-
-      case 5:
-        return (
-          <div>
-            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
-            <p className="text-sm text-gray-500 mb-5">U ontvangt uw prijs direct. Daarna plannen we gratis een plaatsbezoek.</p>
-            <div className="grid gap-3 sm:grid-cols-2 mb-3">
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Naam *</label>
-                <input className={ic} value={naam} onChange={(e) => setNaam(e.target.value)} placeholder="Naam" />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Telefoon *</label>
-                <input className={ic} value={telefoon} onChange={(e) => setTelefoon(e.target.value)} placeholder="Telefoon" type="tel" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs text-gray-500 mb-1">E-mailadres (optioneel)</label>
-              <input className={ic} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mailadres" type="email" />
-            </div>
-            <div className="mt-4 rounded-xl bg-orange-50 border border-orange-200 p-3 text-xs text-orange-700">
-              Enkel voor uw offerte. Geen spam. Nooit doorverkocht.
-            </div>
           </div>
         );
 

@@ -16,7 +16,7 @@ import {
 import { track } from "@/lib/tracking";
 import { ProgressBar, RadioCard, NumberInput } from "./CalcUI";
 
-const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Bouwjaar", "Contact"];
+const STEPS = ["Contact", "Daktype", "Oppervlakte", "Bedekking", "Bouwjaar"];
 
 // Isoprotech plaatst uitsluitend PIR-isolatie — geen keuzestap nodig
 const ISOLATIE: DakIsolatieType = "PIR-platen";
@@ -57,11 +57,11 @@ export function DakCalculator() {
 
   const canNext = useMemo(() => {
     switch (step) {
-      case 0: return !!daktype;
-      case 1: return area >= 10;
-      case 2: return !!bedekking;
-      case 3: return !!bouwjaar;
-      case 4: return naam.trim().length > 1 && telefoon.trim().length > 6;
+      case 0: return naam.trim().length > 1 && telefoon.trim().length > 6;
+      case 1: return !!daktype;
+      case 2: return area >= 10;
+      case 3: return !!bedekking;
+      case 4: return !!bouwjaar;
       default: return false;
     }
   }, [step, daktype, area, bedekking, bouwjaar, naam, telefoon]);
@@ -82,11 +82,11 @@ export function DakCalculator() {
 
   function handleNext() {
     if (!canNext) return;
-    if (step === 1 && bedekkingOpts.length === 1) {
+    if (step === 2 && bedekkingOpts.length === 1) {
       // Auto-select the single option and skip the bedekking step
       setBedekking(bedekkingOpts[0].name);
       setBedekkingSurcharge(bedekkingOpts[0].surcharge);
-      setStep(3);
+      setStep(4);
       return;
     }
     if (step < 4) {
@@ -111,9 +111,9 @@ export function DakCalculator() {
   function handleBack() {
     if (showResult) {
       setShowResult(false);
-    } else if (step === 3 && bedekkingOpts.length === 1) {
+    } else if (step === 4 && bedekkingOpts.length === 1) {
       // Skip back over the auto-selected bedekking step
-      setStep(1);
+      setStep(2);
     } else if (step > 0) {
       setStep(step - 1);
     }
@@ -243,6 +243,31 @@ export function DakCalculator() {
       case 0:
         return (
           <div>
+            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
+            <p className="text-sm text-gray-500 mb-5">Vul uw gegevens in, dan doorlopen we samen de vragen en toont Isoprotech direct uw richtprijs.</p>
+            <div className="grid gap-3 sm:grid-cols-2 mb-3">
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Naam *</label>
+                <input className={inputCls} value={naam} onChange={(e) => setNaam(e.target.value)} placeholder="Naam" />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Telefoon *</label>
+                <input className={inputCls} value={telefoon} onChange={(e) => setTelefoon(e.target.value)} placeholder="Telefoon" type="tel" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">E-mailadres (optioneel)</label>
+              <input className={inputCls} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mailadres" type="email" />
+            </div>
+            <div className="mt-4 rounded-xl bg-orange-50 border border-orange-200 p-3 text-xs text-orange-700">
+              Enkel voor uw offerte. Geen spam. Nooit doorverkocht.
+            </div>
+          </div>
+        );
+
+      case 1:
+        return (
+          <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Wat voor dak heeft uw woning?</h2>
             <p className="text-sm text-gray-500 mb-5">Dit bepaalt de isolatiemethode en beschikbare dakbedekkingen.</p>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -252,7 +277,7 @@ export function DakCalculator() {
           </div>
         );
 
-      case 1:
+      case 2:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Hoe groot is het dak?</h2>
@@ -268,7 +293,7 @@ export function DakCalculator() {
           </div>
         );
 
-      case 2:
+      case 3:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Welke dakbedekking wenst u?</h2>
@@ -288,7 +313,7 @@ export function DakCalculator() {
           </div>
         );
 
-      case 3:
+      case 4:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Wanneer is de woning gebouwd?</h2>
@@ -327,31 +352,6 @@ export function DakCalculator() {
                 Woningen vóór 1990 vereisen wettelijk een asbestinventarisatie vóór dakwerken. Isoprotech regelt dit volledig voor u.
               </div>
             )}
-          </div>
-        );
-
-      case 4:
-        return (
-          <div>
-            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
-            <p className="text-sm text-gray-500 mb-5">U ontvangt uw prijs + premie-overzicht direct. Daarna plannen we gratis een plaatsbezoek.</p>
-            <div className="grid gap-3 sm:grid-cols-2 mb-3">
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Naam *</label>
-                <input className={inputCls} value={naam} onChange={(e) => setNaam(e.target.value)} placeholder="Naam" />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-1">Telefoon *</label>
-                <input className={inputCls} value={telefoon} onChange={(e) => setTelefoon(e.target.value)} placeholder="Telefoon" type="tel" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs text-gray-500 mb-1">E-mailadres (optioneel)</label>
-              <input className={inputCls} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mailadres" type="email" />
-            </div>
-            <div className="mt-4 rounded-xl bg-orange-50 border border-orange-200 p-3 text-xs text-orange-700">
-              Enkel voor uw offerte. Geen spam. Nooit doorverkocht.
-            </div>
           </div>
         );
 
