@@ -9,44 +9,50 @@ export function formatEur(v: number): string {
 // GEVEL CALCULATOR — exact match to live gevelcalculator
 // ═══════════════════════════════════════════════════════════════════
 //
-// Formula:
-//   base = (finishRate + extraIsolatie(thickness)) × netArea + (15 × netArea steiger)
-//          — isolatie en stelling worden niet apart vermeld, ze zitten in "base"
+// Formula (unchanged since before the pricing rework — only the
+// result breakdown below groups isolatie + stelling into one line):
+//   base = (material + labor) × netArea
+//   insul = insulPerCm × (thickness/10) × netArea
 //   plinth = 115 × plinthLm
 //   sillsAlu = 38 × lm
-//   sillsStone = 220 × lm
-//   subtotal = (base + plinth + sillsAlu + sillsStone) × heightFactor
+//   sillsStone = 55 × lm
+//   scaffold = 35 × netArea
+//   subtotal = (base + insul + plinth + sillsAlu + sillsStone + scaffold) × heightFactor
 //   total = subtotal × (1 + vatRate)
-//   premie = min(25% van total, €5000)
+//   premie = alleen bij renovatie: min(25% van total, €3000) — Mijn VerbouwPremie
+//            geldt niet voor nieuwbouw
 //   netTotal = total − premie
 
 export type GevelFinish = "spuitkurk" | "crepi" | "steenstrips" | "kaleien";
+export type GevelInsulation = "none" | "eps";
 export type GevelPlinthType = "blauwesteen" | "mozaiek";
 export type ProjectType = "new" | "reno";
 
-// All-in €/m² netto gevel — materiaal + arbeid + 12cm isolatie inbegrepen
-const FINISH_RATES: Record<GevelFinish, number> = {
-  spuitkurk: 175,
-  crepi: 167,
-  steenstrips: 245,
-  kaleien: 180,
+const FINISH_RATES: Record<GevelFinish, { material: number; labor: number }> = {
+  spuitkurk:   { material: 20, labor: 130 },  // = €150/m²
+  crepi:       { material: 12, labor: 130 },  // = €142/m²
+  steenstrips: { material: 90, labor: 130 },  // = €220/m²
+  kaleien:     { material: 25, labor: 130 },  // = €155/m²
 };
 
-// Isolatie vanaf 12cm inbegrepen; elke extra cm daarboven kost dit per m²
-const BASE_INSULATION_CM = 12;
-const EXTRA_INSULATION_RATE_PER_CM = 2; // €/cm/m²
+const INSUL_PER_CM: Record<GevelInsulation, number> = {
+  none: 0,
+  eps: 2,      // €2 per cm per m²
+};
 
 const PLINTH_RATE: Record<GevelPlinthType, number> = {
   blauwesteen: 115,  // €/lm
   mozaiek: 105,      // €/lm
 };
-const SILLS_ALU_RATE = 38;     // €/lm
-const SILLS_STONE_RATE = 220;  // €/lm
-const SCAFFOLD_RATE = 15;      // €/m² (steiger)
+const SILLS_ALU_RATE = 38;    // €/lm
+const SILLS_STONE_RATE = 55;  // €/lm
+const SCAFFOLD_RATE = 35;     // €/m²
 
-// Indicatieve Mijn VerbouwPremie-schatting, conservatief geplafonneerd
+// Indicatieve Mijn VerbouwPremie-schatting — geldt enkel bij renovatie
+// van een bestaande woning, niet bij nieuwbouw, en is conservatief
+// geplafonneerd (echte premie hangt af van inkomenscategorie)
 const PREMIE_RATE = 0.25;
-const PREMIE_MAX = 5000;
+const PREMIE_MAX = 3000;
 
 function heightFactor(h: number): number {
   if (h <= 5) return 1;
@@ -57,7 +63,8 @@ function heightFactor(h: number): number {
 export interface GevelInput {
   projectType: ProjectType;
   finish: GevelFinish;
-  thickness: number;      // cm, vanaf 12
+  insulation: GevelInsulation;
+  thickness: number;      // cm (0–20)
   grossArea: number;      // m²
   openings: number;       // m² windows/doors
   plinthType: GevelPlinthType;
@@ -90,13 +97,14 @@ export interface GevelResult {
 export function calculateGevel(input: GevelInput): GevelResult {
   const netArea = Math.max(0, input.grossArea - input.openings);
   const vatRate = input.projectType === "reno" ? 0.06 : 0.21;
-  const finRate = FINISH_RATES[input.finish];
-  const extraInsulPerM2 = Math.max(0, input.thickness - BASE_INSULATION_CM) * EXTRA_INSULATION_RATE_PER_CM;
+  const fin = FINISH_RATES[input.finish];
   const hF = heightFactor(input.height);
 
+  const finishCost = (fin.material + fin.labor) * netArea;
+  const insul = INSUL_PER_CM[input.insulation] * (input.thickness / 10) * netArea;
   const scaffold = SCAFFOLD_RATE * netArea;
   // Isolatie en stelling worden niet apart vermeld — samen met de afwerking op één regel
-  const base = (finRate + extraInsulPerM2) * netArea + scaffold;
+  const base = finishCost + insul + scaffold;
   const plinth = PLINTH_RATE[input.plinthType] * input.plinthLm;
   const sillsA = SILLS_ALU_RATE * input.sillsAlu;
   const sillsS = SILLS_STONE_RATE * input.sillsStone;
@@ -105,11 +113,13 @@ export function calculateGevel(input: GevelInput): GevelResult {
   const subtotal = rawSubtotal * hF;
   const vat = subtotal * vatRate;
   const total = subtotal + vat;
-  const premie = Math.min(Math.round(total * PREMIE_RATE), PREMIE_MAX);
+  // Mijn VerbouwPremie geldt enkel bij renovatie van een bestaande woning
+  const premie = input.projectType === "reno" ? Math.min(Math.round(total * PREMIE_RATE), PREMIE_MAX) : 0;
   const netTotal = Math.max(0, total - premie);
 
+  const isolatieLabel = input.insulation !== "none" ? ` incl. isolatie (${input.thickness}cm)` : "";
   const lines: GevelLine[] = [
-    { label: `Gevelafwerking (${input.finish}) incl. isolatie (${input.thickness}cm) en stelling`, amount: base },
+    { label: `Gevelafwerking (${input.finish})${isolatieLabel} en stelling`, amount: base },
   ];
   const plinthLabels: Record<GevelPlinthType, string> = {
     blauwesteen: "Gevelplint in blauwe steen",
