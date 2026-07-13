@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 import { useSubmit } from "@formspree/react";
 import {
   calculateGevel,
@@ -48,7 +47,6 @@ const CURRENT_YEAR = new Date().getFullYear();
 const RENO_CUTOFF_YEAR = CURRENT_YEAR - 10;
 
 export function GevelCalculator() {
-  const router = useRouter();
   const fsSubmit = useSubmit("mqeoygea");
   const [step, setStep] = useState(0);
   const [input, setInput] = useState<BaseInput>({
@@ -100,19 +98,6 @@ export function GevelCalculator() {
     if (step < 5) {
       setStep(step + 1);
     } else {
-      const lines = [
-        "🏠 *Gevelcalculator aanvraag via isoprotech.be*",
-        "",
-        `👤 Naam: ${naam}`,
-        `📞 Telefoon: ${telefoon}`,
-        email ? `📧 E-mail: ${email}` : null,
-        "",
-        `🎨 Afwerking: ${input.finish}`,
-        `🧱 Isolatie: ${input.insulation !== "none" ? `${input.insulation} ${input.thickness}cm` : "geen"}`,
-        `📐 Netto-oppervlakte: ${result.netArea} m²`,
-        `💰 Richtprijs: ${formatEur(result.total)} (incl. BTW)`,
-      ].filter(Boolean).join("\n");
-
       fsSubmit({
         name: naam,
         email: email || "",
@@ -124,7 +109,6 @@ export function GevelCalculator() {
 
       track.calculatorComplete("gevel", result.total, result.total);
       setShowResult(true);
-      router.push("/bedankt");
     }
   }
 
