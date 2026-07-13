@@ -164,16 +164,13 @@ export const PLAT_DAK_OPTIES: DakBedekkingOption[] = [
 ];
 
 export const HELLEND_DAK_OPTIES: DakBedekkingOption[] = [
-  { name: "Natuurleien (ardoise)", desc: "Klassiek, duurzaam, premiumuitstraling", surcharge: 85 },
+  { name: "Kunstleien", desc: "Lichtgewicht en duurzaam alternatief voor natuurleien, kleurvast en onderhoudsvriendelijk", surcharge: 50 },
   { name: "Keramische dakpannen", desc: "Traditioneel, lang leven, kleurvast", surcharge: 60 },
-  { name: "Betonnen dakpannen", desc: "Betaalbaar en sterk, breed aanbod", surcharge: 45 },
-  { name: "Bitumen dakshingles", desc: "Lichtgewicht, geschikt voor lage hellingen", surcharge: 40 },
-  { name: "Vezelcement shingles", desc: "Modern en onderhoudsvriendelijk", surcharge: 50 },
   { name: "Metalen / gevouwen dakbedekking", desc: "Zink, staal of aluminium — modern en duurzaam", surcharge: 70 },
 ];
 
 export type DakIsolatieType = "PIR-platen" | "Minerale wol" | "Houtvezel" | "Advies gewenst";
-export type Bouwjaar = "Vóór 1970" | "1970 – 1990" | "1990 – 2005" | "Na 2005";
+export type Bouwjaar = "Vóór 2000" | "Na 2000";
 
 export interface DakInput {
   daktype: DakType;
@@ -190,6 +187,7 @@ export interface DakPremie { name: string; amount: number; }
 export interface DakResult {
   base: number;
   extrasKost: number;
+  asbestKost: number;
   gross: number;
   grossMin: number;
   grossMax: number;
@@ -209,7 +207,10 @@ export function calculateDak(input: DakInput): DakResult {
   // niet apart vermeld — samen op één regel "Werken"
   const base = 195 * area + input.dakbedekkingSurcharge * area;
   const extrasKost = input.schouwen * 350;
-  const gross = base + extrasKost;
+  // Woningen van vóór 2000 vereisen wettelijk een asbestinventarisatie en
+  // -verwijdering vóór dakwerken — reële meerkost, geen premie
+  const asbestKost = input.bouwjaar === "Vóór 2000" ? 25 * area : 0;
+  const gross = base + extrasKost + asbestKost;
 
   // Premies — Mijn VerbouwPremie only (since 2022, Fluvius no longer gives separate premie for professional dakisolatie)
   // Amounts depend on income category — we show an indicative range
@@ -226,7 +227,7 @@ export function calculateDak(input: DakInput): DakResult {
   }
 
   // Asbestverwijderingsbonus: €8/m² extra when combined with asbest removal
-  if (["Vóór 1970", "1970 – 1990"].includes(input.bouwjaar)) {
+  if (input.bouwjaar === "Vóór 2000") {
     const asbestBonus = Math.min(area * 8, Math.round(gross * 0.5));
     if (asbestBonus > 0) {
       premies.push({ name: "Asbestverwijderingsbonus (indien van toepassing)", amount: asbestBonus });
@@ -235,11 +236,11 @@ export function calculateDak(input: DakInput): DakResult {
   const premieTotal = premies.reduce((s, p) => s + p.amount, 0);
 
   return {
-    base, extrasKost, gross,
+    base, extrasKost, asbestKost, gross,
     grossMin: gross * 0.85, grossMax: gross * 1.18,
     premies, premieTotal,
     net: Math.max(0, gross - premieTotal),
-    asbestRequired: ["Vóór 1970", "1970 – 1990"].includes(input.bouwjaar),
+    asbestRequired: input.bouwjaar === "Vóór 2000",
     area, daktype: input.daktype, dakbedekking: input.dakbedekking, isolatie: input.isolatie,
   };
 }
