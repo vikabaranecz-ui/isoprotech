@@ -41,21 +41,8 @@ const SILL_IMAGES: Record<SillMaterial, string> = {
 // Gemiddelde vensterhoogte, gebruikt om de vensterbanklengte te schatten uit het raam-/deuroppervlak
 const AVG_WINDOW_HEIGHT_M = 1.2;
 
-interface GevelSide {
-  label: string;
-  height: number;
-  plinthLm: number;
-}
-
-const DEFAULT_SIDES: GevelSide[] = [
-  { label: "Voorgevel", height: 6, plinthLm: 12 },
-  { label: "Achtergevel", height: 6, plinthLm: 12 },
-  { label: "Zijgevel links", height: 6, plinthLm: 8 },
-  { label: "Zijgevel rechts", height: 6, plinthLm: 8 },
-];
-
-// Base project input — height, plinthLm and the vensterbank lm's are derived, not entered directly
-type BaseInput = Omit<GevelInput, "height" | "plinthLm" | "sillsAlu" | "sillsStone">;
+// Base project input — the vensterbank lm's are derived, not entered directly
+type BaseInput = Omit<GevelInput, "sillsAlu" | "sillsStone">;
 
 const CURRENT_YEAR = new Date().getFullYear();
 const RENO_CUTOFF_YEAR = CURRENT_YEAR - 10;
@@ -72,8 +59,9 @@ export function GevelCalculator() {
     grossArea: 150,
     openings: 30,
     plinthType: "blauwesteen",
+    height: 6,
+    plinthLm: 40,
   });
-  const [sides, setSides] = useState<GevelSide[]>(DEFAULT_SIDES);
   const [sillMaterial, setSillMaterial] = useState<SillMaterial>("aluminium");
   const [naam, setNaam] = useState("");
   const [telefoon, setTelefoon] = useState("");
@@ -84,23 +72,14 @@ export function GevelCalculator() {
   const set = <K extends keyof BaseInput>(key: K, val: BaseInput[K]) =>
     setInput((p) => ({ ...p, [key]: val }));
 
-  const updateSide = (i: number, key: "height" | "plinthLm", val: number) =>
-    setSides((p) => p.map((s, idx) => (idx === i ? { ...s, [key]: val } : s)));
-
-  // Gemiddelde gevelhoogte en gemiddelde plintlengte worden altijd automatisch berekend uit de gevels hierboven
-  const avgHeight = useMemo(() => sides.reduce((s, x) => s + x.height, 0) / sides.length, [sides]);
-  const avgPlinthLm = useMemo(() => sides.reduce((s, x) => s + x.plinthLm, 0) / sides.length, [sides]);
-
   // Vensterbanklengte wordt altijd berekend uit het oppervlak ramen en deuren, geen handmatige invoer
   const sillLm = useMemo(() => Math.max(0, Math.round(input.openings / AVG_WINDOW_HEIGHT_M)), [input.openings]);
 
   const calcInput: GevelInput = useMemo(() => ({
     ...input,
-    height: avgHeight,
-    plinthLm: avgPlinthLm,
     sillsAlu: sillMaterial === "aluminium" ? sillLm : 0,
     sillsStone: sillMaterial === "natuursteen" ? sillLm : 0,
-  }), [input, avgHeight, avgPlinthLm, sillMaterial, sillLm]);
+  }), [input, sillMaterial, sillLm]);
 
   const result = useMemo(() => calculateGevel(calcInput), [calcInput]);
 
@@ -353,44 +332,12 @@ export function GevelCalculator() {
               <RadioCard selected={input.plinthType === "mozaiek"} onClick={() => set("plinthType", "mozaiek" as GevelPlinthType)} title="Mozaïek sokkel" desc="Decoratief, duurzaam" image={PLINTH_IMAGES.mozaiek} />
             </div>
 
-            <div className="border-t border-gray-100 pt-4">
-              <p className="text-sm font-bold text-teal-800 mb-1">Gevelhoogte & plintlengte per gevel</p>
-              <p className="text-xs text-gray-500 mb-3">De gemiddelde gevelhoogte en plintlengte worden automatisch berekend.</p>
-              <div className="grid grid-cols-3 gap-2 text-[11px] font-bold text-gray-400 mb-1 px-1">
-                <span>Gevel</span><span className="text-center">Hoogte (m)</span><span className="text-center">Plintlengte (lm)</span>
-              </div>
-              <div className="space-y-2 mb-3">
-                {sides.map((side, i) => (
-                  <div key={side.label} className="grid grid-cols-3 gap-2 items-center">
-                    <span className="text-xs text-gray-600">{side.label}</span>
-                    <input
-                      type="number"
-                      className={`${ic} text-center py-2`}
-                      value={side.height}
-                      min={0}
-                      max={15}
-                      step={0.1}
-                      onChange={(e) => updateSide(i, "height", Math.max(0, Number(e.target.value) || 0))}
-                    />
-                    <input
-                      type="number"
-                      className={`${ic} text-center py-2`}
-                      value={side.plinthLm}
-                      min={0}
-                      max={100}
-                      step={0.5}
-                      onChange={(e) => updateSide(i, "plinthLm", Math.max(0, Number(e.target.value) || 0))}
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="rounded-xl bg-orange-50 border border-orange-200 p-3 text-sm font-bold text-orange-600 flex flex-wrap justify-between gap-2">
-                <span>Gemiddelde gevelhoogte: {avgHeight.toFixed(1)} m</span>
-                <span>Gemiddelde plintlengte: {avgPlinthLm.toFixed(1)} lm</span>
-              </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <NumberInput label="Gemiddelde gevelhoogte" value={input.height} onChange={(v) => set("height", v)} suffix="m" min={2} max={15} />
+              <NumberInput label="Plintlengte" value={input.plinthLm} onChange={(v) => set("plinthLm", v)} suffix="lm" max={200} />
             </div>
 
-            <div className="border-t border-gray-100 pt-4 mt-4">
+            <div className="border-t border-gray-100 pt-4 mt-2">
               <p className="text-sm font-bold text-teal-800 mb-1">Vensterbanken</p>
               <p className="text-xs text-gray-500 mb-3">De lengte wordt automatisch berekend op basis van het oppervlak ramen en deuren ({input.openings} m²).</p>
               <div className="grid gap-3 sm:grid-cols-2 mb-3">
@@ -402,9 +349,9 @@ export function GevelCalculator() {
               </div>
             </div>
 
-            {avgHeight > 5 && (
+            {input.height > 5 && (
               <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-700">
-                Gevelhoogte boven 5m: hoogtefactor ×{avgHeight <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
+                Gevelhoogte boven 5m: hoogtefactor ×{input.height <= 8 ? "1.06" : "1.12"} wordt toegepast voor extra stelling- en veiligheidskosten.
               </div>
             )}
           </div>
