@@ -157,10 +157,7 @@ export function DakCalculator() {
             </div>
           </div>
           <div className="p-4 border-t border-gray-100 space-y-2">
-            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Werken (materiaal + arbeid + dakbedekking)</span><span className="text-gray-500">{formatEur(result.base)}</span></div>
-            {result.asbestKost > 0 && (
-              <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Asbestverwijdering (bouwjaar vóór 2000)</span><span className="text-gray-500">{formatEur(result.asbestKost)}</span></div>
-            )}
+            <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Werken (materiaal + arbeid + dakbedekking)</span><span className="text-gray-500">{formatEur(result.base + result.asbestKost)}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Extra elementen</span><span className="text-orange-400">{result.extrasKost > 0 ? formatEur(result.extrasKost) : "—"}</span></div>
             <div className="flex justify-between text-sm"><span className="font-bold text-gray-700">Geschatte premies</span><span className="text-green-600">- {formatEur(result.premieTotal)}</span></div>
           </div>
@@ -185,8 +182,8 @@ export function DakCalculator() {
             <strong>Asbestinventarisatie vereist</strong>
             <br />
             Uw woning dateert van vóór 2000. Een wettelijke asbestinventarisatie en
-            -verwijdering is verplicht vóór dakwerken in België (reeds inbegrepen in de
-            richtprijs, €25/m²). Isoprotech begeleidt u van A tot Z.
+            -verwijdering is verplicht vóór dakwerken in België. Isoprotech begeleidt u
+            van A tot Z.
           </div>
         )}
 
@@ -321,7 +318,7 @@ export function DakCalculator() {
             </div>
             {bouwjaar === "Vóór 2000" && (
               <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
-                Woningen vóór 2000 vereisen wettelijk een asbestinventarisatie en -verwijdering vóór dakwerken (€25/m² incl. in de richtprijs). Isoprotech regelt dit volledig voor u.
+                Woningen vóór 2000 vereisen wettelijk een asbestinventarisatie en -verwijdering vóór dakwerken. Isoprotech regelt dit volledig voor u.
               </div>
             )}
           </div>
