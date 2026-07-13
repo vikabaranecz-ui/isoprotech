@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 import { useSubmit } from "@formspree/react";
 import {
   calculateDak,
@@ -20,7 +19,6 @@ import { ProgressBar, RadioCard, NumberInput } from "./CalcUI";
 const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Isolatie", "Bouwjaar", "Contact"];
 
 export function DakCalculator() {
-  const router = useRouter();
   const fsSubmit = useSubmit("mqeoygea");
   const [step, setStep] = useState(0);
   const [daktype, setDaktype] = useState<DakType | null>(null);
@@ -77,21 +75,6 @@ export function DakCalculator() {
     if (step < 5) {
       setStep(step + 1);
     } else {
-      const lines = [
-        "🏠 *Dakcalculator aanvraag via isoprotech.be*",
-        "",
-        `👤 Naam: ${naam}`,
-        `📞 Telefoon: ${telefoon}`,
-        email ? `📧 E-mail: ${email}` : null,
-        "",
-        `🏗️ Daktype: ${daktype}`,
-        `📐 Oppervlakte: ${area} m²`,
-        `🔧 Dakbedekking: ${bedekking}`,
-        `🧱 Isolatie: ${isolatie}`,
-        `📅 Bouwjaar: ${bouwjaar}`,
-        result ? `💰 Richtprijs: ${formatEur(result.gross)} (incl. BTW)` : null,
-      ].filter(Boolean).join("\n");
-
       fsSubmit({
         name: naam,
         email: email || "",
@@ -105,7 +88,6 @@ export function DakCalculator() {
         track.calculatorComplete("dak", result.grossMin, result.grossMax);
       }
       setShowResult(true);
-      router.push("/bedankt");
     }
   }
 
