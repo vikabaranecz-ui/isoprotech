@@ -9,14 +9,14 @@ export function formatEur(v: number): string {
 // GEVEL CALCULATOR — exact match to live gevelcalculator
 // ═══════════════════════════════════════════════════════════════════
 //
-// Formula (unchanged since before the pricing rework — only the
-// result breakdown below groups isolatie + stelling into one line):
-//   base = (material + labor) × netArea
+// Formula — rates calibrated against real issued offertes
+// (O260134: 22m² crepi 14cm, O260159: 135m² crepi 14cm):
+//   base = (material + labor + smallProjectSurcharge) × netArea
 //   insul = insulPerCm × (thickness/10) × netArea
-//   plinth = 115 × plinthLm
-//   sillsAlu = 38 × lm
-//   sillsStone = 55 × lm
-//   scaffold = 35 × netArea
+//   plinth = rate × plinthLm
+//   sillsAlu = 150 × lm
+//   sillsStone = 220 × lm
+//   scaffold = 10 × netArea
 //   subtotal = (base + insul + plinth + sillsAlu + sillsStone + scaffold) × heightFactor
 //   total = subtotal × (1 + vatRate)
 //   premie = alleen bij renovatie: min(25% van total, €3000) — Mijn VerbouwPremie
@@ -30,10 +30,15 @@ export type ProjectType = "new" | "reno";
 
 const FINISH_RATES: Record<GevelFinish, { material: number; labor: number }> = {
   spuitkurk:   { material: 20, labor: 130 },  // = €150/m²
-  crepi:       { material: 12, labor: 130 },  // = €142/m²
+  crepi:       { material: 12, labor: 130 },  // = €142/m² — matches real large-project offerte (€140/m² incl. 14cm isolatie)
   steenstrips: { material: 90, labor: 130 },  // = €220/m²
   kaleien:     { material: 25, labor: 130 },  // = €155/m²
 };
+
+// Kleine projecten (<50m² netto) hebben een reële meerprijs per m² — bevestigd
+// door offerte O260134 (22m²: €195/m² vs. offerte O260159 (135m²): €140/m²)
+const SMALL_PROJECT_THRESHOLD_M2 = 50;
+const SMALL_PROJECT_SURCHARGE = 50; // €/m²
 
 const INSUL_PER_CM: Record<GevelInsulation, number> = {
   none: 0,
@@ -41,12 +46,12 @@ const INSUL_PER_CM: Record<GevelInsulation, number> = {
 };
 
 const PLINTH_RATE: Record<GevelPlinthType, number> = {
-  blauwesteen: 115,  // €/lm
-  mozaiek: 105,      // €/lm
+  blauwesteen: 115,  // €/lm — matches real offerte (blauwsteen €127.50/lm)
+  mozaiek: 60,       // €/lm — matches real offerte (marmerengranulaat plint €60/lm)
 };
-const SILLS_ALU_RATE = 38;    // €/lm
-const SILLS_STONE_RATE = 55;  // €/lm
-const SCAFFOLD_RATE = 35;     // €/m²
+const SILLS_ALU_RATE = 150;   // €/lm — matches real offerte (confirmed on two separate quotes)
+const SILLS_STONE_RATE = 220; // €/lm
+const SCAFFOLD_RATE = 10;     // €/m² — matches real offerte (was €35, real offertes show €10-12.50/m²)
 
 // Indicatieve Mijn VerbouwPremie-schatting — geldt enkel bij renovatie
 // van een bestaande woning, niet bij nieuwbouw, en is conservatief
@@ -100,7 +105,8 @@ export function calculateGevel(input: GevelInput): GevelResult {
   const fin = FINISH_RATES[input.finish];
   const hF = heightFactor(input.height);
 
-  const finishCost = (fin.material + fin.labor) * netArea;
+  const smallProjectSurcharge = netArea < SMALL_PROJECT_THRESHOLD_M2 ? SMALL_PROJECT_SURCHARGE : 0;
+  const finishCost = (fin.material + fin.labor + smallProjectSurcharge) * netArea;
   const insul = INSUL_PER_CM[input.insulation] * (input.thickness / 10) * netArea;
   const scaffold = SCAFFOLD_RATE * netArea;
   // Isolatie en stelling worden niet apart vermeld — samen met de afwerking op één regel
