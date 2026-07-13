@@ -16,7 +16,26 @@ import {
 import { track } from "@/lib/tracking";
 import { ProgressBar, RadioCard, NumberInput } from "./CalcUI";
 
-const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Isolatie", "Bouwjaar", "Contact"];
+const STEPS = ["Daktype", "Oppervlakte", "Bedekking", "Bouwjaar", "Contact"];
+
+// Isoprotech plaatst uitsluitend PIR-isolatie — geen keuzestap nodig
+const ISOLATIE: DakIsolatieType = "PIR-platen";
+
+// Drop the corresponding photos into these paths (public/images/calculator/dak/…)
+const DAKTYPE_IMAGES: Record<DakType, string> = {
+  "Plat dak": "/images/calculator/dak/daktype/plat-dak.jpg",
+  "Hellend dak": "/images/calculator/dak/daktype/hellend-dak.jpg",
+};
+
+const BEDEKKING_IMAGES: Record<string, string> = {
+  "Bitumen polymeer": "/images/calculator/dak/bedekking/bitumen.jpg",
+  "Natuurleien (ardoise)": "/images/calculator/dak/bedekking/natuurleien.jpg",
+  "Keramische dakpannen": "/images/calculator/dak/bedekking/keramische-dakpannen.jpg",
+  "Betonnen dakpannen": "/images/calculator/dak/bedekking/betonnen-dakpannen.jpg",
+  "Bitumen dakshingles": "/images/calculator/dak/bedekking/bitumen.jpg",
+  "Vezelcement shingles": "/images/calculator/dak/bedekking/vezelcement-shingles.jpg",
+  "Metalen / gevouwen dakbedekking": "/images/calculator/dak/bedekking/metalen-dakbedekking.jpg",
+};
 
 export function DakCalculator() {
   const fsSubmit = useSubmit("mqeoygea");
@@ -27,7 +46,6 @@ export function DakCalculator() {
   const [schouwen, setSchouwen] = useState(0);
   const [bedekking, setBedekking] = useState<string | null>(null);
   const [bedekkingSurcharge, setBedekkingSurcharge] = useState(0);
-  const [isolatie, setIsolatie] = useState<DakIsolatieType | null>(null);
   const [bouwjaar, setBouwjaar] = useState<Bouwjaar | null>(null);
   const [naam, setNaam] = useState("");
   const [telefoon, setTelefoon] = useState("");
@@ -42,15 +60,14 @@ export function DakCalculator() {
       case 0: return !!daktype;
       case 1: return area >= 10;
       case 2: return !!bedekking;
-      case 3: return !!isolatie;
-      case 4: return !!bouwjaar;
-      case 5: return naam.trim().length > 1 && telefoon.trim().length > 6;
+      case 3: return !!bouwjaar;
+      case 4: return naam.trim().length > 1 && telefoon.trim().length > 6;
       default: return false;
     }
-  }, [step, daktype, area, bedekking, isolatie, bouwjaar, naam, telefoon]);
+  }, [step, daktype, area, bedekking, bouwjaar, naam, telefoon]);
 
   const result = useMemo(() => {
-    if (!daktype || !bedekking || !isolatie || !bouwjaar) return null;
+    if (!daktype || !bedekking || !bouwjaar) return null;
     return calculateDak({
       daktype,
       area,
@@ -58,10 +75,10 @@ export function DakCalculator() {
       schouwen,
       dakbedekking: bedekking,
       dakbedekkingSurcharge: bedekkingSurcharge,
-      isolatie,
+      isolatie: ISOLATIE,
       bouwjaar,
     });
-  }, [daktype, area, dakramen, schouwen, bedekking, bedekkingSurcharge, isolatie, bouwjaar]);
+  }, [daktype, area, dakramen, schouwen, bedekking, bedekkingSurcharge, bouwjaar]);
 
   function handleNext() {
     if (!canNext) return;
@@ -72,7 +89,7 @@ export function DakCalculator() {
       setStep(3);
       return;
     }
-    if (step < 5) {
+    if (step < 4) {
       setStep(step + 1);
     } else {
       fsSubmit({
@@ -80,7 +97,7 @@ export function DakCalculator() {
         email: email || "",
         phone: telefoon,
         service: "Dakwerken",
-        message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${isolatie}, ${bouwjaar}${result ? `, richtprijs ${formatEur(result.gross)}` : ""}`,
+        message: `Dakcalculator: ${daktype}, ${area}m², ${bedekking}, ${ISOLATIE}, ${bouwjaar}${result ? `, richtprijs ${formatEur(result.gross)}` : ""}`,
         _subject: `Dakcalculator aanvraag – ${naam}`,
       } as Parameters<typeof fsSubmit>[0]).catch(() => {});
 
@@ -229,8 +246,8 @@ export function DakCalculator() {
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Wat voor dak heeft uw woning?</h2>
             <p className="text-sm text-gray-500 mb-5">Dit bepaalt de isolatiemethode en beschikbare dakbedekkingen.</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <RadioCard selected={daktype === "Plat dak"} onClick={() => { setDaktype("Plat dak"); setBedekking(null); }} title="Plat dak (helling onder 15°)" desc="Warm-dak principe met membraanopbouw" />
-              <RadioCard selected={daktype === "Hellend dak"} onClick={() => { setDaktype("Hellend dak"); setBedekking(null); }} title="Hellend dak (klassiek schuindak)" desc="Geschikt voor pannen, leien of shingles" />
+              <RadioCard selected={daktype === "Plat dak"} onClick={() => { setDaktype("Plat dak"); setBedekking(null); }} title="Plat dak (helling onder 15°)" desc="Warm-dak principe met membraanopbouw" image={DAKTYPE_IMAGES["Plat dak"]} />
+              <RadioCard selected={daktype === "Hellend dak"} onClick={() => { setDaktype("Hellend dak"); setBedekking(null); }} title="Hellend dak (klassiek schuindak)" desc="Geschikt voor pannen, leien of shingles" image={DAKTYPE_IMAGES["Hellend dak"]} />
             </div>
           </div>
         );
@@ -258,64 +275,20 @@ export function DakCalculator() {
             <p className="text-sm text-gray-500 mb-5">Kies het materiaal dat het beste bij uw woning past.</p>
             <div className={`grid gap-3 ${daktype === "Plat dak" ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
               {bedekkingOpts.map((opt) => (
-                <button
+                <RadioCard
                   key={opt.name}
-                  type="button"
+                  selected={bedekking === opt.name}
                   onClick={() => { setBedekking(opt.name); setBedekkingSurcharge(opt.surcharge); }}
-                  aria-pressed={bedekking === opt.name}
-                  className={`text-left rounded-2xl border-2 p-4 transition-all ${
-                    bedekking === opt.name
-                      ? "border-orange-400 bg-orange-50 shadow-md"
-                      : "border-gray-150 bg-white hover:border-gray-300"
-                  }`}
-                >
-                  <span className="block font-bold text-sm text-teal-800">{opt.name}</span>
-                  <span className="block text-xs text-gray-500 mt-1">{opt.desc}</span>
-                </button>
+                  title={opt.name}
+                  desc={opt.desc}
+                  image={BEDEKKING_IMAGES[opt.name]}
+                />
               ))}
             </div>
           </div>
         );
 
       case 3:
-        return (
-          <div>
-            <h2 className="text-xl font-extrabold text-teal-800 mb-1">Welk isolatiemateriaal?</h2>
-            <p className="text-sm text-gray-500 mb-5">Alle opties halen de minimale R=4.5 voor Fluvius-premies.</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {([
-                { k: "PIR-platen" as const, t: "PIR-platen", d: "Hoogste isolatiewaarde per cm", badge: "Populairste keuze", badgeColor: "orange" },
-                { k: "Minerale wol" as const, t: "Minerale wol", d: "Goede geluid- & brandisolatie" },
-                { k: "Houtvezel" as const, t: "Houtvezel", d: "Ecologisch, zomers comfort", badge: "Ecologisch", badgeColor: "green" },
-                { k: "Advies gewenst" as const, t: "Laat Isoprotech adviseren", d: "Wij kiezen de beste optie voor uw situatie" },
-              ]).map((opt) => (
-                <button
-                  key={opt.k}
-                  type="button"
-                  onClick={() => setIsolatie(opt.k)}
-                  aria-pressed={isolatie === opt.k}
-                  className={`text-left rounded-2xl border-2 p-4 transition-all ${
-                    isolatie === opt.k
-                      ? "border-orange-400 bg-orange-50 shadow-md"
-                      : "border-gray-150 bg-white hover:border-gray-300"
-                  }`}
-                >
-                  <span className="block font-bold text-sm text-teal-800">{opt.t}</span>
-                  <span className="block text-xs text-gray-500 mt-1">{opt.d}</span>
-                  {opt.badge && (
-                    <span className={`inline-block mt-2 px-2 py-1 rounded-lg text-[11px] font-bold ${
-                      opt.badgeColor === "green" ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-600"
-                    }`}>
-                      {opt.badge}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 4:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Wanneer is de woning gebouwd?</h2>
@@ -357,7 +330,7 @@ export function DakCalculator() {
           </div>
         );
 
-      case 5:
+      case 4:
         return (
           <div>
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Naar waar sturen we uw richtprijs?</h2>
@@ -402,7 +375,7 @@ export function DakCalculator() {
           disabled={!canNext}
           className="btn-primary flex-1 text-sm"
         >
-          {step === 5 ? "Bereken mijn prijs" : "Verder"}
+          {step === 4 ? "Bereken mijn prijs" : "Verder"}
         </button>
       </div>
     </div>
