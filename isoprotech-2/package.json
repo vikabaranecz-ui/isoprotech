@@ -16,6 +16,12 @@
     "@hookform/resolvers": "^3.3.0",
     "zod": "^3.22.0"
   },
+  "browserslist": [
+    "chrome >= 91",
+    "firefox >= 90",
+    "safari >= 14.1",
+    "edge >= 91"
+  ],
   "devDependencies": {
     "@types/node": "^20.12.0",
     "@types/react": "^18.3.0",

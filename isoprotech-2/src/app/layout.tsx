@@ -2,13 +2,18 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 import { BRAND } from "@/lib/constants";
 import { localBusinessSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { CookieBanner } from "@/components/CookieBanner";
 import "@/styles/globals.css";
+
+const CookieBanner = dynamic(
+  () => import("@/components/CookieBanner").then((m) => ({ default: m.CookieBanner })),
+  { ssr: false }
+);
 
 const outfit = Outfit({
   subsets: ["latin"],

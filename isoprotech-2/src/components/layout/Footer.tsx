@@ -1,5 +1,6 @@
 // src/components/layout/Footer.tsx
 import Link from "next/link";
+import Image from "next/image";
 import { BRAND, IMAGES, SOCIAL } from "@/lib/constants";
 import { services } from "@/content/services";
 import { cities } from "@/content/cities";
@@ -11,8 +12,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 mb-12">
           {/* Brand */}
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={IMAGES.logo}
               alt="ISOPROTECH"
               width={160}

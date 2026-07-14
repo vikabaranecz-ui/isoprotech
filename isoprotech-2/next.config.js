@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  experimental: {
+    optimizePackageImports: ["react-hook-form", "@hookform/resolvers", "zod"],
+  },
   // Generate sitemap and robots.txt
   async headers() {
     return [

@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { BRAND, IMAGES } from "@/lib/constants";
 
@@ -98,13 +99,13 @@ export function Navbar() {
     <nav ref={navRef} className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${navBg}`} role="navigation" aria-label="Hoofdnavigatie">
       <div className="container-wide flex items-center justify-between h-16 md:h-[4.5rem]">
         <Link href="/" aria-label="ISOPROTECH — Naar homepagina">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={scrolled ? IMAGES.logoDark : IMAGES.logo}
             alt="ISOPROTECH"
             width={160}
             height={24}
             className="h-6 w-auto transition-all duration-300"
+            priority
           />
         </Link>
 
