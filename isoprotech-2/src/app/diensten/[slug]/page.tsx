@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
 import { getBlogPostBySlug } from "@/content/blog";
+import { getProjectsByService } from "@/content/projects";
 import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -54,6 +55,7 @@ export default function ServicePage({
 
   const related = getRelatedServices(service.id);
   const serviceUrl = `${BRAND.url}/diensten/${service.slug}`;
+  const relatedProjects = getProjectsByService(service.slug);
   const relatedBlogPosts = (service.relatedBlogSlugs ?? [])
     .map(getBlogPostBySlug)
     .filter(Boolean) as NonNullable<ReturnType<typeof getBlogPostBySlug>>[];
@@ -224,6 +226,52 @@ export default function ServicePage({
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related project case studies */}
+      {relatedProjects.length > 0 && (
+        <section className="bg-stone-50 py-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Voor & Na</span>
+            <h2 className="mt-2 text-2xl font-extrabold text-teal-800 mb-8">
+              Realisaties {service.name.toLowerCase()}
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {relatedProjects.map((rp) => (
+                <Link
+                  key={rp.id}
+                  href={`/realisaties/${rp.slug}`}
+                  className="group block rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-orange-200"
+                >
+                  {rp.beforePhoto ? (
+                    <div className="grid grid-cols-2 gap-0.5 bg-gray-200">
+                      <div className="relative">
+                        <Image src={rp.beforePhoto.src} alt={rp.beforePhoto.alt} width={rp.beforePhoto.width} height={rp.beforePhoto.height} className="w-full h-auto object-cover" sizes="15vw" />
+                        <span className="absolute bottom-1.5 left-1.5 bg-red-500/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">VOOR</span>
+                      </div>
+                      <div className="relative">
+                        <Image src={rp.photo.src} alt={rp.photo.alt} width={rp.photo.width} height={rp.photo.height} className="w-full h-auto object-cover" sizes="15vw" />
+                        <span className="absolute bottom-1.5 right-1.5 bg-green-500/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">NA</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <Image src={rp.photo.src} alt={rp.photo.alt} width={rp.photo.width} height={rp.photo.height} className="w-full h-auto object-cover" sizes="25vw" />
+                  )}
+                  <div className="p-3">
+                    <h3 className="text-xs font-bold text-teal-800 leading-snug group-hover:text-orange-500 transition-colors">{rp.title}</h3>
+                    <p className="text-[11px] text-gray-400 mt-0.5">{rp.location}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-6">
+              <Link href="/realisaties" className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-orange-500 transition-colors">
+                Alle realisaties bekijken
+                <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+              </Link>
             </div>
           </div>
         </section>
