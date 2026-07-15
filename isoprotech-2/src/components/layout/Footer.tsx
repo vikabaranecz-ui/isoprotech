@@ -139,6 +139,12 @@ export function Footer() {
             >
               Blog
             </Link>
+            <Link
+              href="/partners"
+              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+            >
+              Partners
+            </Link>
           </div>
         </div>
       </div>
