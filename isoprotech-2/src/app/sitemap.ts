@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
 import { cities } from "@/content/cities";
 import { blogPosts } from "@/content/blog";
+import { projects } from "@/content/projects";
 
 const BASE = "https://www.isoprotech.be";
 
@@ -12,16 +13,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE}/diensten`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/realisaties`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/realisaties`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE}/calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/calculator/dak`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/partners`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
 
-    // /privacy and /cookies are noindex — excluded from sitemap
+    // /privacy en /cookies zijn noindex — uitgesloten van sitemap
     { url: `${BASE}/regio`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // Landing pages — high priority for Google Ads
+    // Landing pages — hoge prioriteit voor lokale SEO
     { url: `${BASE}/gevelisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dakisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
   ];
@@ -47,5 +49,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticPages, ...servicePages, ...cityPages, ...blogPages];
+  const projectPages: MetadataRoute.Sitemap = projects.map((p) => ({
+    url: `${BASE}/realisaties/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...cityPages,
+    ...blogPages,
+    ...projectPages,
+  ];
 }
