@@ -6,7 +6,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 
 export const metadata: Metadata = {
   title: "Onze Partners",
-  description: "ISOPROTECH werkt samen met betrouwbare partners in de bouwsector. Ontdek onze partnerbedrijven voor isolatie, klimaatisering en ventilatie.",
+  description: "ISOPROTECH werkt samen met betrouwbare partners in de bouwsector. Ontdek onze partnerbedrijven voor isolatie, steigers en renovatie.",
   alternates: { canonical: `${BRAND.url}/partners` },
   openGraph: {
     title: "Onze Partners | ISOPROTECH",
@@ -18,19 +18,19 @@ const partners = [
   {
     id: "klimmax",
     name: "Klimmax",
-    tagline: "Airconditioning, warmtepompen & ventilatie",
+    tagline: "Verhuur van steigers & bouwstelling",
     description:
-      "Klimmax is een gespecialiseerd bedrijf in de installatie van airconditioningsystemen, warmtepompen en ventilatie voor woningen en bedrijven. Als partner van ISOPROTECH zorgen zij voor het complete klimaatverhaal: wij isoleren uw woning optimaal, Klimmax zorgt vervolgens voor een efficiënt en duurzaam klimaatsysteem. Samen bieden wij een totaalpakket voor uw energierenovatie.",
+      "Klimmax is gespecialiseerd in de verhuur van steigers en bouwstellingen voor renovatie- en bouwprojecten. Als vaste partner van ISOPROTECH zorgt Klimmax voor de veilige en snelle plaatsing van steigers bij elk dak- of gevelproject. Dankzij deze samenwerking kunnen wij onze werven efficiënt en professioneel uitvoeren — van de eerste dag tot de laatste afwerking.",
     website: "https://www.klimmax.be",
     logoFallback: "K",
-    logoColor: "bg-blue-600",
+    logoColor: "bg-orange-600",
     services: [
-      "Airconditioning",
-      "Warmtepompen",
-      "Ventilatie (WTW)",
-      "Klimaatinstallaties",
+      "Verhuur van steigers",
+      "Bouwstellingen voor renovatie",
+      "Plaatsing & afbraak steigers",
+      "Gevels & daken bereikbaar maken",
     ],
-    why: "Een goed geïsoleerde woning werkt optimaal in combinatie met een efficiënt klimaatsysteem. ISOPROTECH en Klimmax vullen elkaar aan voor een totale energierenovatie.",
+    why: "Bij gevel- en dakisolatie is een degelijke stelling onmisbaar. ISOPROTECH werkt vast samen met Klimmax voor een vlotte en veilige steigerbouw op elke werf in de regio Antwerpen.",
   },
 ];
 
