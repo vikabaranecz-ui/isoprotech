@@ -102,50 +102,95 @@ export default function ProjectCasePage({
       </div>
 
       {/* Before / After photos */}
-      <section className="mx-auto max-w-7xl px-6 py-10">
+      <section className="mx-auto max-w-7xl px-6 py-10 space-y-4">
         {project.beforePhoto ? (
-          <div className="grid sm:grid-cols-2 gap-3 rounded-2xl overflow-hidden">
-            <div className="relative group">
-              <Image
-                src={project.beforePhoto.src}
-                alt={project.beforePhoto.alt}
-                width={project.beforePhoto.width}
-                height={project.beforePhoto.height}
-                className="w-full h-auto object-cover rounded-2xl"
-                sizes="(max-width:640px)100vw,50vw"
-                priority
-              />
-              <span className="absolute top-4 left-4 bg-red-500/90 text-white text-sm font-bold px-4 py-1.5 rounded-xl">
-                VOOR
-              </span>
+          <>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                <Image
+                  src={project.beforePhoto.src}
+                  alt={project.beforePhoto.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:640px)100vw,50vw"
+                  priority
+                />
+                <span className="absolute top-4 left-4 bg-red-500/90 text-white text-sm font-bold px-4 py-1.5 rounded-xl">
+                  VOOR
+                </span>
+              </div>
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                <Image
+                  src={project.photo.src}
+                  alt={project.photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:640px)100vw,50vw"
+                  priority
+                />
+                <span className="absolute top-4 right-4 bg-green-500/90 text-white text-sm font-bold px-4 py-1.5 rounded-xl">
+                  NA
+                </span>
+              </div>
             </div>
-            <div className="relative group">
+            {project.extraBeforeAfterPairs?.map((pair, i) => (
+              <div key={i} className="grid sm:grid-cols-2 gap-3">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                  <Image
+                    src={pair.before.src}
+                    alt={pair.before.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width:640px)100vw,50vw"
+                  />
+                  <span className="absolute top-4 left-4 bg-red-500/90 text-white text-sm font-bold px-4 py-1.5 rounded-xl">
+                    VOOR
+                  </span>
+                </div>
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                  <Image
+                    src={pair.after.src}
+                    alt={pair.after.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width:640px)100vw,50vw"
+                  />
+                  <span className="absolute top-4 right-4 bg-green-500/90 text-white text-sm font-bold px-4 py-1.5 rounded-xl">
+                    NA
+                  </span>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <div className="rounded-2xl overflow-hidden">
               <Image
                 src={project.photo.src}
                 alt={project.photo.alt}
                 width={project.photo.width}
                 height={project.photo.height}
-                className="w-full h-auto object-cover rounded-2xl"
-                sizes="(max-width:640px)100vw,50vw"
+                className="w-full h-auto rounded-2xl"
+                sizes="(max-width:768px)100vw,900px"
                 priority
               />
-              <span className="absolute top-4 right-4 bg-green-500/90 text-white text-sm font-bold px-4 py-1.5 rounded-xl">
-                NA
-              </span>
             </div>
-          </div>
-        ) : (
-          <div className="rounded-2xl overflow-hidden">
-            <Image
-              src={project.photo.src}
-              alt={project.photo.alt}
-              width={project.photo.width}
-              height={project.photo.height}
-              className="w-full h-auto rounded-2xl"
-              sizes="(max-width:768px)100vw,900px"
-              priority
-            />
-          </div>
+            {project.extraPhotos && project.extraPhotos.length > 0 && (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {project.extraPhotos.map((photo, i) => (
+                  <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </section>
 
