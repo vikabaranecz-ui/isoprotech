@@ -71,7 +71,7 @@ export const PHOTOS = {
   binnentuinAfter: { src: "/images/projects/binnentuin-after-berchem.jpg", alt: "Binnentuin na renovatie — witte crepi muren, tegels en sfeerverlichting", width: 1536, height: 2048 },
   binnentuinOnderkantBefore: { src: "/images/projects/binnentuinonderkant-before-berchem.jpg", alt: "Binnentuin onderkant vóór renovatie — verwaarloosde ruimte", width: 1536, height: 2048 },
   binnentuinOnderkantAfter: { src: "/images/projects/binnentuinonderkant-after-berchem.jpg", alt: "Binnentuin onderkant na renovatie — crepi afwerking en tegels", width: 1536, height: 2048 },
-  hellendDakEdegemBefore: { src: "/images/projects/hellendakedegem-before.jpg", alt: "Hellend dak Edegem vóór renovatie — verouderde dakpannen", width: 2048, height: 1152 },
+  hellendDakEdegemBefore: { src: "/images/projects/hellendakedegem-before.jpg", alt: "Hellend dak Edegem vóór renovatie — verouderde dakpannen", width: 1152, height: 2048 },
   hellendDakEdegemAfter: { src: "/images/projects/hellendakedegem-after.jpg", alt: "Hellend dak Edegem na renovatie — nieuwe dakpannen en isolatie", width: 1320, height: 1752 },
   hellendDakEdegemBefore2: { src: "/images/projects/hellendakedegem-before2.jpg", alt: "Hellend dak Edegem vóór renovatie — tweede hoek", width: 2048, height: 1152 },
   hellendDakEdegemAfter1: { src: "/images/projects/hellendakedegem-after1.jpg", alt: "Hellend dak Edegem na renovatie — tweede hoek na renovatie", width: 1536, height: 2048 },
