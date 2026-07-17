@@ -51,6 +51,15 @@ export default function ProjectCasePage({
   const related = getRelatedProjects(project.id);
   const service = project.serviceSlug ? getServiceBySlug(project.serviceSlug) : undefined;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Realisaties", item: `${BRAND.url}/realisaties` },
+      { "@type": "ListItem", position: 2, name: project.title, item: `${BRAND.url}/realisaties/${project.slug}` },
+    ],
+  };
+
   const caseStudySchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -59,12 +68,20 @@ export default function ProjectCasePage({
     image: `${BRAND.url}${project.photo.src}`,
     author: { "@type": "Organization", name: BRAND.name, url: BRAND.url },
     publisher: { "@type": "Organization", name: BRAND.name, url: BRAND.url },
+    ...(project.specs?.jaar ? { datePublished: `${project.specs.jaar}-01-01` } : {}),
     mainEntityOfPage: `${BRAND.url}/realisaties/${project.slug}`,
+    about: {
+      "@type": "Service",
+      name: project.workType.join(", "),
+      areaServed: { "@type": "City", name: project.location },
+      provider: { "@type": "LocalBusiness", name: BRAND.name, url: BRAND.url },
+    },
   };
 
   return (
     <>
       <JsonLd data={caseStudySchema} />
+      <JsonLd data={breadcrumbSchema} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-teal-800 to-teal-600 py-20">
@@ -194,6 +211,48 @@ export default function ProjectCasePage({
         )}
       </section>
 
+      {/* Project specificaties */}
+      {project.specs && Object.values(project.specs).some(Boolean) && (
+        <section className="mx-auto max-w-4xl px-6 pb-10">
+          <div className="bg-teal-50 border border-teal-100 rounded-2xl p-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {project.specs.material && (
+              <div>
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-1">Systeem</p>
+                <p className="text-sm text-gray-700 font-medium">{project.specs.material}</p>
+              </div>
+            )}
+            {project.specs.isolatiewaarde && (
+              <div>
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-1">Isolatiewaarde</p>
+                <p className="text-sm text-gray-700 font-medium">{project.specs.isolatiewaarde}</p>
+              </div>
+            )}
+            {project.specs.oppervlakte && (
+              <div>
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-1">Oppervlakte</p>
+                <p className="text-sm text-gray-700 font-medium">{project.specs.oppervlakte}</p>
+              </div>
+            )}
+            {(project.specs.epcVoor || project.specs.epcNa) && (
+              <div>
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-1">EPC label</p>
+                <p className="text-sm text-gray-700 font-medium">
+                  {project.specs.epcVoor && <span className="text-red-500 font-bold">{project.specs.epcVoor}</span>}
+                  {project.specs.epcVoor && project.specs.epcNa && <span className="mx-1">→</span>}
+                  {project.specs.epcNa && <span className="text-green-600 font-bold">{project.specs.epcNa}</span>}
+                </p>
+              </div>
+            )}
+            {project.specs.jaar && (
+              <div>
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-1">Jaar</p>
+                <p className="text-sm text-gray-700 font-medium">{project.specs.jaar}</p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Case study — Probleem / Oplossing / Resultaat */}
       <section className="mx-auto max-w-4xl px-6 pb-16">
         <div className="grid gap-8 md:grid-cols-3">
@@ -289,6 +348,19 @@ export default function ProjectCasePage({
           >
             ← Alle realisaties
           </Link>
+          {/* Smart links to service subpages */}
+          {project.workType.some(w => w === "Dakisolatie" || w === "Dakrenovatie") && (
+            <>
+              <Link href="/dakisolatie/plat-dak" className="inline-flex items-center gap-1.5 rounded-xl bg-teal-50 border border-teal-100 px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-100 transition-colors">Plat dak isolatie</Link>
+              <Link href="/dakisolatie/prijs" className="inline-flex items-center gap-1.5 rounded-xl bg-teal-50 border border-teal-100 px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-100 transition-colors">Dakisolatie prijs</Link>
+            </>
+          )}
+          {project.workType.some(w => w === "Gevelisolatie" || w === "Crepi") && (
+            <>
+              <Link href="/gevelisolatie/crepi-met-isolatie" className="inline-flex items-center gap-1.5 rounded-xl bg-teal-50 border border-teal-100 px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-100 transition-colors">Crepi met isolatie</Link>
+              <Link href="/gevelisolatie/prijs" className="inline-flex items-center gap-1.5 rounded-xl bg-teal-50 border border-teal-100 px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-100 transition-colors">Gevelisolatie prijs</Link>
+            </>
+          )}
         </div>
       </section>
 
