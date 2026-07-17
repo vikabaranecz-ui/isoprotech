@@ -1,0 +1,173 @@
+{
+  "generated": "2026-07-17",
+  "baseUrl": "https://www.isoprotech.be",
+  "pages": [
+    {
+      "url": "/",
+      "priority": "P0",
+      "title": "ISOPROTECH — Dakisolatie & Gevelisolatie Antwerpen",
+      "type": "homepage",
+      "status": "existing"
+    },
+    {
+      "url": "/diensten/dakisolatie",
+      "priority": "P0",
+      "title": "Dakisolatie Antwerpen — Plat Dak, Hellend Dak & Sarking",
+      "type": "service-pillar",
+      "status": "existing",
+      "subpages": [
+        "/dakisolatie/plat-dak",
+        "/dakisolatie/hellend-dak",
+        "/dakisolatie/sarkingdak",
+        "/dakisolatie/prijs"
+      ]
+    },
+    {
+      "url": "/diensten/gevelisolatie",
+      "priority": "P0",
+      "title": "Gevelisolatie Antwerpen — Buitenisolatie met Crepi & Steenstrips",
+      "type": "service-pillar",
+      "status": "existing",
+      "subpages": [
+        "/gevelisolatie/crepi-met-isolatie",
+        "/gevelisolatie/steenstrips-met-isolatie",
+        "/gevelisolatie/prijs",
+        "/gevelisolatie/dikte"
+      ]
+    },
+    {
+      "url": "/dakisolatie/plat-dak",
+      "priority": "P1",
+      "title": "Plat Dak Isoleren Antwerpen — Warm Dak, PIR & EPDM",
+      "type": "commercial-subpage",
+      "status": "new-2026-07",
+      "targetKeywords": ["plat dak isoleren", "plat dak isolatie Antwerpen", "warm dak systeem"],
+      "schemas": ["FAQPage", "Service", "BreadcrumbList"],
+      "rdValues": "10–18 cm PIR, Rd 4,5–8,1 m²K/W"
+    },
+    {
+      "url": "/dakisolatie/hellend-dak",
+      "priority": "P1",
+      "title": "Hellend Dak Isoleren Antwerpen — Sarking, Binnenin of Buitenuit",
+      "type": "commercial-subpage",
+      "status": "new-2026-07",
+      "targetKeywords": ["hellend dak isoleren", "hellend dak isolatie Antwerpen", "sarking hellend dak"],
+      "schemas": ["FAQPage", "Service", "BreadcrumbList"],
+      "rdValues": "12–22 cm PIR, Rd 5,4–9,9 m²K/W"
+    },
+    {
+      "url": "/dakisolatie/sarkingdak",
+      "priority": "P1",
+      "title": "Sarkingdak Antwerpen — Buitenisolatie Hellend Dak met PIR",
+      "type": "commercial-subpage",
+      "status": "new-2026-07",
+      "targetKeywords": ["sarkingdak", "sarking isolatie", "buitenisolatie hellend dak"],
+      "schemas": ["FAQPage", "BreadcrumbList"],
+      "rdValues": "12–22 cm PIR, Rd 5,4–9,9 m²K/W"
+    },
+    {
+      "url": "/dakisolatie/prijs",
+      "priority": "P1",
+      "title": "Dakisolatie Prijs 2026 — Wat Kost Dakisolatie in Antwerpen?",
+      "type": "price-page",
+      "status": "new-2026-07",
+      "targetKeywords": ["dakisolatie prijs", "dakisolatie kosten", "plat dak isoleren prijs"],
+      "schemas": ["FAQPage", "BreadcrumbList"],
+      "priceRanges": {
+        "platDak": "€80–170/m² incl. 6% BTW",
+        "sarking": "€75–140/m² incl. 6% BTW",
+        "binnenisolatie": "€45–90/m² incl. 6% BTW"
+      }
+    },
+    {
+      "url": "/gevelisolatie/crepi-met-isolatie",
+      "priority": "P1",
+      "title": "Crepi met Isolatie Antwerpen — ETICS Buitengevelisolatie",
+      "type": "commercial-subpage",
+      "status": "new-2026-07",
+      "targetKeywords": ["crepi met isolatie", "gevelisolatie crepi", "ETICS Antwerpen"],
+      "schemas": ["FAQPage", "Service", "BreadcrumbList"],
+      "rdValues": "10–20 cm EPS, Rd 3,2–6,5 m²K/W"
+    },
+    {
+      "url": "/gevelisolatie/steenstrips-met-isolatie",
+      "priority": "P1",
+      "title": "Steenstrips met Isolatie Antwerpen — Bakstenen Look + ETICS",
+      "type": "commercial-subpage",
+      "status": "new-2026-07",
+      "targetKeywords": ["steenstrips met isolatie", "gevelisolatie steenstrips", "baksteen look isolatie"],
+      "schemas": ["FAQPage", "BreadcrumbList"],
+      "rdValues": "14–18 cm EPS, Rd 4,5–5,8 m²K/W"
+    },
+    {
+      "url": "/gevelisolatie/prijs",
+      "priority": "P1",
+      "title": "Gevelisolatie Prijs 2026 — Wat Kost Gevelisolatie in Antwerpen?",
+      "type": "price-page",
+      "status": "new-2026-07",
+      "targetKeywords": ["gevelisolatie prijs", "gevelisolatie kosten", "crepi isolatie prijs"],
+      "schemas": ["FAQPage", "BreadcrumbList"],
+      "priceRanges": {
+        "crepi14cm": "€85–110/m² incl. 6% BTW",
+        "crepi18cm": "€100–125/m² incl. 6% BTW",
+        "steenstrips14cm": "€130–155/m² incl. 6% BTW"
+      }
+    },
+    {
+      "url": "/gevelisolatie/dikte",
+      "priority": "P2",
+      "title": "Gevelisolatie Dikte — 14 cm of 18 cm EPS? Advies & Vergelijking",
+      "type": "informational-subpage",
+      "status": "new-2026-07",
+      "targetKeywords": ["gevelisolatie dikte", "EPS 14 cm gevel", "isolatiedikte gevel"],
+      "schemas": ["FAQPage", "BreadcrumbList"],
+      "epbReference": "VEKA, geraadpleegd juni 2026"
+    },
+    {
+      "url": "/blog/dakisolatie-premie-2026",
+      "priority": "P2",
+      "title": "Dakisolatie Premie 2026 — Mijn VerbouwPremie & BTW 6%",
+      "type": "blog-post",
+      "status": "new-2026-07",
+      "targetKeywords": ["dakisolatie premie 2026", "mijn verbouwpremie dakisolatie"]
+    },
+    {
+      "url": "/blog/gevelisolatie-premie-2026",
+      "priority": "P2",
+      "title": "Gevelisolatie Premie 2026 — Overzicht Subsidies voor Buitengevelisolatie",
+      "type": "blog-post",
+      "status": "new-2026-07",
+      "targetKeywords": ["gevelisolatie premie 2026", "mijn verbouwpremie gevelisolatie"]
+    },
+    {
+      "url": "/dakisolatie-antwerpen",
+      "priority": "P1",
+      "title": "Dakisolatie Antwerpen — Lokale Landing Page",
+      "type": "local-landing",
+      "status": "existing",
+      "note": "Lokale pagina — commercieel. Pillar is /diensten/dakisolatie (technisch)."
+    },
+    {
+      "url": "/gevelisolatie-antwerpen",
+      "priority": "P1",
+      "title": "Gevelisolatie Antwerpen — Lokale Landing Page",
+      "type": "local-landing",
+      "status": "existing",
+      "note": "Lokale pagina — commercieel. Pillar is /diensten/gevelisolatie (technisch)."
+    }
+  ],
+  "cannibalizationPrevention": {
+    "/diensten/dakisolatie": "Technische pillar — algemene uitleg, links naar subpagina's",
+    "/dakisolatie-antwerpen": "Lokale landing — geo-targeting Antwerpen, conversiegericht",
+    "/dakisolatie/plat-dak": "Commercieel — specifiek voor plat dak, prijzen, projecten",
+    "/diensten/gevelisolatie": "Technische pillar — algemene uitleg ETICS, links naar subpagina's",
+    "/gevelisolatie-antwerpen": "Lokale landing — geo-targeting Antwerpen, conversiegericht"
+  },
+  "regulatoryReferences": {
+    "epb": "VEKA — Vlaams Energie- en Klimaatagentschap (veka.be)",
+    "premies": "vlaanderen.be/mijn-verbouwpremie (geraadpleegd juni 2026)",
+    "btw6": "FOD Financiën — BTW-tarief 6% voor renovatie woningen > 10 jaar",
+    "minRdRenovatie": "Rd 4,5 m²K/W (dak), Rd 1,5 m²K/W (gevel) — EPB renovatie",
+    "minRdIER": "Rd 6,0 m²K/W (dak), Rd 3,5 m²K/W (gevel) — IER"
+  }
+}

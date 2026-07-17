@@ -26,6 +26,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Landing pages — hoge prioriteit voor lokale SEO
     { url: `${BASE}/gevelisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dakisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    // Dakisolatie subpagina's
+    { url: `${BASE}/dakisolatie/plat-dak`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dakisolatie/hellend-dak`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dakisolatie/sarkingdak`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dakisolatie/prijs`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    // Gevelisolatie subpagina's
+    { url: `${BASE}/gevelisolatie/crepi-met-isolatie`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/gevelisolatie/steenstrips-met-isolatie`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/gevelisolatie/prijs`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/gevelisolatie/dikte`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
   ];
 
   const servicePages: MetadataRoute.Sitemap = services.map((s) => ({
