@@ -73,8 +73,10 @@ export const PHOTOS = {
   binnentuinOnderkantAfter: { src: "/images/projects/binnentuinonderkant-after-berchem.jpg", alt: "Binnentuin onderkant na renovatie — crepi afwerking en tegels", width: 1536, height: 2048 },
   hellendDakEdegemBefore: { src: "/images/projects/hellendakedegem-before.jpg", alt: "Hellend dak Edegem vóór renovatie — verouderde dakpannen", width: 1152, height: 2048 },
   hellendDakEdegemAfter: { src: "/images/projects/hellendakedegem-after.jpg", alt: "Hellend dak Edegem na renovatie — nieuwe dakpannen en isolatie", width: 1320, height: 1752 },
-  hellendDakEdegemBefore2: { src: "/images/projects/hellendakedegem-before2.jpg", alt: "Hellend dak Edegem vóór renovatie — tweede hoek", width: 2048, height: 1152 },
-  hellendDakEdegemAfter1: { src: "/images/projects/hellendakedegem-after1.jpg", alt: "Hellend dak Edegem na renovatie — tweede hoek na renovatie", width: 1536, height: 2048 },
+  hellendDakEdegemBefore2: { src: "/images/projects/hellendakedegem-before2.jpg", alt: "Hellend dak Edegem vóór renovatie — tweede hoek", width: 1152, height: 2048 },
+  hellendDakEdegemAfter1: { src: "/images/projects/hellendakedegem-after1.jpg", alt: "Hellend dak Edegem na renovatie — tweede hoek na renovatie", width: 768, height: 1363 },
+  lozanastraatVoor: { src: "/images/projects/lozanastraatplatdak-voor.png", alt: "Plat dak Lozanastraat Antwerpen vóór renovatie — verouderde dakbedekking", width: 3375, height: 4219 },
+  lozanastraatNa: { src: "/images/projects/lozanastraat-platdak-na.png", alt: "Plat dak Lozanastraat Antwerpen na renovatie — nieuwe waterdichte bedekking", width: 3375, height: 4219 },
   // Spuitkurk before/after
   spuitkurkBefore1: { src: "/images/projects/spuitkurk-before-1.jpg", alt: "Woning vóór spuitkurk — verweerde cementbepleistering", width: 1195, height: 896 },
   spuitkurkAfter1: { src: "/images/projects/spuitkurk-after-1.jpg", alt: "Woning na spuitkurk — moderne witte gevelafwerking", width: 896, height: 1195 },
