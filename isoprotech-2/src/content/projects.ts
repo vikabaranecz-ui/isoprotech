@@ -27,6 +27,14 @@ export interface Project {
     keywords: string[];
   };
   videoUrl?: string;
+  specs?: {
+    material?: string;
+    isolatiewaarde?: string;
+    oppervlakte?: string;
+    epcVoor?: string;
+    epcNa?: string;
+    jaar?: string;
+  };
 }
 
 export const projects: Project[] = [
@@ -49,6 +57,7 @@ export const projects: Project[] = [
       description: "Plat dak renovatie in Antwerpen: lekkage verholpen, nieuwe PIR-isolatie en bitumen dakbedekking. Bekijk de voor- en nafoto's van dit project.",
       keywords: ["plat dak renovatie antwerpen", "plat dak lekkage antwerpen", "dakrenovatie antwerpen", "bitumen dakbedekking antwerpen"],
     },
+    specs: { material: "PIR-isolatie + tweelaags bitumen", isolatiewaarde: "Rd ≥ 4,5 m²K/W", oppervlakte: "ca. 35 m²", jaar: "2024" },
   },
   {
     id: "plat-dak-2-voor-na",
@@ -69,6 +78,7 @@ export const projects: Project[] = [
       description: "Plat dak volledig vernieuwd in Antwerpen. Van verouderde dakbedekking naar nieuwe PIR-isolatie en bitumen. Bekijk het resultaat.",
       keywords: ["plat dak vernieuwen antwerpen", "nieuw plat dak antwerpen", "dakwerken antwerpen", "dakrenovatie antwerpen"],
     },
+    specs: { material: "Dampscherm + PIR + elastomeer bitumen", isolatiewaarde: "Rd ≥ 4,5 m²K/W", oppervlakte: "ca. 40 m²", jaar: "2024" },
   },
   {
     id: "binnentuin-voor-na",
@@ -92,6 +102,7 @@ export const projects: Project[] = [
       description: "Binnentuin gerenoveerd met witte minerale crepi in Berchem Antwerpen. Van verlaten muren naar strakke buitenruimte. Bekijk de voor- en nafoto's.",
       keywords: ["binnentuin renovatie antwerpen", "crepi binnentuin antwerpen", "binnentuin renovatie berchem", "gevelafwerking antwerpen", "crepi antwerpen"],
     },
+    specs: { material: "Minerale crepi (wit)", oppervlakte: "ca. 28 m²", jaar: "2023" },
   },
   {
     id: "hellend-dak-edegem-1",
@@ -115,6 +126,7 @@ export const projects: Project[] = [
       description: "Hellend dak volledig gerenoveerd in Edegem: nieuwe dakpannen, isolatie en afwerking. Bekijk de voor- en nafoto's van dit dakrenovatieproject.",
       keywords: ["hellend dak renovatie edegem", "dakrenovatie edegem", "nieuwe dakpannen edegem", "dakwerken edegem"],
     },
+    specs: { material: "Onderdakfolie + isolatie + keramische dakpannen", isolatiewaarde: "Rd ≥ 3,5 m²K/W", oppervlakte: "ca. 110 m²", jaar: "2024" },
   },
   {
     id: "gevel-before-after-1",
@@ -135,6 +147,7 @@ export const projects: Project[] = [
       description: "Bakstenen gevel geïsoleerd met spuitkurk in Antwerpen. EPS-isolatie + spuitkurk afwerking. Bekijk de voor- en nafoto's en het resultaat.",
       keywords: ["spuitkurk antwerpen", "gevelisolatie spuitkurk antwerpen", "spuitkurk gevel antwerpen", "buitengevelisolatie antwerpen", "gevelrenovatie antwerpen"],
     },
+    specs: { material: "EPS 60 mm + spuitkurk", isolatiewaarde: "Rd 1,9 m²K/W", oppervlakte: "ca. 70 m²", jaar: "2023" },
   },
   {
     id: "crepi-before-after-1",
@@ -155,6 +168,7 @@ export const projects: Project[] = [
       description: "Verweerde achtergevel vernieuwd met isolatie en crepi in Antwerpen. Van gebarsten beton naar strakke witte gevel. Bekijk het resultaat.",
       keywords: ["crepi achtergevel antwerpen", "gevelrenovatie antwerpen", "crepi antwerpen", "gevelisolatie antwerpen"],
     },
+    specs: { material: "EPS + basislaag + witte fijnkorrelige crepi", oppervlakte: "ca. 30 m²", jaar: "2024" },
   },
   {
     id: "gevel-antwerpen-before-after",
@@ -175,6 +189,7 @@ export const projects: Project[] = [
       description: "Appartementsgebouw geïsoleerd en afgewerkt met crepi in Antwerpen. Van verouderde leien bekleding naar moderne gevel. Bekijk de transformatie.",
       keywords: ["gevelisolatie appartement antwerpen", "VME gevelrenovatie antwerpen", "crepi appartement antwerpen", "buitengevelisolatie antwerpen"],
     },
+    specs: { material: "EPS + minerale crepi", isolatiewaarde: "Rd ≥ 1,5 m²K/W", oppervlakte: "ca. 220 m²", jaar: "2023" },
   },
   {
     id: "crepi-antwerpen",
@@ -194,6 +209,7 @@ export const projects: Project[] = [
       description: "Voorgevel vernieuwd met witte crepi en donker accent in Antwerpen. Moderne gevelafwerking met isolatie. Bekijk de transformatie.",
       keywords: ["crepi voorgevel antwerpen", "gevelrenovatie antwerpen", "crepi antwerpen", "gevelisolatie antwerpen"],
     },
+    specs: { material: "EPS + witte fijnkorrelige crepi + donkere accenten", oppervlakte: "ca. 45 m²", jaar: "2024" },
   },
   {
     id: "gevel-meise",
@@ -213,6 +229,7 @@ export const projects: Project[] = [
       description: "Buitengevelisolatie met EPS en minerale crepi op vrijstaande woning in Meise. EPC verbeterd van F naar C. Bekijk het voor- en naresultaat.",
       keywords: ["buitengevelisolatie meise", "crepi meise", "gevelisolatie meise", "EPS isolatie meise"],
     },
+    specs: { material: "EPS 100 mm + witte minerale crepi", isolatiewaarde: "Rd 3,2 m²K/W", oppervlakte: "ca. 160 m²", epcVoor: "F", epcNa: "C", jaar: "2024" },
     videoUrl: VIDEOS.mainShowreel,
   },
   {
@@ -233,6 +250,7 @@ export const projects: Project[] = [
       description: "Woning in Meise volledig rondom afgewerkt met witte crepi. Zijgevel en achterkant naadloos geïsoleerd en afgewerkt. Bekijk het eindresultaat.",
       keywords: ["crepi rondom woning meise", "gevelisolatie meise", "crepi meise", "gevelafwerking meise"],
     },
+    specs: { material: "EPS 100 mm + witte minerale crepi", oppervlakte: "ca. 55 m² (zijgevel + achterkant)", jaar: "2024" },
   },
   {
     id: "crepi-schilde",
@@ -252,6 +270,7 @@ export const projects: Project[] = [
       description: "Crepi gevelafwerking op klassieke villa in Schilde. Witte minerale crepi met isolatie. Bekijk het eindresultaat van dit gevelrenovatieproject.",
       keywords: ["crepi schilde", "gevelisolatie schilde", "gevelafwerking schilde", "crepi villa schilde"],
     },
+    specs: { material: "EPS + grove minerale crepi (gebroken wit)", oppervlakte: "ca. 130 m²", jaar: "2024" },
     videoUrl: VIDEOS.projectHighlight,
   },
   {
@@ -272,6 +291,7 @@ export const projects: Project[] = [
       description: "Groot plat dak volledig gerenoveerd in Antwerpen. PIR-isolatie en tweelaags bitumen dakbedekking. Dronebeelden van het eindresultaat.",
       keywords: ["plat dak renovatie antwerpen", "grote dak vernieuwing antwerpen", "dakisolatie antwerpen", "plat dak lekkage antwerpen"],
     },
+    specs: { material: "Dampscherm + PIR 120 mm + tweelaags bitumen", isolatiewaarde: "Rd ≥ 5,5 m²K/W", oppervlakte: "ca. 85 m²", jaar: "2023" },
   },
   {
     id: "crepi-oranje-1",
@@ -292,6 +312,7 @@ export const projects: Project[] = [
       description: "Woning in Antwerpen afgewerkt met warm oranje minerale crepi en EPS-isolatie. Een unieke kleurkeuze professioneel uitgevoerd. Bekijk het resultaat.",
       keywords: ["oranje crepi antwerpen", "gekleurde crepi antwerpen", "crepi antwerpen", "gevelisolatie antwerpen kleur"],
     },
+    specs: { material: "EPS + gepigmenteerde minerale crepi (terracotta-oranje)", oppervlakte: "ca. 50 m²", jaar: "2024" },
   },
   {
     id: "crepi-hoboken-1",
@@ -315,6 +336,7 @@ export const projects: Project[] = [
       description: "Verweerde gevel in Hoboken volledig vernieuwd met isolatie en witte minerale crepi. Voor- en nafoto's van voor- en achterzijde. Bekijk de transformatie.",
       keywords: ["crepi hoboken", "gevelisolatie hoboken", "gevelrenovatie hoboken", "crepi antwerpen hoboken"],
     },
+    specs: { material: "EPS + witte fijnkorrelige minerale crepi", oppervlakte: "ca. 90 m²", jaar: "2024" },
   },
   {
     id: "crepi-mechelen",
@@ -335,6 +357,7 @@ export const projects: Project[] = [
       description: "Bakstenen gevel in Mechelen getransformeerd met gevelisolatie en witte minerale crepi. Bekijk de voor- en nafoto's van dit crepiproject.",
       keywords: ["crepi mechelen", "gevelisolatie mechelen", "gevelafwerking mechelen", "gevelrenovatie mechelen"],
     },
+    specs: { material: "EPS + witte fijnkorrelige minerale crepi", oppervlakte: "ca. 65 m²", jaar: "2024" },
   },
   {
     id: "gevel-meise-voor-na",
@@ -358,6 +381,7 @@ export const projects: Project[] = [
       description: "Voor en na: gevelisolatie met EPS en crepi op woning in Meise. Volledige documentatie van het renovatieproject. Bekijk het resultaat.",
       keywords: ["gevelisolatie meise voor na", "crepi meise voor na", "buitengevelisolatie meise", "gevelrenovatie meise"],
     },
+    specs: { material: "EPS 100 mm + glasvezelwapening + witte minerale crepi", isolatiewaarde: "Rd 3,2 m²K/W", oppervlakte: "ca. 140 m²", jaar: "2025" },
   },
   {
     id: "gevel-berchem-totaal",
@@ -378,6 +402,7 @@ export const projects: Project[] = [
       description: "Complete renovatie in Berchem Antwerpen: gevelisolatie, crepi, platdak en ramen. Alles in één project. Bekijk de voor- en nafoto's.",
       keywords: ["totaalrenovatie berchem", "gevelisolatie berchem antwerpen", "platdak renovatie berchem", "crepi berchem antwerpen"],
     },
+    specs: { material: "EPS gevel + crepi + PIR dakisolatie + bitumen", oppervlakte: "ca. 75 m² gevel + 30 m² dak", jaar: "2024" },
   },
   {
     id: "gevel-wijnegem",
@@ -398,6 +423,7 @@ export const projects: Project[] = [
       description: "Rijwoning in Wijnegem geïsoleerd en afgewerkt met witte minerale crepi. Moderne uitstraling en beter EPC. Bekijk de voor- en nafoto's.",
       keywords: ["gevelisolatie wijnegem", "crepi wijnegem", "gevelrenovatie wijnegem", "buitengevelisolatie wijnegem"],
     },
+    specs: { material: "EPS + witte minerale crepi", isolatiewaarde: "Rd ≥ 1,5 m²K/W", oppervlakte: "ca. 60 m²", jaar: "2025" },
   },
   {
     id: "plat-dak-lozanastraat",
@@ -418,6 +444,7 @@ export const projects: Project[] = [
       description: "Plat dak volledig vernieuwd aan de Lozanastraat in Antwerpen. Van lekkende dakbedekking naar waterdichte PIR-isolatie en bitumen. Bekijk voor en na.",
       keywords: ["plat dak renovatie antwerpen", "dakrenovatie lozanastraat antwerpen", "plat dak lekkage antwerpen", "dakwerken antwerpen"],
     },
+    specs: { material: "Dampscherm + PIR-isolatie + tweelaags elastomeer bitumen", oppervlakte: "ca. 38 m²", jaar: "2025" },
   },
 ];
 
