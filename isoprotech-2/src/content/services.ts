@@ -2,6 +2,12 @@
 
 import { PHOTOS } from "@/lib/constants";
 
+export interface ServiceSubPage {
+  href: string;
+  label: string;
+  desc: string;
+}
+
 export interface Service {
   id: string;
   slug: string;
@@ -21,6 +27,7 @@ export interface Service {
   relatedBlogSlugs: string[];
   landingPage?: string;
   faqIds: string[];
+  subPages?: ServiceSubPage[];
 }
 
 export const services: Service[] = [
@@ -52,9 +59,15 @@ export const services: Service[] = [
       keywords: ["dakisolatie antwerpen", "dak isoleren", "plat dak isolatie", "hellend dak isolatie", "dakisolatie prijs"],
     },
     relatedServices: ["dakwerken", "dakrenovatie", "gevelisolatie"],
-    relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakisolatie-prijs-m2-2026", "epc-label-verbeteren", "premies-renovatie-2026"],
+    relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakisolatie-prijs-m2-2026", "epc-label-verbeteren", "premies-renovatie-2026", "dakisolatie-premie-2026"],
     landingPage: "/dakisolatie-antwerpen",
     faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "garantie"],
+    subPages: [
+      { href: "/dakisolatie/plat-dak", label: "Plat dak isoleren", desc: "Warm-dak systeem met PIR en EPDM — Rd 4,5 tot 9,9 m²K/W" },
+      { href: "/dakisolatie/hellend-dak", label: "Hellend dak isoleren", desc: "Sarking, binnenisolatie of combinatie — welke methode past?" },
+      { href: "/dakisolatie/sarkingdak", label: "Sarkingdak", desc: "Buitenisolatie hellend dak: koudebrug-vrij en dampopen" },
+      { href: "/dakisolatie/prijs", label: "Dakisolatie prijs", desc: "Indicatieve prijsranges per methode, BTW 6% en premie-info" },
+    ],
   },
   {
     id: "dakrenovatie",
@@ -163,9 +176,15 @@ export const services: Service[] = [
       keywords: ["gevelisolatie antwerpen", "buitengevelisolatie", "gevel isoleren", "gevelisolatie prijs m2"],
     },
     relatedServices: ["crepi", "spuitkurk"],
-    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026"],
+    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026", "gevelisolatie-premie-2026"],
     landingPage: "/gevelisolatie-antwerpen",
     faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "premies"],
+    subPages: [
+      { href: "/gevelisolatie/crepi-met-isolatie", label: "Crepi met isolatie", desc: "ETICS-systeem: EPS 14–18 cm + wapeningslaag + structuurpleister" },
+      { href: "/gevelisolatie/steenstrips-met-isolatie", label: "Steenstrips met isolatie", desc: "Authentiek baksteenaspect op dezelfde ETICS-isolatiebasis" },
+      { href: "/gevelisolatie/prijs", label: "Gevelisolatie prijs", desc: "Prijsoverzicht per systeem, BTW 6% en Mijn VerbouwPremie" },
+      { href: "/gevelisolatie/dikte", label: "Isolatiedikte gevel", desc: "14 cm of 18 cm EPS — vergelijking Rd-waarden en EPB-eisen" },
+    ],
   },
   {
     id: "crepi",

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
+import { services, getServiceBySlug, getRelatedServices, type ServiceSubPage } from "@/content/services";
 import { getBlogPostBySlug } from "@/content/blog";
 import { getProjectsByService } from "@/content/projects";
 import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
@@ -331,6 +331,40 @@ export default function ServicePage({
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
                     Lees meer
                     <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Subpagina's — diepere informatie per daktype / systeem */}
+      {service.subPages && service.subPages.length > 0 && (
+        <section className="py-14 bg-white">
+          <div className="mx-auto max-w-7xl px-6">
+            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
+              Verdieping
+            </span>
+            <h2 className="mt-2 text-2xl font-extrabold text-teal-800 mb-8">
+              Meer weten over {service.name.toLowerCase()}?
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {service.subPages.map((sp: ServiceSubPage) => (
+                <Link
+                  key={sp.href}
+                  href={sp.href}
+                  className="group block rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-teal-200 hover:shadow-md transition-all"
+                >
+                  <h3 className="font-bold text-teal-700 group-hover:text-teal-600 mb-2">
+                    {sp.label}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{sp.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-orange-400">
+                    Lees meer
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
                   </span>
                 </Link>
               ))}
