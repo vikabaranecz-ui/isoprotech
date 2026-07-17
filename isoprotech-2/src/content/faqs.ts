@@ -16,6 +16,30 @@ export const faqs: FaqItem[] = [
     category: "Gevelisolatie",
   },
   {
+    id: "gevelisolatie-crepi-prijs",
+    question: "Wat kost crepi met isolatie (ETICS)?",
+    answer: "Crepi met isolatie (ETICS-systeem) kost indicatief €85–125/m² (incl. EPS-isolatieplaten, wapeningslaag, basispleister en crepi-afwerking, excl. btw). Meer details op onze <a href='/gevelisolatie/prijs' class='underline text-teal-700'>gevelisolatie prijspagina</a>. BTW 6% is van toepassing bij woningen ouder dan 10 jaar.",
+    category: "Gevelisolatie",
+  },
+  {
+    id: "gevelisolatie-steenstrips-prijs",
+    question: "Wat kost gevelisolatie met steenstrips?",
+    answer: "Steenstrips met isolatie kosten indicatief €130–180/m² (excl. btw) — meer dan crepi, maar u krijgt een authentieke bakstenen look zonder koudebruggen. Ideaal voor woningen in beschermde zones of met een voorkeur voor een klassiek geveluitzicht. Meer info: <a href='/gevelisolatie/steenstrips-met-isolatie' class='underline text-teal-700'>steenstrips met isolatie pagina</a>.",
+    category: "Gevelisolatie",
+  },
+  {
+    id: "gevelisolatie-dikte",
+    question: "Hoe dik moet gevelisolatie zijn?",
+    answer: "De Vlaamse EPB-regelgeving vereist bij renovatie Rd ≥ 1,5 m²K/W (VEKA, juni 2026). Met EPS grijs (lambda 0,031 W/mK) bereikt u dat met ca. 5 cm — maar 14 of 18 cm is aanzienlijk beter. Voor het IER-traject is Rd 3,5 vereist (ca. 11 cm EPS). Wij raden minimaal 14 cm aan voor optimale energieprestatie én premies. Lees meer op onze <a href='/gevelisolatie/dikte' class='underline text-teal-700'>isolatiedikte pagina</a>.",
+    category: "Gevelisolatie",
+  },
+  {
+    id: "etics-systeem",
+    question: "Wat is een ETICS-systeem voor gevelisolatie?",
+    answer: "ETICS (External Thermal Insulation Composite System) is het systeem voor buitengevelisolatie: isolatieplaten (EPS of minerale wol) worden verlijmd en gemechanisch bevestigd op de bestaande gevel, daarna volgen een wapeningslaag, basispleister en afwerklaag (crepi of steenstrips). Het is de meest effectieve methode om een massieve muur of ongeïsoleerde gevel thermisch te verbeteren zonder aan de binnenkant te werken. Meer info: <a href='/gevelisolatie/crepi-met-isolatie' class='underline text-teal-700'>ETICS crepi pagina</a>.",
+    category: "Gevelisolatie",
+  },
+  {
     id: "gevelisolatie-duur",
     question: "Hoe lang duren gevelisolatiewerken?",
     answer: "Voor een gemiddelde woning rekent u op 2 tot 4 weken, afhankelijk van de oppervlakte, de staat van de gevel en de weersomstandigheden. Wij plannen alles duidelijk in — u weet op voorhand wat u kunt verwachten.",
@@ -40,6 +64,24 @@ export const faqs: FaqItem[] = [
     category: "Premies",
   },
   {
+    id: "mijn-verbouwpremie-dakisolatie",
+    question: "Hoeveel premie krijg ik voor dakisolatie via Mijn VerbouwPremie?",
+    answer: "Via Mijn VerbouwPremie (vlaanderen.be, 2026) ontvangt u een subsidie van minimaal €2/m² tot €12/m² voor dakisolatie, afhankelijk van uw inkomenscategorie en de bereikte isolatiewaarde. De premie is enkel geldig als u werkt met een erkende aannemer. Wij helpen u de aanvraag correct in te dienen. Meer info op <a href='https://www.vlaanderen.be/mijn-verbouwpremie' target='_blank' rel='noopener noreferrer' class='underline text-teal-700'>vlaanderen.be/mijn-verbouwpremie</a>.",
+    category: "Premies",
+  },
+  {
+    id: "mijn-verbouwpremie-gevelisolatie",
+    question: "Bestaat er een premie voor gevelisolatie in Vlaanderen?",
+    answer: "Ja. Via Mijn VerbouwPremie (vlaanderen.be, 2026) kunt u ook een premie aanvragen voor buitengevelisolatie. De hoogte hangt af van uw inkomenscategorie en het bereikte Rd-niveau. Gecombineerde renovaties (dak + gevel + beglazing) kunnen in aanmerking komen voor hogere totale premies via het IER-traject. Wij begeleiden u bij de aanvraag.",
+    category: "Premies",
+  },
+  {
+    id: "btw-6-procent",
+    question: "Wanneer betaal ik BTW 6% in plaats van 21% voor isolatiewerken?",
+    answer: "BTW 6% is van toepassing als uw woning ouder is dan 10 jaar én u werkt met een btw-plichtige aannemer die factureert op naam van de particuliere bewoner. Deze btw-verlaging geldt voor renovatie-, herstel- en onderhoudswerken aan privéwoningen (FOD Financiën, 2026). ISOPROTECH factureert altijd correct en vermeldt de btw-categorie duidelijk op de offerte.",
+    category: "Premies",
+  },
+  {
     id: "dakisolatie-besparing",
     question: "Hoeveel bespaar ik met dakisolatie?",
     answer: "Met een goed geïsoleerd dak bespaart u gemiddeld 25 tot 30% op uw verwarmingskosten. De exacte besparing hangt af van uw huidige isolatiesituatie en het type verwarming. De meeste klanten zien het verschil al op de eerste verwarmingsrekening.",
@@ -49,6 +91,30 @@ export const faqs: FaqItem[] = [
     id: "dakisolatie-prijs",
     question: "Hoeveel kost dakisolatie?",
     answer: "De prijs hangt af van het type dak (plat of hellend), de gekozen materialen en of er ook een nieuwe bedekking nodig is. Voor een plat dak rekent u gemiddeld op €30 tot €50/m² voor isolatie alleen. Gebruik onze dakcalculator voor een volledige indicatieve prijs, of vraag een gratis inspectie aan.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "dakisolatie-prijs-m2",
+    question: "Wat is de prijs van dakisolatie per m²?",
+    answer: "De indicatieve prijzen voor dakisolatie in Antwerpen (incl. materialen en plaatsing, excl. btw): warm dak plat €80–170/m², sarking hellend dak €75–140/m², binnenisolatie hellend dak €45–90/m². Lees meer op onze <a href='/dakisolatie/prijs' class='underline text-teal-700'>prijspagina dakisolatie</a>, of vraag een vrijblijvende offerte aan.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "plat-dak-warm-dak",
+    question: "Wat is een warm dak bij een plat dak?",
+    answer: "Bij een warm dak ligt de isolatie bovenop de dakstructuur, tussen de waterdichting en het draagdek. Zo blijft de dakconstructie op kamertemperatuur — geen condensatie in de structuur, betere luchtdichtheid en langere levensduur van de bedekking. Het warm dak-systeem is de Belgische standaard voor nieuwe platte daken en renovaties (EPB, VEKA). Meer info: <a href='/dakisolatie/plat-dak' class='underline text-teal-700'>plat dak isolatie pagina</a>.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "sarking-vs-binnenisolatie",
+    question: "Wat is het verschil tussen sarking en binnenisolatie voor een hellend dak?",
+    answer: "Sarking = buitenisolatie: PIR-platen worden boven de gordingen aangebracht, daarna nieuwe dakbedekking. Voordelen: geen koudebrug, geen verlies van leefruimte binnenin. Binnenisolatie (tussen of onder de gordingen) is goedkoper maar geeft koudebruggen bij gordingen en verkleint de zolderruimte. Sarking is de technisch superieure oplossing bij totaalrenovatie. Zie ook: <a href='/dakisolatie/sarkingdak' class='underline text-teal-700'>sarkingdak pagina</a>.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "dakisolatie-dikte-pir",
+    question: "Hoeveel cm PIR isolatie heb ik nodig voor mijn dak?",
+    answer: "Voor een renovatie verplicht de Vlaamse EPB-regelgeving Rd ≥ 4,5 m²K/W (VEKA, juni 2026). Met PIR (lambda 0,022 W/mK) bereikt u dat met ca. 10 cm. Voor het Individueel Energetisch Renovatietraject (IER) is Rd 6,0 vereist — dan heeft u ca. 14 cm PIR nodig. Wij berekenen de exacte dikte voor uw specifieke situatie tijdens de gratis inspectie.",
     category: "Dakisolatie",
   },
   {
