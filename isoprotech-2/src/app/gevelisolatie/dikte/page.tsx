@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BRAND, PHOTOS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Gevelisolatie Dikte — 14 cm of 18 cm EPS? Advies & Vergelijking",
+  title: "Gevelisolatie Dikte — 14 of 18 cm EPS? Advies",
   description:
     "Welke dikte gevelisolatie is optimaal voor uw woning? Vergelijking 10–14–18 cm EPS: Rd-waarden, meerprijs, terugverdientijd en EPB-eisen in Vlaanderen.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${BRAND.url}/gevelisolatie/dikte` },
   openGraph: {
-    title: "Gevelisolatie Dikte — 14 cm of 18 cm EPS? Advies & Vergelijking",
+    title: "Gevelisolatie Dikte — 14 of 18 cm EPS? Advies",
     description: "Vergelijking isolatiedikte gevel: 10–14–18–20 cm EPS. Rd-waarden, EPB-eisen en terugverdientijd.",
     url: `${BRAND.url}/gevelisolatie/dikte`,
     type: "website",

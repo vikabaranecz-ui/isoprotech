@@ -103,10 +103,10 @@ export const PHOTOS = {
   gevelCrepiMeiseVoor1: { src: "/images/projects/gevelisolatie_crepi_meise_voor1.PNG", alt: "Woning Meise tweede gevel vóór gevelisolatie", width: 1200, height: 900 },
   gevelCrepiMeiseNa1: { src: "/images/projects/gevelisolatie_crepi_meise_na1.PNG", alt: "Woning Meise tweede gevel na gevelisolatie + crepi", width: 1200, height: 900 },
   // Berchem gevelisolatie + crepi + platdak + ramen
-  gevelCrepiPlatdakBerchemVoor: { src: "/images/projects/geveisolatie_crepi_platdat%20_ramen_voor_berchem.jpg", alt: "Woning Berchem vóór totaalrenovatie — gevel, platdak en ramen", width: 1200, height: 900 },
+  gevelCrepiPlatdakBerchemVoor: { src: "/images/projects/geveisolatie_crepi_platdat_ramen_voor_berchem.jpg", alt: "Woning Berchem vóór totaalrenovatie — gevel, platdak en ramen", width: 1200, height: 900 },
   gevelCrepiPlatdakBerchemNa: { src: "/images/projects/gevelisolatie_crepi_platdat_ramen_na_berchem.jpg", alt: "Woning Berchem na totaalrenovatie — gevelisolatie, crepi, platdak en ramen", width: 1200, height: 900 },
   // Wijnegem gevelisolatie + crepi
-  gevelCrepiWijnegemVoor: { src: "/images/projects/gevelisolatie_crepi_wijnegem%20_voor.PNG", alt: "Woning Wijnegem vóór gevelisolatie + crepi", width: 1200, height: 900 },
+  gevelCrepiWijnegemVoor: { src: "/images/projects/gevelisolatie_crepi_wijnegem_voor.PNG", alt: "Woning Wijnegem vóór gevelisolatie + crepi", width: 1200, height: 900 },
   gevelCrepiWijnegemNa: { src: "/images/projects/gevelisolatie_crepi_wijnegem_na.PNG", alt: "Woning Wijnegem na gevelisolatie + crepi", width: 1200, height: 900 },
   // Service photos
   asbestverwijdering: { src: "/images/services/asbestverwijdering.jpg", alt: "Veilige asbestverwijdering — vakman in beschermend pak", width: 1460, height: 820 },

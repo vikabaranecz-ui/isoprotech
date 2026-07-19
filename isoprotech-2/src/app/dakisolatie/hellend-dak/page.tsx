@@ -10,7 +10,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Hellend Dak Isoleren Antwerpen — Sarking, Binnenin of Buitenuit",
+  title: "Hellend Dak Isoleren Antwerpen — Sarking of Binnenisolatie",
   description:
     "Hellend dak isoleren in Antwerpen. Buitenisolatie (sarking), binnenisolatie of combinatie. PIR 18 cm, dampscherm, onderdak. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
   keywords: [

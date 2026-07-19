@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BRAND, PHOTOS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Gevelisolatie Prijs 2026 — Wat Kost Gevelisolatie in Antwerpen?",
+  title: "Gevelisolatie Prijs 2026 — Kosten per m² in Antwerpen",
   description:
     "Indicatieve prijzen gevelisolatie Antwerpen: crepi met EPS 14 cm €85–110/m², steenstrips €130–170/m². Inclusief 6% BTW, Mijn VerbouwPremie info en prijsfactoren.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${BRAND.url}/gevelisolatie/prijs` },
   openGraph: {
-    title: "Gevelisolatie Prijs 2026 — Wat Kost Gevelisolatie in Antwerpen?",
+    title: "Gevelisolatie Prijs 2026 — Kosten per m² in Antwerpen",
     description:
       "Indicatieve prijzen voor gevelisolatie: crepi €85–110/m², steenstrips €130–170/m², incl. 6% BTW.",
     url: `${BRAND.url}/gevelisolatie/prijs`,
