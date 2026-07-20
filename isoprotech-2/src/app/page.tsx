@@ -11,7 +11,7 @@ import { BRAND, PHOTOS, VIDEOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Dakisolatie & Gevelisolatie Antwerpen | ISOPROTECH",
+  title: { absolute: "ISOPROTECH — Dakisolatie & Gevelisolatie Antwerpen" },
   description:
     "Dak- en gevelisolatie in Antwerpen en omgeving. Gecertificeerde vakmensen, ATG/BENOR-materialen, gratis inspectie aan huis, 10 jaar schriftelijke garantie. Vraag vandaag uw offerte aan.",
   alternates: {

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "ISOPROTECH werkt samen met betrouwbare partners in de bouwsector. Ontdek onze partnerbedrijven voor isolatie, steigers en renovatie.",
   alternates: { canonical: `${BRAND.url}/partners` },
   openGraph: {
-    title: "Onze Partners | ISOPROTECH",
+    title: "Onze Partners",
     description: "ISOPROTECH werkt samen met betrouwbare partners in de bouwsector. Ontdek onze partnerbedrijven.",
   },
 };
