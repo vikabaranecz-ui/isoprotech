@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Realisaties — Projecten Dak- & Gevelisolatie",
     description: "Bekijk onze gerealiseerde dak- en gevelprojecten in Antwerpen en omgeving. Gevelisolatie, crepi, spuitkurk, dakrenovatie en meer.",
+    images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
   },
 };
 

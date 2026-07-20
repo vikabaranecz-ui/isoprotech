@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Onze Diensten — Dak, Gevel & Asbest",
     description: "ISOPROTECH biedt dakisolatie, dakrenovatie, gevelisolatie, crepi, spuitkurk en asbestverwijdering in Antwerpen en omgeving.",
+    images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
   },
 };
 

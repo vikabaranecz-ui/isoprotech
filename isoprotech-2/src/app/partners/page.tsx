@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Onze Partners",
     description: "ISOPROTECH werkt samen met betrouwbare partners in de bouwsector. Ontdek onze partnerbedrijven.",
+    images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
   },
 };
 

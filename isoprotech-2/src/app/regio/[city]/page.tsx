@@ -25,6 +25,7 @@ export function generateMetadata({
   return {
     title: city.seo.title,
     description: city.seo.description,
+    keywords: city.seo.keywords,
     alternates: {
       canonical: `${BRAND.url}/regio/${city.slug}`,
     },

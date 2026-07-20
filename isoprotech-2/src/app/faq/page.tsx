@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Veelgestelde Vragen — Dak- & Gevelisolatie",
     description: "Antwoorden op de meest gestelde vragen over dakisolatie, gevelisolatie, crepi, premies en onze werkwijze. ISOPROTECH Antwerpen.",
+    images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
   },
 };
 

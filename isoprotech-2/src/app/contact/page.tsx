@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact — Gratis Inspectie & Offerte",
     description: "Neem contact op met ISOPROTECH voor een gratis inspectie en vrijblijvende offerte. Telefoon, WhatsApp, email. Antwerpen.",
+    images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
   },
 };
 

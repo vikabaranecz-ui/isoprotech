@@ -75,8 +75,8 @@ export const PHOTOS = {
   hellendDakEdegemAfter: { src: "/images/projects/hellendakedegem-after.jpg", alt: "Hellend dak Edegem na renovatie — nieuwe dakpannen en isolatie", width: 1320, height: 1752 },
   hellendDakEdegemBefore2: { src: "/images/projects/hellendakedegem-before2.jpg", alt: "Hellend dak Edegem vóór renovatie — tweede hoek", width: 1152, height: 2048 },
   hellendDakEdegemAfter1: { src: "/images/projects/hellendakedegem-after1.jpg", alt: "Hellend dak Edegem na renovatie — tweede hoek na renovatie", width: 768, height: 1363 },
-  lozanastraatVoor: { src: "/images/projects/lozanastraatplatdak-voor.png", alt: "Plat dak Lozanastraat Antwerpen vóór renovatie — verouderde dakbedekking", width: 3375, height: 4219 },
-  lozanastraatNa: { src: "/images/projects/lozanastraat-platdak-na.png", alt: "Plat dak Lozanastraat Antwerpen na renovatie — nieuwe waterdichte bedekking", width: 3375, height: 4219 },
+  lozanastraatVoor: { src: "/images/projects/lozanastraatplatdak-voor.jpg", alt: "Plat dak Lozanastraat Antwerpen vóór renovatie — verouderde dakbedekking", width: 2400, height: 3001 },
+  lozanastraatNa: { src: "/images/projects/lozanastraat-platdak-na.jpg", alt: "Plat dak Lozanastraat Antwerpen na renovatie — nieuwe waterdichte bedekking", width: 2400, height: 3001 },
   // Spuitkurk before/after
   spuitkurkBefore1: { src: "/images/projects/spuitkurk-before-1.jpg", alt: "Woning vóór spuitkurk — verweerde cementbepleistering", width: 1195, height: 896 },
   spuitkurkAfter1: { src: "/images/projects/spuitkurk-after-1.jpg", alt: "Woning na spuitkurk — moderne witte gevelafwerking", width: 896, height: 1195 },

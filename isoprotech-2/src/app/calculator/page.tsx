@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Prijscalculator — Gevel & Dak",
     description: "Bereken een indicatieve prijs voor gevelisolatie of dakwerken in de regio Antwerpen. Actuele marktprijzen 2026. ISOPROTECH.",
+    images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
   },
 };
 

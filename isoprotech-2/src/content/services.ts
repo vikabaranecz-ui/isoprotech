@@ -54,9 +54,9 @@ export const services: Service[] = [
       PHOTOS.platDak,
     ],
     seo: {
-      title: "Dakisolatie Antwerpen — Plat & Hellend Dak",
-      description: "Professionele dakisolatie in Antwerpen. Platte en hellende daken. Tot 30% besparing op energiekosten. Gratis inspectie, 10 jaar garantie.",
-      keywords: ["dakisolatie antwerpen", "dak isoleren", "plat dak isolatie", "hellend dak isolatie", "dakisolatie prijs"],
+      title: "Dakisolatie — Plat & Hellend Dak Isoleren",
+      description: "Alles over dakisolatie: warm dak, sarking, binnenisolatie, PIR-dikte en EPB-normen. Vergelijk methodes en ontdek welke het beste past bij uw dak.",
+      keywords: ["dak isoleren", "plat dak isolatie", "hellend dak isolatie", "warm dak systeem", "sarking isolatie", "dakisolatie methodes"],
     },
     relatedServices: ["dakwerken", "dakrenovatie", "gevelisolatie"],
     relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakisolatie-prijs-m2-2026", "epc-label-verbeteren", "premies-renovatie-2026", "dakisolatie-premie-2026"],
