@@ -67,7 +67,23 @@ export function ScrollJourney({ children }: { children: ReactNode }) {
           const edgeInset = isMobile ? 30 : isTablet ? 64 : 100;
           const curveInset = isMobile ? 64 : isTablet ? 130 : 210;
 
-          function buildPath() {
+          function toPath(points: { x: number; y: number }[]) {
+            // Convert to an absolute SVG path string — MotionPathPlugin treats
+            // string paths as literal page coordinates, whereas a raw array of
+            // {x,y} points is instead interpreted relative to the target's own
+            // resting position, which isn't what we want here.
+            const rawPath = MotionPathPlugin.arrayToRawPath(points, { curviness: 0.65 });
+            return MotionPathPlugin.rawPathToString(rawPath);
+          }
+
+          // MotionPath paces itself by arc length within a single call, so one
+          // long path across the whole page would let the (very long) middle
+          // stretch eat almost the entire scroll budget, squeezing the old
+          // house and new house arrivals into an imperceptible sliver of
+          // scroll. Splitting the journey into phases — each its own tween
+          // with an explicit scroll-time share — keeps every story beat
+          // visible regardless of how many page-pixels it physically spans.
+          function buildPhases() {
             const width = wrapper!.offsetWidth;
             const wrapperTop = wrapper!.getBoundingClientRect().top + window.scrollY;
             const totalHeight = wrapper!.offsetHeight;
@@ -92,61 +108,89 @@ export function ScrollJourney({ children }: { children: ReactNode }) {
             const rightX = width - edgeInset;
             const curveX = width - curveInset;
 
-            const longStart = oldHouseBottom + 60;
-            const longSpan = Math.max(contactTop - 100 - longStart, 100);
+            const longStart = oldHouseBottom + 80;
+            const longEnd = contactTop - 550;
+            const longSpan = Math.max(longEnd - longStart, 100);
 
-            const parkedY = Math.min(contactTop + 110, totalHeight - 50);
+            const parkedY = Math.min(contactTop + 260, totalHeight - 80);
 
-            const points = [
-              { x: rightX, y: Math.max(heroBottom - 100, 30) }, // warehouse departure
-              { x: rightX, y: heroBottom + (oldHouseTop - heroBottom) * 0.45 }, // services
-              { x: curveX, y: oldHouseTop + (oldHouseBottom - oldHouseTop) * 0.35 }, // approach old house
-              { x: curveX - 15, y: oldHouseTop + (oldHouseBottom - oldHouseTop) * 0.62 }, // old house moment
-              { x: rightX, y: oldHouseBottom + 80 }, // leaves old house
-              { x: rightX, y: longStart + longSpan * 0.22 }, // calculator / realisaties
-              { x: curveX + 25, y: longStart + longSpan * 0.55 }, // werkgebied curve
-              { x: rightX, y: longStart + longSpan * 0.82 }, // blog
-              { x: curveX, y: contactTop - 60 }, // new house entering
-              { x: curveX - 10, y: parkedY }, // parked
-            ];
-
-            // Convert to an absolute SVG path string — MotionPathPlugin treats
-            // string paths as literal page coordinates, whereas a raw array of
-            // {x,y} points is instead interpreted relative to the target's own
-            // resting position, which isn't what we want here.
-            const rawPath = MotionPathPlugin.arrayToRawPath(points, { curviness: 1.2 });
-
-            // The journey (and its scroll range) ends once the vehicle parks —
-            // not at the bottom of the tall Contact/form section — so it stays
-            // visible next to the new house for the rest of that section instead
-            // of scrolling off screen above the viewport.
-            return { path: MotionPathPlugin.rawPathToString(rawPath), endOffset: parkedY + 120 };
+            return {
+              // Phase 1 — leaves the warehouse, drives toward the old house.
+              approach: [
+                { x: rightX, y: Math.max(heroBottom - 100, 30) },
+                { x: rightX, y: heroBottom + (oldHouseTop - heroBottom) * 0.5 },
+                { x: curveX, y: oldHouseTop + (oldHouseBottom - oldHouseTop) * 0.3 },
+              ],
+              // Phase 2 — the old house moment, then the long middle stretch.
+              journey: [
+                { x: curveX, y: oldHouseTop + (oldHouseBottom - oldHouseTop) * 0.3 },
+                { x: curveX - 15, y: oldHouseTop + (oldHouseBottom - oldHouseTop) * 0.62 },
+                { x: rightX, y: oldHouseBottom + 80 },
+                { x: rightX, y: longStart + longSpan * 0.35 },
+                { x: curveX + 25, y: longStart + longSpan * 0.65 },
+                { x: rightX, y: longEnd },
+              ],
+              // Phase 3 — arrives at the new house and parks.
+              arrival: [
+                { x: rightX, y: longEnd },
+                { x: curveX, y: contactTop - 20 },
+                { x: curveX - 20, y: parkedY },
+              ],
+              // Real scroll-pixel boundaries — used so each phase's timeline
+              // duration matches the actual page distance it covers, instead
+              // of an arbitrary ratio that would drift out of sync with where
+              // the old house / new house actually sit on the page.
+              phase1End: Math.max(oldHouseTop, 200),
+              phase2End: Math.max(longEnd, oldHouseTop + 200),
+              parkedY,
+            };
           }
 
           gsap.set(driving, { autoAlpha: 0, scale: 0.97 });
           gsap.set(front, { autoAlpha: 1, scale: 1 });
 
-          let carTween: gsap.core.Tween | null = null;
+          let driveTl: gsap.core.Timeline | null = null;
           let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 
           function setupPath() {
-            carTween?.scrollTrigger?.kill();
-            carTween?.kill();
-            const { path, endOffset } = buildPath();
-            carTween = gsap.to(car, {
-              motionPath: {
-                path,
-                curviness: 1.2,
-                autoRotate: false,
-              },
-              ease: "none",
+            driveTl?.scrollTrigger?.kill();
+            driveTl?.kill();
+            const { approach, journey, arrival, phase1End, phase2End, parkedY } = buildPhases();
+            const scrollTotal = parkedY + 250;
+
+            // Timeline "time" units are made to equal scroll pixels 1:1, so
+            // each phase's duration is exactly the real page distance it
+            // spans — keeping the old house / new house arrivals synced to
+            // where those sections actually are, regardless of how much of
+            // the path's total arc length each phase happens to occupy.
+            driveTl = gsap.timeline({
+              defaults: { ease: "none" },
               scrollTrigger: {
                 trigger: wrapper,
                 start: "top top",
-                end: `+=${endOffset}`,
+                end: `+=${scrollTotal}`,
                 scrub: 0.15,
               },
             });
+            driveTl
+              .to(car, {
+                motionPath: { path: toPath(approach), curviness: 0.65, autoRotate: false },
+                duration: phase1End,
+              })
+              .to(car, {
+                motionPath: { path: toPath(journey), curviness: 0.65, autoRotate: false },
+                duration: phase2End - phase1End,
+              })
+              .to(car, {
+                motionPath: { path: toPath(arrival), curviness: 0.65, autoRotate: false },
+                duration: scrollTotal - phase2End,
+              });
+
+            // A child tween sitting at exactly time 0 inside a fresh timeline
+            // doesn't render its motionPath position until nudged off zero
+            // (a GSAP/motionPath quirk) — so the vehicle appears at the right
+            // spot immediately instead of only after the first scroll event.
+            driveTl.progress(0.0001);
           }
           setupPath();
 
@@ -175,7 +219,7 @@ export function ScrollJourney({ children }: { children: ReactNode }) {
           }
 
           function onScroll() {
-            const progress = carTween?.scrollTrigger?.progress ?? 0;
+            const progress = driveTl?.scrollTrigger?.progress ?? 0;
             if (progress >= FRONT_LOCK_PROGRESS) {
               showFront();
               return;
@@ -191,8 +235,8 @@ export function ScrollJourney({ children }: { children: ReactNode }) {
             window.removeEventListener("scroll", onScroll);
             if (resizeTimer) clearTimeout(resizeTimer);
             if (stopTimer) clearTimeout(stopTimer);
-            carTween?.scrollTrigger?.kill();
-            carTween?.kill();
+            driveTl?.scrollTrigger?.kill();
+            driveTl?.kill();
           };
         }
       );

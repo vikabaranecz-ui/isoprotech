@@ -11,9 +11,9 @@ export const JOURNEY_IDS = {
 // Drop the five supplied images at these exact paths (public/images/journey/)
 // and the journey picks them up automatically — nothing else to wire up.
 export const journeyAssets = {
-  warehouse: "/images/journey/warehouse.png",
-  carDriving: "/images/journey/car-driving.png",
-  carFront: "/images/journey/car-front.png",
-  oldHouse: "/images/journey/old-house.png",
-  newHouse: "/images/journey/new-house.png",
+  warehouse: "/images/journey/warehouse.webp",
+  carDriving: "/images/journey/car-driving.webp",
+  carFront: "/images/journey/car-front.webp",
+  oldHouse: "/images/journey/old-house.webp",
+  newHouse: "/images/journey/new-house.webp",
 };
