@@ -9,9 +9,9 @@ import { cities } from "@/content/cities";
 import { blogPosts } from "@/content/blog";
 import { BRAND, PHOTOS, VIDEOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { RoadJourney } from "@/components/home/road-journey/RoadJourney";
-import { TransformationJourney } from "@/components/home/TransformationJourney";
-import { OFFERTE_ANCHOR_ID } from "@/lib/roadJourney";
+import { ScrollJourney } from "@/components/home/road-journey/ScrollJourney";
+import { Reveal } from "@/components/ui/Reveal";
+import { JOURNEY_IDS, journeyAssets } from "@/lib/journeyAssets";
 
 export const metadata: Metadata = {
   title: "Dakisolatie & Gevelisolatie Antwerpen | ISOPROTECH",
@@ -46,9 +46,9 @@ const steps = [
 export default function HomePage() {
   return (
     <>
-      <RoadJourney>
+      <ScrollJourney>
       {/* ─── HERO ─── */}
-      <section className="relative min-h-[600px] md:min-h-[680px] flex items-center overflow-hidden">
+      <section id={JOURNEY_IDS.hero} className="relative min-h-[600px] md:min-h-[680px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={PHOTOS.gevelCrepiMeise.src}
@@ -107,6 +107,10 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+              <Reveal className="mt-6 flex justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={journeyAssets.warehouse} alt="ISOPROTECH bedrijfspand" className="h-auto w-32 drop-shadow-xl xl:w-40" />
+              </Reveal>
             </div>
           </div>
         </div>
@@ -179,12 +183,18 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROCESS ─── */}
-      <section className="section-padding">
+      <section id={JOURNEY_IDS.oldHouse} className="section-padding">
         <div className="container-wide">
-          <div className="text-center mb-12">
-            <span className="section-label">Hoe het werkt</span>
-            <h2 className="section-heading">Van aanvraag tot oplevering — zonder stress</h2>
-            <p className="mt-3 text-gray-500 max-w-xl mx-auto">Wij regelen alles. U hoeft enkel uw wensen te vertellen.</p>
+          <div className="mb-12 flex flex-col items-center gap-8 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
+            <div>
+              <span className="section-label">Hoe het werkt</span>
+              <h2 className="section-heading">Van aanvraag tot oplevering — zonder stress</h2>
+              <p className="mt-3 text-gray-500 max-w-xl mx-auto lg:mx-0">Wij regelen alles. U hoeft enkel uw wensen te vertellen.</p>
+            </div>
+            <Reveal direction="left" className="shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={journeyAssets.oldHouse} alt="Woning voor renovatie" className="h-auto w-40 drop-shadow-xl md:w-52 xl:w-60" />
+            </Reveal>
           </div>
           <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-4 relative">
             {/* Connecting line desktop */}
@@ -299,8 +309,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <TransformationJourney />
 
       {/* ─── REVIEWS ─── */}
       <section className="section-padding bg-stone-50">
@@ -437,9 +445,15 @@ export default function HomePage() {
       </section>
 
       {/* ─── CTA + FORM ─── */}
-      <section id={OFFERTE_ANCHOR_ID} className="relative overflow-hidden bg-gradient-to-br from-teal-800 to-teal-700 section-padding scroll-mt-24">
+      <section id={JOURNEY_IDS.contact} className="relative overflow-hidden bg-gradient-to-br from-teal-800 to-teal-700 section-padding scroll-mt-24">
         <div className="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-teal-800/40 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-orange-400/5 blur-3xl pointer-events-none" />
+        <div className="relative container-wide pb-8 md:pb-10">
+          <Reveal className="flex justify-center lg:justify-end">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={journeyAssets.newHouse} alt="Vernieuwde, geïsoleerde woning" className="h-auto w-40 drop-shadow-xl md:w-52 xl:w-64" />
+          </Reveal>
+        </div>
         <div className="relative container-wide grid gap-10 lg:gap-16 lg:grid-cols-2 items-start">
           <div className="lg:pt-2">
             <span className="section-label text-orange-400">Gratis offerte</span>
@@ -478,7 +492,7 @@ export default function HomePage() {
           <ContactForm />
         </div>
       </section>
-      </RoadJourney>
+      </ScrollJourney>
 
       {/* ─── STICKY MOBILE CTA ─── */}
       <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-3 flex gap-2.5 sm:hidden">
