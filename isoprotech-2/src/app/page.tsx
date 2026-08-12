@@ -9,6 +9,9 @@ import { cities } from "@/content/cities";
 import { blogPosts } from "@/content/blog";
 import { BRAND, PHOTOS, VIDEOS } from "@/lib/constants";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { RoadJourney } from "@/components/home/road-journey/RoadJourney";
+import { TransformationJourney } from "@/components/home/TransformationJourney";
+import { OFFERTE_ANCHOR_ID } from "@/lib/roadJourney";
 
 export const metadata: Metadata = {
   title: "Dakisolatie & Gevelisolatie Antwerpen | ISOPROTECH",
@@ -43,6 +46,7 @@ const steps = [
 export default function HomePage() {
   return (
     <>
+      <RoadJourney>
       {/* ─── HERO ─── */}
       <section className="relative min-h-[600px] md:min-h-[680px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
@@ -296,6 +300,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <TransformationJourney />
+
       {/* ─── REVIEWS ─── */}
       <section className="section-padding bg-stone-50">
         <div className="container-wide">
@@ -431,7 +437,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── CTA + FORM ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-800 to-teal-700 section-padding">
+      <section id={OFFERTE_ANCHOR_ID} className="relative overflow-hidden bg-gradient-to-br from-teal-800 to-teal-700 section-padding scroll-mt-24">
         <div className="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-teal-800/40 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-orange-400/5 blur-3xl pointer-events-none" />
         <div className="relative container-wide grid gap-10 lg:gap-16 lg:grid-cols-2 items-start">
@@ -472,6 +478,7 @@ export default function HomePage() {
           <ContactForm />
         </div>
       </section>
+      </RoadJourney>
 
       {/* ─── STICKY MOBILE CTA ─── */}
       <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-3 flex gap-2.5 sm:hidden">
