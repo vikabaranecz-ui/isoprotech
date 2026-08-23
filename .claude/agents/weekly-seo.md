@@ -52,7 +52,19 @@ For SAFE FIX:
 
 ### NEEDS APPROVAL
 Use when any proposed change appears in `automation_policy.requires_human_approval`, when a business fact is missing, or when risk is ambiguous.
-Do not implement or merge the affected change. Ask one exact decision question.
+
+If the proposed change can be prepared safely without inventing missing business facts, prepare it for review but keep it out of `main`:
+1. Create branch `seo/approval-YYYY-MM-DD-<topic>` from current main.
+2. Implement only the exact proposed change that needs approval. Do not mix unrelated edits.
+3. Run production build and lint if configured.
+4. Re-read the diff and verify it matches the approval question exactly.
+5. Push branch and open a normal PR targeting `main`.
+6. The PR body MUST contain the exact marker `<!-- telegram-approval-required -->`.
+7. The PR body must concisely state evidence, proposed change, expected benefit, risk, QA and rollback.
+8. NEVER merge this PR yourself. Telegram approval is the only approval gate for these PRs.
+9. Put the PR number in the weekly issue as `Review PR: #123`.
+
+If the change cannot be safely prepared until a business fact is answered, do not create a PR. Ask one exact business question and set `Review PR: None`.
 
 ## Never auto-publish
 Never automatically execute:
@@ -68,7 +80,7 @@ Never automatically execute:
 - changing the primary intent/service positioning of a page
 - B3 `/regio/antwerpen` repositioning
 
-Those require explicit human approval first.
+These may reach `main` only after explicit owner approval through the Telegram approval workflow.
 
 ## GitHub report
 Always create one issue titled:
@@ -81,10 +93,11 @@ Start the issue with exactly this compact block. The field labels/status codes s
 - Status: <AUTO PUBLISHED | NO CHANGE | MONITORING | NEEDS APPROVAL | AUTO-PUBLISH FAILED>
 - Result: <українською, one sentence, max 140 characters>
 - Needs attention: <None OR українською one exact question/action for the owner>
+- Review PR: <None OR #123>
 - Published: <None OR українською what was merged to main, including PR number>
 ```
 
-Keep this block under 350 characters.
+Keep this block under 420 characters.
 
 After the notification summary, add only the evidence needed to justify the decision, maximum about 2,000 characters total:
 1. Key 28d change; 90d only if it changes the decision
@@ -97,9 +110,11 @@ No long tables. No raw JSON. No full keyword dumps. No repeated explanation of u
 
 ## Human-attention principle
 Telegram is an exception channel, not a reporting dump.
-- If Status = NEEDS APPROVAL or AUTO-PUBLISH FAILED, `Needs attention` must contain exactly what the owner must decide/do.
+- If Status = NEEDS APPROVAL and `Review PR` exists, Telegram will show `Переглянути`, `Підтвердити`, `Відхилити`. Approval merges only that exact PR after checks pass.
+- If Status = NEEDS APPROVAL but `Review PR: None`, ask exactly one business question.
+- If Status = AUTO-PUBLISH FAILED, say exactly what failed.
 - If Status = AUTO PUBLISHED, `Needs attention: None`; say briefly what was published.
-- If Status = NO CHANGE or MONITORING, keep the message short; no owner action unless a business decision is actually required.
+- If Status = NO CHANGE or MONITORING, keep the message short.
 
 ## Important
 Autonomy applies only to evidence-based, low-risk improvements. Publishing activity is not the goal; measurable improvement is. If evidence is weak, monitor instead of changing the site.
