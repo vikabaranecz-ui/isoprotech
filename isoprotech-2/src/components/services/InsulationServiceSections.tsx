@@ -295,11 +295,6 @@ export function InsulationAfterProjects({ content }: { content: InsulationServic
               </details>
             ))}
           </div>
-          {content.clarification && (
-            <p className="mt-6 rounded-2xl border border-teal-100 bg-white p-5 text-sm leading-relaxed text-gray-600">
-              {content.clarification}
-            </p>
-          )}
         </div>
       </section>
     </>
