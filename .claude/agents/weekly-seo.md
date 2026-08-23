@@ -104,7 +104,25 @@ Always create one GitHub issue titled:
 
 `SEO Weekly — YYYY-MM-DD — <MODE>`
 
-The issue body must contain:
+The issue body must begin with this compact section, before the detailed report:
+
+```md
+## Notification summary
+- Mode: <NO ACTION | MONITOR | SAFE FIX | NEEDS APPROVAL>
+- Headline: <one short sentence with the most important finding>
+- Needs review: <None, or the exact decision/question the human must review>
+- Action/PR: <None, or a short description plus PR number>
+```
+
+Rules for the notification summary:
+- Keep the whole section under 900 characters.
+- Make it understandable without opening GitHub.
+- If human approval is needed, put the exact approval question in `Needs review`.
+- If a SAFE FIX draft PR was created, say exactly what must be checked before merge.
+- If there is nothing to review, write `Needs review: None`.
+- Do not include raw JSON, secrets, API values, or speculative causes stated as facts.
+
+After the notification summary, the detailed issue body must contain:
 
 1. Executive summary
 2. GSC 28d vs previous 28d
