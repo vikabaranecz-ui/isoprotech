@@ -1,0 +1,96 @@
+name: Weekly SEO Claude
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+      timezone: "Europe/Brussels"
+  workflow_dispatch:
+
+concurrency:
+  group: weekly-seo-claude
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+  id-token: write
+
+jobs:
+  weekly-seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SEO_BASE_URL: https://www.isoprotech.be
+      GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'https://www.isoprotech.be/' }}
+      GOOGLE_ADS_CUSTOMER_ID: "1501901578"
+      GOOGLE_ADS_API_VERSION: v25
+      GOOGLE_ADC_JSON: ${{ secrets.GOOGLE_ADC_JSON }}
+      GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+      GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install SEO collector dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Collect weekly SEO evidence
+        run: python isoprotech-2/scripts/seo_weekly_collect.py
+
+      - name: Upload raw weekly evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-weekly-context-${{ github.run_id }}
+          path: seo-weekly-context.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Verify Claude authentication is configured
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ] && [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
+            echo "Missing Claude authentication. Add ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN in repository Actions secrets."
+            exit 1
+          fi
+
+      - name: Run Claude weekly SEO agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Today is ${{ github.event.repository.updated_at }} and this is the scheduled ISOPROTECH weekly SEO run.
+
+            Read `.claude/agents/weekly-seo.md` in full and follow it as the governing policy.
+            Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
+            Read `seo-weekly-context.json` as the fresh evidence collected for this run.
+
+            Inspect current repository code only as needed to validate hypotheses.
+            Check recent open SEO issues and PRs before acting so you do not duplicate work.
+
+            Execute the complete weekly analysis and finish in exactly one mode:
+            NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
+
+            Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` GitHub issue.
+            Only SAFE FIX may edit code and create a DRAFT PR.
+            Never merge to main.
+            Never automatically execute redirects, URL deletion, sitemap removals, architecture changes, new landing pages, large rewrites, new prices, savings claims, or unverified technical/business claims.
+
+            If data collection for one source failed, do not invent the missing data. Continue with the sources that succeeded and clearly report the operational error in the weekly issue.
+          claude_args: |
+            --max-turns 50
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
