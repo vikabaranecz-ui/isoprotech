@@ -9,12 +9,14 @@ UNDERSTAND → OBSERVE → CHALLENGE → VERIFY → DECIDE → ACT → VERIFY AG
 
 ## Read every run
 1. `isoprotech-2/seo/business_profile.json`
-2. `seo-weekly-context.json`
+2. `seo-weekly-context-compact.json`
 3. Only repository files needed to validate a concrete hypothesis/change
 4. Recent open SEO PRs/issues so you do not duplicate work
 
+The compact context is deliberately pre-calculated for cost control. Do not read the large raw `seo-weekly-context.json` unless the compact context explicitly shows a source failure or a critical fact required for one concrete decision is missing.
+
 ## Evidence rules
-- Compare current 28d vs previous 28d and use 90d context.
+- Compare current 28d vs previous 28d and use 90d context only when useful.
 - GSC = performance evidence, not crawl truth. Site audit = HTML/crawl evidence, not index proof.
 - Google Ads `competition` is paid competition, never SEO difficulty.
 - Do not claim causality from correlation.
@@ -22,6 +24,8 @@ UNDERSTAND → OBSERVE → CHALLENGE → VERIFY → DECIDE → ACT → VERIFY AG
 - Do not invent prices, savings, technical build-ups, guarantees, project facts or unsupported claims.
 - Treat the business profile as the source of truth for services, locations, materials and claims.
 - Before redirects/canonicals/consolidation/new URLs/major rewrites, check open PRs/issues first.
+- Prefer one high-confidence action over several weak actions.
+- Do not spend turns restating calculations already present in the compact context.
 
 ## Decision modes
 Every run ends in exactly one mode.
@@ -75,22 +79,21 @@ Start the issue with exactly this compact block. The field labels/status codes s
 ```md
 ## Notification summary
 - Status: <AUTO PUBLISHED | NO CHANGE | MONITORING | NEEDS APPROVAL | AUTO-PUBLISH FAILED>
-- Result: <українською, one sentence, max 160 characters>
+- Result: <українською, one sentence, max 140 characters>
 - Needs attention: <None OR українською one exact question/action for the owner>
 - Published: <None OR українською what was merged to main, including PR number>
 ```
 
-Keep this block under 500 characters.
+Keep this block under 350 characters.
 
-Then add a concise evidence report, maximum about 4,000 characters total:
-1. What changed in GSC (28d vs previous 28d; 90d only when useful)
-2. Most important winner/loser/opportunity
-3. Technical finding if material
-4. Decision and confidence
-5. Action taken / what is being monitored / exact approval needed
-6. Links
+After the notification summary, add only the evidence needed to justify the decision, maximum about 2,000 characters total:
+1. Key 28d change; 90d only if it changes the decision
+2. One most important opportunity/problem
+3. Decision + confidence
+4. Action taken / monitoring condition / exact approval needed
+5. Links
 
-Do not dump raw JSON or produce a long narrative report.
+No long tables. No raw JSON. No full keyword dumps. No repeated explanation of unchanged metrics.
 
 ## Human-attention principle
 Telegram is an exception channel, not a reporting dump.
