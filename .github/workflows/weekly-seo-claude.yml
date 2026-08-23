@@ -73,7 +73,7 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            Today is ${{ github.event.repository.updated_at }} and this is the scheduled ISOPROTECH weekly SEO run.
+            This is the scheduled ISOPROTECH weekly SEO run. Determine today's date in Europe/Brussels when naming the report.
 
             Read `.claude/agents/weekly-seo.md` in full and follow it as the governing policy.
             Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
