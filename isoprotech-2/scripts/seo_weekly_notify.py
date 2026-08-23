@@ -64,14 +64,17 @@ def latest_weekly_issue(repo, date_str):
     return exact[0]
 
 
-def send_telegram(token, chat_id, message):
+def send_telegram(token, chat_id, message, reply_markup=None):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {
+        "chat_id": chat_id,
+        "text": message[:4000],
+        "disable_web_page_preview": True,
+    }
+    if reply_markup:
+        payload["reply_markup"] = reply_markup
     try:
-        response = requests.post(
-            url,
-            json={"chat_id": chat_id, "text": message[:4000], "disable_web_page_preview": True},
-            timeout=20,
-        )
+        response = requests.post(url, json=payload, timeout=20)
     except requests.RequestException:
         print("Telegram notification failed due to a network error.")
         return False
@@ -82,13 +85,46 @@ def send_telegram(token, chat_id, message):
     return True
 
 
-def concise_message(issue, today):
+def approval_keyboard(repo, review_pr_value):
+    match = re.search(r"#?(\d+)", review_pr_value or "")
+    if not match:
+        return None
+    pr_number = int(match.group(1))
+    pr = gh_json([
+        "pr", "view", str(pr_number), "--repo", repo,
+        "--json", "number,url,state,baseRefName,headRefName,headRefOid,body",
+    ])
+    if not pr:
+        return None
+    if pr.get("state") != "OPEN" or pr.get("baseRefName") != "main":
+        return None
+    if not str(pr.get("headRefName", "")).startswith("seo/approval-"):
+        return None
+    if "<!-- telegram-approval-required -->" not in (pr.get("body") or ""):
+        return None
+    head = (pr.get("headRefOid") or "")[:12]
+    if len(head) != 12:
+        return None
+
+    return {
+        "inline_keyboard": [
+            [{"text": "👀 Переглянути", "url": pr.get("url")}],
+            [
+                {"text": "✅ Підтвердити", "callback_data": f"seo:approve:{pr_number}:{head}"},
+                {"text": "❌ Відхилити", "callback_data": f"seo:reject:{pr_number}:{head}"},
+            ],
+        ]
+    }
+
+
+def concise_payload(issue, today, repo):
     summary = extract_notification_summary(issue.get("body", ""))
     fields = parse_fields(summary)
 
     status = fields.get("status") or fields.get("mode") or "UNKNOWN"
     result = fields.get("result") or fields.get("headline") or "Щотижнева SEO-перевірка завершена."
     attention = fields.get("needs attention") or fields.get("needs review") or "None"
+    review_pr = fields.get("review pr") or "None"
     published = fields.get("published") or fields.get("action/pr") or "None"
 
     labels = {
@@ -110,8 +146,16 @@ def concise_message(issue, today):
     if published and published.lower() not in {"none", "none created", "ні", "нічого"}:
         lines.append(f"🚀 {published}")
 
+    keyboard = None
+    if status.upper() == "NEEDS APPROVAL" and review_pr.lower() not in {"none", "ні", "нічого"}:
+        keyboard = approval_keyboard(repo, review_pr)
+        if keyboard:
+            lines.append("Обери дію нижче.")
+        else:
+            lines.append(f"PR для перегляду: {review_pr}")
+
     lines.append(f"Звіт: {issue.get('url')}")
-    return "\n".join(lines)
+    return "\n".join(lines), keyboard
 
 
 def main():
@@ -148,7 +192,8 @@ def main():
         )
         return 0
 
-    send_telegram(token, chat_id, concise_message(issue, today))
+    message, keyboard = concise_payload(issue, today, repo)
+    send_telegram(token, chat_id, message, keyboard)
     return 0
 
 
