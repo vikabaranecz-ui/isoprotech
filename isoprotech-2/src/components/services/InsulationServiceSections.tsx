@@ -6,25 +6,21 @@ import type {
 } from "@/content/insulationServiceContent";
 
 export function InsulationHeroActions({ slug }: { slug: InsulationServiceSlug }) {
+  if (slug !== "gevelisolatie") return null;
+
   return (
     <div className="mt-8 flex flex-wrap justify-center gap-3">
       <a href="#offerte" className="btn-primary px-6 py-3 text-sm">
-        {slug === "dakisolatie" ? "Plan gratis dakinspectie" : "Plan gratis gevelinspectie"}
+        Plan gratis gevelinspectie
       </a>
-      {slug === "dakisolatie" ? (
-        <Link href="/calculator/dak" className="btn-outline-light px-6 py-3 text-sm">
-          Bereken mijn dakprijs
-        </Link>
-      ) : (
-        <a
-          href={BRAND.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-outline-light px-6 py-3 text-sm"
-        >
-          Stuur een foto via WhatsApp
-        </a>
-      )}
+      <a
+        href={BRAND.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-outline-light px-6 py-3 text-sm"
+      >
+        Stuur een foto via WhatsApp
+      </a>
     </div>
   );
 }
@@ -255,6 +251,11 @@ export function InsulationAfterProjects({ content }: { content: InsulationServic
             <p className="mt-6 rounded-2xl border border-orange-200 bg-orange-50 p-5 text-sm leading-relaxed text-gray-700">
               {content.premiumNote}
             </p>
+          )}
+          {content.slug === "dakisolatie" && (
+            <a href="#offerte" className="btn-primary mt-6 inline-flex px-5 py-3 text-sm">
+              Vraag premie-advies aan
+            </a>
           )}
         </div>
       </section>
