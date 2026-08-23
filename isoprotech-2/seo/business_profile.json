@@ -50,7 +50,7 @@
     "positioning": "Focus on customer problems, how ISOPROTECH solves them, the process and reasons to trust the company rather than mainly on company biography."
   },
   "automation_policy": {
-    "safe_auto_pr": [
+    "safe_auto_publish": [
       "clear title/meta corrections",
       "broken internal links",
       "descriptive alt text corrections",
@@ -71,6 +71,8 @@
       "large content rewrites",
       "B3 /regio/antwerpen repositioning"
     ],
-    "never_auto_merge_to_main": true
+    "auto_merge_safe_fixes_to_main": true,
+    "require_successful_build_before_auto_merge": true,
+    "never_auto_merge_approval_gated_changes": true
   }
 }
