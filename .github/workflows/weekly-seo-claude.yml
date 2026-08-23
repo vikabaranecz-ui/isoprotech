@@ -27,7 +27,7 @@ jobs:
   weekly-seo:
     if: github.event_name == 'workflow_dispatch' || vars.SEO_AUTOMATION_ENABLED == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 35
     env:
       GH_TOKEN: ${{ github.token }}
       SEO_BASE_URL: https://www.isoprotech.be
@@ -61,7 +61,7 @@ jobs:
         if: steps.duplicate.outputs.skip != 'true'
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Set up Python
         if: steps.duplicate.outputs.skip != 'true'
@@ -77,12 +77,18 @@ jobs:
         if: steps.duplicate.outputs.skip != 'true'
         run: python isoprotech-2/scripts/seo_weekly_collect.py
 
+      - name: Build compact Claude context
+        if: steps.duplicate.outputs.skip != 'true'
+        run: python isoprotech-2/scripts/seo_weekly_compact.py
+
       - name: Upload raw weekly evidence
         if: steps.duplicate.outputs.skip != 'true' && always()
         uses: actions/upload-artifact@v4
         with:
           name: seo-weekly-context-${{ github.run_id }}
-          path: seo-weekly-context.json
+          path: |
+            seo-weekly-context.json
+            seo-weekly-context-compact.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -107,9 +113,10 @@ jobs:
 
             Read `.claude/agents/weekly-seo.md` in full and follow it as the governing policy.
             Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
-            Read `seo-weekly-context.json` as the fresh evidence collected for this run.
+            Read `seo-weekly-context-compact.json` as the fresh evidence for this run.
 
-            Be economical: inspect only files needed to validate concrete findings. Do not produce a long narrative.
+            Cost control is important. The compact file already contains calculated deltas, opportunities, audit signals and filtered keyword data. Do not read the large `seo-weekly-context.json` unless the compact file explicitly shows a source error or a critical fact needed for a concrete decision is missing.
+            Inspect only repository files needed to validate one concrete finding or implement one safe change. Do not browse the repository broadly and do not produce a long narrative.
             Check recent open SEO issues and PRs before acting so you do not duplicate work.
 
             Finish in exactly one mode: NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
@@ -119,7 +126,10 @@ jobs:
             Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` GitHub issue with the compact Notification summary first.
             If data collection for one source failed, continue with successful sources and report the operational error without inventing data.
           claude_args: |
-            --max-turns 18
+            --model claude-sonnet-5
+            --effort medium
+            --max-turns 10
+            --max-budget-usd 1.00
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
       - name: Send Telegram SEO summary
