@@ -51,13 +51,20 @@
   },
   "automation_policy": {
     "safe_auto_publish": [
-      "clear title/meta corrections",
+      "clear title/meta corrections and evidence-based title/meta improvements on existing URLs",
       "broken internal links",
       "descriptive alt text corrections",
       "obvious duplicate brand suffix fixes",
       "small copy fixes that do not introduce new claims",
-      "technical SEO fixes with low architecture risk"
+      "evidence-based on-page SEO improvements to existing pages when search intent is already clear, without changing URL, canonical target, service scope, prices, guarantees or technical claims",
+      "small internal-link improvements between existing relevant pages when they do not restructure site architecture",
+      "technical SEO fixes with low architecture risk",
+      "structured-data corrections that only restate already verified on-page/business facts"
     ],
+    "safe_content_limits": {
+      "max_existing_pages_with_meaningful_copy_changes_per_week": 2,
+      "rule": "Prefer focused improvements to existing pages over bulk rewrites. Every factual statement must already be supported by the business profile or existing verified site content."
+    },
     "requires_human_approval": [
       "redirects",
       "URL deletion",
@@ -68,7 +75,8 @@
       "new prices or savings percentages",
       "new business or technical claims",
       "removing indexed pages from sitemap",
-      "large content rewrites",
+      "large or bulk content rewrites",
+      "changing the primary search intent/service positioning of an existing page",
       "B3 /regio/antwerpen repositioning"
     ],
     "auto_merge_safe_fixes_to_main": true,
