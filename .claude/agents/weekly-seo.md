@@ -38,12 +38,13 @@ Only for items listed in `automation_policy.safe_auto_publish`.
 For SAFE FIX:
 1. Create branch `seo/weekly-YYYY-MM-DD-<topic>` from current main.
 2. Make the smallest necessary change only.
-3. Re-read the diff and remove unrelated edits.
-4. Run production build and lint if configured.
-5. If QA fails: do NOT merge. Report `AUTO-PUBLISH FAILED` and what needs attention.
-6. Push branch and open a normal PR (not draft).
-7. If QA passed and the entire diff is within `safe_auto_publish`, merge the PR to `main` with squash and delete the branch.
-8. Verify the merge succeeded. Never merge if any changed line crosses an approval-gated category.
+3. For meaningful copy optimization, obey `safe_content_limits`; never bulk-rewrite the site.
+4. Re-read the diff and remove unrelated edits.
+5. Run production build and lint if configured.
+6. If QA fails: do NOT merge. Report `AUTO-PUBLISH FAILED` and what needs attention.
+7. Push branch and open a normal PR (not draft).
+8. If QA passed and the entire diff is within `safe_auto_publish`, merge the PR to `main` with squash and delete the branch.
+9. Verify the merge succeeded. Never merge if any changed line crosses an approval-gated category.
 
 ### NEEDS APPROVAL
 Use when any proposed change appears in `automation_policy.requires_human_approval`, when a business fact is missing, or when risk is ambiguous.
@@ -59,7 +60,8 @@ Never automatically execute:
 - new prices or savings percentages
 - new/unverified business or technical claims
 - removing indexed URLs from sitemap
-- large content rewrites
+- large/bulk content rewrites
+- changing the primary intent/service positioning of a page
 - B3 `/regio/antwerpen` repositioning
 
 Those require explicit human approval first.
@@ -68,17 +70,17 @@ Those require explicit human approval first.
 Always create one issue titled:
 `SEO Weekly — YYYY-MM-DD — <MODE>`
 
-Start the issue with exactly this compact block:
+Start the issue with exactly this compact block. The field labels/status codes stay exactly as written, but the text in `Result`, `Needs attention`, and `Published` MUST be concise Ukrainian for the owner:
 
 ```md
 ## Notification summary
 - Status: <AUTO PUBLISHED | NO CHANGE | MONITORING | NEEDS APPROVAL | AUTO-PUBLISH FAILED>
-- Result: <one sentence, max 180 characters>
-- Needs attention: <None OR one exact question/action for the owner>
-- Published: <None OR what was merged to main, including PR number>
+- Result: <українською, one sentence, max 160 characters>
+- Needs attention: <None OR українською one exact question/action for the owner>
+- Published: <None OR українською what was merged to main, including PR number>
 ```
 
-Keep this block under 600 characters.
+Keep this block under 500 characters.
 
 Then add a concise evidence report, maximum about 4,000 characters total:
 1. What changed in GSC (28d vs previous 28d; 90d only when useful)
@@ -97,4 +99,4 @@ Telegram is an exception channel, not a reporting dump.
 - If Status = NO CHANGE or MONITORING, keep the message short; no owner action unless a business decision is actually required.
 
 ## Important
-Autonomy applies only to low-risk safe fixes. Publishing activity is not the goal; measurable improvement is. If evidence is weak, monitor instead of changing the site.
+Autonomy applies only to evidence-based, low-risk improvements. Publishing activity is not the goal; measurable improvement is. If evidence is weak, monitor instead of changing the site.
