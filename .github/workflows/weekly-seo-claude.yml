@@ -19,11 +19,9 @@ permissions:
 
 jobs:
   weekly-seo:
-    # Scheduled runs remain disabled until SEO_AUTOMATION_ENABLED=true.
-    # Manual workflow_dispatch runs are always allowed for pre-activation testing.
     if: github.event_name == 'workflow_dispatch' || vars.SEO_AUTOMATION_ENABLED == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 45
     env:
       GH_TOKEN: ${{ github.token }}
       SEO_BASE_URL: https://www.isoprotech.be
@@ -81,20 +79,17 @@ jobs:
             Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
             Read `seo-weekly-context.json` as the fresh evidence collected for this run.
 
-            Inspect current repository code only as needed to validate hypotheses.
+            Be economical: inspect only files needed to validate concrete findings. Do not produce a long narrative.
             Check recent open SEO issues and PRs before acting so you do not duplicate work.
 
-            Execute the complete weekly analysis and finish in exactly one mode:
-            NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
+            Finish in exactly one mode: NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
+            SAFE FIX must be QA'd and, if the entire diff is within the allowed safe-auto-publish policy, merged to main automatically.
+            Approval-gated changes must never be implemented or merged without prior explicit approval.
 
-            Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` GitHub issue.
-            Only SAFE FIX may edit code and create a DRAFT PR.
-            Never merge to main.
-            Never automatically execute redirects, URL deletion, sitemap removals, architecture changes, new landing pages, large rewrites, new prices, savings claims, or unverified technical/business claims.
-
-            If data collection for one source failed, do not invent the missing data. Continue with the sources that succeeded and clearly report the operational error in the weekly issue.
+            Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` GitHub issue with the compact Notification summary first.
+            If data collection for one source failed, continue with successful sources and report the operational error without inventing data.
           claude_args: |
-            --max-turns 50
+            --max-turns 18
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
       - name: Send Telegram SEO summary
