@@ -14,7 +14,7 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE_URL = os.getenv("SEO_BASE_URL", "https://www.isoprotech.be").rstrip("/")
-GSC_SITE_URL = os.getenv("GSC_SITE_URL", "https://www.isoprotech.be/")
+GSC_SITE_URL = os.getenv("GSC_SITE_URL", "sc-domain:isoprotech.be")
 GOOGLE_ADS_CUSTOMER_ID = re.sub(r"\D", "", os.getenv("GOOGLE_ADS_CUSTOMER_ID", ""))
 GOOGLE_ADS_LOGIN_CUSTOMER_ID = re.sub(r"\D", "", os.getenv("GOOGLE_ADS_LOGIN_CUSTOMER_ID", ""))
 GOOGLE_ADS_DEVELOPER_TOKEN = os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN", "")
@@ -381,7 +381,7 @@ def collect_google_ads(access_token, profile):
             "classifier": disposition,
             "classifier_reason": reason,
         })
-    ideas.sort(key=lambda x: x.get("avg_monthly_searches") or 0, reverse=True)
+    ideas.sort(key=lambda x: int(x.get("avg_monthly_searches") or 0), reverse=True)
     return {
         "warning": "Google Ads competition is paid-ad competition, not SEO difficulty.",
         "seeds": SEEDS,

@@ -24,7 +24,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       SEO_BASE_URL: https://www.isoprotech.be
-      GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'https://www.isoprotech.be/' }}
+      GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'sc-domain:isoprotech.be' }}
       GOOGLE_ADS_CUSTOMER_ID: "1501901578"
       GOOGLE_ADS_API_VERSION: v25
       GOOGLE_ADC_JSON: ${{ secrets.GOOGLE_ADC_JSON }}
