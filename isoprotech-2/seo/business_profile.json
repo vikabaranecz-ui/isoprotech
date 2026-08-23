@@ -1,0 +1,76 @@
+{
+  "business": "ISOPROTECH",
+  "country": "Belgium",
+  "language": "nl-BE",
+  "website": "https://www.isoprotech.be",
+  "business_model": "installation_service",
+  "service_area_rule": "Every current dedicated /regio/[city] page on the website represents a real active service area.",
+  "services": {
+    "dakisolatie": {
+      "offered": true,
+      "methods": ["PIR", "plat dak isoleren", "hellend dak isoleren", "dakisolatie langs buiten", "dakisolatie buitenzijde", "sarking", "sarkingdak", "dak isoleren", "isoleren van dak"],
+      "guardrail": "Sarking is offered as exterior roof insulation. Do not invent exact layer build-up, thicknesses, product combinations or technical performance unless confirmed."
+    },
+    "gevelisolatie": {
+      "offered": true,
+      "methods": ["EPS", "buitengevelisolatie", "gevelisolatie langs buiten", "ETICS", "crepi", "spuitkurk", "steenstrips"],
+      "brands_confirmed": ["Caparol", "Baumit"],
+      "guardrail": "Use ETICS as supporting professional terminology and explain it in plain customer language. Do not infer specific brand products or layer systems."
+    },
+    "asbestverwijdering": {"offered": true},
+    "dakrenovatie": {"offered": true},
+    "dakkapellen": {"offered": true}
+  },
+  "not_offered": [
+    "vloerisolatie",
+    "vloer isoleren",
+    "spouwmuurisolatie",
+    "spouwmuur isoleren",
+    "binnenmuur isoleren",
+    "binnenisolatie",
+    "isolatiechape",
+    "chape isolatie",
+    "isolerende chape"
+  ],
+  "excluded_materials_as_service": ["glaswol", "rockwool", "minerale wol", "isolatiewol"],
+  "purchase_intent_exclusions": ["isolatiemateriaal kopen", "isolatieplaten kopen", "PIR platen kopen", "EPS platen kopen", "bouwmarkt", "hubo", "gamma"],
+  "allowed_comparisons": ["PIR vs glaswol", "PIR of glaswol", "EPS vs minerale wol", "beste dakisolatie", "beste gevelisolatie"],
+  "problem_intents": ["warmteverlies", "oververhitting", "zolder te warm", "koude muren", "koudebruggen", "condensatie op koude oppervlakken"],
+  "moisture_guardrail": "Do not imply insulation solves all moisture or mould problems. Optrekkend vocht, leaks, wet basements and ventilation-related moisture require separate diagnosis.",
+  "pricing_policy": {
+    "existing_price_articles": "KEEP",
+    "existing_price_articles_may_contain_exact_prices": true,
+    "publish_new_exact_prices_automatically": false,
+    "invent_prices": false,
+    "service_pages": "Explain price factors and link to existing price articles instead of inventing new exact prices."
+  },
+  "about_page_strategy": {
+    "wanted": true,
+    "preferred_slug": "/over-ons",
+    "positioning": "Focus on customer problems, how ISOPROTECH solves them, the process and reasons to trust the company rather than mainly on company biography."
+  },
+  "automation_policy": {
+    "safe_auto_pr": [
+      "clear title/meta corrections",
+      "broken internal links",
+      "descriptive alt text corrections",
+      "obvious duplicate brand suffix fixes",
+      "small copy fixes that do not introduce new claims",
+      "technical SEO fixes with low architecture risk"
+    ],
+    "requires_human_approval": [
+      "redirects",
+      "URL deletion",
+      "new URL creation",
+      "canonical architecture changes",
+      "service-page mergers",
+      "major internal-link architecture changes",
+      "new prices or savings percentages",
+      "new business or technical claims",
+      "removing indexed pages from sitemap",
+      "large content rewrites",
+      "B3 /regio/antwerpen repositioning"
+    ],
+    "never_auto_merge_to_main": true
+  }
+}
