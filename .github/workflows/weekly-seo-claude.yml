@@ -5,6 +5,12 @@ on:
     - cron: "0 8 * * 1"
       timezone: "Europe/Brussels"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Run again even if today's SEO report already exists"
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: weekly-seo-claude
@@ -33,24 +39,46 @@ jobs:
       GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
 
     steps:
+      - name: Skip duplicate same-day run
+        id: duplicate
+        env:
+          FORCE_RUN: ${{ inputs.force || 'false' }}
+        run: |
+          TODAY="$(TZ=Europe/Brussels date +%F)"
+          if [ "$FORCE_RUN" = "true" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          COUNT="$(gh issue list --repo "$GITHUB_REPOSITORY" --search "SEO Weekly — ${TODAY} in:title" --limit 1 --json number --jq 'length')"
+          if [ "$COUNT" != "0" ]; then
+            echo "Existing SEO Weekly report found for ${TODAY}; skipping duplicate paid analysis."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout repository
+        if: steps.duplicate.outputs.skip != 'true'
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Set up Python
+        if: steps.duplicate.outputs.skip != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install SEO collector dependencies
+        if: steps.duplicate.outputs.skip != 'true'
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
 
       - name: Collect weekly SEO evidence
+        if: steps.duplicate.outputs.skip != 'true'
         run: python isoprotech-2/scripts/seo_weekly_collect.py
 
       - name: Upload raw weekly evidence
-        if: always()
+        if: steps.duplicate.outputs.skip != 'true' && always()
         uses: actions/upload-artifact@v4
         with:
           name: seo-weekly-context-${{ github.run_id }}
@@ -59,6 +87,7 @@ jobs:
           retention-days: 30
 
       - name: Verify Claude authentication is configured
+        if: steps.duplicate.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -68,6 +97,7 @@ jobs:
           fi
 
       - name: Run Claude weekly SEO agent
+        if: steps.duplicate.outputs.skip != 'true'
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
@@ -93,7 +123,7 @@ jobs:
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
       - name: Send Telegram SEO summary
-        if: always()
+        if: steps.duplicate.outputs.skip != 'true' && always()
         continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
