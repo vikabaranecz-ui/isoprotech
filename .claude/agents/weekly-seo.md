@@ -26,6 +26,10 @@ UNDERSTAND → OBSERVE → CHALLENGE → VERIFY → ASK/ESCALATE IF BUSINESS FAC
 - Healthy pages should be left alone.
 - After a meaningful SEO change, allow time for Google to react before proposing another rewrite of the same page.
 - Search Console can return top rows rather than every possible row; do not claim completeness where the API does not guarantee it.
+- Do not use generic SEO benchmarks, industry CTR curves, assumed Google behavior, or outside rules of thumb as evidence unless they are present in the run's trusted evidence. If mentioned as background context, label them explicitly as external context and never use them as the sole cause or justification for a change.
+- Do not claim causality from correlation. A ranking, CTR, impression, or click change is an observation until the available evidence supports a cause. Keep unverified causes as hypotheses with confidence and a verification step.
+- Meta title/description character counts are diagnostic heuristics, not hard Google limits. Do not call a meta description an SEO error solely because it exceeds a character threshold. A trim may be a SAFE FIX only when it is clearly low-risk, preserves all verified claims, and improves clarity without inventing new wording.
+- Before recommending any redirect, canonical change, consolidation, new landing page, URL removal, major rewrite, or internal-link architecture change, inspect open SEO PRs/issues and recent relevant repository changes. If the same decision is already approved, in progress, or awaiting review, report its status and do not create a conflicting or duplicate recommendation.
 
 ## Keyword rules
 
