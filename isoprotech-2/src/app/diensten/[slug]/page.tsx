@@ -8,11 +8,18 @@ import Link from "next/link";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
 import { getBlogPostBySlug } from "@/content/blog";
 import { getProjectsByService } from "@/content/projects";
-import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
+import { getInsulationServiceContent } from "@/content/insulationServiceContent";
+import { serviceSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { ContactForm } from "@/components/forms/ContactForm";
+import {
+  InsulationAfterProjects,
+  InsulationCoreSections,
+  InsulationHeroActions,
+  InsulationStats,
+} from "@/components/services/InsulationServiceSections";
 
 // Generate all service pages at build time
 export function generateStaticParams() {
@@ -28,16 +35,19 @@ export function generateMetadata({
   const service = getServiceBySlug(params.slug);
   if (!service) return {};
 
+  const insulation = getInsulationServiceContent(service.slug);
+  const description = insulation?.seoDescription ?? service.seo.description;
+
   return {
     title: service.seo.title,
-    description: service.seo.description,
+    description,
     keywords: service.seo.keywords,
     alternates: {
       canonical: `${BRAND.url}/diensten/${service.slug}`,
     },
     openGraph: {
       title: service.seo.title,
-      description: service.seo.description,
+      description,
       url: `${BRAND.url}/diensten/${service.slug}`,
       type: "website",
       images: [{ url: `${BRAND.url}/images/og-isoprotech.png`, width: 1080, height: 1080 }],
@@ -53,6 +63,8 @@ export default function ServicePage({
   const service = getServiceBySlug(params.slug);
   if (!service) notFound();
 
+  const insulation = getInsulationServiceContent(service.slug);
+  const description = insulation?.seoDescription ?? service.seo.description;
   const related = getRelatedServices(service.id);
   const serviceUrl = `${BRAND.url}/diensten/${service.slug}`;
   const relatedProjects = getProjectsByService(service.slug);
@@ -65,14 +77,13 @@ export default function ServicePage({
       <JsonLd
         data={serviceSchema({
           name: service.name,
-          description: service.seo.description,
+          description,
           url: serviceUrl,
         })}
       />
 
       {/* Hero */}
       <section className="relative min-h-[420px] flex items-center overflow-hidden">
-        {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${service.photo.src})` }}
@@ -86,10 +97,13 @@ export default function ServicePage({
             {service.name} in Antwerpen en omgeving
           </h1>
           <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-            {service.heroDesc}
+            {insulation?.heroDesc ?? service.heroDesc}
           </p>
+          {insulation && <InsulationHeroActions slug={insulation.slug} />}
         </div>
       </section>
+
+      {insulation && <InsulationStats content={insulation} />}
 
       {/* Breadcrumb */}
       <div className="mx-auto max-w-7xl px-6">
@@ -101,86 +115,85 @@ export default function ServicePage({
         />
       </div>
 
-      {/* Benefits + Process */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Benefits */}
-          <div>
-            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
-              Voordelen
-            </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-teal-800">
-              Waarom {service.name.toLowerCase()}?
-            </h2>
-            <ul className="mt-8 space-y-4">
-              {service.benefits.map((b, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <svg
-                    className="mt-0.5 h-5 w-5 shrink-0 text-orange-400"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.15" />
-                    <path
-                      d="M6 10l3 3 5-5"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-gray-600 leading-relaxed">{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      {insulation ? (
+        <InsulationCoreSections content={insulation} />
+      ) : (
+        <section className="mx-auto max-w-7xl px-6 py-16">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
+                Voordelen
+              </span>
+              <h2 className="mt-2 text-3xl font-extrabold text-teal-800">
+                Waarom {service.name.toLowerCase()}?
+              </h2>
+              <ul className="mt-8 space-y-4">
+                {service.benefits.map((b, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <svg
+                      className="mt-0.5 h-5 w-5 shrink-0 text-orange-400"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.15" />
+                      <path
+                        d="M6 10l3 3 5-5"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span className="text-gray-600 leading-relaxed">{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Process */}
-          <div>
-            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
-              Onze aanpak
-            </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-teal-800">
-              Hoe wij te werk gaan
-            </h2>
-            <ol className="mt-8 space-y-8">
-              {[
-                {
-                  step: "01",
-                  title: "Gratis inspectie",
-                  desc: "Wij komen vrijblijvend bij u langs om de situatie te beoordelen en gericht advies te geven.",
-                },
-                {
-                  step: "02",
-                  title: "Duidelijke offerte",
-                  desc: "Na de inspectie ontvangt u een heldere offerte zonder verplichtingen of verborgen kosten.",
-                },
-                {
-                  step: "03",
-                  title: "Vakkundige uitvoering",
-                  desc: "Onze vakmensen voeren de werken correct en veilig uit, met kwaliteitscontrole in elke fase.",
-                },
-                {
-                  step: "04",
-                  title: "Nette oplevering",
-                  desc: "Wij ronden alles correct af en laten het netjes achter, precies zoals afgesproken.",
-                },
-              ].map((s) => (
-                <li key={s.step} className="relative pl-16">
-                  <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-xl bg-orange-400/10 text-sm font-extrabold text-orange-400">
-                    {s.step}
-                  </span>
-                  <h3 className="font-bold text-teal-800">{s.title}</h3>
-                  <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-                    {s.desc}
-                  </p>
-                </li>
-              ))}
-            </ol>
+            <div>
+              <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">
+                Onze aanpak
+              </span>
+              <h2 className="mt-2 text-3xl font-extrabold text-teal-800">
+                Hoe wij te werk gaan
+              </h2>
+              <ol className="mt-8 space-y-8">
+                {[
+                  {
+                    step: "01",
+                    title: "Gratis inspectie",
+                    desc: "Wij komen vrijblijvend bij u langs om de situatie te beoordelen en gericht advies te geven.",
+                  },
+                  {
+                    step: "02",
+                    title: "Duidelijke offerte",
+                    desc: "Na de inspectie ontvangt u een heldere offerte zonder verplichtingen of verborgen kosten.",
+                  },
+                  {
+                    step: "03",
+                    title: "Vakkundige uitvoering",
+                    desc: "Onze vakmensen voeren de werken correct en veilig uit, met kwaliteitscontrole in elke fase.",
+                  },
+                  {
+                    step: "04",
+                    title: "Nette oplevering",
+                    desc: "Wij ronden alles correct af en laten het netjes achter, precies zoals afgesproken.",
+                  },
+                ].map((s) => (
+                  <li key={s.step} className="relative pl-16">
+                    <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-xl bg-orange-400/10 text-sm font-extrabold text-orange-400">
+                      {s.step}
+                    </span>
+                    <h3 className="font-bold text-teal-800">{s.title}</h3>
+                    <p className="mt-1 text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Video section */}
       {service.videoSrc && (
@@ -218,7 +231,7 @@ export default function ServicePage({
                 <div key={i} className="break-inside-avoid mb-3 rounded-2xl overflow-hidden relative group">
                   <Image
                     src={photo.src}
-                    alt={photo.alt}
+                    alt={insulation ? photo.alt.replace("Recticel ", "") : photo.alt}
                     width={photo.width}
                     height={photo.height}
                     className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
@@ -277,6 +290,8 @@ export default function ServicePage({
         </section>
       )}
 
+      {insulation && <InsulationAfterProjects content={insulation} />}
+
       {/* Related services */}
       {related.length > 0 && (
         <section className="bg-stone-100 py-16">
@@ -286,7 +301,7 @@ export default function ServicePage({
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((rs) => (
-                <a
+                <Link
                   key={rs.id}
                   href={`/diensten/${rs.slug}`}
                   className="group block rounded-2xl bg-white p-6 border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
@@ -294,10 +309,8 @@ export default function ServicePage({
                   <h3 className="font-bold text-teal-800 group-hover:text-orange-400 transition-colors">
                     {rs.name}
                   </h3>
-                  <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-                    {rs.shortDesc}
-                  </p>
-                </a>
+                  <p className="mt-2 text-sm text-gray-600 leading-relaxed">{rs.shortDesc}</p>
+                </Link>
               ))}
             </div>
           </div>
@@ -319,15 +332,9 @@ export default function ServicePage({
                   href={`/blog/${post.slug}`}
                   className="group block rounded-2xl bg-white border border-gray-100 p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-orange-200 hover:shadow-md"
                 >
-                  <span className="text-xs font-bold text-orange-500 uppercase tracking-wide">
-                    {post.category}
-                  </span>
-                  <h3 className="mt-2 font-bold text-teal-800 leading-snug group-hover:text-orange-500 transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">
-                    {post.excerpt}
-                  </p>
+                  <span className="text-xs font-bold text-orange-500 uppercase tracking-wide">{post.category}</span>
+                  <h3 className="mt-2 font-bold text-teal-800 leading-snug group-hover:text-orange-500 transition-colors">{post.title}</h3>
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">{post.excerpt}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
                     Lees meer
                     <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
@@ -335,12 +342,17 @@ export default function ServicePage({
                 </Link>
               ))}
             </div>
+            {insulation?.clarification && (
+              <p className="mt-6 rounded-2xl border border-teal-100 bg-stone-50 p-5 text-sm leading-relaxed text-gray-600">
+                {insulation.clarification}
+              </p>
+            )}
           </div>
         </section>
       )}
 
-      {/* Landing page link for geo-targeted pages */}
-      {service.landingPage && (
+      {/* Keep geo landing links only for services outside B1/B2 migration */}
+      {!insulation && service.landingPage && (
         <div className="mx-auto max-w-7xl px-6 pb-4">
           <p className="text-sm text-gray-500">
             Specifiek op zoek naar{" "}
@@ -353,7 +365,7 @@ export default function ServicePage({
       )}
 
       {/* CTA + Form */}
-      <section className="bg-teal-800 py-16">
+      <section id="offerte" className="bg-teal-800 py-16 scroll-mt-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-12 lg:grid-cols-2 items-start">
             <div>
@@ -361,8 +373,7 @@ export default function ServicePage({
                 Interesse in {service.name.toLowerCase()}?
               </h2>
               <p className="text-white/60 leading-relaxed mb-8">
-                Vraag vandaag nog een gratis inspectie en vrijblijvende offerte
-                aan. Wij nemen binnen 24 uur contact met u op.
+                Vraag vandaag nog een gratis inspectie en vrijblijvende offerte aan. Wij nemen binnen {insulation ? "48" : "24"} uur contact met u op.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
