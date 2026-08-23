@@ -70,6 +70,7 @@ jobs:
           fi
 
       - name: Run Claude weekly SEO agent
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -95,3 +96,12 @@ jobs:
           claude_args: |
             --max-turns 50
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
+
+      - name: Send Telegram SEO summary
+        if: always()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
+        run: python isoprotech-2/scripts/seo_weekly_notify.py
