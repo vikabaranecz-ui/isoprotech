@@ -128,7 +128,7 @@ jobs:
           claude_args: |
             --model claude-sonnet-5
             --effort medium
-            --max-turns 10
+            --max-turns 12
             --max-budget-usd 1.00
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
