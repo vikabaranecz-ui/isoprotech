@@ -2,8 +2,10 @@
 import json
 import os
 import re
+import socket
 import subprocess
-import urllib.parse
+import time
+import urllib.error
 import urllib.request
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
@@ -11,7 +13,7 @@ CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
 REPO = os.getenv("GITHUB_REPOSITORY", "").strip()
 
 
-def tg(method, payload=None):
+def tg(method, payload=None, retries=2):
     url = "https://api.telegram.org/bot" + TOKEN + "/" + method
     data = None
     headers = {}
@@ -19,8 +21,18 @@ def tg(method, payload=None):
         data = json.dumps(payload).encode("utf-8")
         headers["Content-Type"] = "application/json"
     request = urllib.request.Request(url, data=data, headers=headers)
-    with urllib.request.urlopen(request, timeout=20) as response:
-        return json.load(response)
+
+    last_error = None
+    for attempt in range(retries + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=10) as response:
+                return json.load(response)
+        except (TimeoutError, socket.timeout, urllib.error.URLError) as exc:
+            last_error = exc
+            if attempt < retries:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise last_error
 
 
 def gh(args):
@@ -83,7 +95,6 @@ def validate_pr(pr_number, expected_sha_prefix):
 def checks_ready(pr_number):
     result = gh(["pr", "checks", str(pr_number), "--repo", REPO, "--json", "bucket,name,state"])
     if result.returncode != 0:
-        # If GitHub reports no checks, rely on the agent's mandatory local production build.
         combined = (result.stdout + result.stderr).lower()
         if "no checks" in combined:
             return True, ""
@@ -103,20 +114,29 @@ def approve(pr_number, sha_prefix, callback_id, message):
     pr, error = validate_pr(pr_number, sha_prefix)
     if error:
         answer_callback(callback_id, error)
-        send(f"⚠️ PR #{pr_number} не опубліковано. {error}")
+        try:
+            send(f"⚠️ PR #{pr_number} не опубліковано. {error}")
+        except Exception:
+            pass
         return
 
     ready, error = checks_ready(pr_number)
     if not ready:
         answer_callback(callback_id, "Поки не можна merge: перевірки не завершені.")
-        send(f"⏳ PR #{pr_number} поки не пішов у main. {error}\nСпробуй натиснути «Підтвердити» ще раз після завершення checks.")
+        try:
+            send(f"⏳ PR #{pr_number} поки не пішов у main. {error}\nСпробуй натиснути «Підтвердити» ще раз після завершення checks.")
+        except Exception:
+            pass
         return
 
     if pr.get("isDraft"):
         ready_result = gh(["pr", "ready", str(pr_number), "--repo", REPO])
         if ready_result.returncode != 0:
             answer_callback(callback_id, "Не вдалося підготувати PR до merge.")
-            send(f"⚠️ PR #{pr_number}: не вдалося зняти Draft статус.")
+            try:
+                send(f"⚠️ PR #{pr_number}: не вдалося зняти Draft статус.")
+            except Exception:
+                pass
             return
 
     result = gh([
@@ -127,12 +147,18 @@ def approve(pr_number, sha_prefix, callback_id, message):
         answer_callback(callback_id, "Merge не виконано.")
         detail = (result.stderr or result.stdout).strip().splitlines()
         detail = detail[-1] if detail else "GitHub відхилив merge."
-        send(f"⚠️ PR #{pr_number} не пішов у main. {detail[:300]}")
+        try:
+            send(f"⚠️ PR #{pr_number} не пішов у main. {detail[:300]}")
+        except Exception:
+            pass
         return
 
     clear_buttons(message)
     answer_callback(callback_id, "Підтверджено — merge у main виконано.")
-    send(f"✅ ПІДТВЕРДЖЕНО\nPR #{pr_number} merged у main. Vercel автоматично публікує нову версію сайту.\n{pr.get('url')}")
+    try:
+        send(f"✅ ПІДТВЕРДЖЕНО\nPR #{pr_number} merged у main. Vercel автоматично публікує нову версію сайту.\n{pr.get('url')}")
+    except Exception:
+        pass
 
 
 def reject(pr_number, sha_prefix, callback_id, message):
@@ -143,11 +169,17 @@ def reject(pr_number, sha_prefix, callback_id, message):
     result = gh(["pr", "close", str(pr_number), "--repo", REPO, "--delete-branch", "--comment", "Rejected by owner via Telegram approval workflow."])
     if result.returncode != 0:
         answer_callback(callback_id, "Не вдалося відхилити PR.")
-        send(f"⚠️ Не вдалося закрити PR #{pr_number}.")
+        try:
+            send(f"⚠️ Не вдалося закрити PR #{pr_number}.")
+        except Exception:
+            pass
         return
     clear_buttons(message)
     answer_callback(callback_id, "Відхилено.")
-    send(f"❌ ВІДХИЛЕНО\nPR #{pr_number} закрито без змін у main.\n{pr.get('url')}")
+    try:
+        send(f"❌ ВІДХИЛЕНО\nPR #{pr_number} закрито без змін у main.\n{pr.get('url')}")
+    except Exception:
+        pass
 
 
 def main():
@@ -155,7 +187,12 @@ def main():
         print("Telegram/GitHub environment is incomplete; skipping.")
         return 0
 
-    data = tg("getUpdates", {"limit": 100, "timeout": 0})
+    try:
+        data = tg("getUpdates", {"limit": 100, "timeout": 0})
+    except (TimeoutError, socket.timeout, urllib.error.URLError) as exc:
+        print(f"Transient Telegram API error; skipping this poll without failing workflow: {exc}")
+        return 0
+
     updates = data.get("result", [])
     max_update = None
 
@@ -186,8 +223,10 @@ def main():
             reject(pr_number, sha_prefix, callback.get("id", ""), message)
 
     if max_update is not None:
-        # Confirm processed updates so they are not returned on the next run.
-        tg("getUpdates", {"offset": max_update + 1, "limit": 1, "timeout": 0})
+        try:
+            tg("getUpdates", {"offset": max_update + 1, "limit": 1, "timeout": 0})
+        except (TimeoutError, socket.timeout, urllib.error.URLError) as exc:
+            print(f"Could not acknowledge Telegram updates this cycle; next poll will retry: {exc}")
 
     print(f"Processed {len(updates)} Telegram update(s).")
     return 0
