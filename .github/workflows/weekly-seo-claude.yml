@@ -159,10 +159,11 @@ jobs:
             Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
             Read `seo-weekly-context-compact.json` as the fresh evidence for this run.
 
-            Cost control is important. Never read the large raw context unless the compact context explicitly reports a critical missing fact needed for one concrete decision.
-            By turn 6, choose the likely mode and the single highest-confidence finding. If there is no concrete SAFE FIX or approval-gated opportunity, create the required issue and finish immediately.
-            Inspect repository files only for that one concrete finding. Do not browse broadly, do not restate metrics, and do not investigate secondary opportunities in this run.
-            Check recent open SEO issues/PRs only enough to avoid duplicate work.
+            This is a bounded automation. By turn 6 choose exactly one mode and one primary finding.
+            If the mode is NO ACTION or MONITOR, create the weekly issue immediately and stop.
+            If the mode is NEEDS APPROVAL and no review PR is needed, create the issue immediately and stop.
+            Only a concrete SAFE FIX or approval PR may continue beyond turn 8.
+            Never investigate a second opportunity in the same run.
 
             Finish in exactly one mode: NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
             SAFE FIX: smallest diff only, QA it, and auto-merge to main only if the entire diff is allowed by safe_auto_publish.
@@ -173,7 +174,7 @@ jobs:
           claude_args: |
             --model claude-sonnet-5
             --effort medium
-            --max-turns 16
+            --max-turns 30
             --max-budget-usd 1.00
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
