@@ -5,6 +5,8 @@ from pathlib import Path
 
 RAW = Path(os.getenv("SEO_WEEKLY_RAW", "seo-weekly-context.json"))
 OUT = Path(os.getenv("SEO_WEEKLY_COMPACT", "seo-weekly-context-compact.json"))
+TARGETS = Path(os.getenv("SEO_KEYWORD_TARGETS", "isoprotech-2/seo/keyword_targets.json"))
+GROWTH = Path(os.getenv("SEO_GROWTH_STRATEGY", "isoprotech-2/seo/growth_strategy.json"))
 
 
 def num(value):
@@ -75,6 +77,44 @@ def compact_site(site):
     }
 
 
+def target_scoreboard(current_queries):
+    if not TARGETS.exists():
+        return {"error": f"Target file missing: {TARGETS}"}
+    cfg = json.loads(TARGETS.read_text(encoding="utf-8"))
+    lookup = {str(r.get("query") or "").strip().lower(): r for r in current_queries or []}
+    rows = []
+    for target in cfg.get("targets", []):
+        query = str(target.get("query") or "").strip()
+        gsc = lookup.get(query.lower())
+        rows.append({
+            "query": query,
+            "cluster": target.get("cluster"),
+            "priority": target.get("priority"),
+            "position": gsc.get("position") if gsc else None,
+            "impressions": gsc.get("impressions", 0) if gsc else 0,
+            "clicks": gsc.get("clicks", 0) if gsc else 0,
+            "ctr": gsc.get("ctr", 0) if gsc else 0,
+            "seen_in_current_28d": bool(gsc),
+        })
+
+    def count_at(limit):
+        return sum(1 for r in rows if isinstance(r.get("position"), (int, float)) and r["position"] <= limit)
+
+    return {
+        "deadline": cfg.get("deadline"),
+        "target_count": cfg.get("target_count", 40),
+        "target_position": cfg.get("target_position", 5),
+        "top3": count_at(3),
+        "top5": count_at(5),
+        "top10": count_at(10),
+        "top20": count_at(20),
+        "not_seen_current_28d": sum(1 for r in rows if not r["seen_in_current_28d"]),
+        "targets": rows,
+        "supporting_topic_pool": cfg.get("supporting_topic_pool", []),
+        "note": "Exact-query scoreboard from GSC rows returned for the current 28d. Missing rows are not assumed to rank nowhere; verify if needed.",
+    }
+
+
 def compact_gsc(gsc):
     if not isinstance(gsc, dict) or gsc.get("error"):
         return gsc
@@ -104,6 +144,7 @@ def compact_gsc(gsc):
         "site": gsc.get("site"),
         "periods": gsc.get("periods"),
         "summary": gsc.get("summary"),
+        "growth_scoreboard": target_scoreboard(current_queries),
         "brand_nonbrand_current_returned_rows": brand_split(current_queries),
         "brand_nonbrand_90d_returned_query_page_rows": brand_split(context_90d_query_pages),
         "page_deltas_top": page_deltas,
@@ -137,10 +178,13 @@ def compact_ads(ads):
 
 def main():
     raw = json.loads(RAW.read_text(encoding="utf-8"))
+    growth = json.loads(GROWTH.read_text(encoding="utf-8")) if GROWTH.exists() else None
     compact = {
         "generated_at": raw.get("generated_at"),
         "base_url": raw.get("base_url"),
         "business_profile_path": raw.get("business_profile_path"),
+        "growth_strategy": growth,
+        "keyword_targets_path": str(TARGETS),
         "data_quality_notes": raw.get("data_quality_notes"),
         "site_audit": compact_site(raw.get("site_audit")),
         "gsc": compact_gsc(raw.get("gsc")),
