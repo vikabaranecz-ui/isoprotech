@@ -26,6 +26,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Landing pages — hoge prioriteit voor lokale SEO
     { url: `${BASE}/gevelisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dakisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    // Dakisolatie growth cluster — specifieke zoekintenties
+    { url: `${BASE}/dakisolatie/plat-dak`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dakisolatie/hellend-dak`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dakisolatie/sarkingdak`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
   ];
 
   const servicePages: MetadataRoute.Sitemap = services.map((s) => ({
