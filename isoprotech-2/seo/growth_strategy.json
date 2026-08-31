@@ -1,0 +1,102 @@
+{
+  "program": "ISOPROTECH 40 Keywords Top-5 Growth Engine",
+  "deadline": "2026-12-31",
+  "primary_kpi": {
+    "metric": "commercially relevant Google queries in Top 5 organic positions",
+    "target_count": 40,
+    "target_position": 5,
+    "note": "This is an operating target, not a guaranteed Google outcome. Every sprint must maximize probability of reaching it with evidence-based work."
+  },
+  "priority_service_clusters": [
+    "gevelisolatie",
+    "crepi",
+    "spuitkurk",
+    "dakisolatie",
+    "plat dak isoleren",
+    "hellend dak isoleren",
+    "sarking/PIR dakisolatie"
+  ],
+  "search_intent_layers": {
+    "commercial": "Direct service and local buying-intent queries.",
+    "problem": "Symptoms and homeowner problems that insulation can plausibly help solve.",
+    "economic": "Cost, energy-use, payback and heating/cooling efficiency questions without inventing savings.",
+    "comfort": "How the home feels: cold walls, heat upstairs, rapid cooling, uncomfortable attic, temperature stability.",
+    "seasonal": "Demand that rises with weather, heating season, summer heat, renovation cycles or current subsidy/rule changes."
+  },
+  "weekly_sprint_rule": {
+    "unit_of_work": "one keyword/service cluster, not one micro-fix",
+    "expected_output": [
+      "identify the cluster's ranking bottleneck",
+      "complete all safe related on-page/internal-link/technical fixes that materially support the cluster",
+      "prepare one approval package when a new article/new URL/merge/redirect is the highest-value next move",
+      "measure target-query positions and report movement toward the 40-keyword Top-5 KPI"
+    ],
+    "micro_fix_rule": "A minor metadata or formatting fix may be included in a sprint but should not be the sole weekly objective when a higher-impact ranking task is supported by evidence."
+  },
+  "content_growth": {
+    "new_content_only_when": [
+      "there is verified relevant search demand or a strong GSC/content gap",
+      "the intent is distinct enough to avoid cannibalizing an existing page",
+      "the topic can naturally support a commercial service page or local conversion path"
+    ],
+    "supporting_content_types": [
+      "problem-led article",
+      "economic decision article",
+      "comfort-led article",
+      "seasonal article",
+      "comparison article",
+      "technical explainer in customer language"
+    ],
+    "new_url_requires_telegram_approval": true,
+    "delete_merge_redirect_requires_telegram_approval": true
+  },
+  "seasonal_rules": {
+    "lead_time_weeks_before_peak": [4, 8],
+    "winter_autumn": [
+      "house feels cold despite heating",
+      "cold exterior walls",
+      "heat loss through roof",
+      "high heating use/bills",
+      "home cools down quickly",
+      "prepare house for heating season"
+    ],
+    "spring": [
+      "facade renovation and exterior insulation planning",
+      "roof renovation with insulation",
+      "prepare before next heating season",
+      "current renovation incentives/subsidies when verified"
+    ],
+    "summer": [
+      "attic/upper floor too hot",
+      "overheating under the roof",
+      "keeping upper floors more comfortable",
+      "air-conditioning demand versus improving roof envelope"
+    ],
+    "freshness_guardrail": "Never change a year, subsidy, regulation, energy price, savings claim or legal/financial fact without verifying a current authoritative source."
+  },
+  "ranking_diagnostics": [
+    "search intent mismatch",
+    "content depth/coverage gap",
+    "weak title/snippet CTR",
+    "internal-link weakness",
+    "cannibalization",
+    "technical/indexation issue",
+    "local relevance gap",
+    "authority/off-page bottleneck"
+  ],
+  "reporting": {
+    "telegram_must_show": [
+      "Top-5 progress X/40",
+      "weekly sprint cluster",
+      "concrete completed/published work",
+      "one approval request only when needed"
+    ],
+    "github_report_must_show": [
+      "Top 3 / Top 5 / Top 10 / Top 20 scoreboard",
+      "target queries worked on",
+      "before/current positions when evidence exists",
+      "what was published",
+      "what is blocked by approval or off-page factors"
+    ]
+  }
+}
