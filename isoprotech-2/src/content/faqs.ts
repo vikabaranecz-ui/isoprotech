@@ -34,6 +34,12 @@ export const faqs: FaqItem[] = [
     category: "Gevelafwerking",
   },
   {
+    id: "crepi-met-isolatie",
+    question: "Kan crepi gecombineerd worden met gevelisolatie?",
+    answer: "Ja. Crepi wordt bij ISOPROTECH vaak toegepast als afwerklaag bovenop buitengevelisolatie (EPS/ETICS) — crepi met isolatie in één werf. U kunt crepi ook als losstaande gevelafwerking laten plaatsen, zonder isolatie. Tijdens de gratis inspectie adviseren wij wat het beste past bij uw gevel.",
+    category: "Gevelafwerking",
+  },
+  {
     id: "premies",
     question: "Welke premies kan ik krijgen voor isolatie?",
     answer: "Via Mijn VerbouwPremie kunt u in Vlaanderen premies aanvragen voor dak- en gevelisolatie. Het bedrag hangt af van het type werken, de bereikte isolatiewaarde en uw gezinsinkomen. Wij checken uw situatie en helpen u bij de aanvraag — zodat u het maximale uit uw investering haalt.",
