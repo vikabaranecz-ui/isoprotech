@@ -159,11 +159,10 @@ jobs:
             Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
             Read `seo-weekly-context-compact.json` as the fresh evidence for this run.
 
-            This is a bounded automation. By turn 6 choose exactly one mode and one primary finding.
-            If the mode is NO ACTION or MONITOR, create the weekly issue immediately and stop.
-            If the mode is NEEDS APPROVAL and no review PR is needed, create the issue immediately and stop.
-            Only a concrete SAFE FIX or approval PR may continue beyond turn 8.
-            Never investigate a second opportunity in the same run.
+            Complete the weekly SEO task fully. Do not stop because of an artificial turn target.
+            Prefer one highest-confidence finding and avoid investigating secondary opportunities unless required to finish that finding safely.
+            If the mode is NO ACTION or MONITOR, create the weekly issue and finish without unnecessary repository exploration.
+            For SAFE FIX or NEEDS APPROVAL, complete the required QA/PR/merge-or-approval workflow before finishing.
 
             Finish in exactly one mode: NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
             SAFE FIX: smallest diff only, QA it, and auto-merge to main only if the entire diff is allowed by safe_auto_publish.
@@ -174,8 +173,6 @@ jobs:
           claude_args: |
             --model claude-sonnet-5
             --effort medium
-            --max-turns 30
-            --max-budget-usd 1.00
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
       - name: Send Telegram SEO summary
