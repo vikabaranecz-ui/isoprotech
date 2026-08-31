@@ -43,10 +43,10 @@ export function Footer() {
               ))}
             </ul>
             <div className="mt-4 pt-4 border-t border-white/10 space-y-2">
-              <Link href="/gevelisolatie-antwerpen" className="block text-xs text-orange-400/70 hover:text-orange-300 transition-colors">
+              <Link href="/diensten/gevelisolatie" className="block text-xs text-orange-400/70 hover:text-orange-300 transition-colors">
                 Gevelisolatie Antwerpen →
               </Link>
-              <Link href="/dakisolatie-antwerpen" className="block text-xs text-orange-400/70 hover:text-orange-300 transition-colors">
+              <Link href="/diensten/dakisolatie" className="block text-xs text-orange-400/70 hover:text-orange-300 transition-colors">
                 Dakisolatie Antwerpen →
               </Link>
             </div>
@@ -115,36 +115,11 @@ export function Footer() {
             voorbehouden.
           </p>
           <div className="flex gap-5">
-            <Link
-              href="/privacy"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/cookies"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
-            >
-              Cookies
-            </Link>
-            <Link
-              href="/faq"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
-            >
-              FAQ
-            </Link>
-            <Link
-              href="/blog"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/partners"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
-            >
-              Partners
-            </Link>
+            <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">Privacy</Link>
+            <Link href="/cookies" className="text-xs text-white/30 hover:text-white/60 transition-colors">Cookies</Link>
+            <Link href="/faq" className="text-xs text-white/30 hover:text-white/60 transition-colors">FAQ</Link>
+            <Link href="/blog" className="text-xs text-white/30 hover:text-white/60 transition-colors">Blog</Link>
+            <Link href="/partners" className="text-xs text-white/30 hover:text-white/60 transition-colors">Partners</Link>
           </div>
         </div>
       </div>

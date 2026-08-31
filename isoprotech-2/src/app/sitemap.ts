@@ -23,9 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // /privacy en /cookies zijn noindex — uitgesloten van sitemap
     { url: `${BASE}/regio`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // Landing pages — hoge prioriteit voor lokale SEO
-    { url: `${BASE}/gevelisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/dakisolatie-antwerpen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
   ];
 
   const servicePages: MetadataRoute.Sitemap = services.map((s) => ({

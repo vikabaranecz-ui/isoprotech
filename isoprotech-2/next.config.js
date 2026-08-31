@@ -3,6 +3,20 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/dakisolatie-antwerpen",
+        destination: "/diensten/dakisolatie",
+        statusCode: 301,
+      },
+      {
+        source: "/gevelisolatie-antwerpen",
+        destination: "/diensten/gevelisolatie",
+        statusCode: 301,
+      },
+    ];
+  },
   // Generate sitemap and robots.txt
   async headers() {
     return [
