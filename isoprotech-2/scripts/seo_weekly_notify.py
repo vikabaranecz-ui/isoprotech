@@ -164,6 +164,9 @@ def main():
     repo = os.getenv("GITHUB_REPOSITORY", "").strip()
     run_id = os.getenv("GITHUB_RUN_ID", "").strip()
     claude_outcome = os.getenv("CLAUDE_OUTCOME", "unknown").strip()
+    evidence_ready = os.getenv("EVIDENCE_READY", "").strip().lower()
+    evidence_reason = os.getenv("EVIDENCE_REASON", "").strip()
+    evidence_warning = os.getenv("EVIDENCE_WARNING", "").strip()
 
     if not token or not chat_id:
         print("Telegram secrets are not configured; skipping notification.")
@@ -175,11 +178,21 @@ def main():
     today = datetime.now(ZoneInfo("Europe/Brussels")).date().isoformat()
     run_url = f"https://github.com/{repo}/actions/runs/{run_id}" if run_id else f"https://github.com/{repo}/actions"
 
-    if claude_outcome != "success":
+    if evidence_ready == "false":
+        reason = evidence_reason or "Google Search Console data was unavailable."
         send_telegram(
             token,
             chat_id,
-            f"⚠️ ISOPROTECH SEO — {today}\nПотрібна увага: автоматичний SEO-запуск завершився зі статусом {claude_outcome.upper()}.\nПеревірити: {run_url}",
+            f"⚠️ ISOPROTECH SEO — {today}\nGoogle-дані недоступні. Claude НЕ запускався, витрата API: $0.\nПричина: {reason}\nНа сайті нічого не змінено.\nПеревірити: {run_url}",
+        )
+        return 0
+
+    if claude_outcome != "success":
+        detail = "Claude не завершив аналіз, тому звіт/PR не створено і на сайті нічого не змінено."
+        send_telegram(
+            token,
+            chat_id,
+            f"⚠️ ISOPROTECH SEO — {today}\n{detail}\nСтатус Claude: {claude_outcome.upper()}.\nПеревірити: {run_url}",
         )
         return 0
 
@@ -188,11 +201,13 @@ def main():
         send_telegram(
             token,
             chat_id,
-            f"⚠️ ISOPROTECH SEO — {today}\nПотрібна увага: запуск завершився, але звіт не знайдено.\nПеревірити: {run_url}",
+            f"⚠️ ISOPROTECH SEO — {today}\nClaude завершився, але weekly-звіт не знайдено. На сайті автоматично нічого не вважаємо опублікованим.\nПеревірити: {run_url}",
         )
         return 0
 
     message, keyboard = concise_payload(issue, today, repo)
+    if evidence_warning:
+        message += f"\nℹ️ {evidence_warning}"
     send_telegram(token, chat_id, message, keyboard)
     return 0
 
