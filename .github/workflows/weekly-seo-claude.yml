@@ -97,12 +97,8 @@ jobs:
               gsc_error = (data.get('gsc') or {}).get('error') if isinstance(data.get('gsc'), dict) else None
               ads_error = (data.get('google_ads') or {}).get('error') if isinstance(data.get('google_ads'), dict) else None
               audit_error = (data.get('site_audit') or {}).get('error') if isinstance(data.get('site_audit'), dict) else None
-
               ready = not bool(gsc_error)
-              if gsc_error:
-                  reason = 'Google Search Console authentication/data failed; Claude was not started, so API cost is $0.'
-              else:
-                  reason = ''
+              reason = 'Google Search Console authentication/data failed; Claude was not started, so API cost is $0.' if gsc_error else ''
               warnings = []
               if ads_error:
                   warnings.append('Google Ads data unavailable; run may continue using GSC + site audit.')
@@ -153,23 +149,18 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            This is the scheduled ISOPROTECH weekly SEO run. Determine today's date in Europe/Brussels when naming the report.
+            This is the scheduled ISOPROTECH weekly SEO growth run. Determine today's date in Europe/Brussels when naming the report.
 
             Read `.claude/agents/weekly-seo.md` in full and follow it as the governing policy.
-            Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
-            Read `seo-weekly-context-compact.json` as the fresh evidence for this run.
+            Read `isoprotech-2/seo/business_profile.json`, `isoprotech-2/seo/growth_strategy.json`, `isoprotech-2/seo/keyword_targets.json`, and `seo-weekly-context-compact.json`.
 
-            Complete the weekly SEO task fully. Do not stop because of an artificial turn target.
-            Prefer one highest-confidence finding and avoid investigating secondary opportunities unless required to finish that finding safely.
-            If the mode is NO ACTION or MONITOR, create the weekly issue and finish without unnecessary repository exploration.
-            For SAFE FIX or NEEDS APPROVAL, complete the required QA/PR/merge-or-approval workflow before finishing.
+            The business KPI is 40 commercially relevant queries in Google Top 5 by 2026-12-31. Treat this as the operating target, not a guaranteed result.
+            Execute one coherent WEEKLY RANKING SPRINT for the highest-value service/keyword cluster. A sprint may contain multiple related safe fixes; do not reduce the week to a cosmetic micro-fix when a stronger ranking task is supported by evidence.
+            Consider commercial, problem, economic, comfort and seasonal demand. Seasonal content should be prepared 4-8 weeks before the expected peak.
+            If the highest-value move is a new article/page, merge, redirect or other approval-gated action, prepare the PR and send it through Telegram approval rather than substituting a trivial safe fix.
 
-            Finish in exactly one mode: NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
-            SAFE FIX: smallest diff only, QA it, and auto-merge to main only if the entire diff is allowed by safe_auto_publish.
-            NEEDS APPROVAL: create the review PR/approval package required by policy but never merge it without explicit owner approval.
-
-            Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` issue before finishing.
-            If Google Ads or site-audit data is missing but GSC is valid, continue conservatively and mention the missing source briefly.
+            Complete the sprint fully. For SAFE FIX, QA and auto-merge only safe work. For NEEDS APPROVAL, prepare and QA the exact approval package but never merge it yourself.
+            Always create `SEO Weekly — YYYY-MM-DD — <MODE>` with Top-5 progress X/40, sprint cluster and concrete completed work.
           claude_args: |
             --model claude-sonnet-5
             --effort medium
