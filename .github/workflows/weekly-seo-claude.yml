@@ -77,8 +77,53 @@ jobs:
         if: steps.duplicate.outputs.skip != 'true'
         run: python isoprotech-2/scripts/seo_weekly_collect.py
 
-      - name: Build compact Claude context
+      - name: Validate SEO evidence before paid Claude run
         if: steps.duplicate.outputs.skip != 'true'
+        id: evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          p = Path('seo-weekly-context.json')
+          out = Path(os.environ['GITHUB_OUTPUT'])
+          if not p.exists():
+              ready = False
+              reason = 'SEO evidence file was not created.'
+              warning = ''
+          else:
+              data = json.loads(p.read_text(encoding='utf-8'))
+              gsc_error = (data.get('gsc') or {}).get('error') if isinstance(data.get('gsc'), dict) else None
+              ads_error = (data.get('google_ads') or {}).get('error') if isinstance(data.get('google_ads'), dict) else None
+              audit_error = (data.get('site_audit') or {}).get('error') if isinstance(data.get('site_audit'), dict) else None
+
+              # GSC is the required organic-performance source. Never pay Claude if it is unavailable.
+              ready = not bool(gsc_error)
+              if gsc_error:
+                  reason = 'Google Search Console authentication/data failed; Claude was not started, so API cost is $0.'
+              else:
+                  reason = ''
+              warnings = []
+              if ads_error:
+                  warnings.append('Google Ads data unavailable; run may continue using GSC + site audit.')
+              if audit_error:
+                  warnings.append('Live site audit unavailable; run may continue using GSC.')
+              warning = ' '.join(warnings)
+
+          with out.open('a', encoding='utf-8') as f:
+              f.write(f"claude_ready={'true' if ready else 'false'}\n")
+              f.write(f"reason={reason}\n")
+              f.write(f"warning={warning}\n")
+          print('Claude ready:', ready)
+          if reason:
+              print(reason)
+          if warning:
+              print(warning)
+          PY
+
+      - name: Build compact Claude context
+        if: steps.duplicate.outputs.skip != 'true' && steps.evidence.outputs.claude_ready == 'true'
         run: python isoprotech-2/scripts/seo_weekly_compact.py
 
       - name: Upload raw weekly evidence
@@ -93,7 +138,7 @@ jobs:
           retention-days: 30
 
       - name: Verify Claude authentication is configured
-        if: steps.duplicate.outputs.skip != 'true'
+        if: steps.duplicate.outputs.skip != 'true' && steps.evidence.outputs.claude_ready == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -103,7 +148,7 @@ jobs:
           fi
 
       - name: Run Claude weekly SEO agent
-        if: steps.duplicate.outputs.skip != 'true'
+        if: steps.duplicate.outputs.skip != 'true' && steps.evidence.outputs.claude_ready == 'true'
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
@@ -115,20 +160,21 @@ jobs:
             Read `isoprotech-2/seo/business_profile.json` as the business source of truth.
             Read `seo-weekly-context-compact.json` as the fresh evidence for this run.
 
-            Cost control is important. The compact file already contains calculated deltas, opportunities, audit signals and filtered keyword data. Do not read the large `seo-weekly-context.json` unless the compact file explicitly shows a source error or a critical fact needed for a concrete decision is missing.
-            Inspect only repository files needed to validate one concrete finding or implement one safe change. Do not browse the repository broadly and do not produce a long narrative.
-            Check recent open SEO issues and PRs before acting so you do not duplicate work.
+            Cost control is important. Never read the large raw context unless the compact context explicitly reports a critical missing fact needed for one concrete decision.
+            By turn 6, choose the likely mode and the single highest-confidence finding. If there is no concrete SAFE FIX or approval-gated opportunity, create the required issue and finish immediately.
+            Inspect repository files only for that one concrete finding. Do not browse broadly, do not restate metrics, and do not investigate secondary opportunities in this run.
+            Check recent open SEO issues/PRs only enough to avoid duplicate work.
 
             Finish in exactly one mode: NO ACTION, MONITOR, SAFE FIX, or NEEDS APPROVAL.
-            SAFE FIX must be QA'd and, if the entire diff is within the allowed safe-auto-publish policy, merged to main automatically.
-            Approval-gated changes must never be implemented or merged without prior explicit approval.
+            SAFE FIX: smallest diff only, QA it, and auto-merge to main only if the entire diff is allowed by safe_auto_publish.
+            NEEDS APPROVAL: create the review PR/approval package required by policy but never merge it without explicit owner approval.
 
-            Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` GitHub issue with the compact Notification summary first.
-            If data collection for one source failed, continue with successful sources and report the operational error without inventing data.
+            Always create the required `SEO Weekly — YYYY-MM-DD — <MODE>` issue before finishing.
+            If Google Ads or site-audit data is missing but GSC is valid, continue conservatively and mention the missing source briefly.
           claude_args: |
             --model claude-sonnet-5
             --effort medium
-            --max-turns 12
+            --max-turns 16
             --max-budget-usd 1.00
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
@@ -139,4 +185,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
+          EVIDENCE_READY: ${{ steps.evidence.outputs.claude_ready }}
+          EVIDENCE_REASON: ${{ steps.evidence.outputs.reason }}
+          EVIDENCE_WARNING: ${{ steps.evidence.outputs.warning }}
         run: python isoprotech-2/scripts/seo_weekly_notify.py
