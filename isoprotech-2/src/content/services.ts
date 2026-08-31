@@ -171,8 +171,8 @@ export const services: Service[] = [
     id: "crepi",
     slug: "crepi",
     name: "Crepi",
-    shortDesc: "Strakke gevelafwerking die uw woning beschermt én een nieuwe uitstraling geeft. Duurzaam, onderhoudsvriendelijk.",
-    heroDesc: "Crepi is de meest populaire gevelafwerking in België — en terecht. Het beschermt uw muren tegen vocht en weersinvloeden, geeft een strakke uitstraling en combineert uitstekend met isolatie. ISOPROTECH plaatst crepi-systemen die technisch correct zijn opgebouwd en jarenlang mooi blijven.",
+    shortDesc: "Strakke gevelafwerking voor uw gevel — los of gecombineerd met gevelisolatie. Duurzaam, onderhoudsvriendelijk.",
+    heroDesc: "Crepi is de meest populaire gevelafwerking in België — en terecht. Het beschermt uw muren tegen vocht en weersinvloeden, geeft een strakke uitstraling en combineert uitstekend met isolatie. Crepi op uw gevel kan als losse afwerking geplaatst worden, of als crepi met isolatie bovenop buitengevelisolatie voor extra energiewinst. ISOPROTECH plaatst crepi-systemen die technisch correct zijn opgebouwd en jarenlang mooi blijven.",
     photo: PHOTOS.crepiService,
     benefits: [
       "Strakke, moderne geveluitstraling — direct verschil zichtbaar",
@@ -195,12 +195,12 @@ export const services: Service[] = [
     ],
     seo: {
       title: "Crepi Antwerpen — Gevelafwerking met Isolatie",
-      description: "Professionele crepi gevelafwerking in Antwerpen. Met of zonder isolatie. Diverse kleuren en structuren. Gratis inspectie, 10 jaar garantie.",
+      description: "Professionele crepi gevelafwerking in Antwerpen. Crepi met isolatie of als losse afwerking. Diverse kleuren en structuren. Gratis inspectie, 10 jaar garantie.",
       keywords: ["crepi antwerpen", "crepi gevel", "crepi prijs", "gevelpleister", "crepi met isolatie"],
     },
     relatedServices: ["gevelisolatie", "spuitkurk"],
     relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
-    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
+    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs", "crepi-met-isolatie"],
   },
   {
     id: "spuitkurk",
