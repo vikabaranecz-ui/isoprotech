@@ -13,7 +13,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 export const metadata: Metadata = {
   title: "Dakisolatie & Gevelisolatie Antwerpen | ISOPROTECH",
   description:
-    "Dak- en gevelisolatie in Antwerpen en omgeving. Gecertificeerde vakmensen, ATG/BENOR-materialen, gratis inspectie aan huis, 10 jaar schriftelijke garantie. Vraag vandaag uw offerte aan.",
+    "Dak- en gevelisolatie in Antwerpen en omgeving. Gecertificeerde vakmensen, ATG/BENOR-materialen, gratis inspectie aan huis, 10 jaar schriftelijke garantie.",
   alternates: {
     canonical: "https://www.isoprotech.be",
   },
