@@ -105,7 +105,6 @@ def approval_keyboard(repo, review_pr_value):
     head = (pr.get("headRefOid") or "")[:12]
     if len(head) != 12:
         return None
-
     return {
         "inline_keyboard": [
             [{"text": "👀 Переглянути", "url": pr.get("url")}],
@@ -122,7 +121,9 @@ def concise_payload(issue, today, repo):
     fields = parse_fields(summary)
 
     status = fields.get("status") or fields.get("mode") or "UNKNOWN"
-    result = fields.get("result") or fields.get("headline") or "Щотижнева SEO-перевірка завершена."
+    goal = fields.get("goal progress") or "Top 5 — дані в GitHub звіті"
+    sprint = fields.get("sprint") or "SEO growth"
+    result = fields.get("result") or fields.get("headline") or "Щотижневий SEO sprint завершено."
     attention = fields.get("needs attention") or fields.get("needs review") or "None"
     review_pr = fields.get("review pr") or "None"
     published = fields.get("published") or fields.get("action/pr") or "None"
@@ -138,7 +139,13 @@ def concise_payload(issue, today, repo):
         "SAFE FIX": "✅ SAFE FIX",
     }
 
-    lines = [f"📊 ISOPROTECH SEO — {today}", labels.get(status.upper(), status), result]
+    lines = [
+        f"📈 ISOPROTECH SEO — {today}",
+        f"🎯 {goal}",
+        f"Sprint: {sprint}",
+        labels.get(status.upper(), status),
+        result,
+    ]
 
     if attention and attention.lower() not in {"none", "none new", "ні", "нічого"}:
         lines.append(f"👉 Від тебе: {attention}")
@@ -188,11 +195,10 @@ def main():
         return 0
 
     if claude_outcome != "success":
-        detail = "Claude не завершив аналіз, тому звіт/PR не створено і на сайті нічого не змінено."
         send_telegram(
             token,
             chat_id,
-            f"⚠️ ISOPROTECH SEO — {today}\n{detail}\nСтатус Claude: {claude_outcome.upper()}.\nПеревірити: {run_url}",
+            f"⚠️ ISOPROTECH SEO — {today}\nClaude не завершив ranking sprint, тому звіт/PR не створено і на сайті нічого не змінено.\nСтатус Claude: {claude_outcome.upper()}.\nПеревірити: {run_url}",
         )
         return 0
 
