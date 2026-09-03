@@ -9,6 +9,8 @@ from pathlib import Path
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
 
+from seo_google_ads_dual_geo import collect_google_ads_dual_geo
+
 SCOPES = [
     "https://www.googleapis.com/auth/webmasters.readonly",
     "https://www.googleapis.com/auth/adwords",
@@ -56,6 +58,11 @@ def service_account_access_token():
 def main():
     collector = load_collector()
     collector.get_google_access_token = service_account_access_token
+    collector.collect_google_ads = lambda access_token, profile: collect_google_ads_dual_geo(
+        access_token,
+        profile,
+        collector,
+    )
     collector.main()
 
 
