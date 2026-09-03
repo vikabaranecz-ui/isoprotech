@@ -157,22 +157,60 @@ def compact_gsc(gsc):
     }
 
 
-def compact_ads(ads):
-    if not isinstance(ads, dict) or ads.get("error"):
-        return ads
-    ideas = ads.get("ideas") or []
+def compact_ads_scope(scope):
+    if not isinstance(scope, dict) or scope.get("error"):
+        return scope
+    ideas = scope.get("ideas") or []
     keep = [i for i in ideas if i.get("classifier") == "KEEP"]
     review = [i for i in ideas if i.get("classifier") == "REVIEW"]
     exclude = [i for i in ideas if i.get("classifier") == "EXCLUDE"]
     return {
-        "warning": ads.get("warning"),
-        "seeds": ads.get("seeds"),
-        "language": ads.get("language"),
-        "geo": ads.get("geo"),
-        "counts": ads.get("counts"),
+        "label": scope.get("label"),
+        "geo": scope.get("geo"),
+        "geo_target_constants": scope.get("geo_target_constants"),
+        "counts": scope.get("counts"),
         "top_keep": top_rows(keep, "avg_monthly_searches", 40),
         "top_review": top_rows(review, "avg_monthly_searches", 20),
         "top_exclude_examples": top_rows(exclude, "avg_monthly_searches", 10),
+    }
+
+
+def compact_ads(ads):
+    if not isinstance(ads, dict) or ads.get("error"):
+        return ads
+
+    # Backward compatibility with older raw artifacts that contain one geo only.
+    if "national" not in ads and "local" not in ads:
+        ideas = ads.get("ideas") or []
+        keep = [i for i in ideas if i.get("classifier") == "KEEP"]
+        review = [i for i in ideas if i.get("classifier") == "REVIEW"]
+        exclude = [i for i in ideas if i.get("classifier") == "EXCLUDE"]
+        return {
+            "warning": ads.get("warning"),
+            "seeds": ads.get("seeds"),
+            "language": ads.get("language"),
+            "geo": ads.get("geo"),
+            "counts": ads.get("counts"),
+            "top_keep": top_rows(keep, "avg_monthly_searches", 40),
+            "top_review": top_rows(review, "avg_monthly_searches", 20),
+            "top_exclude_examples": top_rows(exclude, "avg_monthly_searches", 10),
+        }
+
+    comparisons = ads.get("local_vs_national") or []
+    usable = [r for r in comparisons if r.get("classifier") != "EXCLUDE"]
+    return {
+        "warning": ads.get("warning"),
+        "geo_priority_rule": ads.get("geo_priority_rule"),
+        "seeds": ads.get("seeds"),
+        "language": ads.get("language"),
+        "local": compact_ads_scope(ads.get("local")),
+        "national": compact_ads_scope(ads.get("national")),
+        "local_vs_national_top_local": top_rows(usable, "local_avg_monthly_searches", 50),
+        "local_vs_national_top_national_context": top_rows(usable, "national_avg_monthly_searches", 30),
+        "note": (
+            "Local volume is the primary Keyword Planner signal for service-area prioritization. "
+            "National volume is supporting market context; combine both with GSC before changing pages."
+        ),
     }
 
 
