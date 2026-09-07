@@ -55,10 +55,23 @@ def service_account_access_token():
     return creds.token, None
 
 
+def collect_google_ads_with_local_health(access_token, profile, collector):
+    data = collect_google_ads_dual_geo(access_token, profile, collector)
+    if not isinstance(data, dict):
+        return data
+
+    local = data.get("local")
+    if isinstance(local, dict) and local.get("error") and not data.get("error"):
+        # Preserve Belgium data while promoting the Antwerp-local failure so the
+        # weekly validator and Telegram summary cannot silently miss it.
+        data["error"] = f"Antwerp local Keyword Planner unavailable: {local['error']}"
+    return data
+
+
 def main():
     collector = load_collector()
     collector.get_google_access_token = service_account_access_token
-    collector.collect_google_ads = lambda access_token, profile: collect_google_ads_dual_geo(
+    collector.collect_google_ads = lambda access_token, profile: collect_google_ads_with_local_health(
         access_token,
         profile,
         collector,
