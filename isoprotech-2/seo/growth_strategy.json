@@ -7,6 +7,29 @@
     "target_position": 5,
     "note": "This is an operating target, not a guaranteed Google outcome. Every sprint must maximize probability of reaching it with evidence-based work."
   },
+  "core_money_pillars": {
+    "gevel": {
+      "role": "equal-priority core commercial pillar",
+      "clusters": [
+        "gevelisolatie",
+        "crepi",
+        "spuitkurk",
+        "steenstrips with insulation",
+        "local gevelisolatie intent"
+      ]
+    },
+    "dak": {
+      "role": "equal-priority core commercial pillar",
+      "clusters": [
+        "dakisolatie",
+        "plat dak isoleren",
+        "hellend dak isoleren",
+        "sarking/PIR dakisolatie",
+        "local dakisolatie intent"
+      ]
+    },
+    "balance_rule": "Choose the highest-value evidence-backed sprint, but do not allow one pillar to consume more than two consecutive weekly sprints when the other pillar has a material ranking opportunity."
+  },
   "priority_service_clusters": [
     "gevelisolatie",
     "crepi",
@@ -16,6 +39,12 @@
     "hellend dak isoleren",
     "sarking/PIR dakisolatie"
   ],
+  "local_demand_policy": {
+    "primary_local_signal": "Antwerp Province Keyword Planner demand as a proxy for the active service area",
+    "national_context": "Belgium Keyword Planner demand for market breadth and content discovery",
+    "decision_rule": "Combine Antwerp local demand with GSC, current rankings, intent fit and business-profile service-area rules. Never treat Province volume as exact 20-25 km demand.",
+    "health_requirement": "Every weekly run should distinguish Belgium Keyword Planner health from Antwerp local Keyword Planner health and surface a warning if the local scope fails."
+  },
   "search_intent_layers": {
     "commercial": "Direct service and local buying-intent queries.",
     "problem": "Symptoms and homeowner problems that insulation can plausibly help solve.",
