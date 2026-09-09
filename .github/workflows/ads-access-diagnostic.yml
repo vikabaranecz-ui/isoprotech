@@ -1,0 +1,87 @@
+name: Google Ads Access Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ads-access-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GOOGLE_ADC_JSON: ${{ secrets.GOOGLE_ADC_JSON }}
+      GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+      GOOGLE_ADS_API_VERSION: v25
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests google-auth
+      - name: List accessible Google Ads accounts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+
+          info = json.loads(os.environ['GOOGLE_ADC_JSON'])
+          creds = service_account.Credentials.from_service_account_info(
+              info, scopes=['https://www.googleapis.com/auth/adwords'])
+          creds.refresh(Request())
+          token = creds.token
+          dev = os.environ['GOOGLE_ADS_DEVELOPER_TOKEN'].strip()
+          ver = os.environ.get('GOOGLE_ADS_API_VERSION','v25')
+          headers = {'Authorization': f'Bearer {token}', 'developer-token': dev, 'Content-Type': 'application/json'}
+          base = f'https://googleads.googleapis.com/{ver}'
+
+          r = requests.get(f'{base}/customers:listAccessibleCustomers', headers=headers, timeout=30)
+          print('listAccessibleCustomers HTTP', r.status_code)
+          if r.status_code != 200:
+              print(r.text[:2000])
+              raise SystemExit(1)
+          names = r.json().get('resourceNames', [])
+          ids = [x.rsplit('/',1)[-1] for x in names]
+          print('ACCESSIBLE_CUSTOMER_IDS=' + ','.join(ids))
+
+          for cid in ids:
+              q = "SELECT customer.id, customer.descriptive_name, customer.manager, customer.test_account, customer.currency_code, customer.time_zone FROM customer LIMIT 1"
+              rr = requests.post(f'{base}/customers/{cid}/googleAds:search', headers=headers, json={'query': q}, timeout=30)
+              print(f'CUSTOMER {cid} HTTP {rr.status_code}')
+              if rr.status_code == 200:
+                  rows = rr.json().get('results', [])
+                  if rows:
+                      c = rows[0].get('customer', {})
+                      safe = {
+                          'id': c.get('id'),
+                          'descriptiveName': c.get('descriptiveName'),
+                          'manager': c.get('manager'),
+                          'testAccount': c.get('testAccount'),
+                          'currencyCode': c.get('currencyCode'),
+                          'timeZone': c.get('timeZone'),
+                      }
+                      print('CUSTOMER_INFO=' + json.dumps(safe, ensure_ascii=False))
+                      if c.get('manager'):
+                          q2 = "SELECT customer_client.id, customer_client.descriptive_name, customer_client.manager, customer_client.level, customer_client.status FROM customer_client WHERE customer_client.level <= 2"
+                          cr = requests.post(f'{base}/customers/{cid}/googleAds:search', headers=headers, json={'query': q2}, timeout=30)
+                          print(f'CHILDREN {cid} HTTP {cr.status_code}')
+                          if cr.status_code == 200:
+                              for row in cr.json().get('results', []):
+                                  cc = row.get('customerClient', {})
+                                  print('CUSTOMER_CLIENT=' + json.dumps({
+                                      'id': cc.get('id'),
+                                      'descriptiveName': cc.get('descriptiveName'),
+                                      'manager': cc.get('manager'),
+                                      'level': cc.get('level'),
+                                      'status': cc.get('status'),
+                                  }, ensure_ascii=False))
+              else:
+                  print(rr.text[:1200])
+          PY
