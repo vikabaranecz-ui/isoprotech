@@ -1,7 +1,7 @@
 // src/components/calculators/GevelCalculator.tsx
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useSubmit } from "@formspree/react";
 import {
   calculateGevel,
@@ -67,8 +67,13 @@ export function GevelCalculator() {
   const [email, setEmail] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [ctaSent, setCtaSent] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const set = <K extends keyof BaseInput>(key: K, val: BaseInput[K]) =>
+  useEffect(() => {
+    cardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [step]);
+
+  const set =<K extends keyof BaseInput>(key: K, val: BaseInput[K]) =>
     setInput((p) => ({ ...p, [key]: val }));
 
   const autoSet = <K extends keyof BaseInput>(key: K, val: BaseInput[K]) => {
@@ -387,7 +392,7 @@ export function GevelCalculator() {
   return (
     <div className="max-w-2xl mx-auto">
       <ProgressBar steps={STEPS} current={step} />
-      <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
+      <div ref={cardRef} className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
       <StepNav

@@ -1,7 +1,7 @@
 // src/components/calculators/DakCalculator.tsx
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useSubmit } from "@formspree/react";
 import {
   calculateDak,
@@ -48,6 +48,11 @@ export function DakCalculator() {
   const [email, setEmail] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [ctaSent, setCtaSent] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    cardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [step]);
 
   const bedekkingOpts = daktype === "Plat dak" ? PLAT_DAK_OPTIES : HELLEND_DAK_OPTIES;
 
@@ -357,7 +362,7 @@ export function DakCalculator() {
   return (
     <div className="max-w-2xl mx-auto">
       <ProgressBar steps={STEPS} current={step} />
-      <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
+      <div ref={cardRef} className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
       {(() => {
