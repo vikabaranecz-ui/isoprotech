@@ -70,7 +70,10 @@ export function GevelCalculator() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (cardRef.current) {
+      const top = cardRef.current.getBoundingClientRect().top + window.scrollY - 16;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   }, [step]);
 
   const set =<K extends keyof BaseInput>(key: K, val: BaseInput[K]) =>

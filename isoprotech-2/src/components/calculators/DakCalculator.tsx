@@ -51,7 +51,10 @@ export function DakCalculator() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (cardRef.current) {
+      const top = cardRef.current.getBoundingClientRect().top + window.scrollY - 16;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   }, [step]);
 
   const bedekkingOpts = daktype === "Plat dak" ? PLAT_DAK_OPTIES : HELLEND_DAK_OPTIES;
