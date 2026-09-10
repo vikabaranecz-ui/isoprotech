@@ -111,6 +111,7 @@ export function StepNav({
   onBack,
   onNext,
   nextLabel,
+  hideNext,
 }: {
   step: number;
   maxStep: number;
@@ -118,15 +119,18 @@ export function StepNav({
   onBack: () => void;
   onNext: () => void;
   nextLabel?: string;
+  hideNext?: boolean;
 }) {
   return (
     <div className="flex gap-3 mt-5">
       {step > 0 && (
-        <button onClick={onBack} className="btn-outline flex-1 text-sm">Terug</button>
+        <button onClick={onBack} className={`btn-outline text-sm ${hideNext ? "flex-1" : ""}`}>Terug</button>
       )}
-      <button onClick={onNext} disabled={!canNext} className="btn-primary flex-1 text-sm">
-        {nextLabel || (step === maxStep ? "Bereken mijn prijs" : "Verder")}
-      </button>
+      {!hideNext && (
+        <button onClick={onNext} disabled={!canNext} className="btn-primary flex-1 text-sm">
+          {nextLabel || (step === maxStep ? "Bereken mijn prijs" : "Verder")}
+        </button>
+      )}
     </div>
   );
 }
