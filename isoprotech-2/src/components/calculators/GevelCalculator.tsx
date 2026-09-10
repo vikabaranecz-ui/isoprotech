@@ -71,6 +71,11 @@ export function GevelCalculator() {
   const set = <K extends keyof BaseInput>(key: K, val: BaseInput[K]) =>
     setInput((p) => ({ ...p, [key]: val }));
 
+  const autoSet = <K extends keyof BaseInput>(key: K, val: BaseInput[K]) => {
+    setInput((p) => ({ ...p, [key]: val }));
+    setStep((s) => s + 1);
+  };
+
   // Vensterbanklengte wordt altijd berekend uit het oppervlak ramen en deuren, geen handmatige invoer
   const sillLm = useMemo(() => Math.max(0, Math.round(input.openings / AVG_WINDOW_HEIGHT_M)), [input.openings]);
 
@@ -251,8 +256,8 @@ export function GevelCalculator() {
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Projecttype</h2>
             <p className="text-sm text-gray-500 mb-5">Het btw-tarief hangt af van het bouwjaar van de woning.</p>
             <div className="grid gap-3 sm:grid-cols-2 mb-5">
-              <RadioCard selected={input.projectType === "reno"} onClick={() => set("projectType", "reno" as ProjectType)} title="Renovatie" desc={`Woning gebouwd vóór ${RENO_CUTOFF_YEAR}`} badge="6% btw" badgeColor="green" />
-              <RadioCard selected={input.projectType === "new"} onClick={() => set("projectType", "new" as ProjectType)} title="Nieuwbouw" desc={`Woning gebouwd vanaf ${RENO_CUTOFF_YEAR}`} badge="21% btw" badgeColor="orange" />
+              <RadioCard selected={input.projectType === "reno"} onClick={() => autoSet("projectType", "reno" as ProjectType)} title="Renovatie" desc={`Woning gebouwd vóór ${RENO_CUTOFF_YEAR}`} badge="6% btw" badgeColor="green" />
+              <RadioCard selected={input.projectType === "new"} onClick={() => autoSet("projectType", "new" as ProjectType)} title="Nieuwbouw" desc={`Woning gebouwd vanaf ${RENO_CUTOFF_YEAR}`} badge="21% btw" badgeColor="orange" />
             </div>
           </div>
         );
@@ -269,7 +274,7 @@ export function GevelCalculator() {
                 { k: "steenstrips" as const, t: "Steenstrips", d: "Klinkerlook, dun en duurzaam" },
                 { k: "kaleien" as const, t: "Kaleien", d: "Limestone wash, zacht patina" },
               ]).map((o) => (
-                <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => set("finish", o.k)} title={o.t} desc={o.d} image={FINISH_IMAGES[o.k]} />
+                <RadioCard key={o.k} selected={input.finish === o.k} onClick={() => autoSet("finish", o.k)} title={o.t} desc={o.d} image={FINISH_IMAGES[o.k]} />
               ))}
             </div>
           </div>
@@ -285,7 +290,7 @@ export function GevelCalculator() {
                 { k: "none" as const, t: "Geen", d: "Afwerking zonder isolatie" },
                 { k: "eps" as const, t: "EPS / PUR", d: "Hoge isolatiewaarde" },
               ]).map((o) => (
-                <RadioCard key={o.k} selected={input.insulation === o.k} onClick={() => set("insulation", o.k)} title={o.t} desc={o.d} />
+                <RadioCard key={o.k} selected={input.insulation === o.k} onClick={() => o.k === "none" ? autoSet("insulation", o.k) : set("insulation", o.k)} title={o.t} desc={o.d} />
               ))}
             </div>
             {input.insulation !== "none" && (
@@ -385,7 +390,11 @@ export function GevelCalculator() {
       <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
-      <StepNav step={step} maxStep={5} canNext={canNext} onBack={handleBack} onNext={handleNext} />
+      <StepNav
+        step={step} maxStep={5} canNext={canNext}
+        onBack={handleBack} onNext={handleNext}
+        hideNext={step === 0 || step === 1 || (step === 2 && input.insulation === "none")}
+      />
     </div>
   );
 }

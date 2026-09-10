@@ -243,8 +243,8 @@ export function DakCalculator() {
             <h2 className="text-xl font-extrabold text-teal-800 mb-1">Wat voor dak heeft uw woning?</h2>
             <p className="text-sm text-gray-500 mb-5">Dit bepaalt de isolatiemethode en beschikbare dakbedekkingen.</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <RadioCard selected={daktype === "Plat dak"} onClick={() => { setDaktype("Plat dak"); setBedekking(null); }} title="Plat dak (helling onder 15°)" desc="Warm-dak principe met membraanopbouw" image={DAKTYPE_IMAGES["Plat dak"]} />
-              <RadioCard selected={daktype === "Hellend dak"} onClick={() => { setDaktype("Hellend dak"); setBedekking(null); }} title="Hellend dak (klassiek schuindak)" desc="Geschikt voor pannen, leien of shingles" image={DAKTYPE_IMAGES["Hellend dak"]} />
+              <RadioCard selected={daktype === "Plat dak"} onClick={() => { setDaktype("Plat dak"); setBedekking(null); setStep(s => s + 1); }} title="Plat dak (helling onder 15°)" desc="Warm-dak principe met membraanopbouw" image={DAKTYPE_IMAGES["Plat dak"]} />
+              <RadioCard selected={daktype === "Hellend dak"} onClick={() => { setDaktype("Hellend dak"); setBedekking(null); setStep(s => s + 1); }} title="Hellend dak (klassiek schuindak)" desc="Geschikt voor pannen, leien of shingles" image={DAKTYPE_IMAGES["Hellend dak"]} />
             </div>
           </div>
         );
@@ -274,7 +274,7 @@ export function DakCalculator() {
                 <RadioCard
                   key={opt.name}
                   selected={bedekking === opt.name}
-                  onClick={() => { setBedekking(opt.name); setBedekkingSurcharge(opt.surcharge); }}
+                  onClick={() => { setBedekking(opt.name); setBedekkingSurcharge(opt.surcharge); setStep(s => s + 1); }}
                   title={opt.name}
                   desc={opt.desc}
                   image={BEDEKKING_IMAGES[opt.name]}
@@ -297,7 +297,7 @@ export function DakCalculator() {
                 <button
                   key={opt.k}
                   type="button"
-                  onClick={() => setBouwjaar(opt.k)}
+                  onClick={() => { setBouwjaar(opt.k); if (opt.k !== "Vóór 2000") setStep(s => s + 1); }}
                   aria-pressed={bouwjaar === opt.k}
                   className={`text-left rounded-2xl border-2 p-4 transition-all ${
                     bouwjaar === opt.k
@@ -360,18 +360,21 @@ export function DakCalculator() {
       <div className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 md:p-8 animate-fadeIn">
         {renderStep()}
       </div>
-      <div className="flex gap-3 mt-5">
-        {step > 0 && (
-          <button onClick={handleBack} className="btn-outline flex-1 text-sm">Terug</button>
-        )}
-        <button
-          onClick={handleNext}
-          disabled={!canNext}
-          className="btn-primary flex-1 text-sm"
-        >
-          {step === 4 ? "Bereken mijn prijs" : "Verder"}
-        </button>
-      </div>
+      {(() => {
+        const hideNext = step === 0 || step === 2 || (step === 3 && bouwjaar !== "Vóór 2000");
+        return (
+          <div className="flex gap-3 mt-5">
+            {step > 0 && (
+              <button onClick={handleBack} className={`btn-outline text-sm ${hideNext ? "flex-1" : ""}`}>Terug</button>
+            )}
+            {!hideNext && (
+              <button onClick={handleNext} disabled={!canNext} className="btn-primary flex-1 text-sm">
+                {step === 4 ? "Bereken mijn prijs" : "Verder"}
+              </button>
+            )}
+          </div>
+        );
+      })()}
     </div>
   );
 }
