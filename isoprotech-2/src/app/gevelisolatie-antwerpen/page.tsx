@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { BeforeAfterLightbox } from "@/components/BeforeAfterLightbox";
 
 export const metadata: Metadata = {
-  title: "Gevelisolatie Antwerpen — Warmer Huis | ISOPROTECH",
+  title: "Gevelisolatie Antwerpen — Warmer Huis",
   description: "Buitengevelisolatie in Antwerpen met crepi, spuitkurk of steenstrips. Gratis inspectie ter plaatse, duidelijke offerte, 10 jaar garantie. Bel +32 465 88 27 01.",
   keywords: ["gevelisolatie antwerpen", "gevelisolatie prijs", "crepi antwerpen", "spuitkurk antwerpen", "buitengevel isoleren", "gevelrenovatie antwerpen", "gevelisolatie laten plaatsen"],
   alternates: { canonical: `${BRAND.url}/gevelisolatie-antwerpen` },
@@ -58,7 +58,7 @@ export default function GevelisolatieLanding() {
                 <span className="text-xs font-bold text-orange-300 uppercase tracking-wide">Antwerpen & omgeving · Gratis inspectie</span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-[2.8rem] font-extrabold text-white leading-[1.12] mb-5">
-                Via uw ongeïsoleerde gevel verdwijnt elke winter tot{" "}
+                Gevelisolatie Antwerpen: via een ongeïsoleerde gevel verdwijnt elke winter tot{" "}
                 <span className="text-orange-400">25% van uw verwarmingsgeld.</span>
               </h1>
               <p className="text-lg text-white/80 leading-relaxed mb-7">
