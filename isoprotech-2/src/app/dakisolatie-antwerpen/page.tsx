@@ -336,6 +336,12 @@ export default function DakisolatieLanding() {
         <div className="container-wide max-w-3xl mx-auto text-center">
           <p className="text-white/80 text-lg mb-4">Benieuwd wat dakisolatie voor uw woning kan opleveren?</p>
           <a href="#offerte" className="btn-primary text-base px-8 py-3.5">Plan gratis dakinspectie</a>
+          <p className="mt-5 text-sm text-white/50">
+            Wilt u ook de gevel isoleren?{" "}
+            <Link href="/gevelisolatie-antwerpen" className="font-semibold text-orange-300 underline underline-offset-2 hover:text-orange-200 transition-colors">
+              Bekijk gevelisolatie in Antwerpen
+            </Link>
+          </p>
         </div>
       </section>
 

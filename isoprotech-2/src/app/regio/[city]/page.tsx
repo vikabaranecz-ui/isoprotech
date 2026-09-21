@@ -111,7 +111,11 @@ export default function CityPage({
             {services.map((sv) => (
               <a
                 key={sv.id}
-                href={`/diensten/${sv.slug}`}
+                href={
+                  sv.landingPage && sv.landingPage.endsWith(`-${city.slug}`)
+                    ? sv.landingPage
+                    : `/diensten/${sv.slug}`
+                }
                 className="group block rounded-2xl bg-white p-6 border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
               >
                 <h3 className="font-bold text-teal-800 group-hover:text-orange-400 transition-colors">

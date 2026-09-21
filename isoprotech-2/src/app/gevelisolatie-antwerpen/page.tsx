@@ -196,6 +196,12 @@ export default function GevelisolatieLanding() {
               <WhatsAppIcon /> Stuur een foto via WhatsApp
             </a>
           </div>
+          <p className="mt-5 text-sm text-white/50">
+            Wilt u ook het dak isoleren?{" "}
+            <Link href="/dakisolatie-antwerpen" className="font-semibold text-orange-300 underline underline-offset-2 hover:text-orange-200 transition-colors">
+              Bekijk dakisolatie in Antwerpen
+            </Link>
+          </p>
         </div>
       </section>
 
