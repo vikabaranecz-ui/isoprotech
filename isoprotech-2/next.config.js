@@ -3,6 +3,18 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      // /dakisolatie has no page — redirect to the main landing page
+      { source: "/dakisolatie", destination: "/dakisolatie-antwerpen", permanent: true },
+      // Old paths Google may still have cached
+      { source: "/gevelisolatie", destination: "/gevelisolatie-antwerpen", permanent: true },
+      { source: "/contact-antwerpen", destination: "/contact", permanent: true },
+      { source: "/offerte", destination: "/contact", permanent: true },
+      { source: "/diensten/dakisolatie-antwerpen", destination: "/dakisolatie-antwerpen", permanent: true },
+      { source: "/diensten/gevelisolatie-antwerpen", destination: "/gevelisolatie-antwerpen", permanent: true },
+    ];
+  },
   // Generate sitemap and robots.txt
   async headers() {
     return [
