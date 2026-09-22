@@ -13,6 +13,8 @@ const nextConfig = {
       { source: "/offerte", destination: "/contact", permanent: true },
       { source: "/diensten/dakisolatie-antwerpen", destination: "/dakisolatie-antwerpen", permanent: true },
       { source: "/diensten/gevelisolatie-antwerpen", destination: "/gevelisolatie-antwerpen", permanent: true },
+      // English /services/* → Dutch /diensten/*
+      { source: "/services/:slug*", destination: "/diensten/:slug*", permanent: true },
     ];
   },
   // Generate sitemap and robots.txt
