@@ -54,6 +54,7 @@ export default function ServicePage({
   if (!service) notFound();
 
   const related = getRelatedServices(service.id);
+  const subPages = service.subPages ?? [];
   const serviceUrl = `${BRAND.url}/diensten/${service.slug}`;
   const relatedProjects = getProjectsByService(service.slug);
   const relatedBlogPosts = (service.relatedBlogSlugs ?? [])
@@ -337,6 +338,23 @@ export default function ServicePage({
             </div>
           </div>
         </section>
+      )}
+
+      {/* Sub-page links for specific roof/facade techniques */}
+      {subPages.length > 0 && (
+        <div className="mx-auto max-w-7xl px-6 pb-4">
+          <p className="text-sm text-gray-500">
+            Specifieke {service.name.toLowerCase()}-oplossing?{" "}
+            {subPages.map((sp, i) => (
+              <span key={sp.href}>
+                <Link href={sp.href} className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+                  {sp.label}
+                </Link>
+                {i < subPages.length - 1 ? ", " : "."}
+              </span>
+            ))}
+          </p>
+        </div>
       )}
 
       {/* Landing page link for geo-targeted pages */}

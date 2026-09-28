@@ -351,17 +351,23 @@ export default function DakisolatieLanding() {
           <h2 className="text-3xl font-extrabold text-teal-800 text-center mb-10">Plat of hellend dak — wij regelen het volledig</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             {[
-              { photo: PHOTOS.platDak, title: "Plat dak isolatie + renovatie", desc: "Warm-dak principe: PIR-platen op de constructie + nieuwe waterdichte bedekking (EPDM, bitumen of PVC-folie). Waterdicht voor 25–30 jaar." },
-              { photo: PHOTOS.hellendDakEdegemAfter, title: "Hellend dak renovatie + isolatie", desc: "Volledige renovatie van hellend dak: nieuwe isolatie, onderdak en dakpannen of leien naar keuze. Inclusief dakgoten en details." },
-              { photo: PHOTOS.dakSchouw, title: "Details en afwerking", desc: "Schouwkappen, loodaansluitingen, dakramen en nokken — elk detail waterdicht afgewerkt. Geen concessies aan de periferie." },
-              { photo: PHOTOS.dakkapellen, title: "Dakkapellen", desc: "Extra leefruimte en daglicht op de bovenverdieping. Volledig geïntegreerd in uw bestaand dakstructuur, inclusief isolatie." },
+              { photo: PHOTOS.platDak, title: "Plat dak isolatie + renovatie", href: "/dakisolatie/plat-dak", desc: "Warm-dak principe: PIR-platen op de constructie + nieuwe waterdichte bedekking (EPDM, bitumen of PVC-folie). Waterdicht voor 25–30 jaar." },
+              { photo: PHOTOS.hellendDakEdegemAfter, title: "Hellend dak renovatie + isolatie", href: "/dakisolatie/hellend-dak", desc: "Volledige renovatie van hellend dak: nieuwe isolatie, onderdak en dakpannen of leien naar keuze. Inclusief dakgoten en details." },
+              { photo: PHOTOS.dakSchouw, title: "Details en afwerking", href: undefined, desc: "Schouwkappen, loodaansluitingen, dakramen en nokken — elk detail waterdicht afgewerkt. Geen concessies aan de periferie." },
+              { photo: PHOTOS.dakkapellen, title: "Dakkapellen", href: undefined, desc: "Extra leefruimte en daglicht op de bovenverdieping. Volledig geïntegreerd in uw bestaand dakstructuur, inclusief isolatie." },
             ].map((s) => (
               <div key={s.title} className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all">
                 <div className="relative h-48">
                   <Image src={s.photo.src} alt={s.photo.alt} fill className="object-cover" sizes="50vw" />
                 </div>
                 <div className="p-5">
-                  <h3 className="font-bold text-teal-800 mb-1.5">{s.title}</h3>
+                  <h3 className="font-bold text-teal-800 mb-1.5">
+                    {s.href ? (
+                      <Link href={s.href} className="hover:text-orange-500 transition-colors">{s.title}</Link>
+                    ) : (
+                      s.title
+                    )}
+                  </h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
                 </div>
               </div>
