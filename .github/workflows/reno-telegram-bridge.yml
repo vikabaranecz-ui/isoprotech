@@ -1,0 +1,82 @@
+name: Reno Telegram Bridge
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 13 * * 1"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/reno-telegram-bridge.yml"
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Reno Rangers SEO report to working Telegram chat
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, re, urllib.request, datetime
+
+          url = "https://api.github.com/repos/vikabaranecz-ui/renorangers.be/issues?state=all&per_page=30"
+          req = urllib.request.Request(url, headers={"Accept":"application/vnd.github+json","User-Agent":"reno-telegram-bridge"})
+          issues = json.load(urllib.request.urlopen(req))
+          issues = [i for i in issues if not i.get("pull_request") and (i.get("title") or "").startswith("SEO Weekly")]
+          if not issues:
+              message = "⚠️ Reno Rangers SEO\nNo SEO Weekly report found in GitHub."
+          else:
+              issue = issues[0]
+              title = issue.get("title","")
+              body = issue.get("body") or ""
+              report_url = issue.get("html_url","")
+              m = re.search(r"SEO Weekly — (\d{4}-\d{2}-\d{2})", title)
+              report_date = m.group(1) if m else "unknown"
+              today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=2))).date().isoformat()
+
+              kpi = re.search(r"## Top-5 progress:\s*([^\n]+)", body)
+              kpi_text = kpi.group(1).strip() if kpi else "not available"
+
+              confirmed = []
+              block = re.search(r"Confirmed Top-5[^\n]*:\s*\n(.*?)(?:\n\n|Just outside)", body, re.S)
+              if block:
+                  for line in block.group(1).splitlines():
+                      if line.strip().startswith("- "):
+                          clean = line.strip()[2:].replace(chr(96),"").replace("*","")
+                          confirmed.append(clean)
+                      if len(confirmed) == 3:
+                          break
+
+              health = re.search(r"## Website-health status:\s*([^\n]+)", body)
+              health_text = health.group(1).strip() if health else "see full report"
+
+              merged = re.search(r"## Merged or awaiting approval\s*\n([^\n]+)", body)
+              result_text = merged.group(1).replace(chr(96),"").replace("*","").strip() if merged else "see full report"
+
+              nxt = re.search(r"## Next likely opportunity\s*\n([^\n]+)", body)
+              next_text = nxt.group(1).strip() if nxt else "see full report"
+              if len(next_text) > 240:
+                  next_text = next_text[:237] + "..."
+
+              status = "✅ Today's Reno report" if report_date == today else f"⚠️ Latest Reno report is {report_date}; no new report for today yet"
+              lines = ["Reno Rangers SEO", status, f"KPI: {kpi_text}"]
+              if confirmed:
+                  lines.append("Top: " + " | ".join(confirmed))
+              lines += [
+                  f"Website health: {health_text}",
+                  f"Result: {result_text}",
+                  f"Next: {next_text}",
+                  f"Report: {report_url}",
+              ]
+              message = "\n".join(lines)
+
+          open("telegram-message.txt","w",encoding="utf-8").write(message)
+          PY
+
+          curl -fsS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text@telegram-message.txt" >/dev/null
