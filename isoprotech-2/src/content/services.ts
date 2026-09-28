@@ -20,6 +20,7 @@ export interface Service {
   relatedServices: string[];
   relatedBlogSlugs: string[];
   landingPage?: string;
+  subPages?: Array<{ label: string; href: string }>;
   faqIds: string[];
 }
 
@@ -54,6 +55,11 @@ export const services: Service[] = [
     relatedServices: ["dakwerken", "dakrenovatie", "gevelisolatie"],
     relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakisolatie-prijs-m2-2026", "epc-label-verbeteren", "premies-renovatie-2026"],
     landingPage: "/dakisolatie-antwerpen",
+    subPages: [
+      { label: "Plat dak isoleren", href: "/dakisolatie/plat-dak" },
+      { label: "Hellend dak isoleren", href: "/dakisolatie/hellend-dak" },
+      { label: "Sarkingdak", href: "/dakisolatie/sarkingdak" },
+    ],
     faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "garantie"],
   },
   {
