@@ -262,6 +262,17 @@ export default function GevelisolatieLanding() {
             ))}
           </div>
 
+          <p className="mt-6 text-sm text-gray-500 text-center">
+            Meer weten over de afwerking?{" "}
+            <Link href="/diensten/crepi" className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              Crepi in Antwerpen
+            </Link>{" "}
+            of{" "}
+            <Link href="/diensten/spuitkurk" className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              spuitkurk in Antwerpen
+            </Link>.
+          </p>
+
           {/* Guarantee highlight */}
           <div className="mt-8 rounded-2xl bg-teal-800 text-white p-6 flex flex-col sm:flex-row items-center gap-5">
             <svg className="h-14 w-14 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

@@ -206,6 +206,7 @@ export const services: Service[] = [
     },
     relatedServices: ["gevelisolatie", "spuitkurk"],
     relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
+    landingPage: "/gevelisolatie-antwerpen",
     faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs", "crepi-met-isolatie"],
   },
   {
@@ -239,6 +240,7 @@ export const services: Service[] = [
     },
     relatedServices: ["gevelisolatie", "crepi"],
     relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
+    landingPage: "/gevelisolatie-antwerpen",
     faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
   },
   {
