@@ -9,15 +9,17 @@ Primary operating goal: maximize the probability that at least 40 commercially r
 2. `isoprotech-2/seo/growth_strategy.json`
 3. `isoprotech-2/seo/keyword_targets.json`
 4. `seo-weekly-context-compact.json`
-5. Repository files needed to execute the chosen ranking sprint
+5. Repository files needed to execute the chosen ranking portfolio
 6. Recent SEO PRs/issues only enough to avoid duplicate/conflicting work
 
 Do not read the large raw context unless the compact context shows a source failure or a critical fact is missing for the chosen sprint.
 
-## Core operating model: Weekly Ranking Sprint
-A run is not complete merely because one technical issue was fixed. Choose ONE service/keyword cluster and complete the highest-value set of related tasks that can materially improve its rankings.
+## Core operating model: Weekly Ranking Portfolio
+A run is not complete merely because one technical issue was fixed. Audit the full 40-query scoreboard first, then select a portfolio of **3-5 distinct keyword/service clusters** when there are enough evidence-backed opportunities. Work the strongest near-wins in parallel instead of spending the whole week on one or two phrases.
 
-A sprint may include several related actions such as:
+At least one selected cluster should come from each core money pillar (dak and gevel) when both contain a material opportunity. Prioritize commercially valuable queries around positions 5-15, then positions 16-20, while still addressing serious cannibalization or technical blockers that suppress a strategically important page.
+
+A weekly portfolio may include several related actions such as:
 - improve up to the allowed number of existing pages in that cluster;
 - strengthen headings, copy, intent coverage and snippet relevance using verified facts;
 - add small relevant internal links from existing pages;
@@ -96,8 +98,8 @@ Use when the best opportunity needs more evidence and no safe supporting action 
 Use for actions allowed by `automation_policy.safe_auto_publish`.
 
 For SAFE FIX:
-1. Create branch `seo/weekly-YYYY-MM-DD-<cluster>` from current main.
-2. Execute the coherent cluster sprint, not unrelated site-wide edits.
+1. Create branch `seo/weekly-YYYY-MM-DD-growth-portfolio` from current main.
+2. Execute the selected 3-5-cluster portfolio, keeping every change tied to a documented ranking hypothesis.
 3. Obey `safe_content_limits` for meaningful copy changes.
 4. Re-read the diff and remove unrelated changes.
 5. Run production build and lint if configured.
