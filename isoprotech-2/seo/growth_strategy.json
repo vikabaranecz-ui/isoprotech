@@ -53,14 +53,25 @@
     "seasonal": "Demand that rises with weather, heating season, summer heat, renovation cycles or current subsidy/rule changes."
   },
   "weekly_sprint_rule": {
-    "unit_of_work": "one keyword/service cluster, not one micro-fix",
+    "unit_of_work": "weekly portfolio of 3-5 keyword/service clusters, not one micro-fix",
+    "cluster_count_target": {
+      "min": 3,
+      "max": 5
+    },
+    "prioritization": [
+      "prioritize commercially relevant near-wins around positions 5-15 with real GSC impressions and strong business fit",
+      "include both dak and gevel when both have material opportunities",
+      "use positions 16-20 next when near-win work is exhausted or blocked",
+      "treat serious cannibalization/technical suppression as a valid priority even when the affected query is farther away"
+    ],
     "expected_output": [
-      "identify the cluster's ranking bottleneck",
-      "complete all safe related on-page/internal-link/technical fixes that materially support the cluster",
-      "prepare one approval package when a new article/new URL/merge/redirect is the highest-value next move",
+      "audit the complete 40-query scoreboard before selecting work",
+      "select 3-5 evidence-backed clusters with explicit ranking hypotheses",
+      "complete all safe related on-page/internal-link/technical fixes that materially support those clusters",
+      "prepare approval packages for any new article/new URL/merge/redirect that is the highest-value next move",
       "measure target-query positions and report movement toward the 40-keyword Top-5 KPI"
     ],
-    "micro_fix_rule": "A minor metadata or formatting fix may be included in a sprint but should not be the sole weekly objective when a higher-impact ranking task is supported by evidence."
+    "micro_fix_rule": "A minor metadata or formatting fix may support the portfolio but must not consume the weekly run when higher-impact ranking work is supported by evidence."
   },
   "content_growth": {
     "new_content_only_when": [
@@ -80,7 +91,10 @@
     "delete_merge_redirect_requires_telegram_approval": true
   },
   "seasonal_rules": {
-    "lead_time_weeks_before_peak": [4, 8],
+    "lead_time_weeks_before_peak": [
+      4,
+      8
+    ],
     "winter_autumn": [
       "house feels cold despite heating",
       "cold exterior walls",
