@@ -53,10 +53,11 @@ export const cities: CityData[] = [
     localFaqs: [
       { q: "Werken jullie ook in de deelgemeenten van Mechelen?", a: "Ja, wij zijn actief in heel Mechelen inclusief Battel, Heffen, Leest, Walem, Hombeek en Muizen. De afstand tot ons kantoor in Antwerpen is beperkt." },
       { q: "Voeren jullie ook dakwerken uit in Mechelen, niet enkel isolatie?", a: "Zeker. Naast dakisolatie verzorgen wij ook volledige dakwerken in Mechelen: dakrenovatie, dakvernieuwing en herstellingen, steeds met 10 jaar garantie." },
+      { q: "Bieden jullie ook crepi of spuitkurk aan in Mechelen?", a: "Ja. Voor de vele jaren-60 en jaren-70 woningen in de Mechelse rand combineren wij buitengevelisolatie vaak met een afwerking in crepi of spuitkurk. Tijdens de gratis inspectie bekijken wij welke afwerking het best past bij uw gevel." },
     ],
     seo: {
       title: "Dakwerken & Isolatie Mechelen",
-      description: "Dakwerken, dakisolatie, gevelisolatie en dakrenovatie in Mechelen. Lokale referenties, gratis inspectie, 10 jaar garantie. Vraag uw offerte aan.",
+      description: "Dakwerken, dakisolatie, gevelisolatie, crepi en spuitkurk in Mechelen. Lokale referenties, gratis inspectie, 10 jaar garantie.",
     },
   },
   {
