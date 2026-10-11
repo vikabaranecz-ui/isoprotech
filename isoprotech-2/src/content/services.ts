@@ -87,10 +87,11 @@ export const services: Service[] = [
     seo: {
       title: "Dakrenovatie Antwerpen — Nieuw Dak",
       description: "Dakrenovatie in Antwerpen. Volledige vernieuwing van platte en hellende daken. Nieuwe bedekking, isolatie en afwatering. Gratis inspectie, 10 jaar garantie.",
-      keywords: ["dakrenovatie antwerpen", "dak vernieuwen", "dak renoveren", "nieuw dak prijs"],
+      keywords: ["dakrenovatie antwerpen", "dak vernieuwen", "dak renoveren", "nieuw dak prijs", "dakrenovatie isolatie"],
     },
     relatedServices: ["dakwerken", "dakisolatie", "dakkapellen"],
     relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakrenovatie-plat-dak-2026", "premies-renovatie-2026"],
+    landingPage: "/dakisolatie-antwerpen",
     faqIds: ["dakrenovatie-duur", "garantie"],
   },
   {
@@ -146,6 +147,7 @@ export const services: Service[] = [
     },
     relatedServices: ["dakisolatie", "dakrenovatie", "dakkapellen"],
     relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakrenovatie-plat-dak-2026", "premies-renovatie-2026"],
+    landingPage: "/dakisolatie-antwerpen",
     faqIds: ["dakisolatie-besparing", "dakrenovatie-duur", "garantie"],
   },
   {
@@ -169,7 +171,7 @@ export const services: Service[] = [
       keywords: ["gevelisolatie antwerpen", "buitengevelisolatie", "gevel isoleren", "gevelisolatie prijs m2"],
     },
     relatedServices: ["crepi", "spuitkurk"],
-    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026"],
+    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "buitenmuur-isoleren-buitenzijde", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026"],
     landingPage: "/gevelisolatie-antwerpen",
     faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "premies"],
   },

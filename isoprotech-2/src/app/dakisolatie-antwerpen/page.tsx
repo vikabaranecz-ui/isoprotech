@@ -328,6 +328,17 @@ export default function DakisolatieLanding() {
               </div>
             ))}
           </div>
+
+          <p className="mt-6 text-sm text-gray-500 text-center">
+            Dak volledig vernieuwen in plaats van enkel isoleren?{" "}
+            <Link href="/diensten/dakrenovatie" className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              Dakrenovatie in Antwerpen
+            </Link>{" "}
+            of bekijk{" "}
+            <Link href="/diensten/dakwerken" className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              alle dakwerken in Antwerpen
+            </Link>.
+          </p>
         </div>
       </section>
 

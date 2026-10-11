@@ -129,6 +129,11 @@ export default function HomePage() {
             <div>
               <span className="section-label">Onze diensten</span>
               <h2 className="section-heading">Alles voor uw dak en gevel</h2>
+              <p className="mt-3 text-gray-500 max-w-xl">
+                Of uw energiefactuur stijgt door een ongeïsoleerd dak, of uw gevel aan een opfrisbeurt toe is:
+                ISOPROTECH voert dakisolatie, gevelisolatie, crepi en spuitkurk uit als één vakkundig team —
+                met gratis inspectie, vaste prijs en 10 jaar garantie per project.
+              </p>
             </div>
             <Link href="/diensten" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:text-orange-600 transition-colors shrink-0">
               Alle diensten
