@@ -208,39 +208,13 @@ export default function ServicePage({
         </section>
       )}
 
-      {/* Photo gallery */}
-      {service.galleryPhotos && service.galleryPhotos.length > 0 && (
+      {/* Project gallery — clickable cards linking to /realisaties/[slug] */}
+      {relatedProjects.length > 0 && (
         <section className="bg-stone-50 py-16">
           <div className="mx-auto max-w-7xl px-6">
             <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Realisaties</span>
             <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-8">Onze {service.name.toLowerCase()} projecten</h2>
-            <div className="columns-2 md:columns-3 gap-3 [column-gap:12px]">
-              {service.galleryPhotos.map((photo, i) => (
-                <div key={i} className="break-inside-avoid mb-3 rounded-2xl overflow-hidden relative group">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
-                    className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width:768px)50vw,33vw"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Related project case studies */}
-      {relatedProjects.length > 0 && (
-        <section className="bg-stone-50 py-16">
-          <div className="mx-auto max-w-7xl px-6">
-            <span className="text-sm font-bold tracking-widest text-orange-400 uppercase">Voor & Na</span>
-            <h2 className="mt-2 text-2xl font-extrabold text-teal-800 mb-8">
-              Realisaties {service.name.toLowerCase()}
-            </h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {relatedProjects.map((rp) => (
                 <Link
                   key={rp.id}
@@ -250,34 +224,32 @@ export default function ServicePage({
                   {rp.beforePhoto ? (
                     <div className="grid grid-cols-2 gap-0.5 bg-gray-200">
                       <div className="relative">
-                        <Image src={rp.beforePhoto.src} alt={rp.beforePhoto.alt} width={rp.beforePhoto.width} height={rp.beforePhoto.height} className="w-full h-auto object-cover" sizes="15vw" />
+                        <Image src={rp.beforePhoto.src} alt={rp.beforePhoto.alt} width={rp.beforePhoto.width} height={rp.beforePhoto.height} className="w-full h-44 object-cover" sizes="20vw" />
                         <span className="absolute bottom-1.5 left-1.5 bg-red-500/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">VOOR</span>
                       </div>
                       <div className="relative">
-                        <Image src={rp.photo.src} alt={rp.photo.alt} width={rp.photo.width} height={rp.photo.height} className="w-full h-auto object-cover" sizes="15vw" />
+                        <Image src={rp.photo.src} alt={rp.photo.alt} width={rp.photo.width} height={rp.photo.height} className="w-full h-44 object-cover" sizes="20vw" />
                         <span className="absolute bottom-1.5 right-1.5 bg-green-500/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">NA</span>
                       </div>
                     </div>
                   ) : (
-                    <Image src={rp.photo.src} alt={rp.photo.alt} width={rp.photo.width} height={rp.photo.height} className="w-full h-auto object-cover" sizes="25vw" />
+                    <Image src={rp.photo.src} alt={rp.photo.alt} width={rp.photo.width} height={rp.photo.height} className="w-full h-52 object-cover" sizes="30vw" />
                   )}
-                  <div className="p-3">
-                    <h3 className="text-xs font-bold text-teal-800 leading-snug group-hover:text-orange-500 transition-colors">{rp.title}</h3>
-                    <p className="text-[11px] text-gray-400 mt-0.5">{rp.location}</p>
+                  <div className="p-4">
+                    <p className="text-xs font-bold text-orange-500 mb-1">{rp.location}</p>
+                    <h3 className="font-bold text-teal-800 group-hover:text-orange-500 transition-colors leading-snug">{rp.title}</h3>
+                    <p className="mt-1.5 text-xs text-gray-500 line-clamp-2">{rp.summary}</p>
+                    <span className="mt-3 inline-block text-xs font-bold text-orange-500">Bekijk project →</span>
                   </div>
                 </Link>
               ))}
             </div>
-            <div className="mt-6">
-              <Link href="/realisaties" className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-orange-500 transition-colors">
-                Alle realisaties bekijken
-                <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
-              </Link>
+            <div className="mt-8 text-center">
+              <Link href="/realisaties" className="btn-outline text-sm">Alle realisaties bekijken</Link>
             </div>
           </div>
         </section>
       )}
-
       {/* Related services */}
       {related.length > 0 && (
         <section className="bg-stone-100 py-16">

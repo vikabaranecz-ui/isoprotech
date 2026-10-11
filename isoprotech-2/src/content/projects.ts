@@ -429,9 +429,22 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find(p => p.slug === slug);
 }
 
-export function getProjectsByService(serviceSlug: string, limit = 4): Project[] {
+const SERVICE_WORK_TYPES: Record<string, string[]> = {
+  dakisolatie:        ["Dakisolatie"],
+  dakrenovatie:       ["Dakrenovatie"],
+  dakkapellen:        ["Dakrenovatie"],
+  gevelisolatie:      ["Gevelisolatie"],
+  crepi:              ["Crepi"],
+  spuitkurk:          ["Spuitkurk"],
+  asbestverwijdering: ["Asbestverwijdering"],
+};
+
+export function getProjectsByService(serviceSlug: string, limit = 6): Project[] {
+  const bySlug = projects.filter(p => p.serviceSlug === serviceSlug);
+  if (bySlug.length > 0) return bySlug.slice(0, limit);
+  const tags = SERVICE_WORK_TYPES[serviceSlug] ?? [];
   return projects
-    .filter(p => p.serviceSlug === serviceSlug && p.beforePhoto)
+    .filter(p => tags.length > 0 && p.workType.some(t => tags.includes(t)))
     .slice(0, limit);
 }
 
