@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: "0 8 * * 1"
       timezone: "Europe/Brussels"
-    - cron: "0 8 * * 4"
-      timezone: "Europe/Brussels"
   workflow_dispatch:
     inputs:
       force:
@@ -29,7 +27,7 @@ jobs:
   weekly-seo:
     if: github.event_name == 'workflow_dispatch' || vars.SEO_AUTOMATION_ENABLED == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 60
     env:
       GH_TOKEN: ${{ github.token }}
       SEO_BASE_URL: https://www.isoprotech.be
@@ -161,7 +159,17 @@ jobs:
             Read `isoprotech-2/seo/business_profile.json`, `isoprotech-2/seo/growth_strategy.json`, `isoprotech-2/seo/keyword_targets.json`, and `seo-weekly-context-compact.json`.
 
             The business KPI is 40 commercially relevant queries in Google Top 5 by 2026-12-31. Treat this as the operating target, not a guaranteed result.
-            Execute one coherent WEEKLY RANKING SPRINT for the highest-value service/keyword cluster. A sprint may contain multiple related safe fixes; do not reduce the week to a cosmetic micro-fix when a stronger ranking task is supported by evidence.
+            Execute ONE comprehensive weekly MASTER SEO + CONVERSION RUN. Do not treat this as a narrow one- or two-keyword task.
+
+            Before choosing changes, audit the full 40-query scoreboard plus secondary GSC opportunities across roof, facade, local, problem, economic, comfort and seasonal intent. Check query-to-page mapping, cannibalization, internal authority, technical health, content usefulness, CTA/form journey and recent sprint history.
+
+            Then execute the strongest coherent package justified by evidence. A master run should normally include:
+            1) one primary commercial ranking move,
+            2) supporting internal-authority/cannibalization work where justified,
+            3) one conversion/trust improvement on the same customer journey where safe,
+            4) a coverage-gap register for roof, facade, problem/decision and conversion gaps,
+            5) a clear next checkpoint if the remaining bottleneck is off-page authority.
+            Keep roof visibility a priority while it remains weak, but do not ignore a clearly stronger near-win elsewhere. Do not publish filler text. Every changed paragraph must improve intent coverage, buyer understanding, trust or conversion.
             Consider commercial, problem, economic, comfort and seasonal demand. Seasonal content should be prepared 4-8 weeks before the expected peak.
             If the highest-value move is a new article/page, merge, redirect or other approval-gated action, prepare the PR and send it through Telegram approval rather than substituting a trivial safe fix.
 
@@ -169,7 +177,7 @@ jobs:
             Always create `SEO Weekly — YYYY-MM-DD — <MODE>` with Top-5 progress X/40, sprint cluster and concrete completed work.
           claude_args: |
             --model claude-sonnet-5
-            --effort medium
+            --effort high
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
 
       - name: Send Telegram SEO summary
