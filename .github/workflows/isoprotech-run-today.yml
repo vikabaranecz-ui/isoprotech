@@ -1,0 +1,20 @@
+name: Isoprotech Run Today
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/isoprotech-run-today.yml"
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Isoprotech weekly SEO
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run weekly-seo-claude.yml --repo "$GITHUB_REPOSITORY" -f force=true
