@@ -157,6 +157,7 @@ jobs:
             Read `.claude/agents/weekly-seo.md` in full and follow it as the governing policy.
             Also read `.claude/agents/isoprotech-fast-growth.md` and apply it as an additional prioritization overlay without overriding safety or approval rules.
             Also read `.claude/agents/isoprotech-roof-recovery.md` and apply it while roof visibility remains weak.
+            Also read `.claude/agents/isoprotech-conversion-growth.md` and use it to maintain whole-market coverage and conversion-first content quality.
             Read `isoprotech-2/seo/business_profile.json`, `isoprotech-2/seo/growth_strategy.json`, `isoprotech-2/seo/keyword_targets.json`, and `seo-weekly-context-compact.json`.
 
             The business KPI is 40 commercially relevant queries in Google Top 5 by 2026-12-31. Treat this as the operating target, not a guaranteed result.
