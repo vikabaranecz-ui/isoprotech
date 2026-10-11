@@ -148,6 +148,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ github.token }}
           allowed_bots: "github-actions[bot]"
           prompt: |
             This is the scheduled ISOPROTECH weekly SEO growth run. Determine today's date in Europe/Brussels when naming the report.
