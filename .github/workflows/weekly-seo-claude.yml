@@ -49,11 +49,14 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          COUNT="$(gh issue list --repo "$GITHUB_REPOSITORY" --search "SEO Weekly — ${TODAY} in:title" --limit 1 --json number --jq 'length')"
-          if [ "$COUNT" != "0" ]; then
-            echo "Existing SEO Weekly report found for ${TODAY}; skipping duplicate paid analysis."
+          REPORTS="$(gh issue list --repo "$GITHUB_REPOSITORY" --search "SEO Weekly — ${TODAY} in:title" --limit 20 --json title --jq '.[].title')"
+          if [ -n "$REPORTS" ] && echo "$REPORTS" | grep -qv "AUTO-PUBLISH FAILED"; then
+            echo "Existing completed/non-failed SEO Weekly report found for ${TODAY}; skipping duplicate paid analysis."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
+            if [ -n "$REPORTS" ]; then
+              echo "Only failed SEO Weekly report(s) found for ${TODAY}; allowing retry."
+            fi
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
