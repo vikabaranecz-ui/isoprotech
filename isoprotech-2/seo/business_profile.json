@@ -8,18 +8,45 @@
   "services": {
     "dakisolatie": {
       "offered": true,
-      "methods": ["PIR", "plat dak isoleren", "hellend dak isoleren", "dakisolatie langs buiten", "dakisolatie buitenzijde", "sarking", "sarkingdak", "dak isoleren", "isoleren van dak"],
+      "methods": [
+        "PIR",
+        "plat dak isoleren",
+        "hellend dak isoleren",
+        "dakisolatie langs buiten",
+        "dakisolatie buitenzijde",
+        "sarking",
+        "sarkingdak",
+        "dak isoleren",
+        "isoleren van dak"
+      ],
       "guardrail": "Sarking is offered as exterior roof insulation. Do not invent exact layer build-up, thicknesses, product combinations or technical performance unless confirmed."
     },
     "gevelisolatie": {
       "offered": true,
-      "methods": ["EPS", "buitengevelisolatie", "gevelisolatie langs buiten", "ETICS", "crepi", "spuitkurk", "steenstrips"],
-      "brands_confirmed": ["Caparol", "Baumit"],
+      "methods": [
+        "EPS",
+        "buitengevelisolatie",
+        "gevelisolatie langs buiten",
+        "ETICS",
+        "crepi",
+        "spuitkurk",
+        "steenstrips"
+      ],
+      "brands_confirmed": [
+        "Caparol",
+        "Baumit"
+      ],
       "guardrail": "Use ETICS as supporting professional terminology and explain it in plain customer language. Do not infer specific brand products or layer systems."
     },
-    "asbestverwijdering": {"offered": true},
-    "dakrenovatie": {"offered": true},
-    "dakkapellen": {"offered": true}
+    "asbestverwijdering": {
+      "offered": true
+    },
+    "dakrenovatie": {
+      "offered": true
+    },
+    "dakkapellen": {
+      "offered": true
+    }
   },
   "not_offered": [
     "vloerisolatie",
@@ -32,10 +59,36 @@
     "chape isolatie",
     "isolerende chape"
   ],
-  "excluded_materials_as_service": ["glaswol", "rockwool", "minerale wol", "isolatiewol"],
-  "purchase_intent_exclusions": ["isolatiemateriaal kopen", "isolatieplaten kopen", "PIR platen kopen", "EPS platen kopen", "bouwmarkt", "hubo", "gamma"],
-  "allowed_comparisons": ["PIR vs glaswol", "PIR of glaswol", "EPS vs minerale wol", "beste dakisolatie", "beste gevelisolatie"],
-  "problem_intents": ["warmteverlies", "oververhitting", "zolder te warm", "koude muren", "koudebruggen", "condensatie op koude oppervlakken"],
+  "excluded_materials_as_service": [
+    "glaswol",
+    "rockwool",
+    "minerale wol",
+    "isolatiewol"
+  ],
+  "purchase_intent_exclusions": [
+    "isolatiemateriaal kopen",
+    "isolatieplaten kopen",
+    "PIR platen kopen",
+    "EPS platen kopen",
+    "bouwmarkt",
+    "hubo",
+    "gamma"
+  ],
+  "allowed_comparisons": [
+    "PIR vs glaswol",
+    "PIR of glaswol",
+    "EPS vs minerale wol",
+    "beste dakisolatie",
+    "beste gevelisolatie"
+  ],
+  "problem_intents": [
+    "warmteverlies",
+    "oververhitting",
+    "zolder te warm",
+    "koude muren",
+    "koudebruggen",
+    "condensatie op koude oppervlakken"
+  ],
   "moisture_guardrail": "Do not imply insulation solves all moisture or mould problems. Optrekkend vocht, leaks, wet basements and ventilation-related moisture require separate diagnosis.",
   "pricing_policy": {
     "existing_price_articles": "KEEP",
@@ -62,8 +115,10 @@
       "structured-data corrections that only restate already verified on-page/business facts"
     ],
     "safe_content_limits": {
-      "max_existing_pages_with_meaningful_copy_changes_per_week": 2,
-      "rule": "Prefer focused improvements to existing pages over bulk rewrites. Every factual statement must already be supported by the business profile or existing verified site content."
+      "max_existing_pages_with_meaningful_copy_changes_per_week": 6,
+      "max_keyword_service_clusters_per_week": 5,
+      "target_keyword_service_clusters_per_week": 3,
+      "rule": "Prefer focused improvements across several evidence-backed clusters over bulk rewrites. Every factual statement must already be supported by the business profile or existing verified site content."
     },
     "requires_human_approval": [
       "redirects",
