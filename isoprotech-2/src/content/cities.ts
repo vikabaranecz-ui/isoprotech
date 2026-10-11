@@ -164,7 +164,9 @@ export const cities: CityData[] = [
     intro: "In Kapellen voeren wij dak- en gevelisolatiewerken uit voor zowel particuliere woningen als kleinere appartementsgebouwen. De gemeente biedt een mix van bouwstijlen waar onze brede ervaring goed bij aansluit.",
     localContext: "Kapellen kent zowel oudere dorpskernen als nieuwere verkavelingen. Bij oudere woningen combineren wij vaak asbestverwijdering met dakrenovatie en isolatie — een efficiënte totaalaanpak die de woning in één keer toekomstbestendig maakt.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Doen jullie ook spouwmuurisolatie in Kapellen?", a: "Nee, ISOPROTECH is gespecialiseerd in buitengevelisolatie met crepi, spuitkurk of steenstrips. Buitengevelisolatie isoleert de volledige buitenmuur zonder dat u binnenruimte verliest, en is vaak de betere optie bij massieve muren zonder spouw. Tijdens de gratis inspectie bekijken wij wat voor uw woning in Kapellen van toepassing is." },
+    ],
     seo: {
       title: "Dakisolatie & Gevelwerken Kapellen",
       description: "Dak- en gevelisolatie in Kapellen. Van asbestverwijdering tot crepi-afwerking. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
@@ -194,7 +196,9 @@ export const cities: CityData[] = [
     intro: "Kontich is een dynamische gemeente tussen Antwerpen en Mechelen waar wij actief zijn met dak- en gevelprojecten. De goede bereikbaarheid maakt het een efficiënt werkgebied voor ons team.",
     localContext: "In Kontich treffen wij een mix van oudere woningen in het centrum en recentere bouw in de woonwijken. Voor de oudere woningen is een gecombineerde aanpak (dak + gevel) vaak het meest kosteneffectief. Voor recentere woningen kan een gerichte gevelafwerking al voldoende zijn.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Wat is het verschil tussen spouwmuurisolatie en buitengevelisolatie?", a: "Spouwmuurisolatie vult de holle ruimte tussen twee muren, terwijl buitengevelisolatie een isolerende laag over de volledige buitenmuur aanbrengt. ISOPROTECH voert in Kontich buitengevelisolatie uit — de geschikte keuze bij massieve muren zonder spouw of wanneer de gevel ook een nieuwe afwerking nodig heeft." },
+    ],
     seo: {
       title: "Isolatie Kontich — Dak & Gevel",
       description: "Dak- en gevelisolatie in Kontich. Tussen Antwerpen en Mechelen. Gratis inspectie, 10 jaar garantie. ISOPROTECH.",
