@@ -82,9 +82,15 @@ export const faqs: FaqItem[] = [
     category: "Algemeen",
   },
   {
+    id: "warmteverlies-herkennen",
+    question: "Hoe herken ik warmteverlies via mijn dak of gevel?",
+    answer: "Typische signalen zijn een huis dat snel afkoelt zodra de verwarming uitgaat, koude buitenmuren of een koude zolder terwijl de rest van de woning verwarmd is, en een hoge stookfactuur die niet in verhouding staat tot het comfort. Via een ongeïsoleerd dak verdwijnt tot 30% van uw verwarmingskosten, via ongeïsoleerde buitenmuren tot 35%. Tijdens onze gratis inspectie brengen wij in kaart waar uw woning het meeste warmte verliest en welke ingreep — dak, gevel of beide — het grootste verschil maakt.",
+    category: "Algemeen",
+  },
+  {
     id: "offerte-aanvragen",
     question: "Hoe vraag ik een offerte aan?",
-    answer: "Via telefoon (+32 470 80 20 20), WhatsApp of het contactformulier op onze website. Wij plannen een gratis inspectie ter plaatse en bezorgen u een duidelijke offerte met vaste prijs. Geen vrijblijvend rondje raden — een concrete prijs voor uw specifieke situatie.",
+    answer: "Via telefoon (+32 465 88 27 01), WhatsApp of het contactformulier op onze website. Wij plannen een gratis inspectie ter plaatse en bezorgen u een duidelijke offerte met vaste prijs. Geen vrijblijvend rondje raden — een concrete prijs voor uw specifieke situatie.",
     category: "Algemeen",
   },
 ];
