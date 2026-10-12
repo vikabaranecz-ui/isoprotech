@@ -8,6 +8,7 @@ import { useSubmit } from "@formspree/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormData } from "@/lib/form";
 import { track } from "@/lib/tracking";
+import { BRAND } from "@/lib/constants";
 
 interface ContactFormProps {
   defaultService?: ContactFormData["service"];
@@ -72,7 +73,7 @@ export function ContactForm({ defaultService, compact, hideService }: ContactFor
       router.push("/bedankt");
     } catch {
       setFormState("error");
-      setServerError("Er is een fout opgetreden. Probeer het opnieuw of bel ons op +32 470 80 20 20.");
+      setServerError(`Er is een fout opgetreden. Probeer het opnieuw of bel ons op ${BRAND.phoneDisplay}.`);
     }
   }
 

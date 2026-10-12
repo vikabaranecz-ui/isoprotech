@@ -180,9 +180,11 @@ export const cities: CityData[] = [
     zip: "2650",
     province: "Antwerpen",
     intro: "Edegem grenst direct aan ons werkgebied en is een gemeente waar wij snel ter plaatse zijn voor inspectie en uitvoering. De typische Edegemse halfopen en gesloten bebouwing leent zich uitstekend voor buitengevelisolatie.",
-    localContext: "Veel woningen in Edegem dateren uit de jaren 50–70 en zijn gebouwd met massieve muren zonder isolatie. Buitengevelisolatie met crepi is hier de meest logische oplossing: de woning wint aan comfort, uitstraling en waarde, zonder verlies van binnenruimte.",
+    localContext: "Veel woningen in Edegem dateren uit de jaren 50–70 en zijn gebouwd met massieve muren zonder isolatie. Buitengevelisolatie met crepi is hier de meest logische oplossing: de woning wint aan comfort, uitstraling en waarde, zonder verlies van binnenruimte. Naast gevelwerken voeren wij in Edegem ook volledige dakwerken uit — zo renoveerden wij recent een volledig hellend dak van een vrijstaande woning, inclusief nieuwe dakpannen en isolatie.",
     projectRefs: [],
-    localFaqs: [],
+    localFaqs: [
+      { q: "Voeren jullie ook dakwerken uit in Edegem, niet enkel gevelisolatie?", a: "Zeker. Naast buitengevelisolatie verzorgen wij in Edegem ook dakrenovatie en dakisolatie, van hellend tot plat dak — inclusief een recent volledig vernieuwd hellend dak bij een vrijstaande woning, met nieuwe dakpannen en isolatie en 10 jaar garantie." },
+    ],
     seo: {
       title: "Gevelisolatie Edegem — Crepi & Isolatie",
       description: "Buitengevelisolatie met crepi in Edegem. Ideaal voor jaren-60 woningen. Gratis inspectie, 10 jaar garantie. ISOPROTECH Antwerpen.",
