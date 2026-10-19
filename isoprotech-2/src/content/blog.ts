@@ -112,6 +112,8 @@ export const blogPosts: BlogPost[] = [
       { type: "text", content: "Qua prijs ligt spuitkurk doorgaans iets hoger dan standaard crepi. Het verschil wordt echter gecompenseerd door de langere levensduur en het lagere onderhoud. Spuitkurk is zelfherstellend bij kleine scheurtjes, terwijl crepi bij scheuren gerepareerd moet worden." },
       { type: "heading", content: "Wanneer wat kiezen?" },
       { type: "text", content: "Kies crepi als u een strakke, uniforme uitstraling wilt tegen een competitieve prijs. Kies spuitkurk als uw gevel gevoelig is voor scheuren, als u een naadloze afwerking prefereert, of als ecologie een belangrijk criterium is." },
+      { type: "heading", content: "Crepi of spuitkurk in Antwerpen" },
+      { type: "text", content: "ISOPROTECH plaatst beide afwerkingen in Antwerpen en de ruime regio, van typische jaren-60-woningen tot rijwoningen met een gevel die gevoelig is voor scheurvorming. Tijdens de gratis inspectie bekijken wij de staat van uw gevel en adviseren wij welke afwerking — crepi of spuitkurk — het beste resultaat geeft voor uw woning." },
     ],
     relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
     relatedServiceSlugs: ["crepi", "spuitkurk", "gevelisolatie"],

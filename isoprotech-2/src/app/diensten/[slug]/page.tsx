@@ -8,7 +8,8 @@ import Link from "next/link";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
 import { getBlogPostBySlug } from "@/content/blog";
 import { getProjectsByService } from "@/content/projects";
-import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
+import { getFaqsByIds } from "@/content/faqs";
+import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
@@ -60,6 +61,7 @@ export default function ServicePage({
   const relatedBlogPosts = (service.relatedBlogSlugs ?? [])
     .map(getBlogPostBySlug)
     .filter(Boolean) as NonNullable<ReturnType<typeof getBlogPostBySlug>>[];
+  const relatedFaqs = getFaqsByIds(service.faqIds ?? []);
 
   return (
     <>
@@ -70,6 +72,13 @@ export default function ServicePage({
           url: serviceUrl,
         })}
       />
+      {relatedFaqs.length > 0 && (
+        <JsonLd
+          data={faqSchema(
+            relatedFaqs.map((f) => ({ question: f.question, answer: f.answer }))
+          )}
+        />
+      )}
 
       {/* Hero */}
       <section className="relative min-h-[420px] flex items-center overflow-hidden">
@@ -340,6 +349,21 @@ export default function ServicePage({
             ? Bekijk onze speciale pagina met lokale referenties en prijsindicaties.
           </p>
         </div>
+      )}
+
+      {/* FAQ — answer buyer questions before the quote request */}
+      {relatedFaqs.length > 0 && (
+        <section className="mx-auto max-w-6xl px-6 py-16">
+          <h2 className="text-3xl font-extrabold text-teal-800">Veelgestelde vragen</h2>
+          <div className="mt-8 space-y-4">
+            {relatedFaqs.map((faq) => (
+              <details key={faq.id} className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+                <summary className="cursor-pointer font-bold text-teal-800">{faq.question}</summary>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
       )}
 
       {/* CTA + Form */}
