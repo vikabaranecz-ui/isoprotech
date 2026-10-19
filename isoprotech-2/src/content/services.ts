@@ -67,7 +67,7 @@ export const services: Service[] = [
     slug: "dakrenovatie",
     name: "Dakrenovatie",
     shortDesc: "Een verouderd dak lekt geld en water. Wij renoveren van A tot Z — waterdicht, geïsoleerd, gegarandeerd.",
-    heroDesc: "Lekkages, vochtproblemen, verouderde pannen — een slecht dak kost u elke dag méér. ISOPROTECH renoveert uw dak volledig: dakstructuur, isolatie, bedekking en afwatering. Één aanspreekpunt, vaste prijs, geen verrassingen. Wij werken in Antwerpen en de ruime omgeving.",
+    heroDesc: "Lekkages, vochtproblemen, verouderde pannen — een slecht dak kost u elke dag méér. ISOPROTECH renoveert uw dak volledig: dakstructuur, isolatie, bedekking en afwatering. Dakrenovatie en isolatie worden bij ons in dezelfde werf meegenomen, zodat beide meteen op elkaar zijn afgestemd. Één aanspreekpunt, vaste prijs, geen verrassingen. Wij voeren dakrenovatie uit in Antwerpen en de ruime omgeving.",
     photo: PHOTOS.dakrenovatie,
     benefits: [
       "Waterdicht dak met levensduur van 30+ jaar",
@@ -180,7 +180,7 @@ export const services: Service[] = [
     slug: "crepi",
     name: "Crepi",
     shortDesc: "Strakke gevelafwerking voor uw gevel — los of gecombineerd met gevelisolatie. Duurzaam, onderhoudsvriendelijk.",
-    heroDesc: "Crepi is de meest populaire gevelafwerking in België — en terecht. Het beschermt uw muren tegen vocht en weersinvloeden, geeft een strakke uitstraling en combineert uitstekend met isolatie. Crepi op uw gevel kan als losse afwerking geplaatst worden, of als crepi met isolatie bovenop buitengevelisolatie voor extra energiewinst. ISOPROTECH plaatst crepi-systemen die technisch correct zijn opgebouwd en jarenlang mooi blijven.",
+    heroDesc: "Crepi is de meest populaire gevelafwerking in België — en terecht. Het beschermt uw muren tegen vocht en weersinvloeden, geeft een strakke uitstraling en combineert uitstekend met isolatie. Crepi op uw gevel kan als losse afwerking geplaatst worden, of als crepi met isolatie bovenop buitengevelisolatie voor extra energiewinst. ISOPROTECH plaatst crepi in Antwerpen en de ruime regio — van Wilrijk en Mortsel tot Schoten, Mechelen en Kontich — met crepi-systemen die technisch correct zijn opgebouwd en jarenlang mooi blijven.",
     photo: PHOTOS.crepiService,
     benefits: [
       "Strakke, moderne geveluitstraling — direct verschil zichtbaar",
@@ -216,7 +216,7 @@ export const services: Service[] = [
     slug: "spuitkurk",
     name: "Spuitkurk",
     shortDesc: "Naadloze, elastische gevelcoating op basis van natuurlijke kurk. Geen scheuren, geen vocht, geen onderhoud.",
-    heroDesc: "Spuitkurk is een innovatieve gevelafwerking die anders is dan crepi: naadloos aangebracht, elastisch, waterafstotend én dampopen. Het volgt bewegingen in de gevel op, dekt oneffenheden af en heeft een thermisch isolerend effect. ISOPROTECH past spuitkurk toe als duurzame oplossing voor nieuwe en bestaande gevels in Antwerpen.",
+    heroDesc: "Spuitkurk is een innovatieve gevelafwerking die anders is dan crepi: naadloos aangebracht, elastisch, waterafstotend én dampopen. Het volgt bewegingen in de gevel op, dekt oneffenheden af en heeft een thermisch isolerend effect. ISOPROTECH past spuitkurk toe als duurzame oplossing voor nieuwe en bestaande gevels in Antwerpen en de regio (Mechelen, Schoten, Mortsel, Ekeren en meer).",
     photo: PHOTOS.spuitkurk,
     benefits: [
       "Naadloze afwerking — geen voegen die barsten of lekken",
