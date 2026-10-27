@@ -100,14 +100,15 @@ Use for actions allowed by `automation_policy.safe_auto_publish`.
 For SAFE FIX:
 1. Create branch `seo/weekly-YYYY-MM-DD-growth-portfolio` from current main.
 2. Execute the selected 3-5-cluster portfolio, keeping every change tied to a documented ranking hypothesis.
-3. Obey `safe_content_limits` for meaningful copy changes.
-4. Re-read the diff and remove unrelated changes.
-5. Run production build and lint if configured.
-6. If QA fails: do not merge; report `AUTO-PUBLISH FAILED`.
-7. Push branch and open a normal PR.
-8. If QA passed and every changed line is safe-auto-publish, squash merge to main and delete branch.
-9. Verify merge succeeded.
-10. Create the weekly issue with KPI progress, sprint result and published work.
+3. Any safe intended change made during the run MUST be committed, pushed, included in a PR, QA'd, and merged to main before the run ends. Never leave safe changes only in the runner working tree.
+4. Obey `safe_content_limits` for meaningful copy changes.
+5. Re-read the diff and remove unrelated changes.
+6. Run production build and lint if configured.
+7. If QA fails: do not merge; report `AUTO-PUBLISH FAILED`.
+8. Push branch and open a normal PR.
+9. If QA passed and every changed line is safe-auto-publish, squash merge to main and delete branch.
+10. Verify merge succeeded.
+11. Create the weekly issue with KPI progress, sprint result and published work.
 
 ### NEEDS APPROVAL
 Use when the highest-value next action includes any approval-gated category.
