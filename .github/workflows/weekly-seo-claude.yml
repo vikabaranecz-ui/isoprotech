@@ -152,6 +152,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ github.token }}
+          show_full_output: true
           allowed_bots: "github-actions[bot]"
           prompt: |
             This is the scheduled ISOPROTECH weekly SEO growth run. Determine today's date in Europe/Brussels when naming the report.
@@ -178,12 +179,31 @@ jobs:
             Consider commercial, problem, economic, comfort and seasonal demand. Seasonal content should be prepared 4-8 weeks before the expected peak.
             If the highest-value move is a new article/page, merge, redirect or other approval-gated action, prepare the PR and send it through Telegram approval rather than substituting a trivial safe fix.
 
-            Complete the sprint fully. For SAFE FIX, QA and auto-merge only safe work. For NEEDS APPROVAL, prepare and QA the exact approval package but never merge it yourself.
+            Complete the sprint fully. For SAFE FIX, QA, push the branch, open the PR, and auto-merge every safe change to main; do not end the run with safe changes only in the runner working tree. For NEEDS APPROVAL, push the branch, open the exact QA'd PR, and never merge it yourself. If analysis justifies no code/content change, still create the required NO ACTION or MONITOR weekly issue. Never finish without a weekly issue.
+            Before ending, verify there are no uncommitted intended changes left in the runner and that every intended SAFE FIX is present in main or every approval-gated change is present in an open PR.
             Always create `SEO Weekly — YYYY-MM-DD — <MODE>` with Top-5 progress X/40, sprint cluster and concrete completed work.
           claude_args: |
             --model claude-sonnet-5
             --effort high
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
+
+      - name: Verify weekly SEO completion contract
+        if: steps.duplicate.outputs.skip != 'true' && steps.evidence.outputs.claude_ready == 'true'
+        env:
+          CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
+        shell: bash
+        run: |
+          TODAY="$(TZ=Europe/Brussels date +%F)"
+          ISSUE_COUNT="$(gh issue list --repo "$GITHUB_REPOSITORY" --search "SEO Weekly — ${TODAY} in:title" --limit 20 --json number --jq 'length')"
+          if [ "$ISSUE_COUNT" = "0" ]; then
+            echo "::error::Claude finished without creating the required SEO Weekly report."
+            exit 1
+          fi
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "::error::Claude left uncommitted intended changes in the runner. Weekly SEO is incomplete."
+            git status --short
+            exit 1
+          fi
 
       - name: Send Telegram SEO summary
         if: steps.duplicate.outputs.skip != 'true' && always()
