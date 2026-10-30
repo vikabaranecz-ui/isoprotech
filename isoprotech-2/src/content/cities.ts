@@ -53,7 +53,7 @@ export const cities: CityData[] = [
     localFaqs: [
       { q: "Werken jullie ook in de deelgemeenten van Mechelen?", a: "Ja, wij zijn actief in heel Mechelen inclusief Battel, Heffen, Leest, Walem, Hombeek en Muizen. De afstand tot ons kantoor in Antwerpen is beperkt." },
       { q: "Voeren jullie ook dakwerken uit in Mechelen, niet enkel isolatie?", a: "Zeker. Naast dakisolatie verzorgen wij ook volledige dakwerken in Mechelen: dakrenovatie, dakvernieuwing en herstellingen, steeds met 10 jaar garantie." },
-      { q: "Bieden jullie ook crepi of spuitkurk aan in Mechelen?", a: "Ja. Voor de vele jaren-60 en jaren-70 woningen in de Mechelse rand combineren wij buitengevelisolatie vaak met een afwerking in crepi of spuitkurk. Tijdens de gratis inspectie bekijken wij welke afwerking het best past bij uw gevel." },
+      { q: "Bieden jullie ook crepi, gevelbepleistering of spuitkurk aan in Mechelen?", a: "Ja. Voor de vele jaren-60 en jaren-70 woningen in de Mechelse rand combineren wij buitengevelisolatie vaak met een afwerking in crepi (gevelbepleistering) of spuitkurk. Tijdens de gratis inspectie bekijken wij welke afwerking het best past bij uw gevel." },
     ],
     seo: {
       title: "Dakwerken & Isolatie Mechelen",
@@ -201,6 +201,7 @@ export const cities: CityData[] = [
     projectRefs: [],
     localFaqs: [
       { q: "Wat is het verschil tussen spouwmuurisolatie en buitengevelisolatie?", a: "Spouwmuurisolatie vult de holle ruimte tussen twee muren, terwijl buitengevelisolatie een isolerende laag over de volledige buitenmuur aanbrengt. ISOPROTECH voert in Kontich buitengevelisolatie uit — de geschikte keuze bij massieve muren zonder spouw of wanneer de gevel ook een nieuwe afwerking nodig heeft." },
+      { q: "Bieden jullie ook crepi, spuitkurk of gevelbepleistering aan in Kontich?", a: "Ja. Naast buitengevelisolatie verzorgen wij ook de afwerking — crepi (gevelbepleistering) of spuitkurk — zodat isolatie en afwerking in dezelfde werf gebeuren. Tijdens de gratis inspectie adviseren wij welke afwerking het beste past bij uw gevel." },
     ],
     seo: {
       title: "Isolatie Kontich — Dak & Gevel",

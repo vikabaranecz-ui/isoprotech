@@ -131,7 +131,7 @@ export default function HomePage() {
               <h2 className="section-heading">Alles voor uw dak en gevel</h2>
               <p className="mt-3 text-gray-500 max-w-xl">
                 Of uw energiefactuur stijgt door een ongeïsoleerd dak, of uw gevel aan een opfrisbeurt toe is:
-                ISOPROTECH voert dakisolatie, gevelisolatie, crepi en spuitkurk uit als één vakkundig team —
+                ISOPROTECH voert dakisolatie, dakrenovatie, gevelisolatie, crepi en spuitkurk uit als één vakkundig team —
                 met gratis inspectie, vaste prijs en 10 jaar garantie per project.
               </p>
             </div>
