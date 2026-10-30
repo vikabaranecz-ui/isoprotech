@@ -60,7 +60,7 @@ export const services: Service[] = [
       { label: "Hellend dak isoleren", href: "/dakisolatie/hellend-dak" },
       { label: "Sarkingdak", href: "/dakisolatie/sarkingdak" },
     ],
-    faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "garantie"],
+    faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "warmteverlies-herkennen", "garantie"],
   },
   {
     id: "dakrenovatie",
@@ -173,14 +173,14 @@ export const services: Service[] = [
     relatedServices: ["crepi", "spuitkurk"],
     relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "gevelisolatie-prijs-m2-2026", "buitenmuur-isoleren-buitenzijde", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026"],
     landingPage: "/gevelisolatie-antwerpen",
-    faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "premies"],
+    faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "warmteverlies-herkennen", "premies"],
   },
   {
     id: "crepi",
     slug: "crepi",
     name: "Crepi",
     shortDesc: "Strakke gevelafwerking voor uw gevel — los of gecombineerd met gevelisolatie. Duurzaam, onderhoudsvriendelijk.",
-    heroDesc: "Crepi is de meest populaire gevelafwerking in België — en terecht. Het beschermt uw muren tegen vocht en weersinvloeden, geeft een strakke uitstraling en combineert uitstekend met isolatie. Crepi op uw gevel kan als losse afwerking geplaatst worden, of als crepi met isolatie bovenop buitengevelisolatie voor extra energiewinst. ISOPROTECH plaatst crepi in Antwerpen en de ruime regio — van Wilrijk en Mortsel tot Schoten, Mechelen en Kontich — met crepi-systemen die technisch correct zijn opgebouwd en jarenlang mooi blijven.",
+    heroDesc: "Crepi is de meest populaire gevelafwerking in België — ook wel gevelbepleistering genoemd — en terecht. Het beschermt uw muren tegen vocht en weersinvloeden, geeft een strakke uitstraling en combineert uitstekend met isolatie. Crepi op uw gevel kan als losse afwerking geplaatst worden, of als crepi met isolatie bovenop buitengevelisolatie voor extra energiewinst. ISOPROTECH plaatst crepi in Antwerpen en de ruime regio — van Wilrijk en Mortsel tot Schoten, Mechelen en Kontich — met crepi-systemen die technisch correct zijn opgebouwd en jarenlang mooi blijven.",
     photo: PHOTOS.crepiService,
     benefits: [
       "Strakke, moderne geveluitstraling — direct verschil zichtbaar",
