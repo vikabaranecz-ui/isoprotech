@@ -93,6 +93,24 @@ export const faqs: FaqItem[] = [
     answer: "Via telefoon (+32 465 88 27 01), WhatsApp of het contactformulier op onze website. Wij plannen een gratis inspectie ter plaatse en bezorgen u een duidelijke offerte met vaste prijs. Geen vrijblijvend rondje raden — een concrete prijs voor uw specifieke situatie.",
     category: "Algemeen",
   },
+  {
+    id: "dak-isoleren-wat-inhoudt",
+    question: "Wat houdt dak isoleren precies in?",
+    answer: "Dak isoleren betekent het aanbrengen van een isolatielaag op of in uw dakconstructie, zodat warmte in de winter binnenblijft en hitte in de zomer buiten. Bij een plat dak gebeurt dit met PIR-platen volgens het warm-dak principe, bovenop de draagstructuur. Bij een hellend dak wordt meestal tussen of onder de dakspanten geïsoleerd, of langs de buitenzijde via sarking. Welke methode het beste past, hangt af van uw daktype en de huidige staat van de dakconstructie — dat bekijken wij tijdens de gratis inspectie.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "crepi-antwerpen-waarom",
+    question: "Waarom crepi laten plaatsen in Antwerpen?",
+    answer: "Crepi is in de Antwerpse regio een populaire keuze omdat veel woningen — van rijwoningen in de stad tot jaren-60-woningen in Wilrijk, Edegem en omgeving — een gevel hebben die baat heeft bij een strakke, onderhoudsvriendelijke afwerking. ISOPROTECH plaatst crepi in Antwerpen en de ruime regio, zowel als losse gevelafwerking als gecombineerd met buitengevelisolatie voor extra energiewinst.",
+    category: "Gevelafwerking",
+  },
+  {
+    id: "spuitkurk-antwerpen-geschikt",
+    question: "Is spuitkurk geschikt voor elke gevel in Antwerpen?",
+    answer: "Spuitkurk is geschikt voor de meeste gevels in Antwerpen en omgeving, van klassieke bakstenen rijwoningen tot nieuwbouw. Omdat de coating elastisch is en bewegingen in de ondergrond opvangt, is het een goede keuze bij gevels die gevoelig zijn voor scheurvorming. ISOPROTECH past spuitkurk toe in Antwerpen, Mechelen, Schoten, Mortsel, Ekeren en de ruime regio — tijdens de gratis inspectie bekijken wij of uw gevel er geschikt voor is.",
+    category: "Gevelafwerking",
+  },
 ];
 
 export function getFaqsByIds(ids: string[]): FaqItem[] {
