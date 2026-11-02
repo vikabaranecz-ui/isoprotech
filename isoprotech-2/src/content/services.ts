@@ -60,7 +60,7 @@ export const services: Service[] = [
       { label: "Hellend dak isoleren", href: "/dakisolatie/hellend-dak" },
       { label: "Sarkingdak", href: "/dakisolatie/sarkingdak" },
     ],
-    faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "warmteverlies-herkennen", "garantie"],
+    faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "dak-isoleren-wat-inhoudt", "warmteverlies-herkennen", "garantie"],
   },
   {
     id: "dakrenovatie",
@@ -209,7 +209,7 @@ export const services: Service[] = [
     relatedServices: ["gevelisolatie", "spuitkurk"],
     relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
     landingPage: "/gevelisolatie-antwerpen",
-    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs", "crepi-met-isolatie"],
+    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs", "crepi-met-isolatie", "crepi-antwerpen-waarom"],
   },
   {
     id: "spuitkurk",
@@ -243,7 +243,7 @@ export const services: Service[] = [
     relatedServices: ["gevelisolatie", "crepi"],
     relatedBlogSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-voordelen-2026"],
     landingPage: "/gevelisolatie-antwerpen",
-    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
+    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs", "spuitkurk-antwerpen-geschikt"],
   },
   {
     id: "asbestverwijdering",
