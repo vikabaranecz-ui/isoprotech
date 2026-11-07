@@ -182,10 +182,11 @@ jobs:
             Complete the sprint fully. For SAFE FIX, QA, push the branch, open the PR, and auto-merge every safe change to main; do not end the run with safe changes only in the runner working tree. For NEEDS APPROVAL, push the branch, open the exact QA'd PR, and never merge it yourself. If analysis justifies no code/content change, still create the required NO ACTION or MONITOR weekly issue. Never finish without a weekly issue.
             Before ending, verify there are no uncommitted intended changes left in the runner and that every intended SAFE FIX is present in main or every approval-gated change is present in an open PR.
             Always create `SEO Weekly — YYYY-MM-DD — <MODE>` with Top-5 progress X/40, sprint cluster and concrete completed work.
+            Skills: `.claude/skills/` holds reviewed searchfit-seo skills (see `.claude/skills/README.md`; project rules outrank them). Use a skill only when it fits a diagnosed problem, and list in the report which skills were discovered, loaded, executed and whether their result was verified.
           claude_args: |
             --model claude-sonnet-5
             --effort high
-            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*)"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git:*),Bash(gh:*),Bash(npm:*),Bash(npx:*),Bash(python:*),Bash(python3:*),Bash(cat:*),Bash(pwd),Bash(ls:*),Skill"
 
       - name: Verify weekly SEO completion contract
         if: steps.duplicate.outputs.skip != 'true' && steps.evidence.outputs.claude_ready == 'true'
