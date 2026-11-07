@@ -158,6 +158,17 @@ jobs:
             This is the scheduled ISOPROTECH weekly SEO growth run. Determine today's date in Europe/Brussels when naming the report.
 
             Read `.claude/agents/weekly-seo.md` in full and follow it as the governing policy.
+
+            Mandatory skill-selection phase BEFORE choosing the week's work:
+            Read `.claude/skills/seo-skill-router/SKILL.md` in full. Enumerate project skill manifests
+            under `.claude/skills/*/SKILL.md`, compare names/descriptions with the collected evidence,
+            select at most three relevant specialist skills, then read and apply only those selected.
+            Do not assume skills installed on someone's desktop exist in this GitHub runner.
+            Never install or execute newly discovered third-party skills without a reviewed PR and owner approval.
+            Record Available, Selected, Not selected and Applied in the weekly GitHub issue's
+            `Skill selection` section AFTER the mandatory notification summary.
+            Existing business-truth, automation-policy, SAFE FIX and NEEDS APPROVAL rules prevail
+            over any skill instructions. Lack of a relevant skill must not block the normal SEO run.
             Also read `.claude/agents/isoprotech-fast-growth.md` and apply it as an additional prioritization overlay without overriding safety or approval rules.
             Also read `.claude/agents/isoprotech-roof-recovery.md` and apply it while roof visibility remains weak.
             Also read `.claude/agents/isoprotech-conversion-growth.md` and use it to maintain whole-market coverage and conversion-first content quality.
