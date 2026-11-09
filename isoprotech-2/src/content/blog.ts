@@ -117,7 +117,7 @@ export const blogPosts: BlogPost[] = [
       { type: "heading", content: "Crepi of spuitkurk in Antwerpen" },
       { type: "text", content: "ISOPROTECH plaatst beide afwerkingen in Antwerpen en de ruime regio, van typische jaren-60-woningen tot rijwoningen met een gevel die gevoelig is voor scheurvorming. Tijdens de gratis inspectie bekijken wij de staat van uw gevel en adviseren wij welke afwerking — crepi of spuitkurk — het beste resultaat geeft voor uw woning." },
     ],
-    relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026"],
+    relatedSlugs: ["gevelisolatie-voordelen-2026", "premies-renovatie-2026", "steenstrips-crepi-spuitkurk-vergelijking"],
     relatedServiceSlugs: ["crepi", "spuitkurk", "gevelisolatie"],
     seo: {
       title: "Crepi of Spuitkurk? Welke Afwerking Past?",
@@ -452,6 +452,39 @@ export const blogPosts: BlogPost[] = [
       description: "Wat kost dakisolatie per m² in 2026? Richtprijzen plat dak, hellend dak, materialen, premies en terugverdientijd. ISOPROTECH Antwerpen.",
     },
   },
+  {
+    id: "steenstrips-crepi-spuitkurk-vergelijking",
+    slug: "steenstrips-crepi-spuitkurk-vergelijking",
+    title: "Steenstrips, crepi of spuitkurk? Vergelijking gevelafwerking",
+    date: "2026-11-02",
+    dateDisplay: "2 november 2026",
+    category: "Gevelafwerking",
+    readTime: "6 min",
+    excerpt: "Drie populaire gevelafwerkingen naast elkaar: steenstrips, crepi en spuitkurk. Uitstraling, prijsklasse en onderhoud — welke past bij uw woning?",
+    photo: PHOTOS.gevelAntwAfter,
+    body: [
+      { type: "text", content: "Wie buitengevelisolatie overweegt, kiest ook een afwerking. ISOPROTECH plaatst drie populaire opties in Antwerpen en de ruime regio: crepi, spuitkurk en steenstrips. Elke afwerking heeft een ander uitzicht, een andere prijsklasse en andere aandachtspunten. Dit artikel zet ze naast elkaar." },
+      { type: "heading", content: "Steenstrips: het uitzicht van baksteen" },
+      { type: "text", content: "Steenstrips zijn dunne, lichte stroken die het uitzicht van een volledige baksteengevel nabootsen. Ze worden op de isolatielaag aangebracht en gevoegd zoals een echte baksteenmuur, zonder het gewicht en de dikte van traditioneel metselwerk. Steenstrips zijn een goede keuze wanneer u de klassieke baksteenuitstraling van uw woning wil behouden of nabootsen, terwijl u toch buitengevelisolatie plaatst." },
+      { type: "heading", content: "Crepi: strak en mineraal" },
+      { type: "text", content: "Crepi is een minerale pleisterafwerking met een strakke, uniforme uitstraling, beschikbaar in verschillende korrelgroottes en tientallen kleuren. Het is dampdoorlatend, beschermt de onderliggende isolatie en is van de drie afwerkingen doorgaans de meest budgetvriendelijke optie." },
+      { type: "heading", content: "Spuitkurk: elastisch en naadloos" },
+      { type: "text", content: "Spuitkurk is een elastische coating op basis van natuurlijke kurk, naadloos aangebracht en bijzonder goed bestand tegen scheuren en bewegingen in de ondergrond. Spuitkurk heeft bovendien een licht isolerend en akoestisch dempend effect." },
+      { type: "heading", content: "Prijsverschil tussen de drie afwerkingen" },
+      { type: "text", content: "Zoals we eerder uitlegden in ons overzicht van de gevelisolatieprijs per m², ligt de totaalprijs voor buitengevelisolatie met afwerking doorgaans tussen €140 en €230 per m², afhankelijk van de gekozen afwerking. Crepi is binnen die vork de meest budgetvriendelijke keuze, spuitkurk zit daar net boven, en steenstrips is doorgaans de duurste optie — logisch, want het nabootsen van een volledige baksteenstructuur vraagt meer materiaal en plaatsingstijd dan een pleister- of coatinglaag." },
+      { type: "heading", content: "Welke afwerking past bij uw woning?" },
+      { type: "text", content: "Kies steenstrips als u een klassieke baksteenuitstraling wil behouden of uw woning die uitstraling wil geven. Kies crepi als u een strakke, moderne en budgetvriendelijke afwerking zoekt. Kies spuitkurk als uw gevel gevoelig is voor scheurvorming of u een naadloze, onderhoudsarme afwerking prefereert. Veel woningen in de Antwerpse regio — van rijwoningen tot jaren-60-woningen — combineren prima met elk van de drie opties; de keuze is vooral een kwestie van uitstraling, budget en onderhoudsvoorkeur." },
+      { type: "heading", content: "Steenstrips, crepi of spuitkurk in Antwerpen" },
+      { type: "text", content: "ISOPROTECH plaatst alle drie de afwerkingen in Antwerpen en de ruime regio, steeds in combinatie met buitengevelisolatie voor maximale energiewinst. Tijdens de gratis inspectie bekijken wij uw gevel en adviseren wij welke afwerking het beste resultaat geeft voor uw woning en budget." },
+    ],
+    relatedSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-prijs-m2-2026", "gevelisolatie-voordelen-2026"],
+    relatedServiceSlugs: ["crepi", "spuitkurk", "gevelisolatie"],
+    seo: {
+      title: "Steenstrips, Crepi of Spuitkurk? Vergelijking | ISOPROTECH",
+      description: "Steenstrips, crepi of spuitkurk vergeleken: uitstraling, prijsklasse en onderhoud. Welke gevelafwerking past bij uw woning? ISOPROTECH Antwerpen.",
+    },
+  },
+
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
