@@ -52,12 +52,12 @@ jobs:
           ]
           issues.sort(key=lambda i: i.get("created_at", ""), reverse=True)
           if not issues:
-              message = "⚠️ WAT Agency SEO\\nNo weekly SEO report exists yet in GitHub."
+              message = "⚠️ WAT Agency SEO\nNo weekly SEO report exists yet in GitHub."
           else:
               issue = issues[0]
               title = issue.get("title", "")
               body = issue.get("body") or ""
-              found = re.search(r"SEO Weekly\s*[—-]\s*(\\d{4}-\\d{2}-\\d{2})", title)
+              found = re.search(r"SEO Weekly\s*[—-]\s*(\d{4}-\d{2}-\d{2})", title)
               report_date = found.group(1) if found else "unknown"
               status = title.split(" — ")[-1].strip() if " — " in title else "Review report"
               recent = "✅ Today's report" if report_date == today else "⚠️ Latest report is from " + report_date
@@ -70,7 +70,7 @@ jobs:
               ]:
                   if phrase.lower() in body.lower():
                       bullets.append(label + ": see full analysis")
-              message = "\\n".join([
+              message = "\n".join([
                   "📊 WAT AGENCY — SEO",
                   recent,
                   "Decision: " + status,
