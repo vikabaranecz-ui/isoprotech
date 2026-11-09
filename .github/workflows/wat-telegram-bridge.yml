@@ -1,0 +1,94 @@
+name: WAT Agency Telegram Bridge
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 18 * * 1"
+  push:
+    branches: [main]
+    paths: [".github/workflows/wat-telegram-bridge.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Send WAT SEO weekly report to existing ISOPROTECH and Reno Telegram chat
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${TELEGRAM_BOT_TOKEN}" ] || [ -z "${TELEGRAM_CHAT_ID}" ]; then
+            echo "::error::Shared Telegram credentials are missing in ISOPROTECH Actions secrets."
+            exit 1
+          fi
+          python3 - <<'PY'
+          import datetime
+          import json
+          import os
+          import re
+          import urllib.parse
+          import urllib.request
+          from zoneinfo import ZoneInfo
+
+          today = datetime.datetime.now(ZoneInfo("Europe/Brussels")).date().isoformat()
+          url = "https://api.github.com/repos/vikabaranecz-ui/wat-agancy-web/issues?state=all&per_page=50"
+          req = urllib.request.Request(url, headers={
+              "Accept": "application/vnd.github+json",
+              "User-Agent": "wat-telegram-bridge",
+          })
+          with urllib.request.urlopen(req, timeout=20) as response:
+              results = json.load(response)
+
+          issues = [
+              issue for issue in results
+              if "pull_request" not in issue
+              and (issue.get("title") or "").startswith("SEO Weekly")
+          ]
+          issues.sort(key=lambda i: i.get("created_at", ""), reverse=True)
+          if not issues:
+              message = "⚠️ WAT Agency SEO\\nNo weekly SEO report exists yet in GitHub."
+          else:
+              issue = issues[0]
+              title = issue.get("title", "")
+              body = issue.get("body") or ""
+              found = re.search(r"SEO Weekly\s*[—-]\s*(\\d{4}-\\d{2}-\\d{2})", title)
+              report_date = found.group(1) if found else "unknown"
+              status = title.split(" — ")[-1].strip() if " — " in title else "Review report"
+              recent = "✅ Today's report" if report_date == today else "⚠️ Latest report is from " + report_date
+              url = issue.get("html_url", "")
+              bullets = []
+              for phrase, label in [
+                  ("Keyword Planner", "Keyword Planner"),
+                  ("Search Console", "Search Console"),
+                  ("Dutch", "Dutch search visibility"),
+              ]:
+                  if phrase.lower() in body.lower():
+                      bullets.append(label + ": see full analysis")
+              message = "\\n".join([
+                  "📊 WAT AGENCY — SEO",
+                  recent,
+                  "Decision: " + status,
+                  "Report: " + url,
+                  "Site: watagencybelgium.be",
+                  "Note: WAT report only; changes require owner approval.",
+              ])
+
+          data = urllib.parse.urlencode({
+              "chat_id": os.environ["TELEGRAM_CHAT_ID"],
+              "text": message,
+              "disable_web_page_preview": "true",
+          }).encode()
+          endpoint = "https://api.telegram.org/bot" + os.environ["TELEGRAM_BOT_TOKEN"] + "/sendMessage"
+          request = urllib.request.Request(endpoint, data=data, method="POST")
+          with urllib.request.urlopen(request, timeout=20) as response:
+              result = json.load(response)
+          if not result.get("ok"):
+              raise RuntimeError("Telegram did not confirm delivery")
+          print("WAT SEO notification accepted by Telegram (recipient details redacted).")
+          PY
