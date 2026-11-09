@@ -2,9 +2,11 @@
 // City/location page — unique content per city, no thin templates
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { cities, getCityBySlug, getNearbyCities } from "@/content/cities";
 import { services } from "@/content/services";
+import { projects } from "@/content/projects";
 import { BRAND } from "@/lib/constants";
 import { localBusinessSchema, faqSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -47,6 +49,9 @@ export default function CityPage({
   if (!city) notFound();
 
   const nearby = getNearbyCities(city.id, 8);
+  const cityProjects = city.projectRefs
+    .map((ref) => projects.find((p) => p.id === ref))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const generalFaqs = [
     { question: "Bieden jullie garantie op de werken?", answer: "Ja, ISOPROTECH biedt 10 jaar garantie op alle uitgevoerde werken. Wij gebruiken uitsluitend ATG- en BENOR-gekeurde systemen." },
     { question: "Hoe vraag ik een offerte aan?", answer: "Neem contact op via telefoon, WhatsApp of ons contactformulier. Wij plannen een gratis inspectie en bezorgen u nadien een vrijblijvende offerte." },
@@ -100,6 +105,72 @@ export default function CityPage({
           {city.localContext}
         </p>
       </section>
+
+      {/* Local project proof — real completed projects in this city */}
+      {cityProjects.length > 0 && (
+        <section className="mx-auto max-w-7xl px-6 pb-12">
+          <h2 className="text-2xl font-extrabold text-teal-800 mb-8">
+            Onze projecten in {city.name}
+          </h2>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {cityProjects.map((pr) => (
+              <a
+                key={pr.id}
+                href={`/realisaties/${pr.slug}`}
+                className="group block rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-orange-200"
+              >
+                {pr.beforePhoto ? (
+                  <div className="grid grid-cols-2 gap-0.5 bg-gray-200">
+                    <div className="relative">
+                      <Image
+                        src={pr.beforePhoto.src}
+                        alt={pr.beforePhoto.alt}
+                        width={pr.beforePhoto.width}
+                        height={pr.beforePhoto.height}
+                        className="w-full h-auto object-cover"
+                        sizes="20vw"
+                      />
+                      <span className="absolute bottom-2 left-2 bg-red-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">VOOR</span>
+                    </div>
+                    <div className="relative">
+                      <Image
+                        src={pr.photo.src}
+                        alt={pr.photo.alt}
+                        width={pr.photo.width}
+                        height={pr.photo.height}
+                        className="w-full h-auto object-cover"
+                        sizes="20vw"
+                      />
+                      <span className="absolute bottom-2 right-2 bg-green-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">NA</span>
+                    </div>
+                  </div>
+                ) : (
+                  <Image
+                    src={pr.photo.src}
+                    alt={pr.photo.alt}
+                    width={pr.photo.width}
+                    height={pr.photo.height}
+                    className="w-full h-auto"
+                    sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
+                  />
+                )}
+                <div className="p-4">
+                  <h3 className="font-bold text-teal-800 text-sm mb-1 group-hover:text-orange-500 transition-colors">
+                    {pr.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">{pr.summary}</p>
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-orange-500 group-hover:gap-2 transition-all">
+                    Bekijk case study
+                    <svg className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Services grid */}
       <section className="bg-stone-100 py-16">

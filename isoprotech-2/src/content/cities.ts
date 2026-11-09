@@ -31,7 +31,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Als Antwerpse onderneming is ISOPROTECH diep geworteld in de stad. Ons kantoor in Hoboken ligt centraal voor projecten in alle districten — van de historische binnenstad tot de naoorlogse wijken in Deurne, Merksem en Borgerhout. Wij kennen de typische Antwerpse rijwoningen, herenhuizen en appartementsgebouwen en weten exact welke isolatieoplossingen bij elk type passen.",
     localContext: "Antwerpen telt veel vooroorlogse en naoorlogse woningen met ongeïsoleerde massieve muren en verouderde daken. Het Antwerpse stadsbestuur stimuleert energetische renovatie via lokale premies bovenop de Vlaamse Mijn Verbouwpremie. Buitengevelisolatie met crepi is bijzonder populair in de Antwerpse residentiële wijken omdat het de gevel moderniseert zonder de structuur aan te tasten.",
-    projectRefs: ["gevel-antwerpen-1", "gevel-antwerpen-2", "plat-dak-antwerpen"],
+    projectRefs: ["plat-dak-voor-na", "crepi-antwerpen", "gevel-before-after-1"],
     localFaqs: [
       { q: "Heb ik een vergunning nodig voor gevelisolatie in Antwerpen?", a: "Voor standaard buitengevelisolatie met crepi of spuitkurk is in de meeste gevallen geen stedenbouwkundige vergunning nodig in Antwerpen, tenzij uw woning in een beschermd stadsgezicht ligt. Wij adviseren u hierover tijdens de gratis inspectie." },
       { q: "Zijn er extra premies voor isolatie in Antwerpen stad?", a: "Naast de Vlaamse Mijn Verbouwpremie biedt de stad Antwerpen soms bijkomende ondersteuning via het Ecohuis en lokale klimaatprogramma's. Wij helpen u bij het opzoeken van de actuele mogelijkheden." },
@@ -49,7 +49,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Op zoek naar dakwerken in Mechelen? ISOPROTECH voert er regelmatig dak- en gevelprojecten uit. De stad kent een mix van historische panden in het centrum en modernere woningen in de buitenwijken zoals Battel, Heffen en Leest. Ons team combineert geregeld dakwerken met gevelisolatie voor een optimaal energetisch resultaat.",
     localContext: "Mechelen zet sterk in op klimaatneutraliteit en stimuleert bewoners actief om te isoleren. Voor dakwerken in Mechelen kiezen steeds meer eigenaars voor ISOPROTECH: van dakisolatie en dakrenovatie tot volledige dakvernieuwing. De vele jaren-60 en jaren-70 woningen in de Mechelse rand zijn bovendien ideale kandidaten voor buitengevelisolatie. Wij hebben meerdere projecten gerealiseerd waar dakwerken en gevelwerken in één fase werden uitgevoerd, wat technisch efficiënt en kostenbesparend is.",
-    projectRefs: ["dak-gevel-mechelen"],
+    projectRefs: ["crepi-mechelen"],
     localFaqs: [
       { q: "Werken jullie ook in de deelgemeenten van Mechelen?", a: "Ja, wij zijn actief in heel Mechelen inclusief Battel, Heffen, Leest, Walem, Hombeek en Muizen. De afstand tot ons kantoor in Antwerpen is beperkt." },
       { q: "Voeren jullie ook dakwerken uit in Mechelen, niet enkel isolatie?", a: "Zeker. Naast dakisolatie verzorgen wij ook volledige dakwerken in Mechelen: dakrenovatie, dakvernieuwing en herstellingen, steeds met 10 jaar garantie." },
@@ -68,7 +68,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Wilrijk is één van de Antwerpse districten waar wij het meest actief zijn. De wijk kent veel vrijstaande en halfopen bebouwing uit de jaren 50–70 — woningen die bijzonder veel baat hebben bij dakisolatie en buitengevelisolatie.",
     localContext: "De typische Wilrijkse woning heeft een hellend dak met onvoldoende isolatie en massieve gevelmuren zonder spouw. Buitengevelisolatie met crepi is hier de meest effectieve oplossing: het verbetert zowel de isolatiewaarde als de uitstraling, zonder verlies van binnenruimte. Wij hebben in Wilrijk meerdere combinatieprojecten (dak + gevel) succesvol afgerond.",
-    projectRefs: ["dak-gevel-wilrijk"],
+    projectRefs: [],
     localFaqs: [
       { q: "Hoeveel kost gevelisolatie voor een typische woning in Wilrijk?", a: "Een gemiddelde halfopen woning in Wilrijk met circa 100 m² geveloppervlak kost indicatief tussen 9.000 en 16.000 euro voor buitengevelisolatie met crepi, afhankelijk van de staat van de gevel en de gekozen materialen. Gebruik onze calculator voor een nauwkeurigere schatting." },
     ],
@@ -85,7 +85,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "In Schoten realiseren wij regelmatig gevelisolatie- en crepiprojecten. De gemeente heeft een groot aandeel vrijstaande gezinswoningen met ruime gevels die ideaal zijn voor buitenisolatie.",
     localContext: "Schoten telt veel woningen uit de jaren 60–80 met niet-geïsoleerde spouwmuren of massieve gevels. Crepi na isolatiewerken is hier een populaire keuze — het geeft de woning een frisse uitstraling en beschermt de nieuwe isolatielaag. Ons team heeft in Schoten meerdere gevels afgewerkt met zowel crepi als spuitkurk.",
-    projectRefs: ["crepi-schoten"],
+    projectRefs: [],
     localFaqs: [
       { q: "Kan ik in Schoten spuitkurk combineren met gevelisolatie?", a: "Ja, spuitkurk is een uitstekende afwerking over gevelisolatie. Het is naadloos, elastisch en beschermt de isolatielaag. Wij passen dit regelmatig toe in Schoten." },
     ],
@@ -102,7 +102,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Mortsel ligt op korte afstand van ons kantoor en is een gemeente waar wij uitgebreide ervaring hebben opgebouwd met gevelafwerkingen. De compacte stadskern met aaneengesloten rijwoningen vraagt om oplossingen die zowel technisch correct als esthetisch verantwoord zijn.",
     localContext: "In Mortsel zien we veel rijwoningen met smalle gevels waar spuitkurk een praktische keuze is — de naadloze afwerking werkt goed op kleine oppervlakken en rond moeilijke details. Wij hebben hier meerdere gevelprojecten afgerond met zichtbaar resultaat.",
-    projectRefs: ["spuitkurk-mortsel"],
+    projectRefs: [],
     localFaqs: [
       { q: "Is spuitkurk geschikt voor een rijwoning in Mortsel?", a: "Ja, spuitkurk is bijzonder geschikt voor rijwoningen. De naadloze toepassing past goed bij smalle gevels en biedt een elastische, scheurwerende afwerking. Wij hebben hier ervaring mee in Mortsel." },
     ],
@@ -119,7 +119,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Ekeren is een Antwerps district met veel gezinswoningen in een groene omgeving. Wij voeren hier regelmatig gevelisolatie uit, vaak gecombineerd met een nieuwe crepi-afwerking die de woning een moderne uitstraling geeft.",
     localContext: "De woningen in Ekeren zijn vaak ruim opgezet met relatief grote geveloppervlakken. Dit maakt buitengevelisolatie bijzonder kosteneffectief — het bespaarde oppervlak is groot, dus de terugverdientijd is kort. Wij hebben in Ekeren meerdere projecten gerealiseerd met duurzame crepi-afwerking.",
-    projectRefs: ["gevel-ekeren"],
+    projectRefs: [],
     localFaqs: [],
     seo: {
       title: "Gevelisolatie Ekeren — Crepi & Isolatie",
@@ -134,7 +134,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Schilde staat bekend om zijn villawijken en ruime woningen. ISOPROTECH voert hier regelmatig gecombineerde dak- en gevelprojecten uit, waarbij de schaal van de woningen een doordachte aanpak vereist.",
     localContext: "De vrijstaande woningen in Schilde hebben doorgaans zowel grote dakoppervlakken als ruime gevels. Een geïntegreerde aanpak — dakisolatie gecombineerd met gevelisolatie — levert hier het grootste energetische voordeel op. Wij hebben in Schilde succesvolle totaalprojecten gerealiseerd.",
-    projectRefs: ["dak-gevel-schilde"],
+    projectRefs: ["crepi-schilde"],
     localFaqs: [],
     seo: {
       title: "Dak- & Gevelisolatie Schilde",
@@ -167,6 +167,7 @@ export const cities: CityData[] = [
     projectRefs: [],
     localFaqs: [
       { q: "Doen jullie ook spouwmuurisolatie in Kapellen?", a: "Nee, ISOPROTECH is gespecialiseerd in buitengevelisolatie met crepi, spuitkurk of steenstrips. Buitengevelisolatie isoleert de volledige buitenmuur zonder dat u binnenruimte verliest, en is vaak de betere optie bij massieve muren zonder spouw. Tijdens de gratis inspectie bekijken wij wat voor uw woning in Kapellen van toepassing is." },
+      { q: "Voeren jullie ook dakwerken uit in Kapellen, niet enkel dakisolatie?", a: "Zeker. Naast dakisolatie en asbestverwijdering verzorgen wij in Kapellen ook dakrenovatie, dakkapellen en herstellingen, steeds met gratis inspectie en 10 jaar garantie." },
     ],
     seo: {
       title: "Dakisolatie & Gevelwerken Kapellen",
@@ -181,7 +182,7 @@ export const cities: CityData[] = [
     province: "Antwerpen",
     intro: "Edegem grenst direct aan ons werkgebied en is een gemeente waar wij snel ter plaatse zijn voor inspectie en uitvoering. De typische Edegemse halfopen en gesloten bebouwing leent zich uitstekend voor buitengevelisolatie.",
     localContext: "Veel woningen in Edegem dateren uit de jaren 50–70 en zijn gebouwd met massieve muren zonder isolatie. Buitengevelisolatie met crepi is hier de meest logische oplossing: de woning wint aan comfort, uitstraling en waarde, zonder verlies van binnenruimte. Naast gevelwerken voeren wij in Edegem ook volledige dakwerken uit — zo renoveerden wij recent een volledig hellend dak van een vrijstaande woning, inclusief nieuwe dakpannen en isolatie.",
-    projectRefs: [],
+    projectRefs: ["hellend-dak-edegem-1"],
     localFaqs: [
       { q: "Voeren jullie ook dakwerken uit in Edegem, niet enkel gevelisolatie?", a: "Zeker. Naast buitengevelisolatie verzorgen wij in Edegem ook dakrenovatie en dakisolatie, van hellend tot plat dak — inclusief een recent volledig vernieuwd hellend dak bij een vrijstaande woning, met nieuwe dakpannen en isolatie en 10 jaar garantie." },
     ],
@@ -202,6 +203,7 @@ export const cities: CityData[] = [
     localFaqs: [
       { q: "Wat is het verschil tussen spouwmuurisolatie en buitengevelisolatie?", a: "Spouwmuurisolatie vult de holle ruimte tussen twee muren, terwijl buitengevelisolatie een isolerende laag over de volledige buitenmuur aanbrengt. ISOPROTECH voert in Kontich buitengevelisolatie uit — de geschikte keuze bij massieve muren zonder spouw of wanneer de gevel ook een nieuwe afwerking nodig heeft." },
       { q: "Bieden jullie ook crepi, spuitkurk of gevelbepleistering aan in Kontich?", a: "Ja. Naast buitengevelisolatie verzorgen wij ook de afwerking — crepi (gevelbepleistering) of spuitkurk — zodat isolatie en afwerking in dezelfde werf gebeuren. Tijdens de gratis inspectie adviseren wij welke afwerking het beste past bij uw gevel." },
+      { q: "Voeren jullie ook dakwerken uit in Kontich, niet enkel dakisolatie?", a: "Zeker. Naast dakisolatie verzorgen wij in Kontich ook bredere dakwerken: dakrenovatie, dakkapellen en herstellingen, steeds met gratis inspectie en 10 jaar garantie." },
     ],
     seo: {
       title: "Isolatie Kontich — Dak & Gevel",

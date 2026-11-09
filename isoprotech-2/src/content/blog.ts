@@ -104,6 +104,8 @@ export const blogPosts: BlogPost[] = [
     photo: PHOTOS.crepiSchilde,
     body: [
       { type: "text", content: "Crepi en spuitkurk zijn beide populaire gevelafwerkingen in België. Ze worden vaak gecombineerd met buitengevelisolatie en geven uw woning een verzorgde, moderne uitstraling. Maar welke past het best bij uw situatie?" },
+      { type: "heading", content: "Spuitkurk of crepi: kort antwoord" },
+      { type: "text", content: "Twijfelt u tussen spuitkurk of crepi? Kies crepi wanneer u een strakke, uniforme gevel wilt tegen een competitieve prijs. Kies spuitkurk wanneer uw gevel gevoelig is voor scheurvorming of wanneer u een naadloze, elastische afwerking prefereert. Beide zijn uitstekende afwerkingen over buitengevelisolatie — het verschil zit vooral in uitstraling, scheurbestendigheid en onderhoud, zoals hieronder toegelicht." },
       { type: "heading", content: "Crepi: strak en mineraal" },
       { type: "text", content: "Crepi is een minerale pleisterafwerking met een strakke, uniforme uitstraling. Het is beschikbaar in verschillende korrelgroottes en structuren — van fijn tot grof. Crepi is dampdoorlatend, beschermt de onderliggende isolatie en is relatief budgetvriendelijk." },
       { type: "heading", content: "Spuitkurk: elastisch en naadloos" },
