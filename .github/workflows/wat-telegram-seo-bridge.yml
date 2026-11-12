@@ -1,0 +1,86 @@
+name: WAT Telegram SEO Report Bridge
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 14 * * 1"
+      timezone: "Europe/Brussels"
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - name: Forward WAT weekly SEO issue to established ISO/Reno Telegram chat
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          from datetime import datetime
+          from urllib.error import HTTPError, URLError
+          from zoneinfo import ZoneInfo
+
+          bot = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+          chat = os.getenv("TELEGRAM_CHAT_ID", "").strip()
+          if not bot or not chat:
+              raise SystemExit("Existing ISO Telegram secrets are not configured")
+          today = datetime.now(ZoneInfo("Europe/Brussels")).date().isoformat()
+          run_url = ("https://github.com/" + os.environ["GITHUB_REPOSITORY"]
+                     + "/actions/runs/" + os.environ.get("GITHUB_RUN_ID", ""))
+          api = "https://api.github.com/repos/vikabaranecz-ui/wat-agancy-web/issues?state=all&per_page=100"
+          headers = {"Accept": "application/vnd.github+json", "User-Agent": "wat-seo-telegram-bridge"}
+          issue = None
+          error = None
+          try:
+              with urllib.request.urlopen(urllib.request.Request(api, headers=headers), timeout=20) as resp:
+                  issues = json.load(resp)
+              matches = [i for i in issues if not i.get("pull_request") and
+                         (i.get("title") or "").startswith("SEO Weekly — ")]
+              matches.sort(key=lambda i: i.get("created_at") or "", reverse=True)
+              issue = matches[0] if matches else None
+          except (HTTPError, URLError, ValueError) as exc:
+              error = type(exc).__name__
+          if error:
+              message = ("⚠️ WAT Agency SEO — " + today +
+                         "\nGitHub report lookup failed (" + error + "). Check WAT repo access." +
+                         "\nStatus: not verified; no site publication claimed.\n" + run_url)
+          elif not issue:
+              message = ("⚠️ WAT Agency SEO — " + today +
+                         "\nNo weekly SEO issue found. Check WAT workflow and GSC/Claude connections." +
+                         "\nNo site publication claimed.\n" + run_url)
+          else:
+              title = issue.get("title") or ""
+              report_date = title.split(" — ")[1] if " — " in title else "unknown"
+              mode = title.split(" — ")[2] if len(title.split(" — ")) > 2 else "UNKNOWN"
+              body = issue.get("body") or ""
+              excerpt = ""
+              marker = "## 13. Підсумок для власника (українською)"
+              if marker in body:
+                  excerpt = body.split(marker, 1)[1].split("\n---", 1)[0].strip()
+              elif "## Коротко українською" in body:
+                  excerpt = body.split("## Коротко українською", 1)[1].split("\n## ", 1)[0].strip()
+              excerpt = excerpt.replace("**", "").replace("`", "")[:1200]
+              current = report_date == today
+              message = "\n".join([
+                  "📈 WAT Agency SEO — " + today,
+                  ("✅ Today's report" if current else "⚠️ Latest report is " + report_date + " — no new report yet"),
+                  "Status: " + mode,
+                  "Site changes: only if independently confirmed merged; check PR links.",
+                  excerpt or "Review the report for indexing, keyword research and next action.",
+                  "Report: " + (issue.get("html_url") or "unavailable"),
+              ])
+          data = urllib.parse.urlencode({"chat_id": chat, "text": message[:3900],
+                                         "disable_web_page_preview": "true"}).encode()
+          req = urllib.request.Request("https://api.telegram.org/bot" + bot + "/sendMessage", data=data)
+          with urllib.request.urlopen(req, timeout=20) as resp:
+              result = json.load(resp)
+          if not result.get("ok"):
+              raise SystemExit("Telegram did not confirm delivery")
+          print("WAT report bridge delivered to established ISO Telegram chat")
+          PY
