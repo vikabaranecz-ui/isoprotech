@@ -80,6 +80,15 @@ jobs:
         if: steps.duplicate.outputs.skip != 'true'
         run: python isoprotech-2/scripts/seo_weekly_collect_service.py
 
+      - name: Inspect Google-indexed versions of canonical pages (read-only)
+        if: steps.duplicate.outputs.skip != 'true'
+        continue-on-error: true
+        env:
+          SEO_BASE_URL: https://www.isoprotech.be
+          GSC_SITE_URL: sc-domain:isoprotech.be
+          GOOGLE_ADC_JSON: ${{ secrets.GOOGLE_ADC_JSON }}
+        run: python isoprotech-2/scripts/seo_indexing_audit.py
+
       - name: Validate SEO evidence before paid Claude run
         if: steps.duplicate.outputs.skip != 'true'
         id: evidence
@@ -132,6 +141,7 @@ jobs:
           path: |
             seo-weekly-context.json
             seo-weekly-context-compact.json
+            seo-indexing-audit.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -161,6 +171,7 @@ jobs:
             Also read `.claude/agents/isoprotech-fast-growth.md` and apply it as an additional prioritization overlay without overriding safety or approval rules.
             Also read `.claude/agents/isoprotech-roof-recovery.md` and apply it while roof visibility remains weak.
             Also read `.claude/agents/isoprotech-conversion-growth.md` and use it to maintain whole-market coverage and conversion-first content quality.
+            Read `seo-indexing-audit.json` if present; distinguish Google index exclusions from intentionally redirected URLs. Prioritize verified non-indexed canonical pages and report exact fix/PR. Robots, canonical, redirects and sitemap-wide indexing changes ALWAYS require owner approval, not SAFE FIX auto-merge.
             Read `isoprotech-2/seo/business_profile.json`, `isoprotech-2/seo/growth_strategy.json`, `isoprotech-2/seo/keyword_targets.json`, and `seo-weekly-context-compact.json`.
 
             The business KPI is 40 commercially relevant queries in Google Top 5 by 2026-12-31. Treat this as the operating target, not a guaranteed result.
