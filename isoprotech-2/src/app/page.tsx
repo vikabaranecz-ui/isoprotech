@@ -176,6 +176,16 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+          <p className="mt-6 text-sm text-gray-500 text-center">
+            Op zoek naar lokale referenties en prijsindicaties?{" "}
+            <Link href="/dakisolatie-antwerpen" className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              Dakisolatie in Antwerpen
+            </Link>{" "}
+            of{" "}
+            <Link href="/gevelisolatie-antwerpen" className="font-semibold text-teal-700 underline underline-offset-2 hover:text-orange-500 transition-colors">
+              gevelisolatie in Antwerpen
+            </Link>.
+          </p>
         </div>
       </section>
 
