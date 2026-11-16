@@ -364,6 +364,7 @@ export default function DakisolatieLanding() {
             {[
               { photo: PHOTOS.platDak, title: "Plat dak isolatie + renovatie", href: "/dakisolatie/plat-dak", desc: "Warm-dak principe: PIR-platen op de constructie + nieuwe waterdichte bedekking (EPDM, bitumen of PVC-folie). Waterdicht voor 25–30 jaar." },
               { photo: PHOTOS.hellendDakEdegemAfter, title: "Hellend dak renovatie + isolatie", href: "/dakisolatie/hellend-dak", desc: "Volledige renovatie van hellend dak: nieuwe isolatie, onderdak en dakpannen of leien naar keuze. Inclusief dakgoten en details." },
+              { photo: PHOTOS.hellendDakEdegemAfter1, title: "Sarkingdak — isoleren langs buiten", href: "/dakisolatie/sarkingdak", desc: "Hellend dak isoleren langs de buitenzijde, zonder de binnenruimte als uitgangspunt te nemen. Geschikt wanneer een doorlopende isolatielaag gewenst is." },
               { photo: PHOTOS.dakSchouw, title: "Details en afwerking", href: undefined, desc: "Schouwkappen, loodaansluitingen, dakramen en nokken — elk detail waterdicht afgewerkt. Geen concessies aan de periferie." },
               { photo: PHOTOS.dakkapellen, title: "Dakkapellen", href: undefined, desc: "Extra leefruimte en daglicht op de bovenverdieping. Volledig geïntegreerd in uw bestaand dakstructuur, inclusief isolatie." },
             ].map((s) => (

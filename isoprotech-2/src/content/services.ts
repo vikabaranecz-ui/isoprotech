@@ -92,6 +92,11 @@ export const services: Service[] = [
     relatedServices: ["dakwerken", "dakisolatie", "dakkapellen"],
     relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakrenovatie-plat-dak-2026", "dakisolatie-prijs-m2-2026", "premies-renovatie-2026"],
     landingPage: "/dakisolatie-antwerpen",
+    subPages: [
+      { label: "Plat dak isoleren", href: "/dakisolatie/plat-dak" },
+      { label: "Hellend dak isoleren", href: "/dakisolatie/hellend-dak" },
+      { label: "Sarkingdak", href: "/dakisolatie/sarkingdak" },
+    ],
     faqIds: ["dakrenovatie-duur", "garantie"],
   },
   {
@@ -148,6 +153,11 @@ export const services: Service[] = [
     relatedServices: ["dakisolatie", "dakrenovatie", "dakkapellen"],
     relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakrenovatie-plat-dak-2026", "premies-renovatie-2026"],
     landingPage: "/dakisolatie-antwerpen",
+    subPages: [
+      { label: "Plat dak isoleren", href: "/dakisolatie/plat-dak" },
+      { label: "Hellend dak isoleren", href: "/dakisolatie/hellend-dak" },
+      { label: "Sarkingdak", href: "/dakisolatie/sarkingdak" },
+    ],
     faqIds: ["dakisolatie-besparing", "dakrenovatie-duur", "garantie"],
   },
   {
