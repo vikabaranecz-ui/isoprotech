@@ -5,7 +5,7 @@ Apply this overlay together with the normal weekly SEO policy and fast-growth ov
 Current business priority: roof-work visibility is too weak relative to competitors, so increase execution intensity without lowering quality.
 
 ## Operating cadence
-- The SEO engine runs twice per week.
+- The scheduled SEO engine runs weekly on Monday; additional runs only happen when manually triggered.
 - At least one sprint per week must be a roof cluster sprint while roof visibility remains weak.
 - The second sprint may choose the strongest near-win across roof or facade, but roof wins ties.
 - Do not repeat the same micro-fix across two runs.

@@ -38,6 +38,8 @@ Track and report:
 - Top 10 count
 - Top 20 count
 - target queries in the sprint and their current positions
+- organic clicks/impressions to key roof/facade pages, current 28 days versus previous 28 days
+- attributed organic enquiries, form completions and qualified leads **only when verified analytics exists**; otherwise explicitly report NOT MEASURED, never zero, and specify the missing tracking event/connection
 
 Prioritize queries closest to a meaningful threshold when the business value is high (for example positions 6-12), while also building missing coverage for strategic clusters that have no suitable page.
 
@@ -59,6 +61,21 @@ Examples of valid seasonal/problem directions include:
 - summer: attic or upper floor too hot, overheating under the roof, roof insulation and summer comfort.
 
 For subsidies, regulations, energy prices, years, savings or legal/financial facts: verify a current authoritative source before changing content. Never simply replace an old year with a new one.
+
+## Mandatory indexing and live-deployment diagnosis
+Before calling authority/backlinks the cause, always inspect these five URLs:
+- `/dakisolatie/plat-dak`
+- `/dakisolatie/hellend-dak`
+- `/dakisolatie/sarkingdak`
+- `/dakisolatie-antwerpen`
+- `/gevelisolatie-antwerpen`
+
+Read `seo-indexing-audit.json` and the compact site's HTML audit. URL Inspection reports Google's **indexed version**, while `live_check` shows independent live HTTP/redirect/canonical/noindex evidence. For each priority URL report: live HTTP status and canonical/noindex; Google coverage/index verdict and Google-selected canonical; whether technical blockers are confirmed; the exact next action and checkpoint date.
+Investigate any `priority_urls_missing_from_discovery`: missing sitemap or weak URL discovery is not solved by backlinks.
+"Unknown to Google", "Discovered — currently not indexed", "Crawled — currently not indexed", and Google choosing a different canonical are distinct statuses. None independently proves a backlink/authority problem. If inspection or live fetching fails, label it UNVERIFIED. Never fabricate an indexing verdict.
+For confirmed healthy but unindexed canonical pages, instruct the owner to use Search Console > URL Inspection > Test live URL > Request indexing. The public Google Indexing API is NOT a general-purpose submission API for these service pages; do not claim automatic index submissions or guarantee Google indexing.
+Do not rewrite canonicals, redirect/merge landing pages, or shift keyword targeting between home/city/service URLs without URL-level GSC evidence and owner-approved PR.
+Only recommend earned, relevant local authority links after ruling out technical, discovery, canonical and intent factors; never recommend bulk purchased or spammy backlinks.
 
 ## Ranking diagnosis
 Before acting, determine the likely bottleneck for the chosen cluster:
@@ -177,13 +194,14 @@ Start with exactly this block. Result/attention/published text must be concise U
 - Published: <None OR what was merged to main, including PR number>
 ```
 
-Then add a compact evidence section, maximum about 2,500 characters total:
+Then add a compact evidence section (aim for ~2,500 characters without omitting critical indexing or measurement facts):
 1. Scoreboard: Top3 / Top5 / Top10 / Top20.
 2. Sprint target queries + current positions.
 3. Diagnosed bottleneck.
 4. Concrete work completed/prepared.
 5. Expected ranking role and what will be checked next.
-6. Links.
+6. Five priority URLs: live status, Google verdict, reason/evidence, owner action and dated checkpoint (or UNVERIFIED).
+7. Organic landing-page clicks, verified conversions or NOT MEASURED, and links.
 
 No raw JSON, no keyword dumps, no generic SEO lecture.
 
