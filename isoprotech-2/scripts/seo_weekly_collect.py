@@ -321,6 +321,17 @@ def classify_keyword(text, profile):
         return "EXCLUDE", "purchase_or_DIY_intent"
     if any(term.lower() in q for term in not_offered):
         return "EXCLUDE", "service_not_offered"
+    # Prevent product-shopping and unoffered trades from hijacking SEO content.
+    # "PIR dakisolatie" is a relevant service concept; "PIR platen" is a product.
+    if any(word in q for word in (
+        "kelder", "kruipruimte", "vloer isoleren", "zoldervloer", "chape",
+        "isolatieplaat", "isolatieplaten", "isolatie platen", "pir plaat",
+        "pir platen", "eps plaat", "eps platen", "dakisolatie platen",
+        "pir-plaat", "eps-plaat", "eps parels", "isolatieparels",
+        "platen kopen", "isolatierol", "materiaal kopen", "bouwmarkt",
+        "isolatiefolie kopen"
+    )):
+        return "EXCLUDE", "nonservice_or_material_shopping_intent"
 
     comparison_markers = [" vs ", " of ", "beste ", "welke ", "verschil"]
     if any(term.lower() in q for term in excluded_materials) and not any(m in q for m in comparison_markers):
