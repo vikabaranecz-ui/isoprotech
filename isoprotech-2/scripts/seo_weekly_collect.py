@@ -392,6 +392,66 @@ def collect_google_ads(access_token, profile):
     }
 
 
+def build_weekly_keyword_seeds(gsc, profile, limit=20, as_of=None):
+    """Mix stable service seeds with GSC demand and rotating strategic targets."""
+    reference = as_of or date.today()
+    seen = set()
+    seeds = []
+
+    def append(query):
+        query = str(query or "").strip()
+        if not query or query.casefold() in seen or len(seeds) >= limit:
+            return
+        if "isoprotech" in query.casefold():
+            return
+        classification, _ = classify_keyword(query, profile)
+        if classification == "EXCLUDE":
+            return
+        seen.add(query.casefold())
+        seeds.append(query)
+
+    for query in SEEDS:
+        append(query)
+
+    rows = (gsc or {}).get("current_queries", []) if isinstance(gsc, dict) else []
+    # Real recent impressions with commercial relevance trump speculative idea lists.
+    eligible = [r for r in rows
+                if (r.get("impressions") or 0) >= 5
+                and classify_keyword(str(r.get("query", "")), profile)[0] == "KEEP"]
+    eligible.sort(key=lambda r: (4 <= (r.get("position") or 999) <= 20,
+                                 r.get("impressions") or 0), reverse=True)
+    for row in eligible[:8]:
+        append(row.get("query"))
+
+    targets_path = Path("isoprotech-2/seo/keyword_targets.json")
+    if targets_path.exists():
+        target_rows = json.loads(targets_path.read_text(encoding="utf-8")).get("targets", [])
+        # Rotate the strategic seeds weekly: the whole KPI set remains eligible.
+        targets = [t.get("query") for t in target_rows if t.get("query")]
+        offset = (reference.isocalendar().week * 7) % max(1, len(targets))
+        for query in targets[offset:] + targets[:offset]:
+            append(query)
+
+    seasonal = {
+        12: ["dakisolatie warmteverlies", "gevelisolatie koude muren"],
+        1: ["dakisolatie warmteverlies", "gevelisolatie koude muren"],
+        2: ["dakisolatie warmteverlies", "gevelisolatie koude muren"],
+        3: ["dakisolatie prijs antwerpen", "gevelisolatie premie"],
+        4: ["dakisolatie prijs antwerpen", "gevelisolatie crepi"],
+        5: ["warmte zolder dakisolatie", "gevelisolatie crepi"],
+        6: ["warmte zolder dakisolatie", "dak isoleren langs buiten"],
+        7: ["warmte zolder dakisolatie", "dak isoleren langs buiten"],
+        8: ["warmte zolder dakisolatie", "dak isoleren langs buiten"],
+        9: ["dakisolatie warmteverlies", "gevelisolatie koude muren"],
+        10: ["dakisolatie warmteverlies", "gevelisolatie koude muren"],
+        11: ["dakisolatie warmteverlies", "gevelisolatie koude muren"],
+    }
+    # Additional angles only if fewer than 20 eligible GSC/strategic seeds exist.
+    for query in seasonal.get(reference.month, []):
+        append(query)
+    return seeds
+
+
 def main():
     profile = load_profile()
     access_token, token_error = get_google_access_token()
@@ -414,7 +474,10 @@ def main():
         except Exception as exc:
             output["gsc"] = {"error": str(exc)}
         try:
+            SEEDS[:] = build_weekly_keyword_seeds(output.get("gsc"), profile)
             output["google_ads"] = collect_google_ads(access_token, profile)
+            if isinstance(output["google_ads"], dict):
+                output["google_ads"]["seed_provenance"] = "Core services + current GSC query impressions + rotating KPI targets (up to 20)"
         except Exception as exc:
             output["google_ads"] = {"error": str(exc)}
     else:
