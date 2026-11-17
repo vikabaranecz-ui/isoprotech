@@ -176,7 +176,7 @@ def compact_ads_scope(scope):
 
 
 def compact_ads(ads):
-    if not isinstance(ads, dict) or ads.get("error"):
+    if not isinstance(ads, dict) or (ads.get("error") and "national" not in ads):
         return ads
 
     # Backward compatibility with older raw artifacts that contain one geo only.
@@ -200,12 +200,19 @@ def compact_ads(ads):
     usable = [r for r in comparisons if r.get("classifier") != "EXCLUDE"]
     return {
         "warning": ads.get("warning"),
+        "error": ads.get("error"),
+        "seed_provenance": ads.get("seed_provenance"),
         "geo_priority_rule": ads.get("geo_priority_rule"),
         "seeds": ads.get("seeds"),
         "language": ads.get("language"),
         "local": compact_ads_scope(ads.get("local")),
         "national": compact_ads_scope(ads.get("national")),
         "local_vs_national_top_local": top_rows(usable, "local_avg_monthly_searches", 50),
+        "local_trending_3m": sorted(
+            [r for r in usable if isinstance(r.get("local_trend_3m_vs_prior_3m_pct"), (int, float))
+             and num(r.get("local_avg_monthly_searches")) >= 10],
+            key=lambda r: (r["local_trend_3m_vs_prior_3m_pct"], r["local_avg_monthly_searches"]), reverse=True
+        )[:40],
         "local_vs_national_top_national_context": top_rows(usable, "national_avg_monthly_searches", 30),
         "note": (
             "Local volume is the primary Keyword Planner signal for service-area prioritization. "
