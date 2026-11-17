@@ -37,6 +37,17 @@ class DemandTests(unittest.TestCase):
         h=self.ads._search_trend({"monthlySearchVolumes":[]})
         self.assertIsNone(h["trend_3m_vs_prior_3m_pct"])
 
+    def test_excludes_material_and_unoffered_insulation_from_page_topics(self):
+        profile={"services":{"dakisolatie":{"offered":True,"methods":["PIR","sarkingdak","dakisolatie"]},
+                             "gevelisolatie":{"offered":True,"methods":["EPS","crepi","gevelisolatie"]}},
+                 "not_offered":["vloerisolatie"],"excluded_materials_as_service":[],
+                 "purchase_intent_exclusions":[]}
+        for kw in ("pir platen", "pir dakisolatie platen", "pir wandisolatieplaten",
+                   "eps parels", "kelder plafond isoleren", "kruipruimte isolatie"):
+            self.assertEqual(self.collector.classify_keyword(kw,profile)[0],"EXCLUDE",kw)
+        for kw in ("dakisolatie", "sarkingdak", "crepi antwerpen", "gevelisolatie"):
+            self.assertEqual(self.collector.classify_keyword(kw,profile)[0],"KEEP",kw)
+
     def test_weekly_seeds_contain_real_gsc_and_reject_unoffered(self):
         profile={
             "services":{"dakisolatie":{"offered":True,"methods":["sarking","dakisolatie"]},
