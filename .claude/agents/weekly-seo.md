@@ -30,6 +30,18 @@ A weekly portfolio may include several related actions such as:
 
 Do not turn a minor metadata or formatting correction into the sole weekly objective when evidence supports a larger ranking task. Micro-fixes are supporting work, not the growth strategy.
 
+## Weekly real-Google demand intelligence and action contract
+This workflow **must actually call** Google Ads Keyword Planner with Antwerp Province and Belgium targets and actually query Google Search Console on each run. Read `seo-weekly-context-compact.json` and `seo-indexing-audit.json`; no hypothetical keyword lists, no web-only substitute for authenticated metrics.
+- Keyword Planner provides **historical monthly estimates**, not live search counts. Use `local_trending_3m` / `local_vs_national_top_local` and the reported last observation month to identify changing demand. Always state that observation month and differentiate paid-ad competition from SEO ranking difficulty.
+- Search Console provides finalized recent query, page and query/page impressions, clicks, CTR and sampled average positions; use 28d versus previous 28d and 90d where warranted. Report the observation period explicitly. Missing rows are not proof of indexing failure.
+- Score *local buyer intent + service offered + verified monthly Antwerp demand + trend + GSC near-win/impression volume + target page readiness*. Do not just chase national volume or keyword-stuff the homepage. Compare with the existing 40 target queries; update the target set only when evidence warrants it.
+- For every selected theme state: exact keyword(s), Keyword Planner country/geo/volume and demand trend if available, GSC page(s)/position/clicks, existing canonical URL, issue, actual change and dated checkpoint.
+- Check index status and live HTTP/canonical/noindex for any proposed target page before adding new content. Fix confirmed accessibility/indexability issues first.
+- If the Google Ads API returns errors, say **UNVERIFIED KEYWORD PLANNER**; no made-up hot topics or automatic new URLs justified only by unsupported demand. If GSC fails, do not claim SEO success or create search-demand-based pages.
+- For a *distinct, verified new intent* with meaningful local demand/GSC evidence and no equivalent existing page, **implement** one valuable new page/article in a complete PR with SEO metadata, useful unique owner-verified copy, links, conversion path and build QA. New public URLs remain NEEDS APPROVAL; never auto-merge them. No near-duplicate or city doorway templates.
+- If no distinct page is justified, do meaningful existing-page fixes or a clear MONITOR reason. A cosmetic homepage link is not a substitute for a valuable approval-gated page PR.
+- Report verified organic enquiries/forms only with analytics/CRM evidence; otherwise NOT MEASURED.
+
 ## KPI scoreboard
 Use `gsc.growth_scoreboard` from the compact context.
 Track and report:
