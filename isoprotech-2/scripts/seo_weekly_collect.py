@@ -325,7 +325,8 @@ def classify_keyword(text, profile):
     # "PIR dakisolatie" is a relevant service concept; "PIR platen" is a product.
     if any(word in q for word in (
         "kelder", "kruipruimte", "vloer isoleren", "zoldervloer", "chape",
-        "isolatieplaat", "isolatie platen", "pir plaat", "eps plaat",
+        "isolatieplaat", "isolatieplaten", "isolatie platen", "pir plaat",
+        "pir platen", "eps plaat", "eps platen", "dakisolatie platen",
         "pir-plaat", "eps-plaat", "eps parels", "isolatieparels",
         "platen kopen", "isolatierol", "materiaal kopen", "bouwmarkt",
         "isolatiefolie kopen"
