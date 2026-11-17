@@ -101,6 +101,33 @@ def _resolve_local_geo(access_token, collector):
     return chosen
 
 
+def _search_trend(metrics):
+    """Historical Google Ads monthly series, not live/current-day searches."""
+    months = ("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+              "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER")
+    vals = []
+    for row in metrics.get("monthlySearchVolumes", []) or []:
+        try:
+            month = row.get("month")
+            month_num = int(month) if isinstance(month, int) else months.index(str(month).upper()) + 1
+            year = int(row.get("year"))
+            searches = row.get("monthlySearches")
+            if year > 2000 and 1 <= month_num <= 12 and searches is not None:
+                vals.append({"year": year, "month": month_num, "searches": int(searches)})
+        except (TypeError, ValueError):
+            continue
+    vals.sort(key=lambda r: (r["year"], r["month"]))
+    recent = vals[-3:]
+    prior = vals[-6:-3]
+    avg_recent = round(sum(v["searches"] for v in recent)/3, 1) if len(recent) == 3 else None
+    avg_prior = round(sum(v["searches"] for v in prior)/3, 1) if len(prior) == 3 else None
+    change = round((avg_recent / avg_prior - 1)*100, 1) if avg_prior is not None and avg_prior > 0 and avg_recent is not None else None
+    return {"monthly_search_volumes": vals[-12:],
+            "recent_3m_avg": avg_recent, "prior_3m_avg": avg_prior,
+            "trend_3m_vs_prior_3m_pct": change,
+            "trend_observation_end": f'{recent[-1]["year"]}-{recent[-1]["month"]:02d}' if recent else None}
+
+
 def _parse_ideas(data, profile, collector):
     ideas = []
     for result in data.get("results", []):
@@ -112,6 +139,7 @@ def _parse_ideas(data, profile, collector):
             "avg_monthly_searches": metrics.get("avgMonthlySearches", 0),
             "competition": metrics.get("competition"),
             "competition_index": metrics.get("competitionIndex"),
+            **_search_trend(metrics),
             "low_top_of_page_bid_micros": metrics.get("lowTopOfPageBidMicros"),
             "high_top_of_page_bid_micros": metrics.get("highTopOfPageBidMicros"),
             "classifier": disposition,
@@ -242,7 +270,7 @@ def collect_google_ads_dual_geo(access_token, profile, collector):
         )
 
     return {
-        "warning": "Google Ads competition is paid-ad competition, not SEO difficulty.",
+        "warning": "Keyword Planner figures are estimated historical monthly demand, not live searches today. Last 3 reported months versus previous 3 may be delayed and close variants may share volumes. Google Ads competition is paid-ad competition, not SEO difficulty.",
         "geo_priority_rule": (
             "Use Antwerp local demand as the primary Keyword Planner signal for service-area SEO. "
             "Use Belgium demand for market breadth and content discovery. Antwerp Province is a "
