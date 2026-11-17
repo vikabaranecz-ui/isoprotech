@@ -147,8 +147,8 @@ def main():
             f.write(f"- Site: {SITE}\n- URLs discovered: {len(urls)}\n- Inspected: {len(findings)}\n")
             f.write(f"- Non-PASS: {len(failures)} (not necessarily errors; review redirects and canonicals)\n")
             f.write(f"- API errors: {sum(r['status']=='API_ERROR' for r in findings)}\n")
-            f.write(f"- Priority URLs inspected: {sum(r.get('priority',False) for r in findings)}/{len(PRIORITY_PATHS)}\\n")
-            f.write(f"- Sitemap error: {sitemap_error or 'none'}\\n")
+            f.write(f"- Priority URLs inspected: {sum(r.get('priority',False) for r in findings)}/{len(PRIORITY_PATHS)}\n")
+            f.write(f"- Sitemap error: {sitemap_error or 'none'}\n")
             f.write("- Cannot enumerate all excluded URLs in GSC Pages report through the public API.\n")
     if not any(x["status"]=="INSPECTED" for x in findings):
         raise SystemExit("No URL Inspection API verdict returned; check property permissions.")
