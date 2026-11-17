@@ -209,7 +209,7 @@ def compact_ads(ads):
         "national": compact_ads_scope(ads.get("national")),
         "local_vs_national_top_local": top_rows(usable, "local_avg_monthly_searches", 50),
         "local_trending_3m": sorted(
-            [r for r in usable if isinstance(r.get("local_trend_3m_vs_prior_3m_pct"), (int, float))
+            [r for r in usable if r.get("classifier") == "KEEP" and isinstance(r.get("local_trend_3m_vs_prior_3m_pct"), (int, float))
              and num(r.get("local_avg_monthly_searches")) >= 10],
             key=lambda r: (r["local_trend_3m_vs_prior_3m_pct"], r["local_avg_monthly_searches"]), reverse=True
         )[:40],
