@@ -5,6 +5,8 @@ on:
   schedule:
     - cron: "30 19 * * 1"
       timezone: "Europe/Brussels"
+    - cron: "30 10 * * 2"
+      timezone: "Europe/Brussels"
   push:
     branches: [main]
     paths: [".github/workflows/wat-telegram-bridge.yml"]
@@ -89,7 +91,7 @@ jobs:
           request = urllib.request.Request(endpoint, data=data, method="POST")
           with urllib.request.urlopen(request, timeout=20) as response:
               result = json.load(response)
-          if not result.get("ok"):
-              raise RuntimeError("Telegram did not confirm delivery")
+          if not result.get("ok") or not result.get("result", {}).get("message_id"):
+              raise RuntimeError("Telegram did not confirm message acceptance")
           print("WAT SEO notification accepted by Telegram (recipient details redacted).")
           PY
