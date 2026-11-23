@@ -480,7 +480,7 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["crepi-vs-spuitkurk", "gevelisolatie-prijs-m2-2026", "gevelisolatie-voordelen-2026"],
     relatedServiceSlugs: ["crepi", "spuitkurk", "gevelisolatie"],
     seo: {
-      title: "Steenstrips, Crepi of Spuitkurk? Vergelijking | ISOPROTECH",
+      title: "Steenstrips, Crepi of Spuitkurk? Vergelijking",
       description: "Steenstrips, crepi of spuitkurk vergeleken: uitstraling, prijsklasse en onderhoud. Welke gevelafwerking past bij uw woning? ISOPROTECH Antwerpen.",
     },
   },
