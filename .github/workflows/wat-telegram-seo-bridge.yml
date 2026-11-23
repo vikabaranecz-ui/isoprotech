@@ -2,9 +2,8 @@ name: WAT Telegram SEO Report Bridge
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "15 14 * * 1"
-      timezone: "Europe/Brussels"
+  # Disabled duplicate scheduled delivery. The single WAT Telegram
+  # bridge owns scheduled notifications; this remains manual fallback.
 
 permissions:
   contents: read
