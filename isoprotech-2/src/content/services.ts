@@ -53,7 +53,7 @@ export const services: Service[] = [
       keywords: ["dakisolatie antwerpen", "dak isoleren", "plat dak isolatie", "hellend dak isolatie", "dakisolatie prijs"],
     },
     relatedServices: ["dakwerken", "dakrenovatie", "gevelisolatie"],
-    relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakisolatie-prijs-m2-2026", "epc-label-verbeteren", "premies-renovatie-2026"],
+    relatedBlogSlugs: ["dakisolatie-plat-hellend", "dakisolatie-prijs-m2-2026", "epc-label-verbeteren", "premies-renovatie-2026", "warmteverlies-dak-gevel-wat-eerst-isoleren"],
     landingPage: "/dakisolatie-antwerpen",
     subPages: [
       { label: "Plat dak isoleren", href: "/dakisolatie/plat-dak" },
@@ -181,7 +181,7 @@ export const services: Service[] = [
       keywords: ["gevelisolatie antwerpen", "buitengevelisolatie", "gevel isoleren", "gevelisolatie prijs m2"],
     },
     relatedServices: ["crepi", "spuitkurk"],
-    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "gevelisolatie-prijs-m2-2026", "buitenmuur-isoleren-buitenzijde", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026"],
+    relatedBlogSlugs: ["gevelisolatie-voordelen-2026", "gevelisolatie-prijs-m2-2026", "buitenmuur-isoleren-buitenzijde", "spouwmuurisolatie-of-buitengevelisolatie", "isolatie-zonder-bouwvergunning", "epc-label-verbeteren", "premies-renovatie-2026", "warmteverlies-dak-gevel-wat-eerst-isoleren"],
     landingPage: "/gevelisolatie-antwerpen",
     faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "warmteverlies-herkennen", "premies"],
   },

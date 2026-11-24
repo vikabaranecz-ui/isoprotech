@@ -484,6 +484,38 @@ export const blogPosts: BlogPost[] = [
       description: "Steenstrips, crepi of spuitkurk vergeleken: uitstraling, prijsklasse en onderhoud. Welke gevelafwerking past bij uw woning? ISOPROTECH Antwerpen.",
     },
   },
+  {
+    id: "warmteverlies-dak-gevel-wat-eerst-isoleren",
+    slug: "warmteverlies-dak-gevel-wat-eerst-isoleren",
+    title: "Warmteverlies via dak en gevel herkennen — wat isoleert u eerst?",
+    date: "2026-11-23",
+    dateDisplay: "23 november 2026",
+    category: "Energie",
+    readTime: "6 min",
+    excerpt: "Een huis dat snel afkoelt, koude buitenmuren of een ijskoude zolder: herken de signalen van warmteverlies en ontdek wat u het beste eerst laat isoleren — dak of gevel.",
+    photo: PHOTOS.dakisolatieTeam,
+    body: [
+      { type: "text", content: "Nu de verwarming weer dagelijks draait, valt warmteverlies pas goed op: de verwarming staat hoger dan vorig jaar, de zolder blijft koud en toch loopt de stookfactuur op. Vaak is dat geen pech, maar een duidelijk signaal dat er via het dak, de gevel — of beide — te veel warmte verdwijnt. In dit artikel leggen we uit hoe u warmteverlies herkent en wat u het beste eerst laat isoleren." },
+      { type: "heading", content: "De belangrijkste signalen van warmteverlies" },
+      { type: "text", content: "Typische signalen zijn een huis dat snel afkoelt zodra de verwarming uitgaat, koude buitenmuren terwijl de verwarming aanstaat, een koude zolder of bovenverdieping terwijl de rest van de woning verwarmd is, en een stookfactuur die niet in verhouding staat tot het comfort dat u ervoor terugkrijgt. Komt een van deze signalen u bekend voor, dan loont het de moeite om uit te zoeken via welk deel van de woning de warmte verdwijnt." },
+      { type: "heading", content: "Warmteverlies via het dak" },
+      { type: "text", content: "Een ongeïsoleerd dak kan een belangrijke bron van warmteverlies zijn. Hoeveel warmte er precies verloren gaat, hangt af van de dakopbouw, de rest van de gebouwschil en het verwarmingsgebruik. Een koude zolder kan een aanwijzing zijn, maar vormt op zichzelf geen sluitend bewijs. Hetzelfde ongeïsoleerde dak werkt overigens ook averechts in de zomer: zonder isolatielaag warmt de zolder of bovenverdieping dan juist snel op, wat dakisolatie het hele jaar door relevant maakt." },
+      { type: "heading", content: "Warmteverlies via de gevel" },
+      { type: "text", content: "Ook via ongeïsoleerde buitenmuren kan veel warmte verloren gaan. Het aandeel verschilt per woning. Koude muren aan de binnenzijde, zelfs met de verwarming aan, zijn het typische signaal. Buitengevelisolatie pakt dat verlies structureel aan en vermindert bovendien het risico op condensatie op koude muuroppervlakken. Let wel: isolatie lost geen vochtproblemen op die een andere oorzaak hebben, zoals optrekkend vocht of lekkages — daarvoor is aparte diagnose nodig." },
+      { type: "heading", content: "Wat isoleert u eerst: dak of gevel?" },
+      { type: "text", content: "Wat u eerst isoleert, hangt af van de huidige isolatie, de staat van het dak en de gevel, uw budget en eventuele renovatieplannen. Een slecht geïsoleerd dak kan een logische eerste stap zijn, maar een gevel met grote warmteverliezen kan meer prioriteit krijgen. Een gecombineerde aanpak kan uitvoeringsvoordelen bieden, maar laat de kosten en technische haalbaarheid per woning beoordelen." },
+      { type: "heading", content: "Is dakisolatie of gevelisolatie rendabel?" },
+      { type: "text", content: "Er bestaat geen vaste terugverdientijd voor dak- of gevelisolatie. De mogelijke besparing hangt onder meer af van de bestaande isolatie, de verwarmingsinstallatie, energieprijzen, het uitgevoerde werk en het werkelijke verbruik. Vraag daarom een berekening op maat in plaats van uit te gaan van een algemeen aantal jaren. Benieuwd wat dat concreet betekent voor uw woning? Bekijk onze richtprijzen voor dakisolatie en gevelisolatie, of vraag meteen een gratis inspectie aan voor een exacte inschatting." },
+      { type: "heading", content: "Wat kunt u nu doen?" },
+      { type: "text", content: "Twijfelt u of uw warmteverlies via het dak, de gevel of beide loopt? Tijdens de gratis inspectie van ISOPROTECH brengen wij in kaart waar uw woning het meeste warmte verliest en welke ingreep het grootste verschil maakt — met een duidelijke offerte en 10 jaar garantie, in Antwerpen en de ruime regio." },
+    ],
+    relatedSlugs: ["energiezuinig-renoveren-stappenplan", "dakisolatie-prijs-m2-2026", "gevelisolatie-prijs-m2-2026"],
+    relatedServiceSlugs: ["dakisolatie", "gevelisolatie"],
+    seo: {
+      title: "Warmteverlies Dak & Gevel — Wat Eerst Isoleren?",
+      description: "Herken warmteverlies via dak en gevel: koude muren, een huis dat snel afkoelt, hoge stookfactuur. Dak of gevel eerst isoleren? ISOPROTECH legt het uit.",
+    },
+  },
 
 ];
 
