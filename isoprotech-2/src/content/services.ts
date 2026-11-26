@@ -41,7 +41,7 @@ export const services: Service[] = [
       keywords: ["dakisolatie antwerpen", "dak isoleren", "plat dak isolatie", "hellend dak isolatie", "dakisolatie prijs"],
     },
     relatedServices: ["dakrenovatie", "gevelisolatie"],
-    faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "garantie"],
+    faqIds: ["dakisolatie-besparing", "dakisolatie-prijs", "dakisolatie-plat-hellend", "dakisolatie-tijd", "dakisolatie-pir-eps", "premies-bedrag", "garantie"],
   },
   {
     id: "dakrenovatie",
@@ -64,7 +64,7 @@ export const services: Service[] = [
       keywords: ["dakrenovatie antwerpen", "dak vernieuwen", "dak renoveren", "nieuw dak prijs"],
     },
     relatedServices: ["dakisolatie", "dakkapellen"],
-    faqIds: ["dakrenovatie-duur", "garantie"],
+    faqIds: ["dakrenovatie-duur", "asbest-voor-renovatie", "premies-bedrag", "garantie"],
   },
   {
     id: "dakkapellen",
@@ -87,7 +87,7 @@ export const services: Service[] = [
       keywords: ["dakkapellen antwerpen", "dakkapel plaatsen", "dakkapel prijs"],
     },
     relatedServices: ["dakisolatie", "dakrenovatie"],
-    faqIds: ["garantie"],
+    faqIds: ["garantie", "offerte-aanvragen"],
   },
   {
     id: "gevelisolatie",
@@ -110,7 +110,7 @@ export const services: Service[] = [
       keywords: ["gevelisolatie antwerpen", "buitengevelisolatie", "gevel isoleren", "gevelisolatie prijs m2"],
     },
     relatedServices: ["crepi", "spuitkurk"],
-    faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "premies"],
+    faqIds: ["gevelisolatie-prijs", "gevelisolatie-geschikt", "gevelisolatie-duur", "gevelisolatie-dikte", "premies", "premies-bedrag", "garantie"],
   },
   {
     id: "crepi",
@@ -133,7 +133,7 @@ export const services: Service[] = [
       keywords: ["crepi antwerpen", "crepi gevel", "crepi prijs", "gevelpleister", "crepi met isolatie"],
     },
     relatedServices: ["gevelisolatie", "spuitkurk"],
-    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
+    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs", "crepi-onderhoud", "garantie"],
   },
   {
     id: "spuitkurk",
@@ -156,7 +156,7 @@ export const services: Service[] = [
       keywords: ["spuitkurk antwerpen", "spuitkurk gevel", "spuitkurk prijs", "kurk gevelafwerking"],
     },
     relatedServices: ["gevelisolatie", "crepi"],
-    faqIds: ["crepi-vs-spuitkurk", "gevelisolatie-prijs"],
+    faqIds: ["crepi-vs-spuitkurk", "spuitkurk-prijs", "gevelisolatie-prijs", "garantie"],
   },
   {
     id: "asbestverwijdering",
@@ -179,7 +179,7 @@ export const services: Service[] = [
       keywords: ["asbestverwijdering antwerpen", "asbest verwijderen", "asbest sanering", "asbest prijs"],
     },
     relatedServices: ["dakrenovatie", "gevelisolatie"],
-    faqIds: ["asbest-voor-renovatie", "garantie"],
+    faqIds: ["asbest-voor-renovatie", "asbest-herkennen", "garantie", "offerte-aanvragen"],
   },
 ];
 

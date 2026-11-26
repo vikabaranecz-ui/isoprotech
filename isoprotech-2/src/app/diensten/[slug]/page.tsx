@@ -4,7 +4,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { services, getServiceBySlug, getRelatedServices } from "@/content/services";
-import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
+import { getFaqsByIds } from "@/content/faqs";
+import { serviceSchema, faqSchema } from "@/lib/seo";
 import { BRAND } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
@@ -49,6 +50,7 @@ export default function ServicePage({
   if (!service) notFound();
 
   const related = getRelatedServices(service.id);
+  const serviceFaqs = getFaqsByIds(service.faqIds);
   const serviceUrl = `${BRAND.url}/diensten/${service.slug}`;
 
   return (
@@ -60,6 +62,9 @@ export default function ServicePage({
           url: serviceUrl,
         })}
       />
+      {serviceFaqs.length > 0 && (
+        <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.question, answer: f.answer })))} />
+      )}
 
       {/* Hero */}
       <section className="relative min-h-[420px] flex items-center overflow-hidden">
@@ -196,6 +201,43 @@ export default function ServicePage({
                 </a>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ */}
+      {serviceFaqs.length > 0 && (
+        <section className="mx-auto max-w-3xl px-6 py-16">
+          <span className="text-sm font-bold tracking-widest text-orange-500 uppercase">
+            Veelgestelde vragen
+          </span>
+          <h2 className="mt-2 text-3xl font-extrabold text-teal-800 mb-10">
+            Alles over {service.name.toLowerCase()}
+          </h2>
+          <div className="divide-y divide-gray-100">
+            {serviceFaqs.map((faq) => (
+              <details key={faq.id} className="group py-5">
+                <summary className="flex cursor-pointer items-center justify-between font-semibold text-teal-800 list-none">
+                  <span className="pr-4">{faq.question}</span>
+                  <svg
+                    className="h-5 w-5 shrink-0 text-orange-500 transition-transform group-open:rotate-45"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M10 4v12M4 10h12"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </summary>
+                <p className="mt-3 text-gray-600 leading-relaxed pr-8">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </section>
       )}

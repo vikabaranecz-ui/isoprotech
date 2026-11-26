@@ -81,6 +81,54 @@ export const faqs: FaqItem[] = [
     answer: "Neem contact op via telefoon (+32 465 88 27 01), WhatsApp of ons online contactformulier. Wij plannen een gratis inspectie ter plaatse en bezorgen u nadien een vrijblijvende offerte met een duidelijke prijsopbouw.",
     category: "Algemeen",
   },
+  {
+    id: "dakisolatie-plat-hellend",
+    question: "Wat is het verschil tussen plat dak en hellend dak isolatie?",
+    answer: "Bij een plat dak wordt isolatie meestal bovenop de dakstructuur aangebracht (koude dakconstructie) of eronder (warme dakconstructie), vaak in combinatie met een nieuwe waterdichte afdeklaag. Bij een hellend dak isoleert men tussen de dakspanten (tussenruimte-isolatie), direct onder de dakpannen (onderdaks) of langs de binnenzijde van het dak. ISOPROTECH adviseert de beste methode na inspectie van uw specifieke situatie.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "dakisolatie-tijd",
+    question: "Hoe lang duurt dakisolatiewerk?",
+    answer: "Voor een gemiddelde woning duurt dakisolatie 1 tot 5 werkdagen, afhankelijk van de methode, de dakoppervlakte en of er ook een nieuwe bedekking geplaatst wordt. Wij werken efficiënt en houden de hinder voor u zo beperkt mogelijk.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "dakisolatie-pir-eps",
+    question: "Welk isolatiemateriaal is het beste voor een plat dak?",
+    answer: "Voor platte daken gebruiken wij PIR (polyisocyanuraat) of EPS (geëxpandeerd polystyreen). PIR heeft de beste isolatiewaarde per cm dikte en is ideaal als de opbouwhoogte beperkt is. EPS is iets goedkoper en ook kwalitatief geschikt. Wij adviseren het juiste materiaal op basis van uw dak en budget.",
+    category: "Dakisolatie",
+  },
+  {
+    id: "gevelisolatie-dikte",
+    question: "Hoe dik is een gevelisolatiesysteem?",
+    answer: "Een standaard buitengevelisolatiesysteem is 10 tot 20 cm dik, inclusief de isolatieplaat (EPS, minerale wol of PUR) en de afwerkingslaag (crepi of spuitkurk). De dikte is afhankelijk van de gewenste R-waarde. Voor een Mijn Verbouwpremie is een minimum R-waarde van 3,5 m²K/W vereist.",
+    category: "Gevelisolatie",
+  },
+  {
+    id: "premies-bedrag",
+    question: "Hoeveel premie kan ik krijgen voor dakisolatie?",
+    answer: "Via de Vlaamse Mijn Verbouwpremie bedraagt de premie voor dakisolatie 3 tot 6 euro per m², afhankelijk van uw inkomen en de bereikte isolatiewaarde (minimum R=4,5). Bij een laag inkomen kunnen de premies oplopen tot 50% van de kostprijs. Wij helpen u de actuele bedragen opzoeken en bij de aanvraag.",
+    category: "Premies",
+  },
+  {
+    id: "crepi-onderhoud",
+    question: "Hoeveel onderhoud vraagt een gevel met crepi?",
+    answer: "Moderne minerale crepi-systemen zijn vrijwel onderhoudsvriendelijk en gaan 20 tot 30 jaar mee. Een eventuele reiniging met een hogedrukreiniger om de 10–15 jaar volstaat. Kleurvastheid en hechting blijven over de hele levensduur gewaarborgd met onze ATG-gekeurde systemen.",
+    category: "Gevelafwerking",
+  },
+  {
+    id: "spuitkurk-prijs",
+    question: "Hoeveel kost spuitkurk per m²?",
+    answer: "Spuitkurk als afwerking op bestaande gevels of nieuw metselwerk kost indicatief 25 tot 45 euro per m². In combinatie met isolatiewerk is de meerprijs voor spuitkurk ten opzichte van crepi beperkt. Vraag een vrijblijvende offerte voor uw specifieke situatie.",
+    category: "Gevelafwerking",
+  },
+  {
+    id: "asbest-herkennen",
+    question: "Hoe weet ik of mijn dak asbest bevat?",
+    answer: "Golfplaten daken uit voor 2001 bevatten dikwijls asbest. Andere risicomaterialen zijn vlakke dak- en gevelpanelen, isolatiematerialen en kitten uit diezelfde periode. Visuele herkenning is onvoldoende — een staalname is noodzakelijk. ISOPROTECH verzorgt een gratis inspectie en verwijst u indien nodig naar een erkend asbestlaboratorium.",
+    category: "Asbestverwijdering",
+  },
 ];
 
 export function getFaqsByIds(ids: string[]): FaqItem[] {
